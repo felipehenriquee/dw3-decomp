@@ -3,6 +3,8 @@
 #define WFIGHTMN_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800A6414(void);
+void func_800A69B8(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_800143DC();
@@ -41,12 +43,10 @@ s32 func_8009D06C();
 s32 func_8009D0EC();
 s32 func_800A246C();
 s32 func_800A5ECC();
-s32 func_800A6414();
 s32 func_800A6440();
 s32 func_800A66B0();
 s32 func_800A684C();
 s32 func_800A6920();
-s32 func_800A69B8();
 s32 func_800A69F0();
 s32 func_800A6B18();
 s32 func_800A6C44();

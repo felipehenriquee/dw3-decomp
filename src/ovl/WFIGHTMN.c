@@ -5,7 +5,9 @@
 
 INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A5ECC);
 
-INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A6414);
+void func_800A6414(void) {
+    func_80014504(func_800A5ECC, 0x54, 0);
+}
 
 INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A6440);
 
@@ -15,7 +17,15 @@ INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A684C);
 
 INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A6920);
 
-INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A69B8);
+void func_800A69B8(void) {
+    s32 var_s0;
+
+    var_s0 = 0;
+    do {
+        func_800A6920(var_s0);
+        var_s0 += 1;
+    } while (var_s0 < 3);
+}
 
 INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A69F0);
 

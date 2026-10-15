@@ -261,7 +261,7 @@ class Tester:
         # simbolos com declaracao a mao no header ficam com o tipo de la
         hdr = open(self.T.p(self.T.hdr)).read()
         self.syms = [s for s in self.syms
-                     if not re.search(r'\b%s\b' % s, hdr)]
+                     if not re.search(r'^extern[^;]*\b%s\b' % s, hdr, re.M)]
         own = re.compile(r'\b%s\s*\(' % fn)
         self.base = '\n'.join(ln for ln in open(base_ctx).read().splitlines()
                               if not own.search(ln))
