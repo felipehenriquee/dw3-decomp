@@ -1,0 +1,42 @@
+/*
+ * Declaracoes dos dados do EXE usados pelo codigo C (fora da area $gp).
+ * Mantido pelo tools/autodecomp.py: a primeira funcao integrada que usa um
+ * simbolo define o tipo dele aqui. Pode ser editado a mao (para trocar por
+ * structs de verdade, por exemplo); o autodecomp reescreve com casts o
+ * codigo novo que quiser outro tipo.
+ * Escalares levam NOT_GP para o gcc nao usar $gp com -G8.
+ */
+#ifndef MAIN_DATA_H
+#define MAIN_DATA_H
+
+/* tipo ainda desconhecido (so o endereco e usado) */
+struct opaque;
+
+extern s32 D_800100C4 NOT_GP;
+extern s32 D_800100C8 NOT_GP;
+extern s32 D_80010234 NOT_GP;
+extern u8 D_80042BA8[];
+extern s32 D_80044F6C NOT_GP;
+extern u16 D_800474A4[];
+extern u8 D_80048D34[];
+extern u8 D_8004949C[];
+extern s32 D_8004B3F8 NOT_GP;
+extern s32 D_8004B3FC NOT_GP;
+extern s32 D_8004B400 NOT_GP;
+extern s32 D_8004B404 NOT_GP;
+extern struct opaque D_8004B5EC;
+extern s32 D_8004B5F4 NOT_GP;
+extern struct opaque D_8004B600;
+extern s32 D_8004B7BC NOT_GP;
+extern u8 D_8004B7D0[];
+extern s32 D_8004DC04[];
+extern struct opaque D_8004DC0C;
+extern s32 D_8004DE00[];
+extern s32 D_8004DE18 NOT_GP;
+extern s32 D_8004DE20 NOT_GP;
+extern s32 D_8004DE28 NOT_GP;
+extern s32 D_8004DE30 NOT_GP;
+extern u8 D_8004DE48[];
+extern u16 D_80055C40[];
+
+#endif /* MAIN_DATA_H */

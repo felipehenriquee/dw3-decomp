@@ -5,19 +5,25 @@ Uso:
   python3 -I tools/autodecomp.py <nome> --apply          integra as que bateram
 
 <nome>: main (EXE) ou um overlay. Usa src/<nome>.c, include/<nome>.h,
-include/<nome>_auto.h (rode tools/gen_ctx.py antes) e
+include/<nome>_auto.h (tools/gen_ctx.py), include/<nome>_data.h e
 asm/nonmatchings/<nome>/. Resultados em build/autodecomp/<nome>/.
 
-No --apply, as funcoes que bateram entram no .c no lugar do INCLUDE_ASM,
-o _auto.h e regerado e o `make` confere o sha1. Se o make falhar, o lote
-e dividido ao meio ate achar as funcoes que quebram (essas ficam de fora
-e vao para failed.txt).
+Para cada funcao, o tipo de cada simbolo de dados que ela usa (fora do
+$gp) e escolhido por busca: o m2c recebe um tipo candidato no contexto,
+o C e compilado com a mesma declaracao e comparado com o original.
+Comeca pelo tipo ja fixado em <nome>_data.h (se houver) e troca um
+simbolo por vez enquanto o numero de instrucoes diferentes cair.
+
+No --apply, as funcoes que bateram entram no .c no lugar do INCLUDE_ASM.
+Simbolos novos ganham em <nome>_data.h o tipo que a funcao usou; se o
+simbolo ja tinha outro tipo, o codigo da funcao e reescrito com casts.
+O `make` confere o sha1; se falhar, o lote e dividido ao meio ate achar
+as funcoes que quebram (vao para failed.txt).
 """
 import json
 import multiprocessing
 import os
 import re
-import shutil
 import subprocess
 import sys
 
@@ -30,16 +36,21 @@ M2C = os.path.join(R, '.venv/bin/m2c')
 # como cada alvo e carregado: (binario, vram, offset no arquivo, G)
 TARGETS = {'main': ('disc/SLES_049.36', 0x80010000, 0x800, 8)}
 
+# tipos candidatos para um simbolo de dados: (base, forma)
+# forma: 'a' array sem tamanho, 's' escalar, 'o' struct opaca
+CANDIDATES = [('s32', 's'), ('struct opaque', 'o'), ('u8', 'a'),
+              ('s32', 'a'), ('u16', 'a'), ('s16', 'a'), ('s8', 'a'),
+              ('u16', 's'), ('s16', 's'), ('u8', 's'), ('s8', 's')]
+# variantes de opcoes do m2c
+VARIANTS = [[], ['--void']]
+MAX_ROUNDS = 2
+
 
 def target(name):
     if name in TARGETS:
         return TARGETS[name]
     vram = 0x800A5DE0 if name.startswith('W') else 0x80082CB0
     return ('disc/PRO/%s.PRO' % name, vram, 0, 0)
-
-
-# variantes de opcoes do m2c, tentadas em ordem
-VARIANTS = [[], ['--void']]
 
 
 def run(cmd, **kw):
@@ -51,8 +62,78 @@ def pending(name):
     return re.findall(r'^INCLUDE_ASM\("[^"]+", (\w+)\);', src, re.M)
 
 
-def make_ctx(name, work):
-    """Contexto para o m2c: headers preprocessados."""
+# ---------------------------------------------------------------- tipos
+
+def decl(sym, t, for_m2c=False):
+    base, form = t
+    if form == 'a':
+        return 'extern %s %s[];' % (base, sym)
+    if form == 'o':
+        return 'extern struct opaque %s;' % sym
+    return 'extern %s %s%s;' % (base, sym, '' if for_m2c else ' NOT_GP')
+
+
+def parse_decl(line):
+    """'extern u8 D_X[];' -> ('D_X', ('u8', 'a'))."""
+    m = re.match(r'extern (struct opaque|[\w ]+?) (D_[0-9A-F]{8})(\[\])?'
+                 r'(?: NOT_GP)?;', line.strip())
+    if not m:
+        return None
+    base, sym, arr = m.groups()
+    if base == 'struct opaque':
+        return sym, ('struct opaque', 'o')
+    return sym, (base, 'a' if arr else 's')
+
+
+def canonical(name):
+    out = {}
+    p = os.path.join(R, 'include/%s_data.h' % name)
+    if os.path.exists(p):
+        for ln in open(p):
+            d = parse_decl(ln)
+            if d:
+                out[d[0]] = d[1]
+    return out
+
+
+def rewrite(code, sym, want, have):
+    """Reescreve o uso de sym no codigo gerado com o tipo `want` para
+    funcionar com a declaracao `have`."""
+    if want == have:
+        return code
+    base, form = want
+    if form == 'o':
+        rep = '((struct opaque *)&%s)' % sym
+        return re.sub(r'&\s*\b%s\b' % sym, rep, code)
+    if form == 'a':
+        rep = '((%s *)&%s)' % (base, sym)
+    else:
+        rep = '(*(%s *)&%s)' % (base, sym)
+    return re.sub(r'(?<![\w&])\b%s\b' % sym, rep, code)
+
+
+# ------------------------------------------------------------- simbolos
+
+def data_syms(asm_txt):
+    local = set(re.findall(r'^\s*(?:glabel|dlabel|jlabel)\s+(\w+)', asm_txt,
+                           re.M))
+    syms = set(re.findall(r'%(?:hi|lo)\((D_[0-9A-F]{8})', asm_txt))
+    return sorted(syms - local)
+
+
+def fix_code(code):
+    """Ajustes na saida do m2c."""
+    # chamada pela primeira entrada de uma tabela de ponteiros de funcao:
+    # o m2c escreve D_X(...), mas D_X e dado
+    return re.sub(r'(?<![\w&.>])(D_[0-9A-F]{8})\(', r'(*(s32 (**)())&\1)(',
+                  code)
+
+
+# ------------------------------------------------------------- contexto
+
+def make_base(name, work):
+    """Prepara o contexto base do m2c (headers preprocessados, sem os
+    dados fora do $gp)."""
     os.makedirs(work, exist_ok=True)
     stub = os.path.join(work, 'ctx_in.c')
     with open(stub, 'w') as f:
@@ -71,61 +152,126 @@ def rodata_files(name):
             if not f.startswith('func_') and f.endswith('.s')]
 
 
-def try_one(job):
-    name, fn, ctx, work = job
-    tgt = target(name)
-    exe = open(os.path.join(R, tgt[0]), 'rb').read()
-    d = os.path.join(work, fn)
-    os.makedirs(d, exist_ok=True)
-    # contexto sem a declaracao da propria funcao
-    lines = [ln for ln in open(ctx).read().splitlines()
-             if not re.search(r'\b%s\s*\(' % fn, ln)]
-    fctx = os.path.join(d, 'ctx.h')
-    open(fctx, 'w').write('\n'.join(lines) + '\n')
-    auto = open(os.path.join(R, 'include/%s_auto.h' % name)).read()
-    auto = '\n'.join(ln for ln in auto.splitlines()
-                     if not re.search(r'\b%s\s*\(' % fn, ln)
-                     and not ln.startswith('#'))
-    asm = os.path.join(R, 'asm/nonmatchings', name, fn + '.s')
-    best = None
-    for vi, opts in enumerate(VARIANTS):
+class Tester:
+    def __init__(self, name, fn, base_ctx, work):
+        self.name, self.fn = name, fn
+        self.tgt = target(name)
+        self.exe = open(os.path.join(R, self.tgt[0]), 'rb').read()
+        self.d = os.path.join(work, fn)
+        os.makedirs(self.d, exist_ok=True)
+        self.asm = os.path.join(R, 'asm/nonmatchings', name, fn + '.s')
+        self.syms = data_syms(open(self.asm).read())
+        own = re.compile(r'\b%s\s*\(' % fn)
+        self.base = '\n'.join(ln for ln in open(base_ctx).read().splitlines()
+                              if not own.search(ln))
+        auto = open(os.path.join(R, 'include/%s_auto.h' % name)).read()
+        self.auto = '\n'.join(ln for ln in auto.splitlines()
+                              if not own.search(ln) and not ln.startswith('#'))
+        # declaracoes fixadas dos outros simbolos (os desta funcao entram
+        # com o tipo da tentativa)
+        data = os.path.join(R, 'include/%s_data.h' % name)
+        self.data = []
+        if os.path.exists(data):
+            for ln in open(data):
+                d = parse_decl(ln)
+                if d and d[0] not in self.syms:
+                    self.data.append(ln.rstrip())
+        self.n = 0
+
+    def attempt(self, types, vi):
+        """Devolve (ndiff ou None se nao compilou, code, erro)."""
+        self.n += 1
+        tag = 'a%d' % self.n
+        ctx = os.path.join(self.d, tag + '.h')
+        with open(ctx, 'w') as f:
+            f.write(self.base + '\nstruct opaque;\n')
+            for s, t in types.items():
+                f.write(decl(s, t, True) + '\n')
         r = run([M2C, '-t', 'mipsel-gcc-c', '--valid-syntax',
-                 '--globals=none', '--context', fctx, '-f', fn] + opts +
-                [asm] + rodata_files(name))
+                 '--globals=none', '--context', ctx, '-f', self.fn] +
+                VARIANTS[vi] + [self.asm] + rodata_files(self.name))
         if r.returncode != 0 or not r.stdout.strip():
-            res = {'status': 'm2c', 'err': (r.stderr or r.stdout)[-400:]}
-            best = best or res
-            continue
-        code = r.stdout
-        c = os.path.join(d, 'v%d.c' % vi)
+            return None, None, 'm2c: ' + (r.stderr or r.stdout)[-300:]
+        code = fix_code(r.stdout)
+        c = os.path.join(self.d, tag + '.c')
         with open(c, 'w') as f:
-            f.write('#include "%s.h"\n#include "m2c.h"\n%s\n\n%s'
-                    % (name, auto, code))
-        o = os.path.join(d, 'v%d.o' % vi)
-        cr = run([os.path.join(R, 'tools/cc.sh'), c, o, str(tgt[3])],
+            f.write('#include "%s.h"\n#include "m2c.h"\n%s\nstruct opaque;\n'
+                    % (self.name, self.auto))
+            f.write('\n'.join(self.data) + '\n')
+            for s, t in types.items():
+                f.write(decl(s, t) + '\n')
+            f.write('\n' + code)
+        o = os.path.join(self.d, tag + '.o')
+        cr = run([os.path.join(R, 'tools/cc.sh'), c, o, str(self.tgt[3])],
                  stdin=subprocess.DEVNULL)
         if cr.returncode != 0:
-            res = {'status': 'cc', 'err': cr.stderr[-400:], 'code': code}
-            if not best or best['status'] == 'm2c':
-                best = res
-            continue
-        diffs = cc_cmp.compare(o, exe, [fn], tgt[1], tgt[2])[fn]
+            return None, code, 'cc: ' + cr.stderr[-300:]
+        diffs = cc_cmp.compare(o, self.exe, [self.fn], self.tgt[1],
+                               self.tgt[2])[self.fn]
         if diffs is None:
-            res = {'status': 'cc', 'err': 'funcao nao gerada', 'code': code}
-        elif not diffs:
-            return fn, {'status': 'ok', 'code': code, 'variant': vi}
-        else:
-            res = {'status': 'diff', 'ndiff': len(diffs), 'code': code}
-        if (not best or best['status'] != 'diff' or
-                res.get('ndiff', 1e9) < best.get('ndiff', 1e9)):
-            best = res
-    return fn, best
+            return None, code, 'cc: funcao nao gerada'
+        return len(diffs), code, None
+
+
+def score(n):
+    return 1e9 if n is None else n
+
+
+def try_one(job):
+    name, fn, base_ctx, work, canon = job
+    t = Tester(name, fn, base_ctx, work)
+    types = {s: canon.get(s, CANDIDATES[0]) for s in t.syms}
+    best = None
+    for vi in range(len(VARIANTS)):
+        n, code, err = t.attempt(types, vi)
+        if best is None or score(n) < score(best[0]):
+            best = (n, code, err, dict(types), vi)
+        if n == 0:
+            break
+    n, code, err, types, vi = best
+    for _ in range(MAX_ROUNDS):
+        if n == 0:
+            break
+        improved = False
+        for s in t.syms:
+            for c in CANDIDATES:
+                if c == types[s]:
+                    continue
+                trial = dict(types)
+                trial[s] = c
+                n2, code2, err2 = t.attempt(trial, vi)
+                if score(n2) < score(n):
+                    n, code, err, types = n2, code2, err2, trial
+                    improved = True
+                if n == 0:
+                    break
+            if n == 0:
+                break
+        if not improved:
+            break
+    res = {'types': {s: list(v) for s, v in types.items()}, 'variant': vi,
+           'tries': t.n}
+    if n == 0:
+        res.update(status='ok', code=code)
+    elif n is not None:
+        res.update(status='diff', ndiff=n, code=code)
+    else:
+        res.update(status='cc' if code else 'm2c', err=err, code=code)
+    # apaga os arquivos intermediarios das tentativas
+    for f in os.listdir(t.d):
+        if re.match(r'a\d+\.', f):
+            os.remove(os.path.join(t.d, f))
+    return fn, res
 
 
 def test(name, funcs):
     work = os.path.join(R, 'build/autodecomp', name)
-    ctx = make_ctx(name, work)
-    jobs = [(name, fn, ctx, work) for fn in funcs]
+    base_ctx = make_base(name, work)
+    canon = canonical(name)
+    jobs = [(name, fn, base_ctx, work, canon) for fn in funcs]
+    # as funcoes maiores (busca mais longa) primeiro
+    jobs.sort(key=lambda j: -os.path.getsize(os.path.join(
+        R, 'asm/nonmatchings', name, j[1] + '.s')))
     with multiprocessing.Pool(os.cpu_count()) as p:
         results = dict(p.imap_unordered(try_one, jobs))
     path = os.path.join(work, 'results.json')
@@ -142,22 +288,38 @@ def test(name, funcs):
     return results
 
 
+# ---------------------------------------------------------------- apply
+
 def make_ok():
     r = run(['make', '-j%d' % os.cpu_count()])
     return r.returncode == 0 and 'overlays' in r.stdout
 
 
-def insert(name, codes):
+def write_data(name, canon):
+    p = os.path.join(R, 'include/%s_data.h' % name)
+    s = open(p).read()
+    lines = [ln for ln in s.splitlines() if ln.startswith('extern ')]
+    i = s.index(lines[0]) if lines else s.index('\n#endif')
+    j = s.index('\n\n#endif') if '\n\n#endif' in s else s.index('\n#endif')
+    new = [decl(sym, canon[sym]) for sym in sorted(canon)]
+    open(p, 'w').write(s[:i] + '\n'.join(new) + s[j:])
+
+
+def insert(name, items):
     p = os.path.join(R, 'src/%s.c' % name)
     s = open(p).read()
-    if '#include "m2c.h"' not in s:
-        # antes do _auto.h: os prototipos gerados usam M2C_UNK
-        s = s.replace('#include "%s_auto.h"\n' % name,
-                      '#include "m2c.h"\n#include "%s_auto.h"\n' % name, 1)
-    for fn, code in codes.items():
+    canon = canonical(name)
+    for fn, r in items.items():
+        code = r['code']
+        for sym, t in r['types'].items():
+            t = tuple(t)
+            if sym not in canon:
+                canon[sym] = t
+            code = rewrite(code, sym, t, canon[sym])
         line = 'INCLUDE_ASM("asm/nonmatchings/%s", %s);' % (name, fn)
         s = s.replace(line, code.strip(), 1)
     open(p, 'w').write(s)
+    write_data(name, canon)
     run([sys.executable, '-I', 'tools/gen_ctx.py', name,
          str(target(name)[3])])
 
@@ -165,20 +327,21 @@ def insert(name, codes):
 def apply(name):
     work = os.path.join(R, 'build/autodecomp', name)
     res = json.load(open(os.path.join(work, 'results.json')))
-    todo = {f: r['code'] for f, r in res.items()
+    todo = {f: r for f, r in res.items()
             if r['status'] == 'ok' and f in pending(name)}
-    src = os.path.join(R, 'src/%s.c' % name)
-    auto = os.path.join(R, 'include/%s_auto.h' % name)
+    files = [os.path.join(R, p) for p in
+             ('src/%s.c' % name, 'include/%s_auto.h' % name,
+              'include/%s_data.h' % name)]
     good, bad = {}, []
 
     def attempt(batch):
-        base_src, base_auto = open(src).read(), open(auto).read()
+        saved = [open(f).read() for f in files]
         insert(name, batch)
         if make_ok():
             good.update(batch)
             return
-        open(src, 'w').write(base_src)
-        open(auto, 'w').write(base_auto)
+        for f, c in zip(files, saved):
+            open(f, 'w').write(c)
         if len(batch) == 1:
             bad.extend(batch)
             return

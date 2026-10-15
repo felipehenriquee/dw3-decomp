@@ -1,6 +1,7 @@
 #include "main.h"
 #include "m2c.h"
 #include "main_auto.h"
+#include "main_data.h"
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80010F4C);
 
@@ -139,7 +140,18 @@ INCLUDE_ASM("asm/nonmatchings/main", func_80013A6C);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80013ADC);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80013BE4);
+void func_80013BE4(void) {
+    void *temp_v0;
+
+    temp_v0 = func_80013ADC();
+    (*(s32 (**)())&D_8004B5EC)(M2C_FIELD(temp_v0, s32 *, 0xC));
+    M2C_FIELD(temp_v0, s32 *, 4) = 0;
+    M2C_FIELD(temp_v0, s32 *, 0xC) = 0;
+    M2C_FIELD(temp_v0, s32 *, 8) = 0;
+    M2C_FIELD(temp_v0, s16 *, 2) = 0;
+    M2C_FIELD(temp_v0, s16 *, 0) = 0;
+}
+/* Warning: struct opaque is not defined (only forward-declared) */
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80013C30);
 
@@ -168,13 +180,21 @@ INCLUDE_ASM("asm/nonmatchings/main", func_80014128);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80014170);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_800141E4);
+s32 func_800141E4(s32 arg0) {
+    return (&D_80044F6C)[arg0] != 0;
+}
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80014200);
+u16 func_80014200(s32 arg0) {
+    return D_800474A4[arg0];
+}
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001421C);
+s32 func_8001421C(s32 arg0) {
+    return (&D_80044F6C)[arg0];
+}
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80014238);
+void func_80014238(s32 arg0, s32 arg1, M2C_UNK arg2) {
+    CdIntToPos((&D_80044F6C)[arg0] + arg1, arg2);
+}
 
 void func_80014274(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = arg1;
@@ -306,7 +326,14 @@ INCLUDE_ASM("asm/nonmatchings/main", func_80015B9C);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80015BD8);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80015D4C);
+s32 func_80015D4C(void) {
+    void *temp_v0;
+
+    temp_v0 = (*(s32 (**)())&D_8004B7BC)(0x16, -1, -1);
+    M2C_FIELD(temp_v0, M2C_UNK (**)(void *, M2C_UNK), 0x2C)(temp_v0, 3);
+    return 1;
+}
+/* Warning: struct opaque is not defined (only forward-declared) */
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80015D90);
 
@@ -340,19 +367,41 @@ INCLUDE_ASM("asm/nonmatchings/main", func_80016988);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_800169E0);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80016A94);
+void func_80016A94(void) {
+    (*(s32 (**)())&D_8004B600)(D_80048D34, 0x26C4);
+    M2C_FIELD(D_80048D34, s32 *, 0x26C4) = 0x1600;
+    M2C_FIELD(D_80048D34, s32 *, 0x26C8) = 0x1600;
+    M2C_FIELD(D_80048D34, s8 *, 4) = 1;
+    M2C_FIELD(D_80048D34, s8 *, 0x26D4) = 1;
+    M2C_FIELD(D_80048D34, s8 *, 0x26D5) = 8;
+    M2C_FIELD(D_80048D34, s8 *, 0x26D7) = 0x3C;
+    M2C_FIELD(D_80048D34, s32 *, 0x26D0) = 0;
+    M2C_FIELD(D_80048D34, s8 *, 0x26D6) = 0;
+    M2C_FIELD(D_80048D34, s32 *, 0xC) = -1;
+    func_80016BAC();
+    M2C_FIELD(D_80048D34, s32 *, 0x30) = (s32) (((*(s32 (**)())&D_8004DC0C)() & 0x1FF) + 0x200);
+}
+/* Warning: struct opaque is not defined (only forward-declared) */
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80016B28);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80016B58);
+s32 func_80016B58(void) {
+    return D_8004B400;
+}
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80016B68);
+s32 func_80016B68(void) {
+    return D_8004B3F8;
+}
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80016B78);
+s32 func_80016B78(void) {
+    return D_8004B404;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80016B88);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80016B9C);
+s32 func_80016B9C(void) {
+    return D_8004B3FC != 0;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80016BAC);
 
@@ -499,11 +548,27 @@ INCLUDE_ASM("asm/nonmatchings/main", func_800182C8);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80018310);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001843C);
+void func_8001843C(void) {
+    func_800184D0();
+    *((s32 *)&D_8004B7D0) = 0;
+}
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80018460);
+void func_80018460(void) {
+    if (!(*((s32 *)&D_8004B7D0) & 0x40000000)) {
+        func_80018310(0, 0x10);
+    }
+    if (!(*((s32 *)&D_8004B7D0) & 0x20000000)) {
+        PadStartCom();
+        *((s32 *)&D_8004B7D0) |= 0x20000000;
+    }
+}
 
-INCLUDE_ASM("asm/nonmatchings/main", func_800184D0);
+void func_800184D0(void) {
+    if (*((s32 *)&D_8004B7D0) & 0x20000000) {
+        PadStopCom();
+    }
+    *((s32 *)&D_8004B7D0) &= 0xDFFFFFFF;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001851C);
 
@@ -567,7 +632,9 @@ INCLUDE_ASM("asm/nonmatchings/main", func_80019148);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80019224);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001932C);
+void func_8001932C(s32 arg0) {
+    *D_8004DC04 = arg0 & 0xFFF;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001933C);
 
@@ -591,7 +658,18 @@ INCLUDE_ASM("asm/nonmatchings/main", func_800197A4);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80019FB0);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001A180);
+void func_8001A180(void *arg0, s32 arg1) {
+    s32 var_a1;
+    u8 *temp_v1;
+
+    var_a1 = arg1;
+    if ((u32) (var_a1 - 1) >= 3U) {
+        var_a1 = 1;
+    }
+    temp_v1 = *D_8004DE00 + (var_a1 * 0x18);
+    M2C_FIELD(arg0, u8 **, 0x50) = temp_v1;
+    M2C_FIELD(arg0, u8 *, 0xBE) = (u8) *temp_v1;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001A1B8);
 
@@ -732,7 +810,17 @@ INCLUDE_ASM("asm/nonmatchings/main", func_8001B0A4);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001B364);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001B444);
+void func_8001B444(void *arg0) {
+    s32 temp_a0;
+
+    temp_a0 = M2C_FIELD(arg0, s32 *, 0x64);
+    if (temp_a0 != 0) {
+        (*(s32 (**)())&D_8004B5EC)(temp_a0);
+    }
+    M2C_FIELD(arg0, s32 *, 0x64) = 0;
+    M2C_FIELD(arg0, s32 *, 0x60) = 0;
+}
+/* Warning: struct opaque is not defined (only forward-declared) */
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001B48C);
 
@@ -792,17 +880,25 @@ INCLUDE_ASM("asm/nonmatchings/main", func_8001D4E0);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001D504);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001D6E4);
+s32 func_8001D6E4(void) {
+    return D_8004DE18;
+}
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001D6F4);
+s32 func_8001D6F4(void) {
+    return D_8004DE20;
+}
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001D704);
+s32 func_8001D704(void) {
+    return D_8004DE28;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001D714);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001D7C4);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001D844);
+s32 func_8001D844(void) {
+    return D_8004DE30;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001D854);
 
@@ -904,7 +1000,12 @@ void func_8001E19C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x7C) = 1;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001E1E8);
+void func_8001E1E8(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x80) = (*(s32 (**)())&D_8004B5F4)(arg1 * 0x14, 2);
+    M2C_FIELD(arg0, s32 *, 0x78) = arg1;
+    func_8001E19C(arg0);
+}
+/* Warning: struct opaque is not defined (only forward-declared) */
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001E240);
 
@@ -1079,7 +1180,9 @@ INCLUDE_ASM("asm/nonmatchings/main", func_800202D4);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8002037C);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8002043C);
+s32 func_8002043C(void) {
+    return (s16) *D_80055C40 != 0;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8002044C);
 

@@ -10,9 +10,10 @@ Regras:
 - outras funcoes: `s32 nome();` (estilo antigo, aceita qualquer argumento);
 - dados acessados via $gp no original: escalar do tamanho do acesso (ou
   array de ate G bytes), para o gcc tambem usar $gp;
-- outros dados: `extern u8 nome[];` (tamanho desconhecido: o gcc nunca
-  usa $gp para eles).
-Simbolos ja declarados em include/<nome>.h ou no proprio .c sao pulados.
+- outros dados ficam em include/<nome>_data.h, mantido pelo
+  tools/autodecomp.py (o tipo vem da primeira funcao integrada que usa).
+Simbolos ja declarados em include/<nome>.h, include/<nome>_data.h ou no
+proprio .c sao pulados.
 """
 import glob
 import os
@@ -35,7 +36,10 @@ def strip_comments(s):
 
 
 src = strip_comments(open(SRC).read()) if os.path.exists(SRC) else ''
-manual = strip_comments(open(MANUAL).read()) if os.path.exists(MANUAL) else ''
+manual = ''
+for p in (MANUAL, 'include/%s_data.h' % name):
+    if os.path.exists(p):
+        manual += strip_comments(open(p).read())
 
 # prototipos das funcoes definidas no .c
 defs = {}
@@ -86,10 +90,7 @@ for s in gp_syms:
         out.append('extern %s %s;' % (types.pop(), s))
     else:
         out.append('extern u8 %s[%d];' % (s, max(1, G)))
-out += ['', '/* outros dados (tamanho desconhecido, nunca via $gp) */']
-out += ['extern u8 %s[];' % s for s in sorted(datas - skip - local)]
 out += ['', '#endif', '']
 open(OUT, 'w').write('\n'.join(out))
-print('%s: %d funcoes decompiladas, %d funcoes, %d dados gp, %d dados' % (
-    OUT, len(defs), len(funcs - skip - local), len(gp_syms),
-    len(datas - skip - local)))
+print('%s: %d funcoes decompiladas, %d funcoes, %d dados gp' % (
+    OUT, len(defs), len(funcs - skip - local), len(gp_syms)))
