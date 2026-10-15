@@ -8,6 +8,7 @@ options:
   platform: psx
   compiler: PSYQ
   asm_path: asm/ovl/WSTAG939
+  src_path: src/ovl
   asset_path: assets/ovl/WSTAG939
   ld_script_path: linker/ovl/WSTAG939.ld
   ld_dependencies: True
@@ -35,6 +36,6 @@ segments:
     start: 0x0
     vram: 0x800A5DE0
     subsegments:
-      - [0x0, asm]
+      - [0x0, c, WSTAG939]
       - [0x18C, data]
   - [0x4A8]

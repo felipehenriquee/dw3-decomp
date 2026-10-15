@@ -10,7 +10,7 @@ G=${3:-8}
 GCC=${GCC:-2.8.1}
 ASPSX=${ASPSX:-2.86}
 S=${2%.o}.s
-"$R/tools/old-gcc/$GCC/cpp" -P -I"$R/include" -DINCLUDE_ASM_USE_MACRO_INC=1 "$1" \
+"$R/tools/old-gcc/$GCC/cpp" -P -I"$R/include" -I"$R/include/ovl" -DINCLUDE_ASM_USE_MACRO_INC=1 "$1" \
     | "$R/tools/old-gcc/$GCC/cc1" -quiet -O2 -G"$G" -funsigned-char \
         -fpeephole -ffunction-cse -fpcc-struct-return -fcommon \
         -msoft-float -mgas -fgnu-linker -w > "$S"

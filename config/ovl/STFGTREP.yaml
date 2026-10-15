@@ -8,6 +8,7 @@ options:
   platform: psx
   compiler: PSYQ
   asm_path: asm/ovl/STFGTREP
+  src_path: src/ovl
   asset_path: assets/ovl/STFGTREP
   ld_script_path: linker/ovl/STFGTREP.ld
   ld_dependencies: True
@@ -35,7 +36,7 @@ segments:
     start: 0x0
     vram: 0x80082CB0
     subsegments:
-      - [0x0, rodata]
-      - [0x1C0, asm]
+      - [0x0, .rodata, STFGTREP]
+      - [0x1C0, c, STFGTREP]
       - [0x3DD8, data]
   - [0x65F8]

@@ -25,6 +25,7 @@ options:
   platform: psx
   compiler: PSYQ
   asm_path: asm/ovl/{name}
+  src_path: src/ovl
   asset_path: assets/ovl/{name}
   ld_script_path: linker/ovl/{name}.ld
   ld_dependencies: True
@@ -62,8 +63,8 @@ def segments(name, b):
     ts, te = r
     subs = []
     if ts > 0:
-        subs.append('[0x0, rodata]')
-    subs.append('[0x%X, asm]' % ts)
+        subs.append('[0x0, .rodata, %s]' % name)
+    subs.append('[0x%X, c, %s]' % (ts, name))
     tail = size & ~3
     if te < tail:
         subs.append('[0x%X, data]' % te)

@@ -13,3 +13,4 @@ __pycache__/
 .splache
 tools/psyq_sigs/
 tools/old-gcc/
+tools/decomp-permuter/

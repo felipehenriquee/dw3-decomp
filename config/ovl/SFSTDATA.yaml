@@ -8,6 +8,7 @@ options:
   platform: psx
   compiler: PSYQ
   asm_path: asm/ovl/SFSTDATA
+  src_path: src/ovl
   asset_path: assets/ovl/SFSTDATA
   ld_script_path: linker/ovl/SFSTDATA.ld
   ld_dependencies: True

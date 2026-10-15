@@ -8,6 +8,7 @@ options:
   platform: psx
   compiler: PSYQ
   asm_path: asm/ovl/STDWTITL
+  src_path: src/ovl
   asset_path: assets/ovl/STDWTITL
   ld_script_path: linker/ovl/STDWTITL.ld
   ld_dependencies: True
@@ -35,7 +36,7 @@ segments:
     start: 0x0
     vram: 0x80082CB0
     subsegments:
-      - [0x0, rodata]
-      - [0xC0, asm]
+      - [0x0, .rodata, STDWTITL]
+      - [0xC0, c, STDWTITL]
       - [0x4F90, data]
   - [0x65C0]

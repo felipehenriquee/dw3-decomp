@@ -29,12 +29,10 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cc_cmp  # noqa: E402
+from proj import Target  # noqa: E402
 
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 M2C = os.path.join(R, '.venv/bin/m2c')
-
-# como cada alvo e carregado: (binario, vram, offset no arquivo, G)
-TARGETS = {'main': ('disc/SLES_049.36', 0x80010000, 0x800, 8)}
 
 # tipos candidatos para um simbolo de dados: (base, forma)
 # forma: 'a' array sem tamanho, 's' escalar, 'o' struct opaca
@@ -47,10 +45,9 @@ MAX_ROUNDS = 2
 
 
 def target(name):
-    if name in TARGETS:
-        return TARGETS[name]
-    vram = 0x800A5DE0 if name.startswith('W') else 0x80082CB0
-    return ('disc/PRO/%s.PRO' % name, vram, 0, 0)
+    """(binario, vram, offset no arquivo, G)"""
+    t = Target(name)
+    return (t.bin, t.vram, t.off, t.G)
 
 
 def run(cmd, **kw):
@@ -58,7 +55,7 @@ def run(cmd, **kw):
 
 
 def pending(name):
-    src = open(os.path.join(R, 'src/%s.c' % name)).read()
+    src = open(os.path.join(R, Target(name).src)).read()
     return re.findall(r'^INCLUDE_ASM\("[^"]+", (\w+)\);', src, re.M)
 
 
@@ -87,7 +84,7 @@ def parse_decl(line):
 
 def canonical(name):
     out = {}
-    p = os.path.join(R, 'include/%s_data.h' % name)
+    p = os.path.join(R, Target(name).data)
     if os.path.exists(p):
         for ln in open(p):
             d = parse_decl(ln)
@@ -135,10 +132,11 @@ def make_base(name, work):
     """Prepara o contexto base do m2c (headers preprocessados, sem os
     dados fora do $gp)."""
     os.makedirs(work, exist_ok=True)
+    T = Target(name)
     stub = os.path.join(work, 'ctx_in.c')
     with open(stub, 'w') as f:
-        f.write('#include "%s.h"\n#include "m2c.h"\n#include "%s_auto.h"\n'
-                % (name, name))
+        f.write('#include "%s"\n#include "m2c.h"\n#include "%s"\n'
+                % (T.p(T.hdr), T.p(T.auto)))
     out = run([os.path.join(R, 'tools/old-gcc/2.8.1/cpp'), '-P',
                '-I' + os.path.join(R, 'include'), '-DM2CTX', stub])
     ctx = os.path.join(work, 'ctx.h')
@@ -147,7 +145,7 @@ def make_base(name, work):
 
 
 def rodata_files(name):
-    d = os.path.join(R, 'asm/nonmatchings', name)
+    d = os.path.join(R, Target(name).asm)
     return [os.path.join(d, f) for f in sorted(os.listdir(d))
             if not f.startswith('func_') and f.endswith('.s')]
 
@@ -159,17 +157,18 @@ class Tester:
         self.exe = open(os.path.join(R, self.tgt[0]), 'rb').read()
         self.d = os.path.join(work, fn)
         os.makedirs(self.d, exist_ok=True)
-        self.asm = os.path.join(R, 'asm/nonmatchings', name, fn + '.s')
+        self.T = Target(name)
+        self.asm = os.path.join(R, self.T.asm, fn + '.s')
         self.syms = data_syms(open(self.asm).read())
         own = re.compile(r'\b%s\s*\(' % fn)
         self.base = '\n'.join(ln for ln in open(base_ctx).read().splitlines()
                               if not own.search(ln))
-        auto = open(os.path.join(R, 'include/%s_auto.h' % name)).read()
+        auto = open(self.T.p(self.T.auto)).read()
         self.auto = '\n'.join(ln for ln in auto.splitlines()
                               if not own.search(ln) and not ln.startswith('#'))
         # declaracoes fixadas dos outros simbolos (os desta funcao entram
         # com o tipo da tentativa)
-        data = os.path.join(R, 'include/%s_data.h' % name)
+        data = self.T.p(self.T.data)
         self.data = []
         if os.path.exists(data):
             for ln in open(data):
@@ -195,8 +194,8 @@ class Tester:
         code = fix_code(r.stdout)
         c = os.path.join(self.d, tag + '.c')
         with open(c, 'w') as f:
-            f.write('#include "%s.h"\n#include "m2c.h"\n%s\nstruct opaque;\n'
-                    % (self.name, self.auto))
+            f.write('#include "%s"\n#include "m2c.h"\n%s\nstruct opaque;\n'
+                    % (self.T.p(self.T.hdr), self.auto))
             f.write('\n'.join(self.data) + '\n')
             for s, t in types.items():
                 f.write(decl(s, t) + '\n')
@@ -271,7 +270,7 @@ def test(name, funcs):
     jobs = [(name, fn, base_ctx, work, canon) for fn in funcs]
     # as funcoes maiores (busca mais longa) primeiro
     jobs.sort(key=lambda j: -os.path.getsize(os.path.join(
-        R, 'asm/nonmatchings', name, j[1] + '.s')))
+        R, Target(name).asm, j[1] + '.s')))
     with multiprocessing.Pool(os.cpu_count()) as p:
         results = dict(p.imap_unordered(try_one, jobs))
     path = os.path.join(work, 'results.json')
@@ -296,7 +295,7 @@ def make_ok():
 
 
 def write_data(name, canon):
-    p = os.path.join(R, 'include/%s_data.h' % name)
+    p = os.path.join(R, Target(name).data)
     s = open(p).read()
     lines = [ln for ln in s.splitlines() if ln.startswith('extern ')]
     i = s.index(lines[0]) if lines else s.index('\n#endif')
@@ -306,7 +305,8 @@ def write_data(name, canon):
 
 
 def insert(name, items):
-    p = os.path.join(R, 'src/%s.c' % name)
+    T = Target(name)
+    p = os.path.join(R, T.src)
     s = open(p).read()
     canon = canonical(name)
     for fn, r in items.items():
@@ -316,12 +316,10 @@ def insert(name, items):
             if sym not in canon:
                 canon[sym] = t
             code = rewrite(code, sym, t, canon[sym])
-        line = 'INCLUDE_ASM("asm/nonmatchings/%s", %s);' % (name, fn)
-        s = s.replace(line, code.strip(), 1)
+        s = s.replace(T.include_line(fn), code.strip(), 1)
     open(p, 'w').write(s)
     write_data(name, canon)
-    run([sys.executable, '-I', 'tools/gen_ctx.py', name,
-         str(target(name)[3])])
+    run([sys.executable, '-I', 'tools/gen_ctx.py', name])
 
 
 def apply(name):
@@ -329,9 +327,8 @@ def apply(name):
     res = json.load(open(os.path.join(work, 'results.json')))
     todo = {f: r for f, r in res.items()
             if r['status'] == 'ok' and f in pending(name)}
-    files = [os.path.join(R, p) for p in
-             ('src/%s.c' % name, 'include/%s_auto.h' % name,
-              'include/%s_data.h' % name)]
+    T = Target(name)
+    files = [T.p(T.src), T.p(T.auto), T.p(T.data)]
     good, bad = {}, []
 
     def attempt(batch):
@@ -361,6 +358,11 @@ def apply(name):
 
 def main():
     name = sys.argv[1]
+    T = Target(name)
+    if name != 'main':
+        T.ensure_files()
+        if not os.path.getsize(T.p(T.auto)):
+            run([sys.executable, '-I', 'tools/gen_ctx.py', name])
     if '--apply' in sys.argv:
         apply(name)
         return

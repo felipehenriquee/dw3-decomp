@@ -8,6 +8,7 @@ options:
   platform: psx
   compiler: PSYQ
   asm_path: asm/ovl/SMDLDATA
+  src_path: src/ovl
   asset_path: assets/ovl/SMDLDATA
   ld_script_path: linker/ovl/SMDLDATA.ld
   ld_dependencies: True

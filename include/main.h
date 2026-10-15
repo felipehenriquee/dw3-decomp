@@ -23,6 +23,16 @@ typedef struct {
     s32 busy;
 } CdState;
 
+/* elemento da tabela em D_8004B7D0 (0x1C0 bytes) */
+typedef struct {
+    u8 pad0[0x48];
+    u16 unk48;
+    u16 unk4A;
+    u16 unk4C;
+    u16 unk4E;
+    u8 pad50[0x1C0 - 0x50];
+} Unk8004B7D0;
+
 extern Obj *func_80014504(void (*fn)(), s32, s32);
 extern void func_800119A8();
 extern s32 func_800134AC(void);
@@ -36,5 +46,24 @@ extern Ent D_8003EF5C[];
 extern CdState D_80044B04;
 extern u8 D_8005CCF8[4];
 extern s32 D_8005CD08;
+
+/* contexto de desenho: duas OTs (buffer duplo) */
+typedef struct {
+    u8 pad0[0x5C];
+    s32 ot[2];
+    s32 otLen;
+    s32 unk68;
+} Unk8001DDA0;
+
+/* D_800519EC + 0x4204: tabela de 0x18 bytes por entrada */
+typedef struct {
+    s16 unk0;
+    u8 pad2[0x16];
+} Unk800519EC_4204;
+
+typedef struct {
+    u8 pad0[0x4204];
+    Unk800519EC_4204 unk4204[1];
+} Unk800519EC;
 
 #endif /* MAIN_H */

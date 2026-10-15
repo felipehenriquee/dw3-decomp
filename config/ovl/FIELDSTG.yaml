@@ -8,6 +8,7 @@ options:
   platform: psx
   compiler: PSYQ
   asm_path: asm/ovl/FIELDSTG
+  src_path: src/ovl
   asset_path: assets/ovl/FIELDSTG
   ld_script_path: linker/ovl/FIELDSTG.ld
   ld_dependencies: True
@@ -35,7 +36,7 @@ segments:
     start: 0x0
     vram: 0x80082CB0
     subsegments:
-      - [0x0, rodata]
-      - [0xAD4, asm]
+      - [0x0, .rodata, FIELDSTG]
+      - [0xAD4, c, FIELDSTG]
       - [0x1014C, data]
   - [0x18E98]

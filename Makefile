@@ -44,6 +44,14 @@ $(BUILD)/src/%.o: src/%.c $$(wildcard asm/nonmatchings/$$*/*.s) $$(wildcard incl
 	$(MASPSX) -EL -march=r3000 -mtune=r3000 -no-pad-sections -O1 -G$(G) \
 		-Iinclude -o $@ < $(@:.o=.s)
 
+# overlays: nao usam $$gp
+$(BUILD)/src/ovl/%.o: G := 0
+$(BUILD)/src/ovl/%.o: src/ovl/%.c $$(wildcard asm/ovl/$$*/nonmatchings/$$*/*.s) $$(wildcard include/*.h include/ovl/*.h) Makefile
+	@mkdir -p $(dir $@)
+	$(CPP) $(CPPFLAGS) -Iinclude/ovl $< | $(CC1) $(CFLAGS) -G$(G) > $(@:.o=.s)
+	$(MASPSX) -EL -march=r3000 -mtune=r3000 -no-pad-sections -O1 -G$(G) \
+		-Iinclude -o $@ < $(@:.o=.s)
+
 $(BUILD)/%.o: %.bin
 	@mkdir -p $(dir $@)
 	$(OBJCOPY) -I binary -O elf32-tradlittlemips -B mips $< $@

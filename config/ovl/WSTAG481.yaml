@@ -8,6 +8,7 @@ options:
   platform: psx
   compiler: PSYQ
   asm_path: asm/ovl/WSTAG481
+  src_path: src/ovl
   asset_path: assets/ovl/WSTAG481
   ld_script_path: linker/ovl/WSTAG481.ld
   ld_dependencies: True
@@ -35,7 +36,7 @@ segments:
     start: 0x0
     vram: 0x800A5DE0
     subsegments:
-      - [0x0, rodata]
-      - [0x18, asm]
+      - [0x0, .rodata, WSTAG481]
+      - [0x18, c, WSTAG481]
       - [0x5A4, data]
   - [0x11D4]

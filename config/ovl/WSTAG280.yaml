@@ -8,6 +8,7 @@ options:
   platform: psx
   compiler: PSYQ
   asm_path: asm/ovl/WSTAG280
+  src_path: src/ovl
   asset_path: assets/ovl/WSTAG280
   ld_script_path: linker/ovl/WSTAG280.ld
   ld_dependencies: True
@@ -35,7 +36,7 @@ segments:
     start: 0x0
     vram: 0x800A5DE0
     subsegments:
-      - [0x0, rodata]
-      - [0x30, asm]
+      - [0x0, .rodata, WSTAG280]
+      - [0x30, c, WSTAG280]
       - [0x928, data]
   - [0x1BD8]

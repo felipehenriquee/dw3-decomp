@@ -20,12 +20,14 @@ import os
 import re
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from proj import Target  # noqa: E402
+
 name = sys.argv[1]
-G = int(sys.argv[2]) if len(sys.argv) > 2 else 8
-SRC = 'src/%s.c' % name
-MANUAL = 'include/%s.h' % name
-OUT = 'include/%s_auto.h' % name
-ASM = 'asm/nonmatchings/%s' % name
+T = Target(name)
+G = int(sys.argv[2]) if len(sys.argv) > 2 else T.G
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+SRC, MANUAL, OUT, ASM = T.src, T.hdr, T.auto, T.asm
 
 ident = r'[A-Za-z_][A-Za-z0-9_]*'
 
@@ -37,7 +39,7 @@ def strip_comments(s):
 
 src = strip_comments(open(SRC).read()) if os.path.exists(SRC) else ''
 manual = ''
-for p in (MANUAL, 'include/%s_data.h' % name):
+for p in (MANUAL, T.data):
     if os.path.exists(p):
         manual += strip_comments(open(p).read())
 
@@ -66,6 +68,23 @@ for f in sorted(glob.glob(os.path.join(ASM, '*.s'))):
     for m in re.finditer(r'\b(\w+)\s+\$\w+,\s*(?:\$gp,\s*)?%%gp_rel\((%s)\)' % ident, txt):
         gp_acc.setdefault(m.group(2), set()).add(m.group(1))
 
+# declaracoes do _auto.h anterior para simbolos que o C usa mas cujo asm
+# ja sumiu (funcao decompilada): mantidas como estavam
+prev_lines = {}
+if os.path.exists(OUT):
+    for ln in open(OUT):
+        m = re.match(r'(?:extern )?[\w ]+?\**\s*\b(%s)\s*[\[(;]' % ident, ln)
+        if m and not ln.startswith(('/*', '#')):
+            prev_lines[m.group(1)] = ln.rstrip()
+used_in_c = set(re.findall(ident, src))
+for sym, ln in prev_lines.items():
+    if sym not in used_in_c or sym in funcs or sym in gp_acc or sym in defs:
+        continue
+    if 'gp' in ln or re.match(r'extern (s32|s16|u16|s8|u8) \w+(\[\d+\])?;$', ln):
+        gp_acc[sym] = {'keep': ln}
+    elif ln.startswith('s32 ') and ln.endswith('();'):
+        funcs.add(sym)
+
 datas -= set(gp_acc)
 skip = declared | set(defs)
 WIDTH = {'lw': 's32', 'sw': 's32', 'lh': 's16', 'lhu': 'u16', 'sh': 's16',
@@ -74,6 +93,7 @@ WIDTH = {'lw': 's32', 'sw': 's32', 'lh': 's16', 'lhu': 'u16', 'sh': 's16',
 out = ['/* Gerado por tools/gen_ctx.py %s: nao edite. Declare a mao em %s */'
        % (name, MANUAL), '#ifndef %s_AUTO_H' % name.upper(),
        '#define %s_AUTO_H' % name.upper(), '']
+
 out.append('/* funcoes ja decompiladas */')
 out += [defs[f] for f in sorted(defs) if f not in declared]
 out += ['', '/* funcoes ainda em assembly (prototipo desconhecido) */']
@@ -85,6 +105,9 @@ for s in gp_syms:
     if s in skip:
         continue
     ops = gp_acc[s]
+    if isinstance(ops, dict):
+        out.append(ops['keep'])
+        continue
     types = {WIDTH[o] for o in ops if o in WIDTH}
     if len(types) == 1 and 'addiu' not in ops:
         out.append('extern %s %s;' % (types.pop(), s))

@@ -8,6 +8,7 @@ options:
   platform: psx
   compiler: PSYQ
   asm_path: asm/ovl/WSTAG260
+  src_path: src/ovl
   asset_path: assets/ovl/WSTAG260
   ld_script_path: linker/ovl/WSTAG260.ld
   ld_dependencies: True

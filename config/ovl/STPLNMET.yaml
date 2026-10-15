@@ -8,6 +8,7 @@ options:
   platform: psx
   compiler: PSYQ
   asm_path: asm/ovl/STPLNMET
+  src_path: src/ovl
   asset_path: assets/ovl/STPLNMET
   ld_script_path: linker/ovl/STPLNMET.ld
   ld_dependencies: True
@@ -35,7 +36,7 @@ segments:
     start: 0x0
     vram: 0x80082CB0
     subsegments:
-      - [0x0, rodata]
-      - [0x2A8, asm]
+      - [0x0, .rodata, STPLNMET]
+      - [0x2A8, c, STPLNMET]
       - [0x5934, data]
   - [0x6F0C]

@@ -8,6 +8,7 @@ options:
   platform: psx
   compiler: PSYQ
   asm_path: asm/ovl/CNTY_SEL
+  src_path: src/ovl
   asset_path: assets/ovl/CNTY_SEL
   ld_script_path: linker/ovl/CNTY_SEL.ld
   ld_dependencies: True
@@ -35,8 +36,8 @@ segments:
     start: 0x0
     vram: 0x80082CB0
     subsegments:
-      - [0x0, rodata]
-      - [0x38, asm]
+      - [0x0, .rodata, CNTY_SEL]
+      - [0x38, c, CNTY_SEL]
       - [0x1710, data]
       - [0x1778, bin]
   - [0x177B]

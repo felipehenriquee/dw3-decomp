@@ -8,6 +8,7 @@ options:
   platform: psx
   compiler: PSYQ
   asm_path: asm/ovl/SDIGIEDT
+  src_path: src/ovl
   asset_path: assets/ovl/SDIGIEDT
   ld_script_path: linker/ovl/SDIGIEDT.ld
   ld_dependencies: True

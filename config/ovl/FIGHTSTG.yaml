@@ -8,6 +8,7 @@ options:
   platform: psx
   compiler: PSYQ
   asm_path: asm/ovl/FIGHTSTG
+  src_path: src/ovl
   asset_path: assets/ovl/FIGHTSTG
   ld_script_path: linker/ovl/FIGHTSTG.ld
   ld_dependencies: True
@@ -35,7 +36,7 @@ segments:
     start: 0x0
     vram: 0x80082CB0
     subsegments:
-      - [0x0, rodata]
-      - [0x620, asm]
+      - [0x0, .rodata, FIGHTSTG]
+      - [0x620, c, FIGHTSTG]
       - [0x1F7E8, data]
   - [0x21AF0]

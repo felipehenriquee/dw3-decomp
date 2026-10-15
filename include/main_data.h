@@ -38,5 +38,10 @@ extern s32 D_8004DE28 NOT_GP;
 extern s32 D_8004DE30 NOT_GP;
 extern u8 D_8004DE48[];
 extern u16 D_80055C40[];
+extern s32 D_8004DFCC[];
+extern s32 D_8004B610[];
+extern s32 D_8004DE44 NOT_GP;
+extern s32 D_8004B7C8 NOT_GP;
+extern u8 D_800519EC[];
 
 #endif /* MAIN_DATA_H */
