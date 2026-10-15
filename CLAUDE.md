@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-10-15): EXE **124 de 347** funções em C (+55 prontas em `wip/main/`); overlays **144 de 3292**. Total ~7%.
+- [ ] Decompilação (2026-10-15): EXE **179 de 347** funções em C; overlays **144 de 3292**. Total ~7%.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -98,7 +98,7 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 - A comparação com decomp.me não foi necessária: tudo foi feito localmente com `tools/cc.sh` + `tools/cc_cmp.py`.
 
 ## Próximos passos
-1. Integrar `wip/main/` (ver `wip/main/README.md`).
+1. Funções difíceis do EXE em `wip/main/` (ver o README de lá).
 2. Rodar `tools/autodecomp_all.sh` a partir do `STGDGLAB` (parou ali; CARDGAME..STFGTREP já rodaram) — leva ~1 h; os 293 `WSTAG` ainda não rodaram.
 3. Rodar `tools/propagate.py` (reaproveita C de funções idênticas). Antes, ligar `disassemble_all: True` nos yaml e refazer o `make split` (gera o asm das funções já decompiladas em `.../matchings/`).
 4. Permuter nas funções de `wip/main/hard.txt` e nas que o autodecomp deixa a poucas instruções.

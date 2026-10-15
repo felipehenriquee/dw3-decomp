@@ -66,4 +66,66 @@ typedef struct {
     Unk800519EC_4204 unk4204[1];
 } Unk800519EC;
 
+/* struct grande em D_80048D34 (dados do jogador/partida?) */
+typedef struct {
+    u8 pad0[0x70];
+    s32 unk70[3];
+} Unk80048D34;
+
+/* elemento de 0x3DC bytes indexado a partir de D_80048D34 */
+typedef struct {
+    u8 unk0[0x3DC];
+} Unk80048D34_3DC;
+
+/* no de 0x14 bytes da lista em func_8001E324 */
+typedef struct Unk8001E324 {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    struct Unk8001E324 *next;
+} Unk8001E324;
+
+/* tabela em D_8004DE10: 30 slots (em uso + id) */
+typedef struct {
+    u8 pad0[0x60];
+    s32 used[30];
+    s32 id[30];
+} Unk8004DE10;
+
+typedef struct {
+    u8 pad0[0x58];
+    s16 unk58[8];
+} Unk80042B1C;
+
+/* contexto do interpretador: base do script e posicao atual */
+typedef struct {
+    u8 *base;
+    s32 unk4;
+    s16 pc;
+} ScriptCtx;
+
+/* tabela em D_80044B3C: 64 entradas de 0x10 bytes */
+typedef struct {
+    s16 unk0;
+    s16 unk2;
+    s32 id;
+    s32 unk8;
+    s32 unkC;
+} Unk80044B3C;
+
+/* 4 bytes sem alinhamento (o gcc copia com lwl/lwr) */
+typedef struct {
+    u8 b[4];
+} Bytes4;
+
+typedef struct {
+    u8 pad0[0x7B8];
+    s16 unk7B8;
+} Unk80048D34_7B8;
+
+typedef struct {
+    u8 unk0[0xC];
+} Unk80041838;
+
 #endif /* MAIN_H */

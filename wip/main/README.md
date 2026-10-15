@@ -1,20 +1,7 @@
 # Trabalho em andamento: EXE (src/main.c)
 
-Funções decompiladas à mão que **já batem** no teste isolado
-(`tools/fn.py ... test`), mas ainda não foram integradas.
+Funções do EXE que ficaram perto de bater e precisam de mais trabalho.
 
-- `queue.txt`: ordem de integração (algumas dependem de typedefs que
-  outras levam para `include/main.h`, então respeite a ordem). Para
-  integrar todas:
-
-  ```sh
-  for f in $(cat wip/main/queue.txt); do
-      python3 -I tools/fn.py main func_$f apply wip/main/$f.c | tail -1
-  done
-  ```
-
-  O `apply` testa, integra e roda o `make`; se não bater, desfaz.
-  Depois de integrar, apague os arquivos usados.
 - `hard.txt`: funções que ficaram perto mas não bateram (`função arquivo`).
   Candidatas para o decomp-permuter (`tools/perm_setup.py`) ou para
   ajuste manual. Anotações:
@@ -26,4 +13,5 @@ Funções decompiladas à mão que **já batem** no teste isolado
     `s32 []` (escalar `NOT_GP` gera `sw` com `$at`).
   - `80013914`: precisa dar nome aos campos `0x4–0x10` de `CdState`
     (`include/main.h`) e atualizar os usos de `pad[...]` em `src/main.c`.
-- Arquivos `*_t.c` e `NNN_k.c`: variantes de teste; podem ser apagados.
+- Os `.c` daqui são a melhor tentativa de cada uma (alguns `*_t.c`
+  incluem typedefs locais só para o teste isolado).
