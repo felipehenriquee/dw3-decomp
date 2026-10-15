@@ -98,8 +98,9 @@ def compare_show(name, fn, obj):
     addr = int(fn.split('_')[-1], 16)
     # tamanho original: ate o proximo glabel no .s
     asm = open(Target(name).p(Target(name).asm + '/' + fn + '.s')).read()
+    body = re.search(r'glabel %s\b(.*?)endlabel %s\b' % (fn, fn), asm, re.S)
     osize = 4 * len(re.findall(r'^\s*/\* [0-9A-F]+ [0-9A-F]{8} [0-9A-F]{8} \*/',
-                               asm, re.M))
+                               body.group(1) if body else asm, re.M))
     n = max(size, osize) // 4
     cw = [struct.unpack_from('<I', text, start + 4 * i)[0] if 4 * i < size
           else 0 for i in range(n)]
@@ -123,10 +124,12 @@ def test(name, fn, path):
     os.makedirs(SCRATCH, exist_ok=True)
     c = os.path.join(SCRATCH, fn + '.c')
     o = os.path.join(SCRATCH, fn + '.o')
-    open(c, 'w').write(tu(name, fn, open(path).read()))
+    open(c, "w").write(tu(name, fn, open(path).read()))
+    if os.path.exists(o):
+        os.remove(o)
     r = ad.run([os.path.join(R, 'tools/cc.sh'), c, o,
                 str(ad.target(name)[3])], stdin=subprocess.DEVNULL)
-    if r.returncode != 0:
+    if r.returncode != 0 or not os.path.exists(o):
         print(r.stderr[-2000:])
         return False
     return compare_show(name, fn, o)

@@ -62,9 +62,11 @@ def text_bytes(obj):
     return b''
 
 
-def compare(obj, exe_b, names, load=LOAD, hdr=HDR):
+def compare(obj, exe_b, names, load=LOAD, hdr=HDR, osizes=None):
     """Devolve {nome: lista de (offset, compilado, original)} ou None se a
-    funcao nao esta no .o. Lista vazia = bate."""
+    funcao nao esta no .o. Lista vazia = bate. osizes: {nome: tamanho
+    original}; se dado, instrucoes a mais ou a menos contam como
+    diferencas."""
     text = text_bytes(obj)
     syms = symbols(obj)
     rel = relocs(obj)
@@ -86,6 +88,12 @@ def compare(obj, exe_b, names, load=LOAD, hdr=HDR):
             m = ~rel.get(start + i, 0) & 0xFFFFFFFF
             if a & m != b & m:
                 diffs.append((i, a, b))
+        osize = (osizes or {}).get(name)
+        if osize is not None:
+            for i in range(size, osize, 4):
+                diffs.append((i, None, None))
+            for i in range(osize, size, 4):
+                diffs.append((i, None, None))
         out[name] = diffs
     return out
 

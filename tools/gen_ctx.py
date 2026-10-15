@@ -59,7 +59,9 @@ declared |= set(re.findall(r'\bextern\b[^;]*?\b(%s)\s*(?:\[[^\]]*\])?\s*;' % ide
 funcs, datas, gp_acc, local = set(), set(), {}, set()
 for f in sorted(glob.glob(os.path.join(ASM, '*.s'))):
     txt = open(f).read()
-    local |= set(re.findall(r'^\s*(?:glabel|dlabel|jlabel)\s+(%s)' % ident, txt, re.M))
+    # simbolos definidos nos proprios .s (rodata migrada, rotulos); funcoes
+    # pendentes (glabel) continuam precisando de prototipo
+    local |= set(re.findall(r'^\s*(?:dlabel|jlabel)\s+(%s)' % ident, txt, re.M))
     for m in re.finditer(r'\bjal\s+(%s)' % ident, txt):
         funcs.add(m.group(1))
     for m in re.finditer(r'%%(?:hi|lo)\((%s)' % ident, txt):

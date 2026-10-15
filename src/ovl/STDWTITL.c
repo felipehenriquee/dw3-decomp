@@ -1,4 +1,7 @@
-#include "common.h"
+#include "STDWTITL.h"
+#include "m2c.h"
+#include "STDWTITL_auto.h"
+#include "STDWTITL_data.h"
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80082D70);
 
@@ -16,13 +19,23 @@ INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800833AC);
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800833E4);
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083438);
+void func_80083438(void) {
+    ResetGraph(1);
+    ClearImage2(&D_80087C90, 0, 0, 0);
+    DrawSync(0);
+}
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083478);
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083500);
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083568);
+void func_80083568(s32 arg0, M2C_UNK arg1) {
+    func_8008714C(0);
+    func_800873E8(arg1);
+    StSetRing(D_8008924C, 0x20);
+    StSetStream(1, 1, -1, 0, 0);
+    func_80083500(arg0);
+}
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800835D4);
 
@@ -102,7 +115,9 @@ INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80085BE4);
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80085C1C);
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80085C5C);
+s16 func_80085C5C(void *arg0) {
+    return M2C_FIELD(arg0, s16 *, 0x52);
+}
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80085C68);
 
@@ -112,7 +127,9 @@ INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80085D64);
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80085F0C);
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80085F38);
+s32 func_80085F38(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x50);
+}
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80085F44);
 
@@ -148,7 +165,12 @@ INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800870A0);
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800870E0);
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_8008714C);
+void func_8008714C(s32 arg0) {
+    if (arg0 == 0) {
+        ResetCallback();
+    }
+    func_8008740C(arg0);
+}
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80087180);
 

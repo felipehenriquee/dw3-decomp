@@ -21,7 +21,9 @@ INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083304);
 
 INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_800833DC);
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083474);
+void func_80083474(void *arg0, s16 arg1) {
+    M2C_FIELD(arg0, s16 *, 0x54) = arg1;
+}
 
 INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_8008347C);
 

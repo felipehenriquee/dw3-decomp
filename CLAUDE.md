@@ -19,7 +19,8 @@ Caminho escolhido:
 - [x] Limites text/data reais do EXE e entry point nomeado (`__SN_ENTRY_POINT`, do `2MBYTE.OBJ`).
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
-- [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`), compilado pelo `make`. **5 de 345 funções decompiladas** e batendo.
+- [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
+- [ ] Decompilação (2026-10-15): EXE **124 de 347** funções em C (+55 prontas em `wip/main/`); overlays **144 de 3292**. Total ~7%.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -31,6 +32,15 @@ Caminho escolhido:
 - `Makefile`: `make` (compila, assembla, linka, objcopy e confere todos os sha1), `make split` (regera `asm/`, `assets/` e `linker/` a partir do disco, ~12 s), `make clean`. Use `make -j$(nproc)`.
 - Gerados e fora do git: `asm/`, `assets/` (dados do jogo), `linker/`, `build/`. Baixados e fora do git: `tools/psyq_sigs/` (assinaturas), `tools/old-gcc/` (compiladores).
 - `disc/PRO/` tem os `.PRO`; `disc/SLES_049.36` é o EXE.
+
+### Fluxo de decompilação
+- `tools/gen_ctx.py <alvo>`: gera `include/<alvo>_auto.h` (protótipos `s32 f();` das funções em asm, protótipos das já decompiladas, dados do `$gp`). Dados fora do gp ficam em `include/main_data.h` / `include/ovl/<NOME>_data.h` (tipo fixado pela primeira função integrada; `NOT_GP` impede o `$gp` em escalares).
+- `tools/autodecomp.py <alvo> [funcs]` / `--apply`: m2c → gcc → compara, com busca de tipos por símbolo; `--apply` integra e confere com o `make` (bissecção se quebrar).
+- `tools/autodecomp_all.sh [overlays]`: o anterior em todos os overlays.
+- `tools/fn.py <alvo> <func> show|test|apply <arq.c>`: decompilação manual. No `apply`, `typedef`s do arquivo vão para o header, `extern` de dados para o `_data.h`.
+- `tools/propagate.py`, `tools/perm_setup.py`: ver acima.
+- Padrões aprendidos (GCC 2.8.1): retorno antecipado `if (x >= N) return -1;` costuma bater melhor; `return 1` compartilhado no fim em vez de `if/return 0/1` (senão vira `slt`/`xor`); campo de struct global acessado com offset na instrução pede ponteiro-base local (`u8 *p = D_X; *(s32 *)(p + off)`) ou struct; o tipo declarado de um símbolo muda o agendamento — valide com a declaração final.
+- `make split` apaga `build/` (inclusive `build/autodecomp/`).
 
 ### Ferramentas (`tools/`)
 - `ovl_bounds.py`: estima os limites rodata/text/data de cada overlay.
@@ -88,7 +98,11 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 - A comparação com decomp.me não foi necessária: tudo foi feito localmente com `tools/cc.sh` + `tools/cc_cmp.py`.
 
 ## Próximos passos
-1. Decompilar as funções do EXE (m2c → ajustar → `make`). **Aguardando o usuário decidir como conduzir este passo.**
+1. Integrar `wip/main/` (ver `wip/main/README.md`).
+2. Rodar `tools/autodecomp_all.sh` a partir do `STGDGLAB` (parou ali; CARDGAME..STFGTREP já rodaram) — leva ~1 h; os 293 `WSTAG` ainda não rodaram.
+3. Rodar `tools/propagate.py` (reaproveita C de funções idênticas). Antes, ligar `disassemble_all: True` nos yaml e refazer o `make split` (gera o asm das funções já decompiladas em `.../matchings/`).
+4. Permuter nas funções de `wip/main/hard.txt` e nas que o autodecomp deixa a poucas instruções.
+5. **Revisão semântica para o port**: algumas funções batem byte a byte mas omitem argumentos repassados (o m2c não vê argumentos que ficam intactos nos registradores; ex. `func_8001ECF8` chama `obj->fn138()` sem `(obj, arg1)`). No PS1 funciona; no PC quebraria. Revisar antes do port.
 2. Separar `src/main.c` em arquivos menores (por subsistema) quando ficar claro onde começa cada `.c` original.
 3. Separar a rodata/data das libs por objeto (como já foi feito com o text).
 4. Overlays: confirmar `-G0` decompilando uma função de overlay; investigar a primeira palavra dos `WSTAG` (antes do text) e o formato dos 4 overlays só de dados (`SDIGIEDT`, `SFSTDATA`, `SMDLDATA`, `WSTAG260`).

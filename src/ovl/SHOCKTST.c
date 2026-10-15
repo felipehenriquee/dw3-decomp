@@ -1,4 +1,7 @@
-#include "common.h"
+#include "SHOCKTST.h"
+#include "m2c.h"
+#include "SHOCKTST_auto.h"
+#include "SHOCKTST_data.h"
 
 INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_80082DA0);
 

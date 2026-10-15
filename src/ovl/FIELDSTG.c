@@ -1,4 +1,7 @@
-#include "common.h"
+#include "FIELDSTG.h"
+#include "m2c.h"
+#include "FIELDSTG_auto.h"
+#include "FIELDSTG_data.h"
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80083784);
 
@@ -8,7 +11,20 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80083CD8);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80083D08);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80084124);
+void func_80084124(void *arg0, s32 arg1) {
+    if (arg0 != NULL) {
+        switch (arg1) {                             /* irregular */
+        case 0x348:
+            M2C_FIELD(arg0, M2C_UNK (**)(void *, M2C_UNK), 0x28)(arg0, 2);
+            M2C_FIELD(arg0, s16 *, 0x58) = 0;
+            return;
+        case 0x349:
+            M2C_FIELD(arg0, M2C_UNK (**)(void *, M2C_UNK), 0x28)(arg0, 2);
+            M2C_FIELD(arg0, s16 *, 0x58) = 1;
+            break;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80084198);
 
@@ -88,23 +104,38 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80086C9C);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80086CE4);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80086D6C);
+void func_80086D6C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x50) = ((s32 (*)()) D_8004DF98)();
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80086D9C);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80086E24);
+s32 func_80086E24(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x6C);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80086E30);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800870DC);
+void func_800870DC(void *arg0, s32 arg1, void *arg2) {
+    M2C_FIELD(arg0, s32 *, 0x228) = arg1;
+    M2C_FIELD(arg0, void **, 0x22C) = arg2;
+    M2C_FIELD(arg2, M2C_UNK (**)(void *, s32, M2C_UNK), 0x7C)(arg2, M2C_FIELD(arg0, s32 *, 0x68), 0x2800);
+    M2C_FIELD(arg0, M2C_UNK (**)(void *, M2C_UNK), 0x2C)(arg0, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80087130);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800872C0);
+void func_800872C0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x70) = -1;
+}
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800872CC);
+s32 func_800872CC(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x70);
+}
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800872D8);
+s32 func_800872D8(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x58);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800872E4);
 
@@ -132,9 +163,28 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80087F84);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80088144);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80088190);
+void func_80088190(s32 arg0) {
+    func_80088144(0, 0, arg0);
+}
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800881B8);
+void func_800881B8(void *arg0, s32 arg1, M2C_UNK arg2) {
+    if (arg0 != NULL) {
+        switch (arg1) {                             /* irregular */
+        case 0x325:
+            M2C_FIELD(arg0, s32 *, 8) = 0;
+            break;
+        case 0x327:
+            M2C_FIELD(arg0, s32 *, 8) = 1;
+            break;
+        case 0x326:
+            M2C_FIELD(arg0, M2C_UNK (**)(void *, M2C_UNK), 0x28)(arg0, 2);
+            break;
+        }
+        if ((arg1 == 0x325) || (arg1 == 0x327)) {
+            M2C_FIELD(arg0, s32 *, 0x50) = ((s32 (*)(M2C_UNK, M2C_UNK, M2C_UNK)) D_8004B7BC)(5, arg2, -1);
+        }
+    }
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80088288);
 
@@ -162,7 +212,11 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80089490);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800894D8);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80089548);
+void func_80089548(s32 arg0) {
+    D_8009B8FC = arg0;
+    D_8009B8F8 = D_80099D90;
+    func_800894D8();
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008957C);
 
@@ -196,13 +250,26 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008B798);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008BF38);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008BFA4);
+void func_8008BFA4(s32 arg0) {
+    void *temp_s0;
+
+    temp_s0 = M2C_FIELD(((void *(*)(M2C_UNK, M2C_UNK, M2C_UNK)) D_8004B7BC)(7, -1, -1), void **, 0x24);
+    M2C_FIELD(temp_s0, s32 *, 0xC) = func_800853F8((s16) D_800978D8[arg0]);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008C000);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008C078);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008C0F0);
+s32 func_8008C0F0(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = rsin(arg0 >> 2) * arg1;
+    if (var_v0 < 0) {
+        var_v0 += 0xFFF;
+    }
+    return var_v0 >> 0xC;
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008C130);
 
@@ -242,7 +309,14 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008DC90);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008DD40);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008DDC8);
+void func_8008DDC8(s32 arg0) {
+    void *temp_v0;
+
+    temp_v0 = ((void *(*)(M2C_UNK, M2C_UNK, M2C_UNK)) D_8004B7BC)(0x10, -1, -1);
+    if (temp_v0 != NULL) {
+        M2C_FIELD(temp_v0, s32 *, 0x5C) = arg0;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008DE0C);
 
@@ -266,9 +340,16 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008ED2C);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008EEF0);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008EFD0);
+void func_8008EFD0(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_FIELD(arg0, s32 *, 0xEC) = 1;
+    M2C_FIELD(arg0, s32 *, 0xF0) = arg1;
+    M2C_FIELD(arg0, s32 *, 0xF4) = arg2;
+    M2C_FIELD(arg0, s32 *, 0xF8) = arg3;
+}
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008EFE8);
+s32 func_8008EFE8(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0xEC);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008EFF4);
 
@@ -292,15 +373,24 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008F3E4);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008F44C);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008F4B4);
+void func_8008F4B4(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0xA0) = arg1;
+    M2C_FIELD(arg0, s32 *, 0xCC) = 0;
+    M2C_FIELD(arg0, s32 *, 0xD0) = 0;
+    M2C_FIELD(arg0, s32 *, 0xE8) = 0;
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008F4C8);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008F520);
+s32 func_8008F520(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0xE8);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008F52C);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008F9B8);
+void func_8008F9B8(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x60) = arg1;
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008F9C0);
 
@@ -308,7 +398,14 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008FD60);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008FD74);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008FE68);
+void func_8008FE68(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 8) == 0) {
+        if (!(M2C_FIELD(arg0, s32 *, 0x18) & 0xF)) {
+            ((M2C_UNK (*)(M2C_UNK)) D_80055C48)(0x800458BD);
+        }
+        M2C_FIELD(arg0, s32 *, 0x18) = (s32) (M2C_FIELD(arg0, s32 *, 0x18) + 1);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008FED0);
 
@@ -316,7 +413,13 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80090E70);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80090EF0);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80090F70);
+void func_80090F70(void *arg0, void *arg1) {
+    void *temp_a2;
+
+    temp_a2 = (M2C_FIELD(arg0, s32 *, 0x60) * 8) + D_80097CCC;
+    M2C_FIELD(arg1, s32 *, 0) = (s32) (M2C_FIELD(arg0, s32 *, 0x58) + M2C_FIELD(temp_a2, s32 *, 0));
+    M2C_FIELD(arg1, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 0x5C) + M2C_FIELD(temp_a2, s32 *, 4));
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80090FB0);
 
@@ -324,67 +427,99 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8009116C);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800915A0);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091600);
+void func_80091600(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x400, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8009162C);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8009168C);
+void func_8009168C(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x401, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800916B8);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091718);
+void func_80091718(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x402, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091744);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800917A4);
+void func_800917A4(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x403, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800917D0);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091830);
+void func_80091830(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x404, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8009185C);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800918BC);
+void func_800918BC(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x405, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800918E8);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091948);
+void func_80091948(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x406, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091974);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800919D4);
+void func_800919D4(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x407, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091A00);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091A60);
+void func_80091A60(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x408, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091A8C);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091AEC);
+void func_80091AEC(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x409, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091B18);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091B78);
+void func_80091B78(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x40A, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091BA4);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091C04);
+void func_80091C04(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x40B, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091C30);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091C90);
+void func_80091C90(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x40C, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091CBC);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091D1C);
+void func_80091D1C(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x40D, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091D48);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091DA8);
+void func_80091DA8(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x40E, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091DD4);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091E34);
+void func_80091E34(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x40F, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091E60);
 
@@ -392,7 +527,9 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091FDC);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092070);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800920DC);
+s32 func_800920DC(s32 arg0) {
+    return (&D_80099E00)[arg0];
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800920F8);
 
@@ -400,9 +537,13 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092110);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800921E4);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092214);
+void func_80092214(void) {
+    ((M2C_UNK (*)(s32 *, M2C_UNK)) D_8004B600)(&D_8009B3C4, 8);
+}
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092244);
+void func_80092244(s32 arg0) {
+    ((M2C_UNK (*)(M2C_UNK, s32, M2C_UNK)) D_8004B7BC)(5, arg0, -1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092274);
 
@@ -416,11 +557,41 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092408);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8009243C);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092484);
+s32 func_80092484(s32 arg0) {
+    s32 var_v1;
+    void *temp_v0;
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800924C8);
+    temp_v0 = func_8009243C();
+    var_v1 = 0;
+    if (temp_v0 != NULL) {
+        var_v1 = M2C_FIELD(temp_v0, s32 (**)(s32), 4)(arg0);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8009252C);
+void func_800924C8(s32 arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3) {
+    M2C_UNK (*temp_v0_2)(s32, M2C_UNK, M2C_UNK);
+    void *temp_v0;
+
+    temp_v0 = func_8009243C(arg1);
+    if (temp_v0 != NULL) {
+        temp_v0_2 = M2C_FIELD(temp_v0, M2C_UNK (**)(s32, M2C_UNK, M2C_UNK), 8);
+        if (temp_v0_2 != NULL) {
+            temp_v0_2(arg0, arg2, arg3);
+        }
+    }
+}
+
+void func_8009252C(void) {
+    s32 temp_a0;
+
+    temp_a0 = ((s32 (*)()) D_8004DC0C)() % 2304;
+    if (temp_a0 < 0x100) {
+        D_80048D64 = temp_a0;
+        return;
+    }
+    D_80048D64 = (s32) (temp_a0 + 0x100) / 2;
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800925A8);
 
@@ -430,11 +601,15 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800927A0);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800927FC);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800928CC);
+void func_800928CC(s32 arg0, s32 arg1) {
+    (&D_8009B6C4)[arg0] = arg1;
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800928E4);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092908);
+void func_80092908(s32 arg0) {
+    D_8004B414 = arg0;
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092914);
 

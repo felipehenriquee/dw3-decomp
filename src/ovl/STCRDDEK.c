@@ -1,4 +1,7 @@
-#include "common.h"
+#include "STCRDDEK.h"
+#include "m2c.h"
+#include "STCRDDEK_auto.h"
+#include "STCRDDEK_data.h"
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800831F0);
 
@@ -63,23 +66,41 @@ INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80087788);
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800884E8);
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80088628);
+void func_80088628(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x5C) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x60) = arg2;
+}
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80088634);
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800886C8);
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800887C8);
+void func_800887C8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x10) = 0xA;
+}
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800887D4);
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80088874);
+void func_80088874(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x58) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x60) = arg2;
+}
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80088880);
+void func_80088880(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x7C) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x80) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x78) = 1;
+}
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80088894);
+void func_80088894(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x6C) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x70) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x68) = 1;
+}
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800888A8);
+void func_800888A8(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x74) = arg1;
+}
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800888B0);
 

@@ -5,4 +5,5 @@
 /* tipo ainda desconhecido (so o endereco e usado) */
 struct opaque;
 
+
 #endif /* CNTY_SEL_DATA_H */

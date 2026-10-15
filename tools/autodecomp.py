@@ -159,7 +159,17 @@ class Tester:
         os.makedirs(self.d, exist_ok=True)
         self.T = Target(name)
         self.asm = os.path.join(R, self.T.asm, fn + '.s')
-        self.syms = data_syms(open(self.asm).read())
+        asm_txt = open(self.asm).read()
+        self.syms = data_syms(asm_txt)
+        body = re.search(r'glabel %s\b(.*?)endlabel %s\b' % (fn, fn), asm_txt,
+                         re.S)
+        self.osize = 4 * len(re.findall(
+            r'^\s*/\* [0-9A-F]+ [0-9A-F]{8} [0-9A-F]{8} \*/',
+            body.group(1) if body else asm_txt, re.M))
+        # simbolos com declaracao a mao no header ficam com o tipo de la
+        hdr = open(self.T.p(self.T.hdr)).read()
+        self.syms = [s for s in self.syms
+                     if not re.search(r'\b%s\b' % s, hdr)]
         own = re.compile(r'\b%s\s*\(' % fn)
         self.base = '\n'.join(ln for ln in open(base_ctx).read().splitlines()
                               if not own.search(ln))
@@ -201,12 +211,18 @@ class Tester:
                 f.write(decl(s, t) + '\n')
             f.write('\n' + code)
         o = os.path.join(self.d, tag + '.o')
+        if os.path.exists(o):
+            os.remove(o)
         cr = run([os.path.join(R, 'tools/cc.sh'), c, o, str(self.tgt[3])],
                  stdin=subprocess.DEVNULL)
-        if cr.returncode != 0:
+        if cr.returncode != 0 or not os.path.exists(o):
             return None, code, 'cc: ' + cr.stderr[-300:]
-        diffs = cc_cmp.compare(o, self.exe, [self.fn], self.tgt[1],
-                               self.tgt[2])[self.fn]
+        try:
+            diffs = cc_cmp.compare(o, self.exe, [self.fn], self.tgt[1],
+                                   self.tgt[2],
+                                   {self.fn: self.osize})[self.fn]
+        except subprocess.CalledProcessError:
+            return None, code, 'cc: .o invalido ' + cr.stderr[-300:]
         if diffs is None:
             return None, code, 'cc: funcao nao gerada'
         return len(diffs), code, None

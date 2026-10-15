@@ -1,4 +1,7 @@
-#include "common.h"
+#include "STGDGLAB.h"
+#include "m2c.h"
+#include "STGDGLAB_auto.h"
+#include "STGDGLAB_data.h"
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_80082F48);
 

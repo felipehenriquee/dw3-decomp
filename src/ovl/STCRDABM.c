@@ -1,4 +1,7 @@
-#include "common.h"
+#include "STCRDABM.h"
+#include "m2c.h"
+#include "STCRDABM_auto.h"
+#include "STCRDABM_data.h"
 
 INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_80082D88);
 

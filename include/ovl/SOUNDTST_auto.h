@@ -1,0 +1,20 @@
+/* Gerado por tools/gen_ctx.py SOUNDTST: nao edite. Declare a mao em include/ovl/SOUNDTST.h */
+#ifndef SOUNDTST_AUTO_H
+#define SOUNDTST_AUTO_H
+
+/* funcoes ja decompiladas */
+
+/* funcoes ainda em assembly (prototipo desconhecido) */
+s32 func_80014504();
+s32 func_8001AE38();
+s32 func_80084370();
+s32 func_8008443C();
+s32 func_800844A8();
+s32 func_80084808();
+s32 func_800848BC();
+s32 func_80084B2C();
+s32 func_80084D48();
+
+/* dados acessados via $gp */
+
+#endif
