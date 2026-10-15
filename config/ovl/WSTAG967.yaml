@@ -1,0 +1,39 @@
+name: WSTAG967
+sha1: 9ed7dd42266ae77bb2b202aa623fd3aaf411eeee
+options:
+  basename: WSTAG967
+  target_path: disc/PRO/WSTAG967.PRO
+  elf_path: build/ovl/WSTAG967.elf
+  base_path: ../..
+  platform: psx
+  compiler: PSYQ
+  asm_path: asm/ovl/WSTAG967
+  asset_path: assets/ovl/WSTAG967
+  ld_script_path: linker/ovl/WSTAG967.ld
+  ld_dependencies: True
+  find_file_boundaries: False
+  gp_value: 0x8005CB50
+  o_as_suffix: True
+  use_legacy_include_asm: False
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  symbol_addrs_path: [symbol_addrs.txt]
+  reloc_addrs_path: [reloc_addrs.txt]
+  undefined_funcs_auto_path: linker/ovl/WSTAG967.undefined_funcs_auto.txt
+  undefined_syms_auto_path: linker/ovl/WSTAG967.undefined_syms_auto.txt
+  subalign: 2
+  ld_align_section_vram_end: False
+  ld_align_segment_vram_end: False
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - name: WSTAG967
+    type: code
+    start: 0x0
+    vram: 0x800A5DE0
+    subsegments:
+      - [0x0, rodata]
+      - [0x4, asm]
+      - [0x31C, data]
+  - [0xC98]

@@ -1,0 +1,94 @@
+# Digimon World 3 — decompilação e port para PC
+
+## Objetivo
+Decompilar o Digimon World 3 (PS1, versão europeia `SLES_049.36` com patch de tradução BR da romsportugues) e criar um **port nativo para PC**.
+
+Caminho escolhido:
+1. Decomp *matching* (C que recompila byte a byte): **splat** + **binutils MIPS** + **GCC da PsyQ com maspsx** + **m2c** + decomp.me / objdiff.
+2. Port: trocar as bibliotecas PsyQ (libgpu/libgte/libcd/libspu/libpad) pelo **PsyCross** (OpenGL/SDL), como fez o REDRIVER2.
+3. Os assets **não** vão para o repositório: o port lê os dados do disco do próprio usuário.
+
+## Estado atual (2026-10-15)
+- [x] Disco extraído com `dumpsxiso` → `extraido/` + `layout.xml` (o mkpsxiso 2.30 para Windows está em `../mkpsxiso-2.30-win64/`).
+- [x] Endereços do EXE e dos overlays mapeados e validados (ver abaixo).
+- [x] Migrado para **Ubuntu 22.04 nativo** (não é WSL). O projeto fica no HD externo NTFS em `/media/felipe/Felipe Henrique/projetos/2026/digimon/Digimon World 3 (BR-EUR) (T1.01) (www.romsportugues.com) (1)/`.
+- [x] Toolchain instalada: binutils-mips-linux-gnu 2.38, venv em `~/dw3-decomp/.venv` (splat64 0.50.1, m2c 0.4.7, spimdisasm 1.42.4), maspsx em `~/dw3-decomp/tools/maspsx`.
+- [x] Repositório `~/dw3-decomp` criado (git, no disco interno). O jogo fica em `disc/`, que está no `.gitignore`.
+- [x] Primeiro split e rebuild **idêntico** do EXE: `make` → `build/sles_049.36: SUCESSO`. Config em `sles_049.36.yaml`, `make split` regera o asm.
+- [x] Overlays no splat: um yaml por `.PRO` em `config/ovl/` (gerado por `tools/gen_ovl_yaml.py`). `make` → EXE + **318 overlays idênticos**.
+- [x] Limites text/data reais do EXE e entry point nomeado (`__SN_ENTRY_POINT`, do `2MBYTE.OBJ`).
+- [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
+- [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE. Cinco funções batem byte a byte (`tools/compiler_probe.c`).
+
+## Repositório `~/dw3-decomp`
+- `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
+- `config/ovl/<NOME>.yaml`: um por overlay. `tools/gen_ovl_yaml.py disc/PRO` cria os que faltam (não sobrescreve; apague o yaml para regerar). Overlays de tamanho ímpar usam `subalign: 1` e a cauda que não fecha uma palavra vira `bin`; senão o linker acrescenta 1 byte.
+- `config/ovl.sha1`, `sles_049.36.sha1`: hashes conferidos pelo `make`.
+- `Makefile`: `make` (assembla, linka, objcopy e confere todos os sha1), `make split` (regera `asm/`, `assets/` e `linker/` a partir do disco, ~12 s), `make clean`. Use `make -j$(nproc)`.
+- Gerados e fora do git: `asm/`, `assets/` (dados do jogo), `linker/`, `build/`. Baixados e fora do git: `tools/psyq_sigs/` (assinaturas), `tools/old-gcc/` (compiladores).
+- `disc/PRO/` tem os `.PRO`; `disc/SLES_049.36` é o EXE.
+
+### Ferramentas (`tools/`)
+- `ovl_bounds.py`: estima os limites rodata/text/data de cada overlay.
+- `gen_ovl_yaml.py`: gera os yaml dos overlays a partir do `ovl_bounds`.
+- `psyq_match.py`: casa as assinaturas do `lab313ru/psx_psyq_signatures` com o EXE (`versoes`, lista, `--syms` para o `symbol_addrs.txt`, `--yaml` para os subsegmentos). Para baixar as assinaturas: `git clone --depth 1 https://github.com/lab313ru/psx_psyq_signatures tools/psyq_sigs`.
+- `cc.sh <in.c> <out.o> [G]`: compila como o jogo (GCC 2.8.1 + maspsx). Os compiladores vêm de `decompals/old-gcc` (release 0.17, `gcc-2.8.1-psx.tar.gz`) extraídos em `tools/old-gcc/<versão>/`.
+- `cc_cmp.py <o> <exe> func_XXXXXXXX...`: compara funções compiladas com o EXE, ignorando campos relocados.
+- O `readelf` está em português neste sistema: scripts que leem a saída dele precisam de `LANG=C`.
+
+## Arquivos do disco
+| Caminho | Conteúdo |
+|---|---|
+| `extraido/SLES_049.36` | Executável principal (PS-X EXE) |
+| `extraido/SYSTEM.CNF` | `BOOT = cdrom:\SLES_049.36;1`, `STACK = 801FFF00` |
+| `extraido/AAA/PRO/*.PRO` | 318 overlays de código (binário cru, sem cabeçalho) |
+| `extraido/AAA/DAT/` | Assets: `FIELD`, `FIGHT` (modelos e efeitos), `Z_STAGE` (cenários), `SOUND`, `COUNTRY/<idioma>` (textos), `SCREEN`, `CARD`... |
+| `extraido/AAA/STR/` | Vídeos FMV (.STR) |
+| `extraido/DUMMY` | Preenchimento (~35 MB) |
+
+## Executável `SLES_049.36`
+Layout (endereços de RAM; offset no arquivo = endereço − 0x80010000 + 0x800):
+
+| Faixa | Conteúdo |
+|---|---|
+| `0x80010000–0x80010E88` | rodata (do jogo e, a partir de `0x800102D8`, das libs) |
+| `0x80010E88–0x80010F4C` | `2MBYTE.OBJ` da PsyQ: `__main`, `__SN_ENTRY_POINT` |
+| `0x80010F4C–0x80020D8C` | **código do jogo** (`asm/main.s`, ~64 KB, 345 funções) |
+| `0x80020D8C–0x8003EDCC` | PsyQ 4.7 (libpad, libgpu, libgs, libgte, libcd, libsnd, libspu, libmcrd, libcard, libapi, libc2) |
+| `0x8003EDCC–0x8005CCE8` | data (inclui a área pequena acessada via `$gp`, ~`0x8005CCxx`) |
+| `0x8005CCE8–0x800A5DE0` | zeros no arquivo: bss (zerada pelo entry até `0x80082CB0`) + área dos overlays |
+| `0x800A5DE0–0x800F0DF4` | TIM de boot 320×480 16 bpp |
+
+
+- Endereço de carga `0x80010000`, tamanho do texto `0xE1000` (vai até `0x800F1000`), entrada (pc0) `0x80010E90`, gp `0`.
+- Região "SLES": `Sony Computer Entertainment Inc. for Europe area`.
+- sha1 `ae75434288284f85ecf01103705c38998ba30984`. É o **EXE com patch**; pode ser diferente do retail. Se aparecer um EXE original, comparar e preferir o original como alvo do matching.
+- Strings e rodata das bibliotecas aparecem logo no início (`0x800102d8`...).
+- Região zerada em `0x8005CCDE–0x80082CB0` (provavelmente bss gravada no arquivo) e de novo até `0x800A5DE0` (área dos overlays de nível 1).
+- Em `0x800A5DE0` o EXE guarda uma imagem **TIM** de 320×480 em 16 bpp, usada no boot e depois sobrescrita pelos overlays de nível 2.
+
+## Overlays (`AAA/PRO`)
+| Nível | Endereço de carga | Arquivos |
+|---|---|---|
+| 1 | `0x80082CB0` | 22 arquivos que não começam com W: `CARDGAME`, `CNTY_SEL`, `FIELDSTG`, `FIGHTSTG`, `SDIGIEDT`, `SFSTDATA`, `SHOCKTST`, `SMDLDATA`, `SOUNDTST`, `STAGSLCT`, `STCRDABM`, `STCRDDEK`, `STCRDSHP`, `STDGNAME`, `STDWTITL`, `STFGTREP`, `STGDGLAB`, `STGMCARD`, `STGTRAIN`, `STITSHOP`, `STPLNMET`, `STSTATUS`. O maior (CARDGAME, `0x23130`) termina exatamente em `0x800A5DE0`. |
+| 2 | `0x800A5DE0` | 296 arquivos `W*`: `WSTAG###` (scripts de mapa) + `WFIGHTMN`, `WFIGHTTS` |
+
+Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu sp,sp,-N`) em cerca de 84% dos casos nos dois níveis. O restante são funções folha. Os scripts estão em `ferramentas/ovlbase.py` (estima a base) e `ferramentas/verify.py` (valida). Rode com `python3 -I script.py <caminho>`.
+
+`SDIGIEDT`, `SFSTDATA` e `SMDLDATA` têm poucos ou nenhum `jal` e podem ser só dados (editores de debug?). Falta confirmar.
+
+## Bibliotecas e compilador
+- **PsyQ 4.7**, pelas assinaturas: a 4.7 casa tudo o que a 4.6 casa e mais (inclusive o `PDRESRES.OBJ` inteiro, de 7,5 KB). LIBCD e LIBPAD só casam a partir da 4.6. As strings `$Id: sys.c ... 1998` só mostram que a libgpu não mudou desde 1998.
+- 8 stubs curtos ficaram sem nome por serem ambíguos (setters/getters com assinatura igual), por exemplo `func_8002E25C`/`func_8002E27C` na libcd (provavelmente `CdSyncCallback`/`CdReadyCallback`). Eles estão em `asm/psyq/<lib>/<offset>.s`.
+- **Compilador: GCC 2.8.1** (o 2.8.0 dá o mesmo resultado; 2.7.2 erra o epílogo, 2.91.66 e 2.95.2 erram o agendamento). Flags: `-O2 -funsigned-char -fpeephole -ffunction-cse -fpcc-struct-return -fcommon -msoft-float -mgas -fgnu-linker`. O EXE usa `-G4` ou `-G8` (há acesso via `$gp`); os overlays não usam `$gp` (provavelmente `-G0`). A versão do ASPSX (2.79/2.81/2.86) ainda não foi distinguida; o padrão é 2.86. O maspsx precisa de `--dont-force-G0`.
+- A comparação com decomp.me não foi necessária: tudo foi feito localmente com `tools/cc.sh` + `tools/cc_cmp.py`.
+
+## Próximos passos
+1. Infraestrutura de C: trocar `asm/main.s` por `src/main.c` com `INCLUDE_ASM` (splat `c` subsegment, `asm/nonmatchings/`), compilar com `tools/cc.sh` no Makefile e manter o sha1 batendo. Começar com as 5 funções de `tools/compiler_probe.c`.
+2. Separar `asm/main.s` em arquivos menores (por subsistema) quando ficar claro onde começa cada `.c` original.
+3. Separar a rodata/data das libs por objeto (como já foi feito com o text).
+4. Overlays: confirmar `-G0` decompilando uma função de overlay; investigar a primeira palavra dos `WSTAG` (antes do text) e o formato dos 4 overlays só de dados (`SDIGIEDT`, `SFSTDATA`, `SMDLDATA`, `WSTAG260`).
+
+## Convenções
+- Conversar com o usuário em **português**.
+- Nunca commitar assets ou binários do jogo no repositório.

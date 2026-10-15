@@ -1,0 +1,38 @@
+name: WSTAG760
+sha1: 533f0f1e77771f197c901aa3408e89f8079710ab
+options:
+  basename: WSTAG760
+  target_path: disc/PRO/WSTAG760.PRO
+  elf_path: build/ovl/WSTAG760.elf
+  base_path: ../..
+  platform: psx
+  compiler: PSYQ
+  asm_path: asm/ovl/WSTAG760
+  asset_path: assets/ovl/WSTAG760
+  ld_script_path: linker/ovl/WSTAG760.ld
+  ld_dependencies: True
+  find_file_boundaries: False
+  gp_value: 0x8005CB50
+  o_as_suffix: True
+  use_legacy_include_asm: False
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  symbol_addrs_path: [symbol_addrs.txt]
+  reloc_addrs_path: [reloc_addrs.txt]
+  undefined_funcs_auto_path: linker/ovl/WSTAG760.undefined_funcs_auto.txt
+  undefined_syms_auto_path: linker/ovl/WSTAG760.undefined_syms_auto.txt
+  subalign: 2
+  ld_align_section_vram_end: False
+  ld_align_segment_vram_end: False
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - name: WSTAG760
+    type: code
+    start: 0x0
+    vram: 0x800A5DE0
+    subsegments:
+      - [0x0, asm]
+      - [0x1CC, data]
+  - [0xF8C]

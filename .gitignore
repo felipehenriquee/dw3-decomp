@@ -1,0 +1,15 @@
+# dados do jogo: nunca versionar
+disc/
+assets/
+*.bin
+*.STR
+# gerados pelo `make split` (dependem do disco)
+asm/
+linker/
+# gerados
+build/
+.venv/
+__pycache__/
+.splache
+tools/psyq_sigs/
+tools/old-gcc/

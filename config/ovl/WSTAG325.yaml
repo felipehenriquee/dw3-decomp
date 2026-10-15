@@ -1,0 +1,38 @@
+name: WSTAG325
+sha1: 27281eebb749be4cb6dbad7878f4a1a85f4dc1df
+options:
+  basename: WSTAG325
+  target_path: disc/PRO/WSTAG325.PRO
+  elf_path: build/ovl/WSTAG325.elf
+  base_path: ../..
+  platform: psx
+  compiler: PSYQ
+  asm_path: asm/ovl/WSTAG325
+  asset_path: assets/ovl/WSTAG325
+  ld_script_path: linker/ovl/WSTAG325.ld
+  ld_dependencies: True
+  find_file_boundaries: False
+  gp_value: 0x8005CB50
+  o_as_suffix: True
+  use_legacy_include_asm: False
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  symbol_addrs_path: [symbol_addrs.txt]
+  reloc_addrs_path: [reloc_addrs.txt]
+  undefined_funcs_auto_path: linker/ovl/WSTAG325.undefined_funcs_auto.txt
+  undefined_syms_auto_path: linker/ovl/WSTAG325.undefined_syms_auto.txt
+  subalign: 2
+  ld_align_section_vram_end: False
+  ld_align_segment_vram_end: False
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - name: WSTAG325
+    type: code
+    start: 0x0
+    vram: 0x800A5DE0
+    subsegments:
+      - [0x0, asm]
+      - [0x48C, data]
+  - [0xDC0]

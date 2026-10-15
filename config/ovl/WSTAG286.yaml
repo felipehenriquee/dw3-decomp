@@ -1,0 +1,38 @@
+name: WSTAG286
+sha1: d76b848169e7c9660204a61c5fd084e6b6af33d4
+options:
+  basename: WSTAG286
+  target_path: disc/PRO/WSTAG286.PRO
+  elf_path: build/ovl/WSTAG286.elf
+  base_path: ../..
+  platform: psx
+  compiler: PSYQ
+  asm_path: asm/ovl/WSTAG286
+  asset_path: assets/ovl/WSTAG286
+  ld_script_path: linker/ovl/WSTAG286.ld
+  ld_dependencies: True
+  find_file_boundaries: False
+  gp_value: 0x8005CB50
+  o_as_suffix: True
+  use_legacy_include_asm: False
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  symbol_addrs_path: [symbol_addrs.txt]
+  reloc_addrs_path: [reloc_addrs.txt]
+  undefined_funcs_auto_path: linker/ovl/WSTAG286.undefined_funcs_auto.txt
+  undefined_syms_auto_path: linker/ovl/WSTAG286.undefined_syms_auto.txt
+  subalign: 2
+  ld_align_section_vram_end: False
+  ld_align_segment_vram_end: False
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - name: WSTAG286
+    type: code
+    start: 0x0
+    vram: 0x800A5DE0
+    subsegments:
+      - [0x0, asm]
+      - [0x1E4, data]
+  - [0xAC8]

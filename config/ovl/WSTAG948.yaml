@@ -1,0 +1,38 @@
+name: WSTAG948
+sha1: 25941b963756baa98b8d7b2d1951d4acb0558c00
+options:
+  basename: WSTAG948
+  target_path: disc/PRO/WSTAG948.PRO
+  elf_path: build/ovl/WSTAG948.elf
+  base_path: ../..
+  platform: psx
+  compiler: PSYQ
+  asm_path: asm/ovl/WSTAG948
+  asset_path: assets/ovl/WSTAG948
+  ld_script_path: linker/ovl/WSTAG948.ld
+  ld_dependencies: True
+  find_file_boundaries: False
+  gp_value: 0x8005CB50
+  o_as_suffix: True
+  use_legacy_include_asm: False
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  symbol_addrs_path: [symbol_addrs.txt]
+  reloc_addrs_path: [reloc_addrs.txt]
+  undefined_funcs_auto_path: linker/ovl/WSTAG948.undefined_funcs_auto.txt
+  undefined_syms_auto_path: linker/ovl/WSTAG948.undefined_syms_auto.txt
+  subalign: 2
+  ld_align_section_vram_end: False
+  ld_align_segment_vram_end: False
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - name: WSTAG948
+    type: code
+    start: 0x0
+    vram: 0x800A5DE0
+    subsegments:
+      - [0x0, asm]
+      - [0x1B4, data]
+  - [0x634]

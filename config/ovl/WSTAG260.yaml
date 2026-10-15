@@ -1,0 +1,35 @@
+name: WSTAG260
+sha1: 6e227ed799d95d4b78202d9a6844c7560310e20c
+options:
+  basename: WSTAG260
+  target_path: disc/PRO/WSTAG260.PRO
+  elf_path: build/ovl/WSTAG260.elf
+  base_path: ../..
+  platform: psx
+  compiler: PSYQ
+  asm_path: asm/ovl/WSTAG260
+  asset_path: assets/ovl/WSTAG260
+  ld_script_path: linker/ovl/WSTAG260.ld
+  ld_dependencies: True
+  find_file_boundaries: False
+  gp_value: 0x8005CB50
+  o_as_suffix: True
+  use_legacy_include_asm: False
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  symbol_addrs_path: [symbol_addrs.txt]
+  reloc_addrs_path: [reloc_addrs.txt]
+  undefined_funcs_auto_path: linker/ovl/WSTAG260.undefined_funcs_auto.txt
+  undefined_syms_auto_path: linker/ovl/WSTAG260.undefined_syms_auto.txt
+  subalign: 2
+  ld_align_section_vram_end: False
+  ld_align_segment_vram_end: False
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - name: WSTAG260
+    type: bin
+    start: 0x0
+    vram: 0x800A5DE0
+  - [0x4162]

@@ -1,0 +1,39 @@
+name: WSTAG570
+sha1: d9363386f4b6a7075f4fc485e07ee09ce329a50e
+options:
+  basename: WSTAG570
+  target_path: disc/PRO/WSTAG570.PRO
+  elf_path: build/ovl/WSTAG570.elf
+  base_path: ../..
+  platform: psx
+  compiler: PSYQ
+  asm_path: asm/ovl/WSTAG570
+  asset_path: assets/ovl/WSTAG570
+  ld_script_path: linker/ovl/WSTAG570.ld
+  ld_dependencies: True
+  find_file_boundaries: False
+  gp_value: 0x8005CB50
+  o_as_suffix: True
+  use_legacy_include_asm: False
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  symbol_addrs_path: [symbol_addrs.txt]
+  reloc_addrs_path: [reloc_addrs.txt]
+  undefined_funcs_auto_path: linker/ovl/WSTAG570.undefined_funcs_auto.txt
+  undefined_syms_auto_path: linker/ovl/WSTAG570.undefined_syms_auto.txt
+  subalign: 2
+  ld_align_section_vram_end: False
+  ld_align_segment_vram_end: False
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - name: WSTAG570
+    type: code
+    start: 0x0
+    vram: 0x800A5DE0
+    subsegments:
+      - [0x0, rodata]
+      - [0x4, asm]
+      - [0x200, data]
+  - [0xB74]

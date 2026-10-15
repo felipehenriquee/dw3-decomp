@@ -1,0 +1,39 @@
+name: FIGHTSTG
+sha1: e56575e2066cf1898ac930f79d31b8a48674b8f9
+options:
+  basename: FIGHTSTG
+  target_path: disc/PRO/FIGHTSTG.PRO
+  elf_path: build/ovl/FIGHTSTG.elf
+  base_path: ../..
+  platform: psx
+  compiler: PSYQ
+  asm_path: asm/ovl/FIGHTSTG
+  asset_path: assets/ovl/FIGHTSTG
+  ld_script_path: linker/ovl/FIGHTSTG.ld
+  ld_dependencies: True
+  find_file_boundaries: False
+  gp_value: 0x8005CB50
+  o_as_suffix: True
+  use_legacy_include_asm: False
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  symbol_addrs_path: [symbol_addrs.txt]
+  reloc_addrs_path: [reloc_addrs.txt]
+  undefined_funcs_auto_path: linker/ovl/FIGHTSTG.undefined_funcs_auto.txt
+  undefined_syms_auto_path: linker/ovl/FIGHTSTG.undefined_syms_auto.txt
+  subalign: 2
+  ld_align_section_vram_end: False
+  ld_align_segment_vram_end: False
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - name: FIGHTSTG
+    type: code
+    start: 0x0
+    vram: 0x80082CB0
+    subsegments:
+      - [0x0, rodata]
+      - [0x620, asm]
+      - [0x1F7E8, data]
+  - [0x21AF0]

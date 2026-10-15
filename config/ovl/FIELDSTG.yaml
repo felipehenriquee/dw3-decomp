@@ -1,0 +1,39 @@
+name: FIELDSTG
+sha1: bc5fb336d7befa61e34d6d50331eedbc9c40e078
+options:
+  basename: FIELDSTG
+  target_path: disc/PRO/FIELDSTG.PRO
+  elf_path: build/ovl/FIELDSTG.elf
+  base_path: ../..
+  platform: psx
+  compiler: PSYQ
+  asm_path: asm/ovl/FIELDSTG
+  asset_path: assets/ovl/FIELDSTG
+  ld_script_path: linker/ovl/FIELDSTG.ld
+  ld_dependencies: True
+  find_file_boundaries: False
+  gp_value: 0x8005CB50
+  o_as_suffix: True
+  use_legacy_include_asm: False
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  symbol_addrs_path: [symbol_addrs.txt]
+  reloc_addrs_path: [reloc_addrs.txt]
+  undefined_funcs_auto_path: linker/ovl/FIELDSTG.undefined_funcs_auto.txt
+  undefined_syms_auto_path: linker/ovl/FIELDSTG.undefined_syms_auto.txt
+  subalign: 2
+  ld_align_section_vram_end: False
+  ld_align_segment_vram_end: False
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - name: FIELDSTG
+    type: code
+    start: 0x0
+    vram: 0x80082CB0
+    subsegments:
+      - [0x0, rodata]
+      - [0xAD4, asm]
+      - [0x1014C, data]
+  - [0x18E98]

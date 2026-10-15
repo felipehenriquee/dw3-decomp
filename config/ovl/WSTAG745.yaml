@@ -1,0 +1,38 @@
+name: WSTAG745
+sha1: 0886d01e1b93db6c826d149602652c689a454642
+options:
+  basename: WSTAG745
+  target_path: disc/PRO/WSTAG745.PRO
+  elf_path: build/ovl/WSTAG745.elf
+  base_path: ../..
+  platform: psx
+  compiler: PSYQ
+  asm_path: asm/ovl/WSTAG745
+  asset_path: assets/ovl/WSTAG745
+  ld_script_path: linker/ovl/WSTAG745.ld
+  ld_dependencies: True
+  find_file_boundaries: False
+  gp_value: 0x8005CB50
+  o_as_suffix: True
+  use_legacy_include_asm: False
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  symbol_addrs_path: [symbol_addrs.txt]
+  reloc_addrs_path: [reloc_addrs.txt]
+  undefined_funcs_auto_path: linker/ovl/WSTAG745.undefined_funcs_auto.txt
+  undefined_syms_auto_path: linker/ovl/WSTAG745.undefined_syms_auto.txt
+  subalign: 2
+  ld_align_section_vram_end: False
+  ld_align_segment_vram_end: False
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - name: WSTAG745
+    type: code
+    start: 0x0
+    vram: 0x800A5DE0
+    subsegments:
+      - [0x0, asm]
+      - [0xCB8, data]
+  - [0x1768]

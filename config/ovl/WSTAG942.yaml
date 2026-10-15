@@ -1,0 +1,39 @@
+name: WSTAG942
+sha1: f0f5dbe32ef035f07d9232d802a87ec0f985a1c3
+options:
+  basename: WSTAG942
+  target_path: disc/PRO/WSTAG942.PRO
+  elf_path: build/ovl/WSTAG942.elf
+  base_path: ../..
+  platform: psx
+  compiler: PSYQ
+  asm_path: asm/ovl/WSTAG942
+  asset_path: assets/ovl/WSTAG942
+  ld_script_path: linker/ovl/WSTAG942.ld
+  ld_dependencies: True
+  find_file_boundaries: False
+  gp_value: 0x8005CB50
+  o_as_suffix: True
+  use_legacy_include_asm: False
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  symbol_addrs_path: [symbol_addrs.txt]
+  reloc_addrs_path: [reloc_addrs.txt]
+  undefined_funcs_auto_path: linker/ovl/WSTAG942.undefined_funcs_auto.txt
+  undefined_syms_auto_path: linker/ovl/WSTAG942.undefined_syms_auto.txt
+  subalign: 2
+  ld_align_section_vram_end: False
+  ld_align_segment_vram_end: False
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - name: WSTAG942
+    type: code
+    start: 0x0
+    vram: 0x800A5DE0
+    subsegments:
+      - [0x0, rodata]
+      - [0x4, asm]
+      - [0x1D0, data]
+  - [0xA50]

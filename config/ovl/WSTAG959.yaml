@@ -1,0 +1,38 @@
+name: WSTAG959
+sha1: d080f5b54e7faf5f2aaf66f9b7733674aabbc515
+options:
+  basename: WSTAG959
+  target_path: disc/PRO/WSTAG959.PRO
+  elf_path: build/ovl/WSTAG959.elf
+  base_path: ../..
+  platform: psx
+  compiler: PSYQ
+  asm_path: asm/ovl/WSTAG959
+  asset_path: assets/ovl/WSTAG959
+  ld_script_path: linker/ovl/WSTAG959.ld
+  ld_dependencies: True
+  find_file_boundaries: False
+  gp_value: 0x8005CB50
+  o_as_suffix: True
+  use_legacy_include_asm: False
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  symbol_addrs_path: [symbol_addrs.txt]
+  reloc_addrs_path: [reloc_addrs.txt]
+  undefined_funcs_auto_path: linker/ovl/WSTAG959.undefined_funcs_auto.txt
+  undefined_syms_auto_path: linker/ovl/WSTAG959.undefined_syms_auto.txt
+  subalign: 2
+  ld_align_section_vram_end: False
+  ld_align_segment_vram_end: False
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - name: WSTAG959
+    type: code
+    start: 0x0
+    vram: 0x800A5DE0
+    subsegments:
+      - [0x0, asm]
+      - [0x190, data]
+  - [0x2A0]
