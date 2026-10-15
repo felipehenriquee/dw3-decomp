@@ -12,7 +12,7 @@ Caminho escolhido:
 - [x] Disco extraído com `dumpsxiso` → `extraido/` + `layout.xml` (o mkpsxiso 2.30 para Windows está em `../mkpsxiso-2.30-win64/`).
 - [x] Endereços do EXE e dos overlays mapeados e validados (ver abaixo).
 - [x] Migrado para **Ubuntu 22.04 nativo** (não é WSL). O projeto fica no HD externo NTFS em `/media/felipe/Felipe Henrique/projetos/2026/digimon/Digimon World 3 (BR-EUR) (T1.01) (www.romsportugues.com) (1)/`.
-- [x] Toolchain instalada: binutils-mips-linux-gnu 2.38, venv em `~/dw3-decomp/.venv` (splat64 0.50.1, m2c 0.4.7, spimdisasm 1.42.4), maspsx em `~/dw3-decomp/tools/maspsx`.
+- [x] Toolchain instalada: binutils-mips-linux-gnu 2.38, venv em `~/dw3-decomp/.venv` (splat64 0.50.1, spimdisasm 1.42.4 e o m2c do git — o pacote `m2c` do PyPI é outro projeto), maspsx em `~/dw3-decomp/tools/maspsx`.
 - [x] Repositório `~/dw3-decomp` criado (git, no disco interno). O jogo fica em `disc/`, que está no `.gitignore`.
 - [x] Primeiro split e rebuild **idêntico** do EXE: `make` → `build/sles_049.36: SUCESSO`. Config em `sles_049.36.yaml`, `make split` regera o asm.
 - [x] Overlays no splat: um yaml por `.PRO` em `config/ovl/` (gerado por `tools/gen_ovl_yaml.py`). `make` → EXE + **318 overlays idênticos**.

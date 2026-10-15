@@ -1,8 +1,12 @@
 """Compara funcoes compiladas de um .o com os bytes originais do EXE.
 
-Uso: python3 -I tools/cc_cmp.py <arquivo.o> <exe> func_XXXXXXXX ...
+Uso: python3 -I tools/cc_cmp.py <arquivo.o> <binario> func_XXXXXXXX ...
+     [--vram 0x80010000] [--off 0x800]
 
-O endereco sai do nome (func_80011DAC). Campos com relocacao no .o
+O endereco sai do nome (func_80011DAC). --vram e --off dizem onde o
+binario e carregado e o offset do inicio dele no arquivo (padrao: EXE;
+overlays de nivel 1: --vram 0x80082CB0 --off 0; nivel 2: --vram
+0x800A5DE0 --off 0). Campos com relocacao no .o
 (jal, %hi, %lo) sao ignorados na comparacao. Imprime, por funcao,
 OK ou as instrucoes diferentes.
 """
@@ -58,37 +62,61 @@ def text_bytes(obj):
     return b''
 
 
-def main():
-    obj, exe = sys.argv[1:3]
-    exe_b = open(exe, 'rb').read()
+def compare(obj, exe_b, names, load=LOAD, hdr=HDR):
+    """Devolve {nome: lista de (offset, compilado, original)} ou None se a
+    funcao nao esta no .o. Lista vazia = bate."""
     text = text_bytes(obj)
     syms = symbols(obj)
     rel = relocs(obj)
-    ok_all = True
-    for name in sys.argv[3:]:
+    out = {}
+    for name in names:
         addr = int(name.split('_')[-1], 16)
         if name not in syms:
-            print('%s: nao esta no .o' % name)
-            ok_all = False
+            out[name] = None
             continue
         start, size = syms[name]
         diffs = []
         for i in range(0, size, 4):
             a = struct.unpack_from('<I', text, start + i)[0]
-            b = struct.unpack_from('<I', exe_b, addr - LOAD + HDR + i)[0]
+            o = addr - load + hdr + i
+            if o + 4 > len(exe_b):
+                diffs.append((i, a, None))
+                continue
+            b = struct.unpack_from('<I', exe_b, o)[0]
             m = ~rel.get(start + i, 0) & 0xFFFFFFFF
             if a & m != b & m:
                 diffs.append((i, a, b))
-        if diffs:
-            ok_all = False
-            print('%s: %d/%d instrucoes diferentes' % (
-                name, len(diffs), size // 4))
-            for i, a, b in diffs[:8]:
-                print('   +%03X  compilado %08X  original %08X' % (i, a, b))
-        else:
-            print('%s: OK (%d instrucoes)' % (name, size // 4))
-    sys.exit(0 if ok_all else 1)
+        out[name] = diffs
+    return out
 
+
+def main():
+    args = sys.argv[1:]
+    load, hdr = LOAD, HDR
+    if '--vram' in args:
+        i = args.index('--vram')
+        load = int(args[i + 1], 16)
+        del args[i:i + 2]
+    if '--off' in args:
+        i = args.index('--off')
+        hdr = int(args[i + 1], 16)
+        del args[i:i + 2]
+    obj, exe = args[:2]
+    res = compare(obj, open(exe, 'rb').read(), args[2:], load, hdr)
+    ok_all = True
+    for name, diffs in res.items():
+        if diffs is None:
+            print('%s: nao esta no .o' % name)
+            ok_all = False
+        elif diffs:
+            ok_all = False
+            print('%s: %d instrucoes diferentes' % (name, len(diffs)))
+            for i, a, b in diffs[:8]:
+                print('   +%03X  compilado %08X  original %s' % (
+                    i, a, '%08X' % b if b is not None else '--------'))
+        else:
+            print('%s: OK' % name)
+    sys.exit(0 if ok_all else 1)
 
 if __name__ == '__main__':
     main()

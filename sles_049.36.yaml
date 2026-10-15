@@ -59,7 +59,9 @@ segments:
     start: 0x800
     vram: 0x80010000
     subsegments:
-      - [0x800, rodata, 800]
+      # rodata do jogo (vai para as funcoes de src/main.c) e das libs
+      - [0x800, .rodata, main]
+      - [0xAD8, rodata, psyq_rodata]
       - [0x1688, asm, psyq/2mbyte]
       # codigo do jogo
       - [0x174C, c, main]
