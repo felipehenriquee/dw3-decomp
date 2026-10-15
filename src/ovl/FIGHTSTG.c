@@ -75,7 +75,9 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80087000);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80087070);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80087160);
+void func_80087160(void) {
+    func_80014504(func_80087070, 0x50, 4);
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008718C);
 
@@ -158,7 +160,18 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80089CD8);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008A7F4);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008A83C);
+void func_8008A83C(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, M2C_UNK (**)(), 0x28)(arg0, 1);
+    M2C_FIELD(arg0, s32 *, 0x10) = 1;
+    M2C_FIELD(arg0, s32 *, 0x58) = arg1;
+    if (arg1 == 0) {
+        M2C_FIELD(arg0, s32 *, 0x5C) = 0;
+        M2C_FIELD(arg0, s32 *, 0x60) = (s32) (0xFF00 / arg2);
+        return;
+    }
+    M2C_FIELD(arg0, s32 *, 0x5C) = 0xFF00;
+    M2C_FIELD(arg0, s32 *, 0x60) = (s32) -(0xFF00 / arg2);
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008A8C4);
 

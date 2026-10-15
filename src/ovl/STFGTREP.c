@@ -5,15 +5,35 @@
 
 INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80082E70);
 
-INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80082F6C);
+void func_80082F6C(void) {
+    func_80014504(func_80082E70, 0x50, 4);
+}
 
-INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80082F98);
+void func_80082F98(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, M2C_UNK (**)(), 0x28)(arg0, 1);
+    M2C_FIELD(arg0, s32 *, 0x10) = 1;
+    M2C_FIELD(arg0, s32 *, 0x58) = arg1;
+    if (arg1 == 0) {
+        M2C_FIELD(arg0, s32 *, 0x5C) = 0;
+        M2C_FIELD(arg0, s32 *, 0x60) = (s32) (0xFF00 / arg2);
+        return;
+    }
+    M2C_FIELD(arg0, s32 *, 0x5C) = 0xFF00;
+    M2C_FIELD(arg0, s32 *, 0x60) = (s32) -(0xFF00 / arg2);
+}
 
 INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80083020);
 
 INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80083164);
 
-INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80083218);
+void func_80083218(void) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_80083164, 0x68, 0);
+    M2C_FIELD(temp_v0, s32 (**)(), 0x64) = func_80082F98;
+    M2C_FIELD(temp_v0, s32 *, 0x50) = 0x1000;
+    M2C_FIELD(temp_v0, s32 *, 0x54) = 6;
+}
 
 INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80083260);
 
@@ -69,7 +89,18 @@ INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80085B60);
 
 INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80085C08);
 
-INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80085C90);
+void func_80085C90(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0xC) = 1;
+    if (arg1 != 0) {
+        ((void (*)(s32))D_80055C48[0])(0x40019);
+        M2C_FIELD(arg0, s32 *, 4) = 0x1000 / M2C_FIELD(arg0, s32 *, 0);
+        M2C_FIELD(arg0, s32 *, 8) = 0;
+    } else {
+        ((void (*)(s32))D_80055C48[0])(0x4001A);
+        M2C_FIELD(arg0, s32 *, 8) = 0x1000;
+        M2C_FIELD(arg0, s32 *, 4) = -((0x1000 / M2C_FIELD(arg0, s32 *, 0)) * 2);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80085D24);
 

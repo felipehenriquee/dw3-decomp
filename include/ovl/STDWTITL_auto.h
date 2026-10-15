@@ -3,10 +3,13 @@
 #define STDWTITL_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_80082E9C(void);
 void func_80083438(void);
 void func_80083568(s32 arg0, M2C_UNK arg1);
+void func_8008483C(void);
 s16 func_80085C5C(void *arg0);
 s32 func_80085F38(void *arg0);
+void func_80086FA0(void *arg0, s32 arg1);
 void func_8008714C(s32 arg0);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
@@ -29,7 +32,6 @@ s32 func_80014504();
 s32 func_8001F648();
 s32 func_8001FFA8();
 s32 func_80082D70();
-s32 func_80082E9C();
 s32 func_80082EC8();
 s32 func_80083054();
 s32 func_800831E8();
@@ -54,7 +56,6 @@ s32 func_800843A4();
 s32 func_800844E8();
 s32 func_8008453C();
 s32 func_80084628();
-s32 func_8008483C();
 s32 func_80084868();
 s32 func_800848EC();
 s32 func_8008497C();

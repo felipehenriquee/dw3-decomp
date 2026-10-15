@@ -3,9 +3,13 @@
 #define STDGNAME_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_80083084(void);
+void func_800830B0(void *arg0, s32 arg1, s32 arg2);
+void func_80083378(void *arg0, s32 arg1);
 void func_800851B8(void *arg0, s32 arg1, s32 arg2);
 void func_80085358(void *arg0);
 void func_8008656C(void *arg0);
+void func_80086730(void *arg0, s32 arg1);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();
@@ -14,11 +18,9 @@ s32 func_8001F648();
 s32 func_8001FCC0();
 s32 func_8001FFA8();
 s32 func_80082F8C();
-s32 func_800830B0();
 s32 func_80083138();
 s32 func_8008327C();
 s32 func_80083330();
-s32 func_80083378();
 s32 func_8008340C();
 s32 func_80083478();
 s32 func_80083668();

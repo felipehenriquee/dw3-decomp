@@ -6,8 +6,10 @@
 s32 func_80084554(void *arg0);
 s32 func_80086904(void);
 s16 func_8008695C(s32 arg0);
+void func_80087160(void);
 s32 func_80087C3C(void *arg0);
 void func_80089214(void);
+void func_8008A83C(void *arg0, s32 arg1, s32 arg2);
 void func_80092D80(s32 arg0);
 s32 func_80092DE4(void);
 void func_8009A254(void *arg0);
@@ -96,7 +98,6 @@ s32 func_80089978();
 s32 func_80089A24();
 s32 func_80089BE4();
 s32 func_80089CD8();
-s32 func_8008A83C();
 s32 func_8008A8C4();
 s32 func_8008AA08();
 s32 func_8008AAF0();

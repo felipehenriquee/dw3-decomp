@@ -106,7 +106,18 @@ INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80085BB0);
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80085DD8);
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80085EF4);
+void func_80085EF4(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, M2C_UNK (**)(), 0x28)(arg0, 1);
+    M2C_FIELD(arg0, s32 *, 0x10) = 1;
+    M2C_FIELD(arg0, s32 *, 0x58) = arg1;
+    if (arg1 == 0) {
+        M2C_FIELD(arg0, s32 *, 0x5C) = 0;
+        M2C_FIELD(arg0, s32 *, 0x60) = (s32) (0xFF00 / arg2);
+        return;
+    }
+    M2C_FIELD(arg0, s32 *, 0x5C) = 0xFF00;
+    M2C_FIELD(arg0, s32 *, 0x60) = (s32) -(0xFF00 / arg2);
+}
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80085F7C);
 
@@ -365,7 +376,18 @@ void func_8008B838(s32 arg0) {
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008B8A4);
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008B8FC);
+void func_8008B8FC(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0xC) = 1;
+    if (arg1 != 0) {
+        ((void (*)(s32))D_80055C48[0])(0x40019);
+        M2C_FIELD(arg0, s32 *, 4) = 0x1000 / M2C_FIELD(arg0, s32 *, 0);
+        M2C_FIELD(arg0, s32 *, 8) = 0;
+    } else {
+        ((void (*)(s32))D_80055C48[0])(0x4001A);
+        M2C_FIELD(arg0, s32 *, 8) = 0x1000;
+        M2C_FIELD(arg0, s32 *, 4) = -((0x1000 / M2C_FIELD(arg0, s32 *, 0)) * 2);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008B990);
 

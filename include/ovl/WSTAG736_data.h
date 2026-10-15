@@ -1,0 +1,8 @@
+/* Dados usados pelo codigo C de WSTAG736 (ver include/main_data.h) */
+#ifndef WSTAG736_DATA_H
+#define WSTAG736_DATA_H
+
+/* tipo ainda desconhecido (so o endereco e usado) */
+struct opaque;
+
+#endif /* WSTAG736_DATA_H */

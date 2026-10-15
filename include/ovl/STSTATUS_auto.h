@@ -22,6 +22,7 @@ void func_8009943C(void *arg0, s32 arg1, s32 arg2);
 void func_80099450(void *arg0, s32 arg1, s32 arg2);
 void func_80099464(void *arg0, s32 arg1);
 void func_80099684(void);
+void func_80099D5C(void *arg0, s32 arg1);
 s32 func_80099F5C(s32 arg0, s32 arg1);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */

@@ -1,4 +1,7 @@
-#include "common.h"
+#include "WSTAG745.h"
+#include "m2c.h"
+#include "WSTAG745_auto.h"
+#include "WSTAG745_data.h"
 
 INCLUDE_ASM("asm/ovl/WSTAG745/nonmatchings/WSTAG745", func_800A5DE0);
 

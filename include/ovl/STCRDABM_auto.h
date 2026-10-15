@@ -3,6 +3,10 @@
 #define STCRDABM_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_80082D88(void *arg0, s32 arg1, s32 arg2);
+void func_80083008(void);
+void func_80083BD0(void);
+void func_800858A0(void *arg0, s32 arg1);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();
@@ -10,10 +14,8 @@ s32 func_8001AE38();
 s32 func_8001EBF8();
 s32 func_8001F648();
 s32 func_8001FFA8();
-s32 func_80082D88();
 s32 func_80082E10();
 s32 func_80082F54();
-s32 func_80083008();
 s32 func_8008304C();
 s32 func_80083114();
 s32 func_8008314C();

@@ -5,7 +5,9 @@
 
 INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_80082DA0);
 
-INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_80082E98);
+void func_80082E98(void) {
+    func_80014504(func_80082DA0, 0x50, 4);
+}
 
 INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_80082EC4);
 

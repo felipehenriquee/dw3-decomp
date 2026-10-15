@@ -5,9 +5,22 @@
 
 INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80082F8C);
 
-INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80083084);
+void func_80083084(void) {
+    func_80014504(func_80082F8C, 0x50, 4);
+}
 
-INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_800830B0);
+void func_800830B0(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, M2C_UNK (**)(), 0x28)(arg0, 1);
+    M2C_FIELD(arg0, s32 *, 0x10) = 1;
+    M2C_FIELD(arg0, s32 *, 0x58) = arg1;
+    if (arg1 == 0) {
+        M2C_FIELD(arg0, s32 *, 0x5C) = 0;
+        M2C_FIELD(arg0, s32 *, 0x60) = (s32) (0xFF00 / arg2);
+        return;
+    }
+    M2C_FIELD(arg0, s32 *, 0x5C) = 0xFF00;
+    M2C_FIELD(arg0, s32 *, 0x60) = (s32) -(0xFF00 / arg2);
+}
 
 INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80083138);
 
@@ -15,7 +28,18 @@ INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_8008327C);
 
 INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80083330);
 
-INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80083378);
+void func_80083378(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0xC) = 1;
+    if (arg1 != 0) {
+        ((void (*)(s32))D_80055C48[0])(0x40019);
+        M2C_FIELD(arg0, s32 *, 4) = 0x1000 / M2C_FIELD(arg0, s32 *, 0);
+        M2C_FIELD(arg0, s32 *, 8) = 0;
+    } else {
+        ((void (*)(s32))D_80055C48[0])(0x4001A);
+        M2C_FIELD(arg0, s32 *, 8) = 0x1000;
+        M2C_FIELD(arg0, s32 *, 4) = -((0x1000 / M2C_FIELD(arg0, s32 *, 0)) * 2);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_8008340C);
 
@@ -76,6 +100,17 @@ INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_800865F0);
 
 INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_800866AC);
 
-INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80086730);
+void func_80086730(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0xC) = 1;
+    if (arg1 != 0) {
+        ((void (*)(s32))D_80055C48[0])(0x40019);
+        M2C_FIELD(arg0, s32 *, 4) = 0x1000 / M2C_FIELD(arg0, s32 *, 0);
+        M2C_FIELD(arg0, s32 *, 8) = 0;
+    } else {
+        ((void (*)(s32))D_80055C48[0])(0x4001A);
+        M2C_FIELD(arg0, s32 *, 8) = 0x1000;
+        M2C_FIELD(arg0, s32 *, 4) = -((0x1000 / M2C_FIELD(arg0, s32 *, 0)) * 2);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_800867C4);

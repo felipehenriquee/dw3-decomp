@@ -5,7 +5,9 @@
 
 INCLUDE_ASM("asm/ovl/STAGSLCT/nonmatchings/STAGSLCT", func_800849CC);
 
-INCLUDE_ASM("asm/ovl/STAGSLCT/nonmatchings/STAGSLCT", func_80084A30);
+void func_80084A30(void) {
+    func_80014504(func_800849CC, 0x50, 4);
+}
 
 INCLUDE_ASM("asm/ovl/STAGSLCT/nonmatchings/STAGSLCT", func_80084A5C);
 

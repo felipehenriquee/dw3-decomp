@@ -81,22 +81,27 @@ def decl_of(T, sym):
 
 
 def build_index():
-    """forma -> (alvo, funcao, simbolos) das funcoes ja em C."""
+    """forma -> (alvo, funcao, simbolos) das funcoes ja em C. O asm vem de
+    .../matchings/ (splat com disassemble_all) ou, enquanto nao houve um
+    novo split, do proprio .../nonmatchings/."""
     index = {}
     for t in targets():
         T = Target(t)
-        mdir = T.p(T.asm.replace('/nonmatchings/', '/matchings/'))
-        if not os.path.isdir(mdir):
-            continue
         src = open(T.p(T.src)).read()
-        for f in sorted(os.listdir(mdir)):
-            if not f.startswith('func_') or not f.endswith('.s'):
+        for d in (T.asm.replace('/nonmatchings/', '/matchings/'), T.asm):
+            d = T.p(d)
+            if not os.path.isdir(d):
                 continue
-            fn = f[:-2]
-            if T.include_line(fn) in src:
-                continue
-            sh, syms = shape(os.path.join(mdir, f))
-            index.setdefault(sh, (t, fn, syms))
+            for f in sorted(os.listdir(d)):
+                if not f.startswith('func_') or not f.endswith('.s'):
+                    continue
+                fn = f[:-2]
+                if T.include_line(fn) in src:
+                    continue
+                if not re.search(r'\b%s\([^;{]*\)\s*\{' % fn, src):
+                    continue
+                sh, syms = shape(os.path.join(d, f))
+                index.setdefault(sh, (t, fn, syms))
     return index
 
 

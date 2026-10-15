@@ -1,0 +1,8 @@
+/* Dados usados pelo codigo C de WSTAG951 (ver include/main_data.h) */
+#ifndef WSTAG951_DATA_H
+#define WSTAG951_DATA_H
+
+/* tipo ainda desconhecido (so o endereco e usado) */
+struct opaque;
+
+#endif /* WSTAG951_DATA_H */

@@ -5,7 +5,9 @@
 
 INCLUDE_ASM("asm/ovl/SOUNDTST/nonmatchings/SOUNDTST", func_80084370);
 
-INCLUDE_ASM("asm/ovl/SOUNDTST/nonmatchings/SOUNDTST", func_80084410);
+void func_80084410(void) {
+    func_80014504(func_80084370, 0x50, 4);
+}
 
 INCLUDE_ASM("asm/ovl/SOUNDTST/nonmatchings/SOUNDTST", func_8008443C);
 

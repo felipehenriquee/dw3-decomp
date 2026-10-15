@@ -5,7 +5,9 @@
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80082D70);
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80082E9C);
+void func_80082E9C(void) {
+    func_80014504(func_80082D70, 0x50, 4);
+}
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80082EC8);
 
@@ -71,7 +73,9 @@ INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_8008453C);
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80084628);
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_8008483C);
+void func_8008483C(void) {
+    func_80014504(func_80084628, 0x54, 0);
+}
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80084868);
 
@@ -157,7 +161,18 @@ INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80086DB0);
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80086DF8);
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80086FA0);
+void func_80086FA0(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0xC) = 1;
+    if (arg1 != 0) {
+        ((void (*)(s32))D_80055C48[0])(0x40019);
+        M2C_FIELD(arg0, s32 *, 4) = 0x1000 / M2C_FIELD(arg0, s32 *, 0);
+        M2C_FIELD(arg0, s32 *, 8) = 0;
+    } else {
+        ((void (*)(s32))D_80055C48[0])(0x4001A);
+        M2C_FIELD(arg0, s32 *, 8) = 0x1000;
+        M2C_FIELD(arg0, s32 *, 4) = -((0x1000 / M2C_FIELD(arg0, s32 *, 0)) * 2);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80087034);
 

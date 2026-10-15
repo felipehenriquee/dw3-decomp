@@ -19,6 +19,7 @@ void func_80093C18(void *arg0, void *arg1);
 void func_80094828(void *arg0);
 void func_80094B78(void *arg0);
 void func_80094FDC(void *arg0, void *arg1, M2C_UNK arg2);
+void func_80095E2C(void);
 void func_80096144(void *arg0, s16 arg1, s16 arg2);
 void func_80096150(void *arg0);
 void func_80096160(void *arg0);

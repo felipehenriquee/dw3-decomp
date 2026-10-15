@@ -3,6 +3,7 @@
 #define STAGSLCT_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_80084A30(void);
 void func_80084B2C(void *arg0, s32 arg1);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */

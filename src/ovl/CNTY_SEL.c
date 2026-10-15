@@ -15,7 +15,9 @@ INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083000);
 
 INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083184);
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_800832D8);
+void func_800832D8(void) {
+    func_80014504(func_80083184, 0x54, 0);
+}
 
 INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083304);
 

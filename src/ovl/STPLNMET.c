@@ -46,7 +46,18 @@ void func_80083D38(s32 arg0) {
     M2C_FIELD(func_80014504(func_80083774, 0x5C, 8), s32 *, 0x50) = arg0;
 }
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80083D70);
+void func_80083D70(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0xC) = 1;
+    if (arg1 != 0) {
+        ((void (*)(s32))D_80055C48[0])(0x40019);
+        M2C_FIELD(arg0, s32 *, 4) = 0x1000 / M2C_FIELD(arg0, s32 *, 0);
+        M2C_FIELD(arg0, s32 *, 8) = 0;
+    } else {
+        ((void (*)(s32))D_80055C48[0])(0x4001A);
+        M2C_FIELD(arg0, s32 *, 8) = 0x1000;
+        M2C_FIELD(arg0, s32 *, 4) = -((0x1000 / M2C_FIELD(arg0, s32 *, 0)) * 2);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80083E04);
 
@@ -185,7 +196,18 @@ INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_800882E0);
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80088398);
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80088438);
+void func_80088438(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0xC) = 1;
+    if (arg1 != 0) {
+        ((void (*)(s32))D_80055C48[0])(0x40019);
+        M2C_FIELD(arg0, s32 *, 4) = 0x1000 / M2C_FIELD(arg0, s32 *, 0);
+        M2C_FIELD(arg0, s32 *, 8) = 0;
+    } else {
+        ((void (*)(s32))D_80055C48[0])(0x4001A);
+        M2C_FIELD(arg0, s32 *, 8) = 0x1000;
+        M2C_FIELD(arg0, s32 *, 4) = -((0x1000 / M2C_FIELD(arg0, s32 *, 0)) * 2);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_800884CC);
 

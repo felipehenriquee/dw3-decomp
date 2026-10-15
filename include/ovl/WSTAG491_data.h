@@ -1,0 +1,8 @@
+/* Dados usados pelo codigo C de WSTAG491 (ver include/main_data.h) */
+#ifndef WSTAG491_DATA_H
+#define WSTAG491_DATA_H
+
+/* tipo ainda desconhecido (so o endereco e usado) */
+struct opaque;
+
+#endif /* WSTAG491_DATA_H */

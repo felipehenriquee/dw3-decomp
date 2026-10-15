@@ -3,7 +3,11 @@
 #define STCRDSHP_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800853B4(void *arg0, s32 arg1, s32 arg2);
+void func_80085634(void);
 void func_80086074(void *arg0, void *arg1);
+void func_80087CD4(void);
+void func_80088FB4(void *arg0, s32 arg1);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();
@@ -21,10 +25,8 @@ s32 func_800843C0();
 s32 func_800844B8();
 s32 func_800852CC();
 s32 func_8008536C();
-s32 func_800853B4();
 s32 func_8008543C();
 s32 func_80085580();
-s32 func_80085634();
 s32 func_80085678();
 s32 func_80085730();
 s32 func_80085788();

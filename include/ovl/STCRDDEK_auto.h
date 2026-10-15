@@ -3,13 +3,19 @@
 #define STCRDDEK_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800832E8(void);
+void func_80083314(void *arg0, s32 arg1, s32 arg2);
+void func_80083594(void);
 void func_80086664(void);
+void func_800867A0(s32 arg0);
+void func_800867E8(void *arg0, s32 arg1);
 void func_80088628(void *arg0, s32 arg1, s32 arg2);
 void func_800887C8(void *arg0);
 void func_80088874(void *arg0, s32 arg1, s32 arg2);
 void func_80088880(void *arg0, s32 arg1, s32 arg2);
 void func_80088894(void *arg0, s32 arg1, s32 arg2);
 void func_800888A8(void *arg0, s32 arg1);
+void func_8008A2D8(void *arg0, s32 arg1);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();
@@ -20,10 +26,8 @@ s32 func_8001F648();
 s32 func_8001FCC0();
 s32 func_8001FFA8();
 s32 func_800831F0();
-s32 func_80083314();
 s32 func_8008339C();
 s32 func_800834E0();
-s32 func_80083594();
 s32 func_800835D8();
 s32 func_800837B4();
 s32 func_800838C4();
@@ -40,7 +44,6 @@ s32 func_8008660C();
 s32 func_8008666C();
 s32 func_800866A8();
 s32 func_8008671C();
-s32 func_800867E8();
 s32 func_8008687C();
 s32 func_800868E8();
 s32 func_80086AD8();
