@@ -59,5 +59,8 @@ extern struct opaque D_8004B5DC;
 extern s32 *D_8005CB50[];
 extern Unk80041838 D_80041838[];
 extern u16 D_8004BC04[];
+extern u8 D_8004BBF4[];
+extern s32 D_80044B38[];
+extern HeapBlock *D_8004B5E0[];
 
 #endif /* MAIN_DATA_H */

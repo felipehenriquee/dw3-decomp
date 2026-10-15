@@ -128,4 +128,11 @@ typedef struct {
     u8 unk0[0xC];
 } Unk80041838;
 
+/* bloco do heap (lista encadeada; tag 1 = fim) */
+typedef struct HeapBlock {
+    struct HeapBlock *unk0;
+    struct HeapBlock *next;
+    s32 tag;
+} HeapBlock;
+
 #endif /* MAIN_H */

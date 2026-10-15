@@ -5,14 +5,25 @@
 
 INCLUDE_ASM("asm/ovl/WSTAG205/nonmatchings/WSTAG205", func_800A5DE4);
 
-INCLUDE_ASM("asm/ovl/WSTAG205/nonmatchings/WSTAG205", func_800A60B0);
+void func_800A60B0(void) {
+    func_80014504(func_800A5DE4, 0xC8, 0);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG205/nonmatchings/WSTAG205", func_800A60DC);
 
-INCLUDE_ASM("asm/ovl/WSTAG205/nonmatchings/WSTAG205", func_800A6194);
+void *func_800A6194(s32 arg0) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_800A60DC, 0x54, 4);
+    M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    ((M2C_UNK (*)()) *D_800A79D0)();
+    return temp_v0;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG205/nonmatchings/WSTAG205", func_800A61F0);
 
-INCLUDE_ASM("asm/ovl/WSTAG205/nonmatchings/WSTAG205", func_800A623C);
+void func_800A623C(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x4016, 1);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG205/nonmatchings/WSTAG205", func_800A6268);

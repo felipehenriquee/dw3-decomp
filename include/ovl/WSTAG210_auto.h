@@ -3,6 +3,11 @@
 #define WSTAG210_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800A67E0(void);
+void func_800A6DC8(void);
+void func_800A73B0(void);
+void *func_800A74A4(s32 arg0);
+void func_800A754C(void);
 void func_800A76EC(void *arg0, s32 arg1);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
