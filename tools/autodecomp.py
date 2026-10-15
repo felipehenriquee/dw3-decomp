@@ -28,16 +28,19 @@ import subprocess
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import arity  # noqa: E402
 import cc_cmp  # noqa: E402
-from proj import Target  # noqa: E402
+from proj import Target, apply_lock  # noqa: E402
 
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 M2C = os.path.join(R, '.venv/bin/m2c')
 
 # tipos candidatos para um simbolo de dados: (base, forma)
 # forma: 'a' array sem tamanho, 's' escalar, 'o' struct opaca
-CANDIDATES = [('s32', 's'), ('struct opaque', 'o'), ('u8', 'a'),
-              ('s32', 'a'), ('u16', 'a'), ('s16', 'a'), ('s8', 'a'),
+# (array primeiro: o codigo original parece usar arrays/structs; escalar
+# com NOT_GP faz o gcc gravar via $at)
+CANDIDATES = [('s32', 'a'), ('struct opaque', 'o'), ('u8', 'a'),
+              ('s32', 's'), ('u16', 'a'), ('s16', 'a'), ('s8', 'a'),
               ('u16', 's'), ('s16', 's'), ('u8', 's'), ('s8', 's')]
 # variantes de opcoes do m2c
 VARIANTS = [[], ['--void']]
@@ -139,8 +142,18 @@ def make_base(name, work):
                 % (T.p(T.hdr), T.p(T.auto)))
     out = run([os.path.join(R, 'tools/old-gcc/2.8.1/cpp'), '-P',
                '-I' + os.path.join(R, 'include'), '-DM2CTX', stub])
+    # prototipos com a aridade estimada pelo asm do chamado (so para o
+    # m2c): sem isso ele perde argumentos repassados sem mudanca
+    ar = arity.arities(name)
+
+    def proto(m):
+        n = ar.get(m.group(2))
+        if not n:
+            return m.group(0)
+        return '%s %s(%s);' % (m.group(1), m.group(2), ', '.join(['s32'] * n))
+    text = re.sub(r'^(s32) (\w+)\(\);$', proto, out.stdout, flags=re.M)
     ctx = os.path.join(work, 'ctx.h')
-    open(ctx, 'w').write(out.stdout)
+    open(ctx, 'w').write(text)
     return ctx
 
 
@@ -185,6 +198,7 @@ class Tester:
                 d = parse_decl(ln)
                 if d and d[0] not in self.syms:
                     self.data.append(ln.rstrip())
+        self.canon = canonical(name)
         self.n = 0
 
     def attempt(self, types, vi):
@@ -202,14 +216,20 @@ class Tester:
         if r.returncode != 0 or not r.stdout.strip():
             return None, None, 'm2c: ' + (r.stderr or r.stdout)[-300:]
         code = fix_code(r.stdout)
+        # simbolos com tipo ja fixado: compila com a declaracao fixada e o
+        # codigo reescrito com cast, exatamente como vai ficar no build
+        built = code
+        for s, t in types.items():
+            if s in self.canon:
+                built = rewrite(built, s, t, self.canon[s])
         c = os.path.join(self.d, tag + '.c')
         with open(c, 'w') as f:
             f.write('#include "%s"\n#include "m2c.h"\n%s\nstruct opaque;\n'
                     % (self.T.p(self.T.hdr), self.auto))
             f.write('\n'.join(self.data) + '\n')
             for s, t in types.items():
-                f.write(decl(s, t) + '\n')
-            f.write('\n' + code)
+                f.write(decl(s, self.canon.get(s, t)) + '\n')
+            f.write('\n' + built)
         o = os.path.join(self.d, tag + '.o')
         if os.path.exists(o):
             os.remove(o)
@@ -311,13 +331,21 @@ def make_ok():
 
 
 def write_data(name, canon):
+    """Grava os tipos de canon em <nome>_data.h: troca a linha de quem ja
+    existe e acrescenta os novos, preservando as outras linhas."""
     p = os.path.join(R, Target(name).data)
     s = open(p).read()
-    lines = [ln for ln in s.splitlines() if ln.startswith('extern ')]
-    i = s.index(lines[0]) if lines else s.index('\n#endif')
-    j = s.index('\n\n#endif') if '\n\n#endif' in s else s.index('\n#endif')
-    new = [decl(sym, canon[sym]) for sym in sorted(canon)]
-    open(p, 'w').write(s[:i] + '\n'.join(new) + s[j:])
+    for sym, t in sorted(canon.items()):
+        d = decl(sym, t)
+        pat = re.compile(r'^extern [^\n;]*\b%s\b[^\n;]*;$' % sym, re.M)
+        if pat.search(s):
+            old = pat.search(s).group()
+            if parse_decl(old) is not None and parse_decl(old)[1] != t:
+                s = pat.sub(d, s, count=1)
+        else:
+            k = s.rindex('\n#endif')
+            s = s[:k].rstrip('\n') + '\n' + d + '\n' + s[k:]
+    open(p, 'w').write(s)
 
 
 def insert(name, items):
@@ -364,7 +392,8 @@ def apply(name):
         attempt(dict(items[h:]))
 
     if todo:
-        attempt(todo)
+        with apply_lock():
+            attempt(todo)
     with open(os.path.join(work, 'failed.txt'), 'a') as f:
         for fn in bad:
             f.write(fn + '\n')

@@ -1,4 +1,6 @@
 """Caminhos e parametros de cada alvo do projeto (EXE ou overlay)."""
+import contextlib
+import fcntl
 import os
 
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -54,3 +56,16 @@ class Target:
         if '#include "%s_auto.h"' % n not in src:
             src = src.replace('#include "common.h"\n', want, 1)
             open(self.p(self.src), 'w').write(src)
+
+
+@contextlib.contextmanager
+def apply_lock():
+    """Trava para integrar codigo (inserir + make + desfazer) sem que dois
+    processos (ex.: autodecomp_all em segundo plano e fn.py) se misturem."""
+    os.makedirs(os.path.join(R, 'build'), exist_ok=True)
+    with open(os.path.join(R, 'build/.apply.lock'), 'w') as f:
+        fcntl.flock(f, fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(f, fcntl.LOCK_UN)

@@ -1,0 +1,9 @@
+/* Dados usados pelo codigo C de STGMCARD (ver include/main_data.h) */
+#ifndef STGMCARD_DATA_H
+#define STGMCARD_DATA_H
+
+/* tipo ainda desconhecido (so o endereco e usado) */
+struct opaque;
+extern s32 D_80088798 NOT_GP;
+
+#endif /* STGMCARD_DATA_H */

@@ -4,5 +4,6 @@
 
 /* tipo ainda desconhecido (so o endereco e usado) */
 struct opaque;
+extern s32 D_8008FD98 NOT_GP;
 
 #endif /* STGDGLAB_DATA_H */

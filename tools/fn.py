@@ -21,7 +21,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import autodecomp as ad  # noqa: E402
 import cc_cmp  # noqa: E402
-from proj import Target  # noqa: E402
+from proj import Target, apply_lock  # noqa: E402
 
 R = ad.R
 SCRATCH = os.path.join(R, 'build/fn')
@@ -204,7 +204,9 @@ def main():
     elif cmd == 'test':
         sys.exit(0 if test(name, fn, sys.argv[4]) else 1)
     elif cmd == 'apply':
-        sys.exit(0 if apply(name, fn, sys.argv[4]) else 1)
+        with apply_lock():
+            ok = apply(name, fn, sys.argv[4])
+        sys.exit(0 if ok else 1)
 
 
 if __name__ == '__main__':

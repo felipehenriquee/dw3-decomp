@@ -1,4 +1,7 @@
-#include "common.h"
+#include "STITSHOP.h"
+#include "m2c.h"
+#include "STITSHOP_auto.h"
+#include "STITSHOP_data.h"
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_8008321C);
 
