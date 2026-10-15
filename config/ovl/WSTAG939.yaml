@@ -15,6 +15,8 @@ options:
   gp_value: 0x8005CB50
   o_as_suffix: True
   use_legacy_include_asm: False
+  # os arquivos de include/ vem do split do EXE
+  generate_asm_macros_files: False
   section_order: [".rodata", ".text", ".data", ".bss"]
   symbol_addrs_path: [symbol_addrs.txt]
   reloc_addrs_path: [reloc_addrs.txt]

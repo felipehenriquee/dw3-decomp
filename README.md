@@ -8,11 +8,11 @@ Decompilação *matching* do **Digimon World 3** (PlayStation, versão europeia 
 
 | | |
 |---|---|
-| Executável `SLES_049.36` | reconstrói idêntico (ainda 100% assembly) |
+| Executável `SLES_049.36` | reconstrói idêntico |
 | Overlays `AAA/PRO/*.PRO` | 318 de 318 reconstroem idênticos |
 | Bibliotecas | PsyQ 4.7, 430 funções identificadas por assinatura |
 | Compilador | GCC 2.8.1 (PsyQ) + [maspsx](https://github.com/mkst/maspsx) |
-| Funções em C | 5 de prova em [`tools/compiler_probe.c`](tools/compiler_probe.c) (ainda fora do build) |
+| Funções do jogo em C | 5 de 345 no executável ([`src/main.c`](src/main.c)) |
 
 Hoje a versão alvo é a do disco com a tradução para português da romsportugues (`SLES_049.36` com sha1 `ae75434288284f85ecf01103705c38998ba30984`). Se houver um EXE europeu original disponível, ele passa a ser o alvo.
 
@@ -49,7 +49,7 @@ sudo apt install binutils-mips-linux-gnu python3-venv make git
 
    Os hashes esperados estão em [`sles_049.36.sha1`](sles_049.36.sha1) e [`config/ovl.sha1`](config/ovl.sha1).
 
-4. Compiladores antigos (só necessários para compilar C). Baixe os pacotes `-psx` da release 0.17 do [decompals/old-gcc](https://github.com/decompals/old-gcc/releases):
+4. Compilador antigo (necessário para o build). Baixe os pacotes `-psx` da release 0.17 do [decompals/old-gcc](https://github.com/decompals/old-gcc/releases):
 
    ```sh
    mkdir -p tools/old-gcc/2.8.1
@@ -82,6 +82,7 @@ overlays (318): SUCESSO
 ## Organização
 
 ```
+src/main.c           código do jogo no executável (C + INCLUDE_ASM)
 sles_049.36.yaml     config do splat para o executável
 config/ovl/*.yaml    um config do splat por overlay
 symbol_addrs.txt     nomes de funções (por enquanto, as da PsyQ)
@@ -93,7 +94,7 @@ tools/maspsx/        submódulo
 Depois do `make split`:
 
 ```
-asm/main.s           código do jogo no executável
+asm/nonmatchings/main/  uma função ainda não decompilada por arquivo
 asm/psyq/<lib>/      um arquivo por objeto da PsyQ
 asm/ovl/<NOME>/      código e dados de cada overlay
 ```
@@ -122,18 +123,20 @@ asm/ovl/<NOME>/      código e dados de cada overlay
 
 Os scripts Python leem arquivos do disco; rode-os com `python3 -I`.
 
-## Como testar uma função
+## Como decompilar uma função
 
-```sh
-tools/cc.sh minha_funcao.c build/teste.o 8
-python3 -I tools/cc_cmp.py build/teste.o disc/SLES_049.36 func_80011DAC
-```
+1. Escolha uma função em `asm/nonmatchings/main/` e gere um rascunho com o [m2c](https://github.com/matt-kempster/m2c) (já vem no `requirements.txt`).
+2. Teste o C isolado:
 
-Para gerar um primeiro rascunho em C a partir do assembly, use o [m2c](https://github.com/matt-kempster/m2c), que já vem no `requirements.txt`.
+   ```sh
+   tools/cc.sh minha_funcao.c build/teste.o 8
+   python3 -I tools/cc_cmp.py build/teste.o disc/SLES_049.36 func_XXXXXXXX
+   ```
+
+3. Quando bater, troque a linha `INCLUDE_ASM("asm/nonmatchings/main", func_XXXXXXXX);` em `src/main.c` pelo C e rode `make`. O sha1 tem que continuar batendo.
 
 ## Próximos passos
 
-- Estrutura de C no build (`src/` com `INCLUDE_ASM` para as funções ainda em assembly).
 - Separar a rodata/data das bibliotecas por objeto.
 - Decompilar os overlays (confirmar `-G0`) e entender o formato dos `WSTAG`.
 - Começar o port com o PsyCross.

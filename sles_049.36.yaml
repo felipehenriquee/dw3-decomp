@@ -45,9 +45,10 @@ options:
   rodata_string_guesser_level: 2
   data_string_guesser_level: 2
 
-  # Uncomment this line if you need to use the maspsx reorder workaround hack
+  # com -G8 o gcc 2.8.1 joga as funcoes para depois dos dados e quebra o
+  # INCLUDE_ASM comum
   # https://github.com/mkst/maspsx?tab=readme-ov-file#include_asm-reordering-workaround-hack
-  # include_asm_macro_style: maspsx_hack
+  include_asm_macro_style: maspsx_hack
 segments:
   - name: header
     type: header
@@ -61,7 +62,7 @@ segments:
       - [0x800, rodata, 800]
       - [0x1688, asm, psyq/2mbyte]
       # codigo do jogo
-      - [0x174C, asm, main]
+      - [0x174C, c, main]
       # daqui ate o fim do text: PsyQ 4.7 (tools/psyq_match.py)
       - [0x1158C, asm, psyq/libpad/pdcmd1]
       - [0x115CC, asm, psyq/libpad/pdcmd2]

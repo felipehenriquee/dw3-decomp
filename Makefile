@@ -8,6 +8,18 @@ PYTHON   := .venv/bin/python
 SPLAT    := $(PYTHON) -m splat split
 JOBS     ?= $(shell nproc)
 
+# compilador do jogo: GCC 2.8.1 da PsyQ + maspsx (ver tools/cc.sh)
+GCC_DIR  := tools/old-gcc/2.8.1
+CPP      := $(GCC_DIR)/cpp
+CC1      := $(GCC_DIR)/cc1
+MASPSX   := $(PYTHON) tools/maspsx/maspsx.py --aspsx-version=2.86 \
+            --run-assembler --dont-force-G0 --gnu-as-path=$(AS)
+CPPFLAGS := -P -Iinclude -DINCLUDE_ASM_USE_MACRO_INC=1
+CFLAGS   := -quiet -O2 -funsigned-char -fpeephole -ffunction-cse \
+            -fpcc-struct-return -fcommon -msoft-float -mgas -fgnu-linker -w
+# -G do EXE (usa $$gp); os overlays nao usam $$gp
+G        := 8
+
 ASFLAGS  := -Iinclude -march=r3000 -mtune=r3000 -no-pad-sections -EL -G0 -32 -mno-shared
 LDFLAGS  := -EL --no-check-sections -nostdlib
 
@@ -23,6 +35,14 @@ all: check
 $(BUILD)/%.o: %.s
 	@mkdir -p $(dir $@)
 	$(AS) $(ASFLAGS) -o $@ $<
+
+# o .c inclui os .s das funcoes ainda nao decompiladas
+.SECONDEXPANSION:
+$(BUILD)/src/%.o: src/%.c $$(wildcard asm/nonmatchings/$$*/*.s) $$(wildcard include/*.h) Makefile
+	@mkdir -p $(dir $@)
+	$(CPP) $(CPPFLAGS) $< | $(CC1) $(CFLAGS) -G$(G) > $(@:.o=.s)
+	$(MASPSX) -EL -march=r3000 -mtune=r3000 -no-pad-sections -O1 -G$(G) \
+		-Iinclude -o $@ < $(@:.o=.s)
 
 $(BUILD)/%.o: %.bin
 	@mkdir -p $(dir $@)

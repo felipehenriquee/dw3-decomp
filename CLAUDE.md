@@ -18,13 +18,17 @@ Caminho escolhido:
 - [x] Overlays no splat: um yaml por `.PRO` em `config/ovl/` (gerado por `tools/gen_ovl_yaml.py`). `make` → EXE + **318 overlays idênticos**.
 - [x] Limites text/data reais do EXE e entry point nomeado (`__SN_ENTRY_POINT`, do `2MBYTE.OBJ`).
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
-- [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE. Cinco funções batem byte a byte (`tools/compiler_probe.c`).
+- [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
+- [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`), compilado pelo `make`. **5 de 345 funções decompiladas** e batendo.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
 - `config/ovl/<NOME>.yaml`: um por overlay. `tools/gen_ovl_yaml.py disc/PRO` cria os que faltam (não sobrescreve; apague o yaml para regerar). Overlays de tamanho ímpar usam `subalign: 1` e a cauda que não fecha uma palavra vira `bin`; senão o linker acrescenta 1 byte.
 - `config/ovl.sha1`, `sles_049.36.sha1`: hashes conferidos pelo `make`.
-- `Makefile`: `make` (assembla, linka, objcopy e confere todos os sha1), `make split` (regera `asm/`, `assets/` e `linker/` a partir do disco, ~12 s), `make clean`. Use `make -j$(nproc)`.
+- `src/main.c`: código do jogo do EXE. As funções não decompiladas são `INCLUDE_ASM("asm/nonmatchings/main", func_X);`; o `make split` só gera `.s` para elas e nunca sobrescreve o `.c`. Compilado com `-G8` (variável `G` no Makefile).
+- `INCLUDE_ASM` usa o modo `maspsx_hack` (`include_asm_macro_style` no yaml do EXE): com `-G8` o gcc 2.8.1 joga as funções para depois dos dados e quebraria o `INCLUDE_ASM` comum. O C é compilado com `-DINCLUDE_ASM_USE_MACRO_INC=1` (o `macro.inc` deixa os `jlabel` globais, que a rodata das jump tables precisa). Os yaml dos overlays usam `generate_asm_macros_files: False`, senão sobrescrevem o `include/include_asm.h`.
+- `include/common.h`: tipos básicos (`u8`, `s32`...). Os outros arquivos de `include/` são gerados pelo splat.
+- `Makefile`: `make` (compila, assembla, linka, objcopy e confere todos os sha1), `make split` (regera `asm/`, `assets/` e `linker/` a partir do disco, ~12 s), `make clean`. Use `make -j$(nproc)`.
 - Gerados e fora do git: `asm/`, `assets/` (dados do jogo), `linker/`, `build/`. Baixados e fora do git: `tools/psyq_sigs/` (assinaturas), `tools/old-gcc/` (compiladores).
 - `disc/PRO/` tem os `.PRO`; `disc/SLES_049.36` é o EXE.
 
@@ -32,7 +36,7 @@ Caminho escolhido:
 - `ovl_bounds.py`: estima os limites rodata/text/data de cada overlay.
 - `gen_ovl_yaml.py`: gera os yaml dos overlays a partir do `ovl_bounds`.
 - `psyq_match.py`: casa as assinaturas do `lab313ru/psx_psyq_signatures` com o EXE (`versoes`, lista, `--syms` para o `symbol_addrs.txt`, `--yaml` para os subsegmentos). Para baixar as assinaturas: `git clone --depth 1 https://github.com/lab313ru/psx_psyq_signatures tools/psyq_sigs`.
-- `cc.sh <in.c> <out.o> [G]`: compila como o jogo (GCC 2.8.1 + maspsx). Os compiladores vêm de `decompals/old-gcc` (release 0.17, `gcc-2.8.1-psx.tar.gz`) extraídos em `tools/old-gcc/<versão>/`.
+- `cc.sh <in.c> <out.o> [G]`: compila um `.c` isolado como o jogo (GCC 2.8.1 + maspsx), para testar funções fora do build. Os compiladores vêm de `decompals/old-gcc` (release 0.17, `gcc-2.8.1-psx.tar.gz`) extraídos em `tools/old-gcc/<versão>/`.
 - `cc_cmp.py <o> <exe> func_XXXXXXXX...`: compara funções compiladas com o EXE, ignorando campos relocados.
 - O `readelf` está em português neste sistema: scripts que leem a saída dele precisam de `LANG=C`.
 
@@ -53,7 +57,7 @@ Layout (endereços de RAM; offset no arquivo = endereço − 0x80010000 + 0x800)
 |---|---|
 | `0x80010000–0x80010E88` | rodata (do jogo e, a partir de `0x800102D8`, das libs) |
 | `0x80010E88–0x80010F4C` | `2MBYTE.OBJ` da PsyQ: `__main`, `__SN_ENTRY_POINT` |
-| `0x80010F4C–0x80020D8C` | **código do jogo** (`asm/main.s`, ~64 KB, 345 funções) |
+| `0x80010F4C–0x80020D8C` | **código do jogo** (`src/main.c`, ~64 KB, 345 funções) |
 | `0x80020D8C–0x8003EDCC` | PsyQ 4.7 (libpad, libgpu, libgs, libgte, libcd, libsnd, libspu, libmcrd, libcard, libapi, libc2) |
 | `0x8003EDCC–0x8005CCE8` | data (inclui a área pequena acessada via `$gp`, ~`0x8005CCxx`) |
 | `0x8005CCE8–0x800A5DE0` | zeros no arquivo: bss (zerada pelo entry até `0x80082CB0`) + área dos overlays |
@@ -84,8 +88,8 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 - A comparação com decomp.me não foi necessária: tudo foi feito localmente com `tools/cc.sh` + `tools/cc_cmp.py`.
 
 ## Próximos passos
-1. Infraestrutura de C: trocar `asm/main.s` por `src/main.c` com `INCLUDE_ASM` (splat `c` subsegment, `asm/nonmatchings/`), compilar com `tools/cc.sh` no Makefile e manter o sha1 batendo. Começar com as 5 funções de `tools/compiler_probe.c`.
-2. Separar `asm/main.s` em arquivos menores (por subsistema) quando ficar claro onde começa cada `.c` original.
+1. Decompilar as funções do EXE (m2c → ajustar → `make`). **Aguardando o usuário decidir como conduzir este passo.**
+2. Separar `src/main.c` em arquivos menores (por subsistema) quando ficar claro onde começa cada `.c` original.
 3. Separar a rodata/data das libs por objeto (como já foi feito com o text).
 4. Overlays: confirmar `-G0` decompilando uma função de overlay; investigar a primeira palavra dos `WSTAG` (antes do text) e o formato dos 4 overlays só de dados (`SDIGIEDT`, `SFSTDATA`, `SMDLDATA`, `WSTAG260`).
 
