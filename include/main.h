@@ -35,7 +35,7 @@ typedef struct {
 
 extern Obj *func_80014504(void (*fn)(), s32, s32);
 extern void func_800119A8();
-extern s32 func_800134AC(void);
+extern s32 func_800134AC(s32);
 extern void func_800136F4();
 extern void func_800138B8(void);
 extern void func_8002E25C(s32);

@@ -101,9 +101,9 @@ void func_8001345C(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/nonmatchings/main", func_800134AC);
 
-Ent *func_800134E8(void)
+Ent *func_800134E8(s32 arg0)
 {
-    s32 i = func_800134AC();
+    s32 i = func_800134AC(arg0);
 
     if (i >= 0) {
         return &D_8003EF5C[i];
@@ -271,7 +271,7 @@ INCLUDE_ASM("asm/nonmatchings/main", func_80013C30);
 INCLUDE_ASM("asm/nonmatchings/main", func_80013CDC);
 
 void func_80013E20(s32 arg0) {
-    func_80013C30();
+    func_80013C30(arg0);
     do {
         func_80013CDC();
     } while (func_80013A6C(arg0) != 0);
@@ -783,12 +783,13 @@ INCLUDE_ASM("asm/nonmatchings/main", func_80017E84);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80017EEC);
 
-s32 func_80017F54(s32 arg0) {
-    s32 temp_v0;
+/* aloca e zera */
+s32 func_80017F54(s32 size, s32 arg1) {
+    s32 p;
 
-    temp_v0 = func_80017E84();
-    func_80017CB0(temp_v0, arg0);
-    return temp_v0;
+    p = func_80017E84(size, arg1);
+    func_80017CB0(p, size);
+    return p;
 }
 
 void func_80017F94(s32 arg0, s32 arg1) {
@@ -1612,13 +1613,13 @@ void func_8001ECEC(s32 arg0) {
     M2C_FIELD(D_8005CD10, s32 *, 0x20) = arg0;
 }
 
-void func_8001ECF8(void *arg0) {
+void func_8001ECF8(void *arg0, s32 arg1) {
     M2C_FIELD(D_8005CD10, void **, 0) = arg0;
-    M2C_FIELD(D_8005CD10, s32 *, 4) = M2C_FIELD(arg0, s32 (**)(), 0x138)();
+    M2C_FIELD(D_8005CD10, s32 *, 4) = M2C_FIELD(arg0, s32 (**)(void *, s32), 0x138)(arg0, arg1);
 }
 
 void func_8001ED34(s32 arg0, s32 arg1) {
-    ((void (*)(s32, s32))func_8001ECF8)(((s32 (*)(s32))D_8004DF8C[0])(arg0), arg1);
+    func_8001ECF8((void *)((s32 (*)(s32))D_8004DF8C[0])(arg0), arg1);
 }
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001ED6C);
