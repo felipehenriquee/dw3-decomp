@@ -1278,7 +1278,14 @@ INCLUDE_ASM("asm/nonmatchings/main", func_8001B930);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001BA2C);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001BB88);
+Obj *func_8001BB88(s32 arg0) {
+    Obj *temp_v0;
+
+    temp_v0 = func_80014504((void (*)()) func_8001BA2C, 0x6C, 0);
+    temp_v0->unk50 = arg0;
+    ((M2C_UNK (*)(M2C_UNK)) *D_80055C48)(0x40019);
+    return temp_v0;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001BBE8);
 
@@ -1591,7 +1598,22 @@ s32 func_8001EBCC(void) {
     return D_8004DFCC[(*(u8 **)D_8005CD08)[3]];
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001EBF8);
+void func_8001EBF8(void *arg0) {
+    (*(s32 (**)())&D_8004B600)(arg0, 0x54);
+    M2C_FIELD(arg0, s32 (**)(s32), 0x2C) = func_8001E7EC;
+    M2C_FIELD(arg0, s32 (**)(), 0x30) = func_8001E890;
+    M2C_FIELD(arg0, void (**)(s32, s32), 0x38) = func_8001E938;
+    M2C_FIELD(arg0, void (**)(s32, s32), 0x3C) = func_8001E98C;
+    M2C_FIELD(arg0, void (**)(s32, s32), 0x40) = func_8001E9A0;
+    M2C_FIELD(arg0, void (**)(s32, s32), 0x44) = func_8001E9B4;
+    M2C_FIELD(arg0, void (**)(s32), 0x48) = func_8001E9C8;
+    M2C_FIELD(arg0, void (**)(s32), 0x4C) = func_8001E9D4;
+    M2C_FIELD(arg0, s32 (**)(s32), 0x34) = func_8001E9E0;
+    M2C_FIELD(arg0, s32 (**)(), 0x50) = func_8001EBCC;
+    func_8001E7E0((s32) arg0);
+    M2C_FIELD(arg0, s32 *, 0x1C) = 8;
+}
+/* Warning: struct opaque is not defined (only forward-declared) */
 
 void func_8001ECB0(s32 arg0) {
     D_8005CD10 = arg0;
@@ -1651,7 +1673,30 @@ void func_8001F628(Bytes4 *arg0) {
     *(Bytes4 *)((u8 *)D_8005CD10 + 0x28) = *arg0;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001F648);
+void func_8001F648(void *arg0) {
+    (*(s32 (**)())&D_8004B600)(arg0, 0xA0);
+    M2C_FIELD(arg0, s32 *, 0x38) = 0x1000;
+    M2C_FIELD(arg0, s32 *, 0x3C) = 0x1000;
+    M2C_FIELD(arg0, s32 *, 0x40) = 0x1000;
+    M2C_FIELD(arg0, s32 *, 0x24) = 1;
+    M2C_FIELD(arg0, u8 *, 0x2A) = 0x80;
+    M2C_FIELD(arg0, u8 *, 0x29) = 0x80;
+    M2C_FIELD(arg0, u8 *, 0x28) = 0x80;
+    M2C_FIELD(arg0, void (**)(s32, s32), 0x74) = func_8001ECBC;
+    M2C_FIELD(arg0, s32 (**)(s32, s32, s32, s32), 0x84) = func_8001ED6C;
+    M2C_FIELD(arg0, void (**)(s32, s32), 0x78) = func_8001ECD8;
+    M2C_FIELD(arg0, void (**)(s32, s32), 0x7C) = func_8001ED34;
+    M2C_FIELD(arg0, void (**)(void *, s32), 0x80) = func_8001ECF8;
+    M2C_FIELD(arg0, void (**)(s32), 0x70) = func_8001ECB0;
+    M2C_FIELD(arg0, void (**)(s32), 0x88) = func_8001ECEC;
+    M2C_FIELD(arg0, void (**)(s32, s32, s32), 0x8C) = func_8001F5D0;
+    M2C_FIELD(arg0, void (**)(s16, s16, s16), 0x90) = func_8001F5EC;
+    M2C_FIELD(arg0, void (**)(s32, s32), 0x94) = func_8001F608;
+    M2C_FIELD(arg0, void (**)(s32), 0x98) = func_8001F61C;
+    M2C_FIELD(arg0, void (**)(Bytes4 *), 0x9C) = func_8001F628;
+    func_8001ECB0((s32) arg0);
+}
+/* Warning: struct opaque is not defined (only forward-declared) */
 
 void func_8001F738(s32 arg0) {
     D_8005CD18 = arg0;
@@ -1671,7 +1716,13 @@ INCLUDE_ASM("asm/nonmatchings/main", func_8001F770);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001FA20);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001FCC0);
+void func_8001FCC0(void **arg0) {
+    (*(void (**)(void *, s32))&D_8004B600)(arg0, 12);
+    arg0[0] = func_8001F744;
+    arg0[1] = func_8001F770;
+    arg0[2] = func_8001FA20;
+    func_8001F738(arg0);
+}
 
 void func_8001FD1C(s32 arg0) {
     D_8005CD20 = arg0;
@@ -1695,7 +1746,18 @@ void func_8001FF9C(s32 arg0) {
     M2C_FIELD(D_8005CD20, s32 *, 0x18) = arg0;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001FFA8);
+void func_8001FFA8(void *arg0) {
+    (*(s32 (**)())&D_8004B600)(arg0, 0x34);
+    M2C_FIELD(arg0, s32 (**)(s32), 0x20) = func_8001FD50;
+    M2C_FIELD(arg0, void (**)(s32, s32), 0x28) = func_8001FD3C;
+    M2C_FIELD(arg0, void (**)(s32, s32), 0x24) = func_8001FD28;
+    M2C_FIELD(arg0, void (**)(s32), 0x1C) = func_8001FD1C;
+    M2C_FIELD(arg0, s32 (**)(s32), 0x2C) = func_8001FE38;
+    M2C_FIELD(arg0, void (**)(s32), 0x30) = func_8001FF9C;
+    func_8001FD1C((s32) arg0);
+    M2C_FIELD(arg0, s32 *, 0x18) = 0xA800;
+}
+/* Warning: struct opaque is not defined (only forward-declared) */
 
 s32 func_80020030(s32 arg0) {
     s32 i;

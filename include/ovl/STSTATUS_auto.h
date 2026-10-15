@@ -1,0 +1,128 @@
+/* Gerado por tools/gen_ctx.py STSTATUS: nao edite. Declare a mao em include/ovl/STSTATUS.h */
+#ifndef STSTATUS_AUTO_H
+#define STSTATUS_AUTO_H
+
+/* funcoes ja decompiladas */
+void func_80083654(void);
+void func_80084C48(s32 arg0);
+void func_80084C90(void *arg0, s32 arg1, s32 arg2);
+void func_80084F10(void);
+void func_80086450(s32 arg0);
+void *func_800882C8(void *arg0);
+void func_8008B4CC(void *arg0);
+void func_8008E8F8(s32 arg0);
+void func_8008F4E8(s32 arg0, s32 arg1);
+s32 func_8008F55C(s32 arg0);
+void func_80091E4C(s32 arg0);
+void *func_80093678(s32 arg0, s32 arg1, s32 arg2);
+void func_80096548(s32 arg0);
+void func_8009824C(s32 arg0);
+void func_80099430(void *arg0, s32 arg1, s32 arg2);
+void func_8009943C(void *arg0, s32 arg1, s32 arg2);
+void func_80099450(void *arg0, s32 arg1, s32 arg2);
+void func_80099464(void *arg0, s32 arg1);
+void func_80099684(void);
+s32 func_80099F5C(s32 arg0, s32 arg1);
+
+/* funcoes ainda em assembly (prototipo desconhecido) */
+s32 func_8001345C();
+s32 func_80014504();
+s32 func_8001AE38();
+s32 func_8001B364();
+s32 func_8001F648();
+s32 func_8001FFA8();
+s32 func_80083558();
+s32 func_80083680();
+s32 func_80083914();
+s32 func_80083B58();
+s32 func_80083C94();
+s32 func_80084238();
+s32 func_80084A98();
+s32 func_80084D18();
+s32 func_80084E5C();
+s32 func_80084F54();
+s32 func_8008519C();
+s32 func_800853E0();
+s32 func_800855C8();
+s32 func_80085B6C();
+s32 func_800862A0();
+s32 func_80086498();
+s32 func_80086680();
+s32 func_800867B8();
+s32 func_80086900();
+s32 func_80086C78();
+s32 func_80086DD4();
+s32 func_8008744C();
+s32 func_80088214();
+s32 func_8008833C();
+s32 func_8008865C();
+s32 func_8008886C();
+s32 func_80088A44();
+s32 func_800891A4();
+s32 func_8008933C();
+s32 func_800895C8();
+s32 func_80089BF0();
+s32 func_8008B3C8();
+s32 func_8008B520();
+s32 func_8008B944();
+s32 func_8008BB88();
+s32 func_8008BD70();
+s32 func_8008BE34();
+s32 func_8008C02C();
+s32 func_8008C1C0();
+s32 func_8008C460();
+s32 func_8008C954();
+s32 func_8008D684();
+s32 func_8008DDB0();
+s32 func_8008E744();
+s32 func_8008E94C();
+s32 func_8008ED04();
+s32 func_8008EF48();
+s32 func_8008F000();
+s32 func_8008F0DC();
+s32 func_8008F2B4();
+s32 func_8008F584();
+s32 func_8008F8F0();
+s32 func_80090264();
+s32 func_80091D18();
+s32 func_80091E94();
+s32 func_80092094();
+s32 func_80092340();
+s32 func_80092524();
+s32 func_80092BC8();
+s32 func_80092FAC();
+s32 func_800934E0();
+s32 func_800936EC();
+s32 func_800937A4();
+s32 func_80093930();
+s32 func_800939E8();
+s32 func_80093A58();
+s32 func_80093E84();
+s32 func_80094144();
+s32 func_80094388();
+s32 func_80094558();
+s32 func_800946BC();
+s32 func_80094FBC();
+s32 func_80096380();
+s32 func_80096590();
+s32 func_80096744();
+s32 func_80096988();
+s32 func_8009744C();
+s32 func_800980B0();
+s32 func_80098294();
+s32 func_80098450();
+s32 func_800986C0();
+s32 func_80098B84();
+s32 func_8009913C();
+s32 func_8009946C();
+s32 func_800996EC();
+s32 func_800997D4();
+s32 func_80099894();
+s32 func_80099A80();
+s32 func_80099FF8();
+s32 func_8009A1BC();
+s32 func_8009A670();
+
+/* dados acessados via $gp */
+
+#endif

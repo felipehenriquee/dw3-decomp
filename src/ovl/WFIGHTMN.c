@@ -1,4 +1,7 @@
-#include "common.h"
+#include "WFIGHTMN.h"
+#include "m2c.h"
+#include "WFIGHTMN_auto.h"
+#include "WFIGHTMN_data.h"
 
 INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A5ECC);
 

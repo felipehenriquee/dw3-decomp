@@ -121,8 +121,87 @@ def data_syms(asm_txt):
     return sorted(syms - local)
 
 
+def _balanced(code, i):
+    """Indice logo depois do ')' que fecha o '(' em code[i-1]."""
+    depth = 1
+    while i < len(code) and depth:
+        if code[i] == '(':
+            depth += 1
+        elif code[i] == ')':
+            depth -= 1
+        i += 1
+    return i
+
+
+def _first_arg_split(inner):
+    depth = 0
+    for k, c in enumerate(inner):
+        if c in '([':
+            depth += 1
+        elif c in ')]':
+            depth -= 1
+        elif c == ',' and depth == 0:
+            return inner[:k].strip(), inner[k + 1:]
+    return inner.strip(), None
+
+
+def add_self_args(code, globals_=True, methods=True):
+    """Variantes para argumentos repassados que o m2c perde em chamadas
+    indiretas: (globals_) poe arg0 como 1o argumento de chamadas por
+    ponteiro global; (methods) poe o proprio objeto como 1o argumento de
+    M2C_FIELD(obj, ...)(...). Os tipos de ponteiro viram (*)() para
+    aceitar o argumento a mais."""
+    out, i = [], 0
+    pat = re.compile(r'M2C_FIELD\(|\(\*\([^()]*\(\*\*\)\([^()]*\)\)&D_[0-9A-F]{8}\)')
+    while True:
+        m = pat.search(code, i)
+        if not m:
+            out.append(code[i:])
+            break
+        out.append(code[i:m.start()])
+        if m.group().startswith('M2C_FIELD('):
+            end = _balanced(code, m.end())
+            call = code[m.start():end]
+            if methods and code[end:end + 1] == '(' and '(**)' in call:
+                obj, _ = _first_arg_split(code[m.end():end - 1])
+                call = re.sub(r'\(\*\*\)\([^()]*\)', '(**)()', call)
+                aend = _balanced(code, end + 1)
+                args = code[end + 1:aend - 1].strip()
+                first, _ = _first_arg_split(args) if args else ('', None)
+                if first != obj:
+                    args = obj + (', ' + args if args else '')
+                out.append(call + '(' + args + ')')
+                i = aend
+                continue
+            out.append(call)
+            i = end
+            continue
+        # chamada por ponteiro global
+        txt = re.sub(r'\(\*\*\)\([^()]*\)', '(**)()', m.group())
+        if globals_ and code[m.end():m.end() + 1] == '(':
+            aend = _balanced(code, m.end() + 1)
+            args = code[m.end() + 1:aend - 1].strip()
+            first, _ = _first_arg_split(args) if args else ('', None)
+            if first != 'arg0':
+                args = 'arg0' + (', ' + args if args else '')
+            out.append(txt + '(' + args + ')')
+            i = aend
+            continue
+        out.append(txt)
+        i = m.end()
+    return ''.join(out)
+
+
 def fix_code(code):
     """Ajustes na saida do m2c."""
+    # constante que nao cabe no tipo com sinal (ex.: s8 = 0x80 vira -128)
+    def unsign(m):
+        t, v = m.group(2), int(m.group(4), 16)
+        if (t == 's8' and v >= 0x80) or (t == 's16' and v >= 0x8000):
+            return m.group(1) + 'u' + t[1:] + m.group(3) + m.group(4)
+        return m.group(0)
+    code = re.sub(r'(M2C_FIELD\([^;]*?, )(s8|s16)( \*, [^;]*?\) = )(0x[0-9A-F]+)\b',
+                  unsign, code)
     # chamada pela primeira entrada de uma tabela de ponteiros de funcao:
     # o m2c escreve D_X(...), mas D_X e dado
     return re.sub(r'(?<![\w&.>])(D_[0-9A-F]{8})\(', r'(*(s32 (**)())&\1)(',
@@ -201,7 +280,7 @@ class Tester:
         self.canon = canonical(name)
         self.n = 0
 
-    def attempt(self, types, vi):
+    def attempt(self, types, vi, selfargs=None):
         """Devolve (ndiff ou None se nao compilou, code, erro)."""
         self.n += 1
         tag = 'a%d' % self.n
@@ -216,6 +295,10 @@ class Tester:
         if r.returncode != 0 or not r.stdout.strip():
             return None, None, 'm2c: ' + (r.stderr or r.stdout)[-300:]
         code = fix_code(r.stdout)
+        if selfargs:
+            if 'arg0' not in code.split('{', 1)[0] and selfargs[0]:
+                return None, None, 'sem arg0'
+            code = add_self_args(code, *selfargs)
         # simbolos com tipo ja fixado: compila com a declaracao fixada e o
         # codigo reescrito com cast, exatamente como vai ficar no build
         built = code
@@ -284,6 +367,14 @@ def try_one(job):
                 break
         if not improved:
             break
+    if n != 0 and code:
+        # variantes com argumentos repassados em chamadas indiretas
+        for g, m in ((True, False), (False, True), (True, True)):
+            n2, code2, err2 = t.attempt(types, vi, (g, m))
+            if score(n2) < score(n):
+                n, code, err = n2, code2, err2
+            if n == 0:
+                break
     res = {'types': {s: list(v) for s, v in types.items()}, 'variant': vi,
            'tries': t.n}
     if n == 0:
