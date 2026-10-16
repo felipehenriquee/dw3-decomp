@@ -17,7 +17,11 @@ INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083054);
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800831E8);
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800833AC);
+void func_800833AC(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0xC) == 1) {
+        M2C_FIELD(arg0, M2C_UNK (**)(), 0x2C)(arg0, 1);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800833E4);
 

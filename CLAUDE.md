@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação: EXE **188 de 347** funções em C (54%); overlays **275 de 3292** (8,4%; os `WSTAG` ainda não começaram). Total **463 de 3639 (12,7%)**.
+- [ ] Decompilação (2026-10-16): EXE **236 de 347** (68%); overlays **1036 de 3292** (31,5%; `W*` 710 de 1646). Total **1272 de 3639 (35,0%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -104,14 +104,19 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 - A comparação com decomp.me não foi necessária: tudo foi feito localmente com `tools/cc.sh` + `tools/cc_cmp.py`.
 
 ## Próximos passos
-1. Retomar o autodecomp nos overlays a partir do `WFIGHTTS` (parou ali; inclui os 293 `WSTAG`):
-   `ls src/ovl | sed 's/\.c$//' | awk '$0 >= "WFIGHTTS"' > build/ovl_todo.txt; tools/autodecomp_all.sh $(cat build/ovl_todo.txt)`
-   (~1 h; rode em segundo plano). Depois, rodar de novo nos overlays já processados (CARDGAME..WFIGHTMN): desde então o autodecomp ganhou aridade, argumentos repassados e constantes sem sinal.
-2. `tools/propagate.py`: antes, ligar `disassemble_all: True` nos yaml e refazer o `make split` (gera o asm das funções já decompiladas em `.../matchings/`). Atenção: `make split` apaga `build/` (resultados do autodecomp, diretórios do permuter).
-3. Permuter: `tools/perm_setup.py main --near 8` e `tools/perm_batch.sh 300 4` (as difíceis do EXE estão em `wip/main/`). Revisar o C antes de integrar.
-4. Corrigir a divisão do splat em `func_800148C0` (os `case`s `func_80014908`/`func_8001491C` viraram funções).
-5. **Revisão semântica para o port**: `tools/audit_args.py` (chamadas diretas com argumentos faltando; zerado no EXE). Chamadas indiretas (ponteiro de função/método) ainda não são auditadas.
-6. Para parar com segurança jobs em segundo plano: pegue a trava (`proj.apply_lock`) antes de matar os processos, e não use `pkill -f` com padrões que aparecem na sua própria linha de comando.
+1. Retomar o reteste dos overlays não-`W` (parou em 500 de 1229; os resultados ficam salvos e o `--run r2` pula o que já foi testado):
+   `python3 -I tools/autodecomp_reps.py --retest --run r2 C F S > build/reps2.log 2>&1` (em segundo plano, ~1-2 h; no fim integra e propaga sozinho).
+2. Depois, rodar de novo os `W*` com o código novo: `python3 -I tools/autodecomp_reps.py --retest --run r3 W`.
+3. Permuter nas difíceis: os diretórios estão em `build/perm/` (EXE; lista e arquivos em `wip/main/hard.txt`). `tools/perm_batch.sh 240 4`; revisar o C antes de integrar.
+4. Corrigir a divisão do splat em `func_800148C0` (os `case`s `func_80014908`/`func_8001491C` viraram funções). Exige `make split`, que apaga `build/` — fazer quando nada estiver rodando.
+5. **Revisão semântica para o port**: `tools/audit_args.py` (chamadas diretas; zerado no EXE). Chamadas indiretas ainda não são auditadas.
+6. Jobs em segundo plano: parar com `tools/stop_jobs.sh` (pega a trava antes de matar) e commitar com `tools/commit_locked.sh "msg"`. Não use `pkill -f` com padrões que aparecem na própria linha de comando.
+
+### Regras automáticas do autodecomp (resumo)
+- Aridade das funções no contexto do m2c (`tools/arity.py`); assinatura completada com `arg0..argN` quando o corpo usa `argN` (`fix_params`).
+- Variantes testadas quando não bate: `arg0`/objeto como primeiro argumento de chamadas indiretas (`add_self_args`), `M2C_FIELD((base + i*N), ...)` achatado (`flatten_fields`), constantes ≥ 0x80 em campo `s8` viram `u8`.
+- Símbolos com tipo já fixado são testados com a declaração fixada e cast (igual ao que vai para o build).
+- `tools/autodecomp_reps.py`: um representante por forma de função, um `Pool` só, resultados salvos aos poucos (`--run NOME` retoma), integra e propaga no fim.
 
 ## Convenções
 - Conversar com o usuário em **português**.

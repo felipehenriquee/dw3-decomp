@@ -192,8 +192,71 @@ def add_self_args(code, globals_=True, methods=True):
     return ''.join(out)
 
 
+def fix_params(code):
+    """Se o corpo usa argN, a assinatura precisa de arg0..argN (o m2c omite
+    parametros que a funcao so repassa; sem eles argN cai no registrador
+    errado)."""
+    m = re.search(r'^([^\n;{}]*?\b\w+)\(([^()]*)\)\s*\{', code, re.M)
+    if not m:
+        return code
+    params = [x.strip() for x in m.group(2).split(',') if x.strip()]
+    if params == ['void']:
+        params = []
+    have = {}
+    for prm in params:
+        mm = re.search(r'\barg(\d+)$', prm)
+        if not mm:
+            return code
+        have[int(mm.group(1))] = prm
+    used = [int(x) for x in re.findall(r'\barg(\d+)\b', code[m.end():])]
+    top = max(used + list(have)) if (used or have) else -1
+    if top < 0 or all(i in have for i in range(top + 1)):
+        return code
+    new = ', '.join(have.get(i, 's32 arg%d' % i) for i in range(top + 1))
+    return code[:m.start(2)] + new + code[m.end(2):]
+
+
+def flatten_fields(code):
+    """Variante: M2C_FIELD((A + B), T, off) -> (*(T)((s8 *)(A) + (B) + off))."""
+    out, i = [], 0
+    while True:
+        k = code.find('M2C_FIELD((', i)
+        if k < 0:
+            out.append(code[i:])
+            break
+        out.append(code[i:k])
+        end = _balanced(code, k + len('M2C_FIELD('))
+        inner = code[k + len('M2C_FIELD('):end - 1]
+        first, rest = _first_arg_split(inner)
+        parts = rest.split(',') if rest else []
+        if (rest and first.startswith('(') and first.endswith(')') and
+                len(parts) >= 2):
+            expr = first[1:-1]
+            depth, cut = 0, -1
+            for j, ch in enumerate(expr):
+                if ch in '([':
+                    depth += 1
+                elif ch in ')]':
+                    depth -= 1
+                elif ch == '+' and depth == 0:
+                    cut = j
+                    break
+            if cut > 0:
+                a, b = expr[:cut].strip(), expr[cut + 1:].strip()
+                typ = ','.join(parts[:-1]).strip()
+                off = parts[-1].strip()
+                out.append('(*(%s)((s8 *)(%s) + (%s) + (%s)))'
+                           % (typ, a, b, off))
+                i = end
+                continue
+        out.append(code[k:end])
+        i = end
+    return ''.join(out)
+
+
 def fix_code(code):
     """Ajustes na saida do m2c."""
+    code = fix_params(code)
     # constante que nao cabe no tipo com sinal (ex.: s8 = 0x80 vira -128)
     def unsign(m):
         t, v = m.group(2), int(m.group(4), 16)
@@ -295,7 +358,9 @@ class Tester:
         if r.returncode != 0 or not r.stdout.strip():
             return None, None, 'm2c: ' + (r.stderr or r.stdout)[-300:]
         code = fix_code(r.stdout)
-        if selfargs:
+        if selfargs and selfargs[0] == 'flat':
+            code = flatten_fields(code)
+        elif selfargs:
             if 'arg0' not in code.split('{', 1)[0] and selfargs[0]:
                 return None, None, 'sem arg0'
             code = add_self_args(code, *selfargs)
@@ -368,8 +433,10 @@ def try_one(job):
         if not improved:
             break
     if n != 0 and code:
-        # variantes com argumentos repassados em chamadas indiretas
-        for g, m in ((True, False), (False, True), (True, True)):
+        # variantes com argumentos repassados em chamadas indiretas e com
+        # M2C_FIELD((base + i * N), ...) achatado
+        for g, m in ((True, False), (False, True), (True, True),
+                     ('flat', None)):
             n2, code2, err2 = t.attempt(types, vi, (g, m))
             if score(n2) < score(n):
                 n, code, err = n2, code2, err2

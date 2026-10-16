@@ -57,7 +57,18 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800861F4);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80086304);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800868C0);
+void func_800868C0(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 temp_v0;
+
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0x50);
+    if (temp_v0 != arg1) {
+        M2C_FIELD(arg0, s32 *, 0x54) = temp_v0;
+        M2C_FIELD(arg0, s32 *, 0x50) = arg1;
+        M2C_FIELD(arg0, s32 *, 0xB0) = arg2;
+        M2C_FIELD(arg0, s32 *, 0xAC) = arg3;
+        M2C_FIELD(arg0, M2C_UNK (**)(), 0x28)(arg0, 2);
+    }
+}
 
 s32 func_80086904(void) {
     return (((s32 (*)()) D_8004DC0C)() % 27) + 1;
@@ -71,7 +82,19 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800869A8);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80086A00);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80087000);
+void *func_80087000(s32 arg0, s32 arg1, s32 arg2) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_80086A00, 0x68, 0xC);
+    M2C_FIELD(temp_v0, s32 *, 4) = arg0;
+    if (arg1 != 0) {
+        M2C_FIELD(temp_v0, s32 *, 8) = 0x10;
+    } else {
+        M2C_FIELD(temp_v0, s32 *, 8) = 0;
+    }
+    M2C_FIELD(temp_v0, s32 *, 0x64) = arg2;
+    return temp_v0;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80087070);
 
@@ -81,7 +104,9 @@ void func_80087160(void) {
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008718C);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80087B84);
+void func_80087B84(void) {
+    func_80014504(func_8008718C, 0x6C, 0);
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80087BB0);
 
@@ -117,19 +142,34 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80087EE4);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80087F38);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80088024);
+void func_80088024(s32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_v0;
+
+    temp_v0 = func_80087E28();
+    if (temp_v0 != 0) {
+        M2C_FIELD(temp_v0, s32 *, 0x18) = arg2;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80088054);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800880F0);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008834C);
+void func_8008834C(s32 arg0, s32 arg1) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_800880F0, 0x70, 8);
+    M2C_FIELD(temp_v0, s32 *, 0x58) = arg0;
+    M2C_FIELD(temp_v0, s32 *, 0x5C) = arg1;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80088394);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80088564);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80088C00);
+void func_80088C00(void) {
+    func_80014504(func_80088564, 0x80, 8);
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80088C2C);
 
@@ -158,7 +198,13 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80089BE4);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80089CD8);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008A7F4);
+void func_8008A7F4(s32 arg0, s32 arg1) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_80089CD8, 0x74, 0x18);
+    M2C_FIELD(temp_v0, s32 *, 4) = arg0;
+    M2C_FIELD(temp_v0, s32 *, 8) = arg1;
+}
 
 void func_8008A83C(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, M2C_UNK (**)(), 0x28)(arg0, 1);
@@ -177,7 +223,14 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008A8C4);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008AA08);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008AAAC);
+void func_8008AAAC(void) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_8008AA08, 0x68, 0);
+    M2C_FIELD(temp_v0, void (**)(void *, s32, s32), 0x64) = func_8008A83C;
+    M2C_FIELD(temp_v0, s32 *, 0x50) = 0x1006;
+    M2C_FIELD(temp_v0, s32 *, 0x54) = 0;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008AAF0);
 
