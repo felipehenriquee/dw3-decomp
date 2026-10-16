@@ -23,36 +23,68 @@ INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A6504);
 
 INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A6550);
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A659C);
+void func_800A659C(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40BA, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A65C8);
+void func_800A65C8(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40BB, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A65F4);
+void func_800A65F4(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40BC, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A6620);
+void func_800A6620(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40BD, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A664C);
+void func_800A664C(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40BE, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A6678);
+void func_800A6678(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40BF, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A66A4);
+void func_800A66A4(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40C0, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A66D0);
+void func_800A66D0(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40C1, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A66FC);
+void func_800A66FC(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40C2, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A6728);
+void func_800A6728(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40C3, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A6754);
+void func_800A6754(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40C4, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A6780);
+void func_800A6780(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40C5, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A67AC);
+void func_800A67AC(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40C6, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A67D8);
+void func_800A67D8(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40C7, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A6804);
+void func_800A6804(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40C8, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A6830);
+void func_800A6830(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40C9, 1);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A685C);

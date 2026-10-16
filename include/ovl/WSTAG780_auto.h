@@ -3,6 +3,13 @@
 #define WSTAG780_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800A6678(s32 arg0);
+void func_800A69D8(void);
+void func_800A6A04(void *arg0, void *arg1);
+void func_800A7450(void *arg0, s32 arg1);
+void func_800A760C(void);
+void func_800A7618(void);
+void func_800A7644(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_800143DC();
@@ -17,13 +24,10 @@ s32 func_800A61C8();
 s32 func_800A638C();
 s32 func_800A6480();
 s32 func_800A652C();
-s32 func_800A6678();
 s32 func_800A66B0();
 s32 func_800A67A4();
 s32 func_800A6914();
 s32 func_800A6940();
-s32 func_800A69D8();
-s32 func_800A6A04();
 s32 func_800A6B4C();
 s32 func_800A6DC4();
 s32 func_800A6FBC();

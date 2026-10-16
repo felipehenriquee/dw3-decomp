@@ -15,10 +15,14 @@ INCLUDE_ASM("asm/ovl/WSTAG620/nonmatchings/WSTAG620", func_800A6314);
 
 INCLUDE_ASM("asm/ovl/WSTAG620/nonmatchings/WSTAG620", func_800A6370);
 
-INCLUDE_ASM("asm/ovl/WSTAG620/nonmatchings/WSTAG620", func_800A63BC);
+void func_800A63BC(void) {
+    *D_8004B370 = 0x14;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG620/nonmatchings/WSTAG620", func_800A63CC);
 
-INCLUDE_ASM("asm/ovl/WSTAG620/nonmatchings/WSTAG620", func_800A6418);
+void func_800A6418(void) {
+    *D_8004B370 = 0x15;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG620/nonmatchings/WSTAG620", func_800A6428);

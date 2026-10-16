@@ -3,6 +3,8 @@
 #define WSTAG676_AUTO_H
 
 /* funcoes ja decompiladas */
+void *func_800A5E68(s32 arg0);
+void func_800A5F10(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();

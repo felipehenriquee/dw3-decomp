@@ -9,6 +9,9 @@ INCLUDE_ASM("asm/ovl/WSTAG756/nonmatchings/WSTAG756", func_800A5EA0);
 
 INCLUDE_ASM("asm/ovl/WSTAG756/nonmatchings/WSTAG756", func_800A5EFC);
 
-INCLUDE_ASM("asm/ovl/WSTAG756/nonmatchings/WSTAG756", func_800A5F48);
+void func_800A5F48(void) {
+    *D_8004B370 = 0x24;
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x8019, 1);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG756/nonmatchings/WSTAG756", func_800A5F80);

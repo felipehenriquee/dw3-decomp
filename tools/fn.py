@@ -60,8 +60,8 @@ def tu(name, fn, code):
     p = T.p(T.data)
     if os.path.exists(p):
         for ln in open(p):
-            d = ad.parse_decl(ln)
-            if d and d[0] not in decls:
+            m = re.match(r'extern\b[^;]*\b(D_[0-9A-F]{8})\b', ln)
+            if m and m.group(1) not in decls:
                 data.append(ln.rstrip())
     return ('#include "%s"\n#include "m2c.h"\n%s\n%s\nstruct opaque;\n'
             '%s\n%s\n\n%s'

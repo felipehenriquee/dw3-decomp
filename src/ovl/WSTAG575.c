@@ -14,6 +14,8 @@ void *func_800A5E74(s32 arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG575/nonmatchings/WSTAG575", func_800A5ED0);
+void func_800A5ED0(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40A2, 1);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG575/nonmatchings/WSTAG575", func_800A5EFC);

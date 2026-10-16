@@ -4,5 +4,7 @@
 
 /* tipo ainda desconhecido (so o endereco e usado) */
 struct opaque;
+extern s32 D_80048AC8[];
+extern u8 D_800A6A2A[];
 
 #endif /* WSTAG795_DATA_H */

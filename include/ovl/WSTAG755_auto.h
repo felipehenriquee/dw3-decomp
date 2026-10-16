@@ -3,6 +3,7 @@
 #define WSTAG755_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800A5F14(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();

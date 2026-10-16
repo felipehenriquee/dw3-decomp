@@ -7,7 +7,9 @@ INCLUDE_ASM("asm/ovl/WSTAG785/nonmatchings/WSTAG785", func_800A5DE4);
 
 INCLUDE_ASM("asm/ovl/WSTAG785/nonmatchings/WSTAG785", func_800A5F04);
 
-INCLUDE_ASM("asm/ovl/WSTAG785/nonmatchings/WSTAG785", func_800A61A4);
+void func_800A61A4(void) {
+    M2C_FIELD(func_80014504(func_800A5F04, 0x6C, 0), s32 *, 0x50) = 1;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG785/nonmatchings/WSTAG785", func_800A61D8);
 
@@ -23,6 +25,8 @@ INCLUDE_ASM("asm/ovl/WSTAG785/nonmatchings/WSTAG785", func_800A660C);
 
 INCLUDE_ASM("asm/ovl/WSTAG785/nonmatchings/WSTAG785", func_800A66B0);
 
-INCLUDE_ASM("asm/ovl/WSTAG785/nonmatchings/WSTAG785", func_800A670C);
+void func_800A670C(void) {
+    *D_8004B370 = 1;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG785/nonmatchings/WSTAG785", func_800A671C);

@@ -16,7 +16,24 @@ void func_80010F4C(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80010FE0);
+s32 func_80010FE0(Fade *f) {
+    if (f->active == 0) {
+        return 1;
+    }
+    f->value += f->speed;
+    if (f->speed > 0) {
+        if (f->value > 0x1000) {
+            f->value = 0x1000;
+            f->active = 0;
+            return 1;
+        }
+    } else if (f->value < 0) {
+        f->value = 0;
+        f->active = 0;
+        return 1;
+    }
+    return 0;
+}
 
 void func_8001104C(void) {
     s32 i;
@@ -88,7 +105,24 @@ void func_800120B4(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80012148);
+s32 func_80012148(Fade *f) {
+    if (f->active == 0) {
+        return 1;
+    }
+    f->value += f->speed;
+    if (f->speed > 0) {
+        if (f->value > 0x1000) {
+            f->value = 0x1000;
+            f->active = 0;
+            return 1;
+        }
+    } else if (f->value < 0) {
+        f->value = 0;
+        f->active = 0;
+        return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_800121B4);
 
@@ -839,7 +873,32 @@ void func_80017028(s32 who, u32 stat, s16 v) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_800170C8);
+void func_800170C8(s32 who, u32 stat, s16 v) {
+    Unk8004949C *c = &((Unk8004949C *)D_8004949C)[who];
+    s16 *p = c->stat;
+
+    if (stat < 19) {
+        p += stat;
+        v = *p += v;
+        if (v < 0) {
+            *p = 0;
+            return;
+        }
+        if (stat < 2) {
+            if (v >= 100) {
+                *p = 99;
+                return;
+            }
+        } else if (stat - 2 < 4) {
+            if (v >= 10000) {
+                *p = 9999;
+                return;
+            }
+        } else if (v >= 1000) {
+            *p = 999;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80017174);
 
@@ -1558,7 +1617,21 @@ INCLUDE_ASM("asm/nonmatchings/main", func_8001BEEC);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001C050);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001C448);
+void func_8001C448(void *arg0) {
+    switch (M2C_FIELD(arg0, s32 *, 0xC)) {
+    case 0:
+    default:
+        M2C_FIELD(arg0, void (**)(void *, s32), 0x28)(arg0, 2);
+        break;
+    case 1:
+        func_8001BEEC(arg0);
+        func_8001C050(arg0);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void func_8001C4B4(s32 arg0) {
     func_80014504(func_8001C448, 0x60, 0)->unk50 = arg0;
@@ -1641,7 +1714,15 @@ s32 func_8001D704(void) {
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001D714);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001D7C4);
+void func_8001D7C4(s32 size) {
+    u8 *t = D_8004DE10;
+    u8 *heap = (u8 *)&D_8004B5DC;
+
+    *(s32 *)(t + 0x2C) = size;
+    *(s32 *)(t + 0x24) = (*(s32 (**)(s32, s32))(heap + 0x1C))(size, 2);
+    *(s32 *)(t + 0x28) = (*(s32 (**)(s32, s32))(heap + 0x1C))(size, 2);
+    *(s32 *)(t + 0x20) = *(s32 *)(t + *(s32 *)(t + 0x34) * 4 + 0x24);
+}
 
 s32 func_8001D844(void) {
     return D_8004DE30[0];
@@ -2158,7 +2239,22 @@ INCLUDE_ASM("asm/nonmatchings/main", func_8002006C);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80020204);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_800202D4);
+/* som: id empacotado -> SsSepStop */
+void func_800202D4(s32 id) {
+    s32 neg = (u32)id >> 31;
+    s32 sub = (id >> 8) & 0xFF;
+    s32 seq = id & 0xFF;
+    s32 ch = func_80020030((id >> 18) & 0x7F);
+    u8 *t;
+
+    if (ch != -1 && neg == 0) {
+        t = D_800519EC;
+        SsSepStop(((Unk800519EC *)t)->unk4204[ch].unk4[sub], seq);
+        if (*(s32 *)(t + 0x4248) == id) {
+            *(s32 *)(t + 0x4248) = 0;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8002037C);
 

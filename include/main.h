@@ -58,7 +58,8 @@ typedef struct {
 /* D_800519EC + 0x4204: tabela de 0x18 bytes por entrada */
 typedef struct {
     s16 unk0;
-    u8 pad2[0x16];
+    s16 unk2;
+    s16 unk4[10];
 } Unk800519EC_4204;
 
 typedef struct {
@@ -159,5 +160,13 @@ typedef struct {
     s16 stat[19];
     u8 pad42[0x3DC - 0x42];
 } Unk8004949C;
+
+/* fade: valor de 0 a 0x1000 andando 'speed' por quadro */
+typedef struct {
+    s32 unk0;
+    s32 speed;
+    s32 value;
+    s32 active;
+} Fade;
 
 #endif /* MAIN_H */
