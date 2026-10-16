@@ -6,6 +6,7 @@
 s32 func_800A6024(void);
 s32 func_800A60A4(void);
 s32 func_800A6124(void);
+void *func_800A62B8(s32 arg0);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_800143DC();

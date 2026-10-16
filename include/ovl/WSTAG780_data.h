@@ -8,5 +8,6 @@ extern s32 D_80048AC8[];
 extern s32 D_8004B370[];
 extern s32 D_8004DC0C[];
 extern s32 D_80055C48[];
+extern s32 D_800A9208[];
 
 #endif /* WSTAG780_DATA_H */

@@ -6,6 +6,7 @@
 void func_800A5F64(void *arg0, s32 arg1);
 void func_800A63C4(void *arg0, s32 arg1);
 void func_800A6990(s32 arg0, s32 arg1, s32 arg2);
+void *func_800A6B44(s32 arg0);
 void func_800A6BEC(void);
 void func_800A6C18(void);
 

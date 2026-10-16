@@ -1,6 +1,7 @@
 """Autodecomp so em um representante de cada forma de funcao pendente.
 
-Uso: python3 -I tools/autodecomp_reps.py [prefixo]   (padrao: WSTAG)
+Uso: python3 -I tools/autodecomp_reps.py [--retest] [prefixo ...]
+     (padrao: WSTAG; --retest testa de novo funcoes ja testadas)
 
 Os overlays de mapa repetem muito codigo: agrupa as funcoes pendentes pela
 forma (asm normalizado, ver tools/propagate.py), roda o
@@ -22,9 +23,11 @@ from proj import R, Target  # noqa: E402
 
 
 def main():
-    prefix = sys.argv[1] if len(sys.argv) > 1 else 'WSTAG'
-    targets = sorted(os.path.basename(p)[:-2] for p in
-                     glob.glob(os.path.join(R, 'src/ovl/%s*.c' % prefix)))
+    args = [a for a in sys.argv[1:] if a != '--retest']
+    retest = '--retest' in sys.argv
+    prefixes = args or ['WSTAG']
+    targets = sorted({os.path.basename(p)[:-2] for pre in prefixes for p in
+                      glob.glob(os.path.join(R, 'src/ovl/%s*.c' % pre))})
     groups = collections.OrderedDict()
     for t in targets:
         T = Target(t)
@@ -53,7 +56,7 @@ def main():
         rp = os.path.join(work, 'results.json')
         done = json.load(open(rp)) if os.path.exists(rp) else {}
         jobs += [(t, fn, base, work, canon) for fn in reps[t]
-                 if fn not in done]
+                 if retest or fn not in done]
     print('%d testes' % len(jobs), flush=True)
     results = collections.defaultdict(dict)
     with multiprocessing.Pool(os.cpu_count()) as pool:

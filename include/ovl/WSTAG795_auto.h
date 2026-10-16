@@ -6,6 +6,7 @@
 void func_800A6180(void *arg0, s32 arg1);
 void func_800A6200(void);
 void func_800A654C(void);
+void *func_800A6654(s32 arg0);
 void func_800A66B0(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */

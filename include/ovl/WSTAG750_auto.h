@@ -4,6 +4,7 @@
 
 /* funcoes ja decompiladas */
 void func_800A6170(void *arg0, s32 arg1);
+void *func_800A6424(s32 arg0);
 void func_800A6A38(void);
 void func_800A6A48(void);
 void func_800A6A74(void);

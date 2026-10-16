@@ -659,7 +659,26 @@ INCLUDE_ASM("asm/nonmatchings/main", func_80015FBC);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_800160A8);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80016124);
+/* remove uma referencia (6 slots s16 em 0x3C0 do personagem) */
+s32 func_80016124(s32 who, s32 ref) {
+    Unk8004949C *c = &((Unk8004949C *)D_8004949C)[who];
+    u8 *info = *(u8 **)((s32 (*)(s32))D_80042B98[0])(ref);
+    s16 *slot = (s16 *)((u8 *)c + 0x3C0);
+    s32 i;
+
+    for (i = 0; i < 6; i++) {
+        if (slot[i] == ref) {
+            if (info[2] == 7) {
+                *(s16 *)((u8 *)c + 0x3C4) = 0;
+                *(s16 *)((u8 *)c + 0x3C6) = 0;
+            } else {
+                slot[i] = 0;
+            }
+            return 1;
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_800161D8);
 
@@ -1293,7 +1312,33 @@ void func_800194E8(s32 arg0, s32 arg1, s32 arg2) {
     func_800196E4(arg0, arg1, arg2, 0);
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80019508);
+/* numero -> digitos decimais (sem terminador) */
+void func_80019508(char *buf, s32 n) {
+    s32 save;
+    s32 len;
+    s32 d;
+    s32 digit;
+
+    if (n <= 0) {
+        *buf = '0';
+        return;
+    }
+    save = n;
+    len = 0;
+    d = 10;
+    do {
+        len++;
+        n -= n % d;
+        d *= 10;
+    } while (n != 0);
+    n = save;
+    while (n != 0) {
+        digit = n % 10;
+        n -= digit;
+        n /= 10;
+        buf[--len] = digit + '0';
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_800195B0);
 

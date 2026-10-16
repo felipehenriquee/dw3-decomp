@@ -3,6 +3,9 @@
 #define WSTAG741_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800A606C(void);
+void *func_800A6138(s32 arg0);
+void func_800A64BC(s32 arg0, s32 arg1);
 void func_800A659C(void);
 void func_800A65C8(void);
 void func_800A65F4(void);
@@ -29,7 +32,6 @@ s32 func_800A6098();
 s32 func_800A6194();
 s32 func_800A626C();
 s32 func_800A6324();
-s32 func_800A64BC();
 
 /* dados acessados via $gp */
 
