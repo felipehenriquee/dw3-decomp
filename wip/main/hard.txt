@@ -10,3 +10,5 @@
 80010FE0 fade.c
 80012148 fade.c (igual a 80010FE0)
 800169E0 800169E0.c
+800135E8 800135E8.c
+8001C7D8 8001C7D8.c (switch: blez vs slti 2)

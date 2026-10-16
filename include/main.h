@@ -135,4 +135,9 @@ typedef struct HeapBlock {
     s32 tag;
 } HeapBlock;
 
+/* bloco de 32 bytes copiado como struct (tamanho de um MATRIX da PsyQ) */
+typedef struct {
+    s32 w[8];
+} Block32;
+
 #endif /* MAIN_H */

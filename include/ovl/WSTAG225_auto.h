@@ -3,6 +3,9 @@
 #define WSTAG225_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800A6210(void);
+void *func_800A62B4(s32 arg0);
+void func_800A6310(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_800143DC();
