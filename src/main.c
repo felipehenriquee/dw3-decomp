@@ -563,9 +563,71 @@ s32 func_80014AA8(void) {
     return r;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80014B44);
+/* espera o cartao de memoria / consulta o resultado da operacao */
+s32 func_80014B44(s32 port) {
+    s32 r;
+    u8 *mc = D_80048750;
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80014C24);
+    switch (*(s32 *)mc) {
+    case 0:
+    default:
+        while (MemCardExist(port << 4) == 0) {
+            func_80014AA8();
+        }
+        *(s32 *)D_80048750 = 1;
+        return 0;
+    case 1:
+        r = func_80014AA8();
+        if (r != 0) {
+            *(s32 *)D_80048750 = 0;
+            if (*(s32 *)(mc + 0x94) == 0) {
+                return 1;
+            }
+            return *(s32 *)(mc + 0x94) + 1;
+        }
+        if (*(s32 *)(mc + 0xA0) == 0) {
+            return 0;
+        }
+        *(s32 *)(mc + 0xA0) = 0;
+        while (MemCardExist(port << 4) == 0) {
+            func_80014AA8();
+        }
+        return 0;
+    }
+}
+
+/* espera o cartao de memoria / consulta o resultado da operacao */
+s32 func_80014C24(s32 port) {
+    s32 r;
+    u8 *mc = D_80048750;
+
+    switch (*(s32 *)mc) {
+    case 0:
+    default:
+        while (MemCardAccept(port << 4) == 0) {
+            func_80014AA8();
+        }
+        *(s32 *)D_80048750 = 2;
+        return 0;
+    case 2:
+        r = func_80014AA8();
+        if (r != 0) {
+            *(s32 *)D_80048750 = 0;
+            if (*(s32 *)(mc + 0x94) == 0) {
+                return 1;
+            }
+            return *(s32 *)(mc + 0x94) + 1;
+        }
+        if (*(s32 *)(mc + 0xA0) == 0) {
+            return 0;
+        }
+        *(s32 *)(mc + 0xA0) = 0;
+        while (MemCardAccept(port << 4) == 0) {
+            func_80014AA8();
+        }
+        return 0;
+    }
+}
 
 INCLUDE_RODATA("asm/nonmatchings/main", jtbl_80010114);
 
@@ -2438,7 +2500,24 @@ void func_8002096C(s32 id, s16 voice) {
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80020A10);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80020B58);
+void func_80020B58(u8 *a, s32 *out) {
+    switch (*(s32 *)(a + 0xC)) {
+    case 0:
+    default:
+        ((void (*)(void))D_80055D30[0])();
+        *out = ((s32 (*)(void))D_80055C70[((s32 (*)(void))D_8004B438[0])() >> 8])();
+        (*(void (**)(void *))(a + 0x38))(a);
+        break;
+    case 1:
+        if (((s32 (*)(void))D_8004B444[0])() != 0) {
+            (*(void (**)(void *, s32))(a + 0x28))(a, 3);
+        }
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void func_80020C38(void) {
     func_80014504(func_80020B58, 0x50, 4);
