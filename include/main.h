@@ -153,4 +153,11 @@ typedef struct {
     u16 unk63E;
 } Unk80048D34_63E;
 
+/* personagem em D_8004949C (0x3DC bytes); atributos s16 a partir de 0x1C */
+typedef struct {
+    u8 pad0[0x1C];
+    s16 stat[19];
+    u8 pad42[0x3DC - 0x42];
+} Unk8004949C;
+
 #endif /* MAIN_H */

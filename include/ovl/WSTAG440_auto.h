@@ -4,6 +4,7 @@
 
 /* funcoes ja decompiladas */
 void *func_800A5E50(s32 arg0);
+void func_800A5EAC(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();

@@ -812,7 +812,32 @@ s32 func_80016FD8(u32 arg0) {
     return *(s32 *)(p->unk0 + 0x760) - 3;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80017028);
+void func_80017028(s32 who, u32 stat, s16 v) {
+    Unk8004949C *c = &((Unk8004949C *)D_8004949C)[who];
+    s16 *p = c->stat;
+
+    if (stat < 19) {
+        p += stat;
+        *p = v;
+        if (v < 0) {
+            *p = 0;
+            return;
+        }
+        if (stat < 2) {
+            if (v >= 100) {
+                *p = 99;
+                return;
+            }
+        } else if (stat - 2 < 4) {
+            if (v >= 10000) {
+                *p = 9999;
+                return;
+            }
+        } else if (v >= 1000) {
+            *p = 999;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_800170C8);
 
@@ -1902,7 +1927,20 @@ void func_8001E7E0(s32 arg0)
     D_8005CD08 = arg0;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001E7EC);
+/* blocos de 0x62C bytes em bancos de 64 */
+void func_8001E7EC(s32 n) {
+    s32 idx;
+    s32 bank;
+
+    if (n > 0) {
+        idx = n - 1;
+        bank = (*(s32 (**)(s32))&D_80044F4C)(*(D_8004DFB8 + (idx >> 6)));
+        idx &= 0x3F;
+        *(s32 *)D_8005CD08 = bank + idx * 0x62C;
+    } else {
+        *(s32 *)D_8005CD08 = (*(s32 (**)(s32))&D_80044F4C)(D_8004DFB8[0]);
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001E890);
 
@@ -2150,7 +2188,19 @@ s16 func_8002090C(s32 arg0, s16 arg1, s16 arg2) {
     return SsUtKeyOn(((Unk800519EC *)D_800519EC)->unk4204[arg0].unk0, arg1, 0, arg2, 0, 0x7F, 0x7F);
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8002096C);
+/* som: id empacotado -> SsUtKeyOff */
+void func_8002096C(s32 id, s16 voice) {
+    s32 ch;
+    s32 prog = (id >> 11) & 0x7F;
+    s32 tone = (id >> 7) & 0xF;
+    s32 note = id & 0x7F;
+
+    ch = func_80020030((id >> 18) & 0x7F);
+
+    if (voice != -1 && ch != -1) {
+        SsUtKeyOff(voice, ((Unk800519EC *)D_800519EC)->unk4204[ch].unk0, prog, tone, note);
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80020A10);
 
