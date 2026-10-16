@@ -1,7 +1,9 @@
 """Autodecomp so em um representante de cada forma de funcao pendente.
 
-Uso: python3 -I tools/autodecomp_reps.py [--retest] [prefixo ...]
-     (padrao: WSTAG; --retest testa de novo funcoes ja testadas)
+Uso: python3 -I tools/autodecomp_reps.py [--retest] [--run NOME] [prefixo ...]
+     (padrao: WSTAG; --retest testa de novo funcoes ja testadas;
+      --run NOME marca os resultados: rodar de novo com o mesmo nome
+      retoma de onde parou)
 
 Os overlays de mapa repetem muito codigo: agrupa as funcoes pendentes pela
 forma (asm normalizado, ver tools/propagate.py), roda o
@@ -23,8 +25,14 @@ from proj import R, Target  # noqa: E402
 
 
 def main():
-    args = [a for a in sys.argv[1:] if a != '--retest']
-    retest = '--retest' in sys.argv
+    argv = sys.argv[1:]
+    run = None
+    if '--run' in argv:
+        i = argv.index('--run')
+        run = argv[i + 1]
+        del argv[i:i + 2]
+    args = [a for a in argv if a != '--retest']
+    retest = '--retest' in argv
     prefixes = args or ['WSTAG']
     targets = sorted({os.path.basename(p)[:-2] for pre in prefixes for p in
                       glob.glob(os.path.join(R, 'src/ovl/%s*.c' % pre))})
@@ -56,20 +64,38 @@ def main():
         rp = os.path.join(work, 'results.json')
         done = json.load(open(rp)) if os.path.exists(rp) else {}
         jobs += [(t, fn, base, work, canon) for fn in reps[t]
-                 if retest or fn not in done]
+                 if fn not in done or
+                 (retest and (run is None or done[fn].get('run') != run))]
     print('%d testes' % len(jobs), flush=True)
     results = collections.defaultdict(dict)
+
+    def save(pending_save):
+        for t, res in pending_save.items():
+            path = os.path.join(R, 'build/autodecomp', t, 'results.json')
+            old = json.load(open(path)) if os.path.exists(path) else {}
+            old.update(res)
+            json.dump(old, open(path, 'w'), indent=1)
+
+    unsaved = collections.defaultdict(dict)
     with multiprocessing.Pool(os.cpu_count()) as pool:
         for k, (job, (fn, r)) in enumerate(zip(jobs, pool.imap(ad.try_one, jobs))):
+            if run:
+                r['run'] = run
             results[job[0]][fn] = r
+            unsaved[job[0]][fn] = r
             if k % 50 == 0:
                 print('  %d/%d' % (k, len(jobs)), flush=True)
-    for t, res in sorted(results.items()):
+                save(unsaved)
+                unsaved.clear()
+    save(unsaved)
+    # integra todas as que bateram (inclusive de execucoes interrompidas)
+    for t in targets:
         path = os.path.join(R, 'build/autodecomp', t, 'results.json')
-        old = json.load(open(path)) if os.path.exists(path) else {}
-        old.update(res)
-        json.dump(old, open(path, 'w'), indent=1)
-        if any(r['status'] == 'ok' for r in res.values()):
+        if not os.path.exists(path):
+            continue
+        res = json.load(open(path))
+        pend = set(ad.pending(t))
+        if any(r['status'] == 'ok' and f in pend for f, r in res.items()):
             ad.apply(t)
             sys.stdout.flush()
     print('== propagando', flush=True)

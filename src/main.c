@@ -82,7 +82,35 @@ void func_80011DEC(void *arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80011E74);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80011FB8);
+void func_80011FB8(u8 *a) {
+    s32 v;
+
+    switch (*(s32 *)(a + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(void *))(a + 0x38))(a);
+        break;
+    case 1:
+        if (*(s32 *)(a + 0x10) == 0) {
+            break;
+        }
+        v = *(s32 *)(a + 0x5C) + *(s32 *)(a + 0x60);
+        *(s32 *)(a + 0x5C) = v;
+        if (*(s32 *)(a + 0x58) == 0) {
+            if (v > 0xFF00) {
+                *(s32 *)(a + 0x5C) = 0xFF00;
+                *(s32 *)(a + 0xC) = 2;
+            }
+        } else if (v < 0) {
+            *(s32 *)(a + 0x5C) = 0;
+            *(s32 *)(a + 0xC) = 2;
+        }
+    case 2:
+        func_80011E74(a);
+    case 3:
+        break;
+    }
+}
 
 void func_8001206C(s32 arg0) {
     Obj *o = func_80014504(func_80011FB8, 0x68, 0);
@@ -1802,7 +1830,27 @@ s32 func_8001D704(void) {
     return D_8004DE28[0];
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001D714);
+void func_8001D714(void) {
+    s32 i;
+    u8 *t;
+    u8 *u;
+
+    if (D_8005CCE0 != 0) {
+        for (i = 0, t = D_8004DE10; i < 30; i++) {
+            if (*(s32 *)(i * 4 + t + 0x60) != 0) {
+                /* remove o objeto (a tabela anda): olha o mesmo indice de novo */
+                (*(void (**)(s32))(t + 0x170))(*(s32 *)(i * 4 + t + 0xD8));
+                i--;
+            }
+        }
+        (*(void (**)(void *, s32))&D_8004B600)(D_8004DE30, 0x18);
+    } else {
+        u = D_8004DE10;
+        *(s32 *)(u + 0x34) = 1;
+        *(s32 *)(u + 0x30) = 0;
+        D_8005CCE0 = 1;
+    }
+}
 
 void func_8001D7C4(s32 size) {
     u8 *t = D_8004DE10;
