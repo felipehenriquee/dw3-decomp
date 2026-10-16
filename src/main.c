@@ -1092,7 +1092,30 @@ void func_80018014(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001804C);
+/* proximo item (a partir do cursor) que casa com os 3 criterios (-1 = qualquer) */
+s32 *func_8001804C(void) {
+    s32 i;
+    s32 *item;
+
+    for (i = D_8004B610[103]; i < 100; i++) {
+        item = (s32 *)D_8004B610[i];
+        if (item == NULL) {
+            continue;
+        }
+        if (D_8004B610[100] != -1 && item[0] != D_8004B610[100]) {
+            continue;
+        }
+        if (D_8004B610[101] != -1 && item[1] != D_8004B610[101]) {
+            continue;
+        }
+        if (D_8004B610[102] != -1 && item[2] != D_8004B610[102]) {
+            continue;
+        }
+        D_8004B610[103] = i + 1;
+        return (s32 *)D_8004B610[i];
+    }
+    return NULL;
+}
 
 void func_8001810C(s32 arg0, s32 arg1, s32 arg2) {
     s32 *p = D_8004B610;
@@ -1283,7 +1306,29 @@ void func_8001968C(MsgWin *arg0, s32 arg1, s32 arg2) {
     func_80019370(arg0, &arg0->work[arg2], arg1);
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_800196E4);
+void func_800196E4(MsgWin *w, s32 text, s32 idx, s32 n) {
+    struct {
+        s32 (*fn0)(s32, s32);
+        s32 (*fn4)();
+        s32 (*fn8)();
+        s32 unkC;
+    } tbl;
+    s32 r;
+    u8 *p;
+
+    if (idx >= 0) {
+        func_8001FCC0(&tbl);
+        r = tbl.fn0(text, idx);
+        if (r == 0) {
+            return;
+        }
+        func_80019370(w, &w->work[n], r);
+    } else {
+        func_80019370(w, &w->work[n], text);
+    }
+    p = (u8 *)w + n * 12;
+    *(s16 *)(p + 0x66) = 0;
+}
 
 INCLUDE_RODATA("asm/nonmatchings/main", D_80010234);
 

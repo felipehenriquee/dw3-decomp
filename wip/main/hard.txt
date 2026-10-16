@@ -15,3 +15,5 @@
 8001B724 - (switch com jalr compartilhado)
 80017D2C 80017D2C.c (malloc; so o sll do arredondamento)
 80017DDC 80017DDC.c (malloc do fim)
+8002037C 8002037C.c
+80020204 80020204.c

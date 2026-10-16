@@ -24,7 +24,14 @@ INCLUDE_ASM("asm/ovl/WSTAG934/nonmatchings/WSTAG934", func_800A628C);
 
 INCLUDE_ASM("asm/ovl/WSTAG934/nonmatchings/WSTAG934", func_800A62F4);
 
-INCLUDE_ASM("asm/ovl/WSTAG934/nonmatchings/WSTAG934", func_800A633C);
+void *func_800A633C(s32 arg0) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_800A62F4, 0x58, 8);
+    M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    ((M2C_UNK (*)()) *D_800A6870)();
+    return temp_v0;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG934/nonmatchings/WSTAG934", func_800A6398);
 

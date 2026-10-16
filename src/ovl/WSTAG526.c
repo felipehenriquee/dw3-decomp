@@ -17,11 +17,18 @@ INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6058);
 
 INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6178);
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6364);
+void func_800A6364(void *arg0) {
+    if (arg0 != NULL) {
+        M2C_FIELD(arg0, s16 *, 0x50) = 2;
+        M2C_FIELD(arg0, s16 *, 0x52) = 0x96;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6380);
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A63B0);
+void func_800A63B0(void) {
+    func_80014504(func_800A6178, 0x5C, 0);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A63DC);
 
@@ -36,7 +43,9 @@ void func_800A67A4(void *arg0) {
 
 INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A67C0);
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A67F0);
+void func_800A67F0(void) {
+    func_80014504(func_800A64FC, 0x64, 0);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A681C);
 
@@ -51,11 +60,26 @@ void func_800A6AF4(void *arg0) {
 
 INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6B10);
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6B40);
+void func_800A6B40(void) {
+    func_80014504(func_800A693C, 0x5C, 0);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6B6C);
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6C8C);
+s32 func_800A6C8C(void *arg0, s32 arg1) {
+    s32 var_a1;
+    s32 var_a2;
+
+    var_a2 = M2C_FIELD(arg0, s16 *, 0x6C) - M2C_FIELD(arg0, s32 *, 0x5C);
+    var_a1 = M2C_FIELD(arg0, s16 *, 0x6E) - M2C_FIELD(arg0, s32 *, 0x60);
+    if (var_a2 < 0) {
+        var_a2 = -var_a2;
+    }
+    if (var_a1 < 0) {
+        var_a1 = -var_a1;
+    }
+    return arg1 < (var_a2 + var_a1);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6CC8);
 
@@ -63,7 +87,12 @@ INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6E38);
 
 INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6FB4);
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A734C);
+void func_800A734C(void *arg0) {
+    if (arg0 != NULL) {
+        M2C_FIELD(arg0, s16 *, 0x50) = 2;
+        M2C_FIELD(arg0, s32 *, 0x58) = 0x3C;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A7368);
 

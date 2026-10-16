@@ -26,7 +26,9 @@ INCLUDE_ASM("asm/ovl/WSTAG924/nonmatchings/WSTAG924", func_800A6090);
 
 INCLUDE_ASM("asm/ovl/WSTAG924/nonmatchings/WSTAG924", func_800A60FC);
 
-INCLUDE_ASM("asm/ovl/WSTAG924/nonmatchings/WSTAG924", func_800A6A68);
+void func_800A6A68(void) {
+    func_80014504(func_800A60FC, 0x84, 0x28);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG924/nonmatchings/WSTAG924", func_800A6A94);
 

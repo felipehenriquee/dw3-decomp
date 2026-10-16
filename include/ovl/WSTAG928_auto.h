@@ -3,6 +3,7 @@
 #define WSTAG928_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800A5E84(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();

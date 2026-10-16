@@ -13,7 +13,14 @@ void func_800A6164(void) {
 
 INCLUDE_ASM("asm/ovl/WSTAG480/nonmatchings/WSTAG480", func_800A6190);
 
-INCLUDE_ASM("asm/ovl/WSTAG480/nonmatchings/WSTAG480", func_800A6230);
+void *func_800A6230(s32 arg0) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_800A6190, 0x54, 8);
+    M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    ((M2C_UNK (*)()) *D_800A81F8)();
+    return temp_v0;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG480/nonmatchings/WSTAG480", func_800A628C);
 

@@ -3,6 +3,8 @@
 #define WSTAG815_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800A6834(void);
+void func_800A6860(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_800143DC();
