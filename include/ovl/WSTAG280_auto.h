@@ -3,6 +3,8 @@
 #define WSTAG280_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800A63CC(void);
+void *func_800A64B8(s32 arg0);
 void func_800A6608(void *arg0, s32 arg1);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */

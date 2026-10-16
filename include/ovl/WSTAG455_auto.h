@@ -3,6 +3,7 @@
 #define WSTAG455_AUTO_H
 
 /* funcoes ja decompiladas */
+void *func_800A60D4(s32 arg0);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_800143DC();

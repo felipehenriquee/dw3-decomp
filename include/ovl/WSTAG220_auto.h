@@ -6,6 +6,7 @@
 void func_800A6430(void);
 void func_800A6A18(void);
 void func_800A7000(void);
+void func_800A702C(void *arg0);
 void *func_800A7074(s32 arg0);
 void func_800A7230(void *arg0, s32 arg1);
 
@@ -18,7 +19,6 @@ s32 func_800853F8();
 s32 func_800A5E74();
 s32 func_800A645C();
 s32 func_800A6A44();
-s32 func_800A702C();
 
 /* dados acessados via $gp */
 

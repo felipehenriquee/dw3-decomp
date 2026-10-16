@@ -3,7 +3,18 @@
 #include "WSTAG219_auto.h"
 #include "WSTAG219_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG219/nonmatchings/WSTAG219", func_800A5DE4);
+void func_800A5DE4(void *arg0) {
+    switch (M2C_FIELD(arg0, s32 *, 0xC)) {
+    case 0:
+    default:
+        M2C_FIELD(arg0, void (**)(void *), 0x38)(arg0);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A5E2C(s32 arg0) {
     void *temp_v0;

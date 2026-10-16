@@ -3,6 +3,11 @@
 #define WSTAG311_AUTO_H
 
 /* funcoes ja decompiladas */
+void *func_800A6DD0(s32 arg0);
+void func_800A750C(void);
+void func_800A7538(void);
+void func_800A7564(void);
+void func_800A7590(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_800143DC();

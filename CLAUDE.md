@@ -43,6 +43,8 @@ Caminho escolhido:
 - `tools/fn.py <alvo> <func> show|test|apply <arq.c>`: decompilação manual. No `apply`, `typedef`s do arquivo vão para o header, `extern` de dados para o `_data.h`.
 - `tools/propagate.py`, `tools/perm_setup.py`: ver acima.
 - Dados: prefira array (`extern s32 X[];`) a escalar `NOT_GP` — com escalar o gcc grava via `$at`, e o original usa registrador (arrays/structs).
+- Máquinas de estado: `switch (obj->state) { case 0: default: obj->fn38(obj); break; case 1: case 2: case 3: ...; }` — o `case 0:` explícito junto do `default` muda a árvore de comparações (`beqz` antes do `bltz`). A ordem dos `case` no fonte também muda o código.
+- A ordem dos comandos no fonte importa mesmo quando o escalonador move os `sw` (ex.: conversões `s16` de parâmetros aparecem onde o fonte usa o parâmetro primeiro).
 - Padrões aprendidos (GCC 2.8.1): retorno antecipado `if (x >= N) return -1;` costuma bater melhor; `return 1` compartilhado no fim em vez de `if/return 0/1` (senão vira `slt`/`xor`); campo de struct global acessado com offset na instrução pede ponteiro-base local (`u8 *p = D_X; *(s32 *)(p + off)`) ou struct; o tipo declarado de um símbolo muda o agendamento — valide com a declaração final.
 - `make split` apaga `build/` (inclusive `build/autodecomp/`).
 

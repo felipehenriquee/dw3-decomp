@@ -21,7 +21,18 @@ void func_800A7000(void) {
     func_80014504(func_800A6A44, 0x64, 0x14);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG220/nonmatchings/WSTAG220", func_800A702C);
+void func_800A702C(void *arg0) {
+    switch (M2C_FIELD(arg0, s32 *, 0xC)) {
+    case 0:
+    default:
+        M2C_FIELD(arg0, void (**)(void *), 0x38)(arg0);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A7074(s32 arg0) {
     void *temp_v0;

@@ -474,7 +474,32 @@ INCLUDE_ASM("asm/nonmatchings/main", func_8001491C);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80014930);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80014AA8);
+/* consulta assincrona do cartao de memoria, com contador de tentativas */
+s32 func_80014AA8(void) {
+    s32 cmd;
+    u32 result;
+    s32 r;
+    u8 *mc;
+
+    r = MemCardSync(1, &cmd, &result);
+    if (r != 1) {
+        return r;
+    }
+    mc = D_80048750;
+    *(s32 *)(mc + 0x90) = cmd;
+    *(s32 *)(mc + 0x94) = result;
+    if (result < 2 || result == 3) {
+        *(s32 *)(mc + 0x98) = 0;
+    } else {
+        if (++*(s32 *)(mc + 0x98) < *(s32 *)(mc + 0x9C)) {
+            *(s32 *)(mc + 0xA0) = r;
+            return 0;
+        }
+        *(s32 *)(mc + 0x98) = 0;
+        *(s32 *)(mc + 0xA0) = 0;
+    }
+    return r;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80014B44);
 
@@ -729,7 +754,19 @@ void func_80016E2C(s32 arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80016E6C);
+void func_80016E6C(void) {
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < 40; i++) {
+        func_80016E2C(D_8004B49C[i], 1);
+    }
+    for (j = 0; j < 3; j++) {
+        for (i = 0; i < 40; i++) {
+            ((Unk80048D34_63E *)(D_80048D34 + j * 0x66 + i * 2))->unk63E = D_8004B49C[i];
+        }
+    }
+}
 
 void func_80016F0C(void) {
     u8 *p = D_80048D34;
@@ -1504,7 +1541,29 @@ void func_8001C4B4(s32 arg0) {
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001C4EC);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001C7D8);
+void func_8001C7D8(u8 *arg0) {
+    switch (*(s32 *)(arg0 + 0xC)) {
+    case 0:
+    default:
+        *(s32 *)(arg0 + 0x68) = 0;
+        if (*(s32 *)(arg0 + 0xB8) == 0) {
+            *(s32 *)(arg0 + 0x60) = 0;
+        } else {
+            *(s32 *)(arg0 + 0x60) = 0x1000;
+        }
+        *(s32 *)(arg0 + 0x90) = 0;
+        *(s32 *)(arg0 + 0x88) = *(s16 *)(arg0 + 0x54);
+        *(s32 *)(arg0 + 0x8C) = *(s16 *)(arg0 + 0x56);
+        (*(void (**)(void *))(arg0 + 0x38))(arg0);
+        break;
+    case 1:
+        func_8001C4EC(arg0);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001C85C);
 
@@ -1633,7 +1692,17 @@ void func_8001DB84(s32 slot, s32 used, s32 id) {
     ((Unk8004DE10 *)D_8004DE10)->id[slot] = id;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001DBE0);
+s32 func_8001DBE0(s16 *rect, s32 arg1, s32 id) {
+    s32 env[0x5C / 4];
+    s32 i = func_8001DAD0(0);
+
+    if (i != -1) {
+        SetDefDrawEnv(env, rect[0], rect[1], rect[2], rect[3]);
+        ((Unk8004DE10 *)D_8004DE10)->id[i] = id;
+        return ((Unk8004DE10 *)D_8004DE10)->used[i] = func_8001E5BC(env, arg1);
+    }
+    return 0;
+}
 
 s32 func_8001DC7C(s32 id) {
     s32 i = func_8001DAD0(id);

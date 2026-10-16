@@ -5,15 +5,30 @@
 
 INCLUDE_ASM("asm/ovl/WSTAG400/nonmatchings/WSTAG400", func_800A5DE4);
 
-INCLUDE_ASM("asm/ovl/WSTAG400/nonmatchings/WSTAG400", func_800A5E8C);
+void *func_800A5E8C(s32 arg0) {
+    void *temp_v0;
 
-INCLUDE_ASM("asm/ovl/WSTAG400/nonmatchings/WSTAG400", func_800A5EE8);
+    temp_v0 = func_80014504(func_800A5DE4, 0x54, 4);
+    M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    ((M2C_UNK (*)()) *D_800A82A8)();
+    return temp_v0;
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG400/nonmatchings/WSTAG400", func_800A5F14);
+void func_800A5EE8(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x1C4B, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG400/nonmatchings/WSTAG400", func_800A5F40);
+void func_800A5F14(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x1C4C, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG400/nonmatchings/WSTAG400", func_800A5F6C);
+void func_800A5F40(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x1C4D, 1);
+}
+
+void func_800A5F6C(void) {
+    ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x1C4E, 1);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG400/nonmatchings/WSTAG400", func_800A5F98);
 

@@ -148,4 +148,9 @@ typedef struct {
     } work[6];
 } MsgWin;
 
+typedef struct {
+    u8 pad0[0x63E];
+    u16 unk63E;
+} Unk80048D34_63E;
+
 #endif /* MAIN_H */

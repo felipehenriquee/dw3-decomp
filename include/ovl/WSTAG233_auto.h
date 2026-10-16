@@ -3,6 +3,7 @@
 #define WSTAG233_AUTO_H
 
 /* funcoes ja decompiladas */
+void *func_800A605C(s32 arg0);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();
