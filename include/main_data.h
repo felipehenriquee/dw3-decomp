@@ -64,5 +64,6 @@ extern s32 D_80044B38[];
 extern HeapBlock *D_8004B5E0[];
 extern Block32 D_800812F8[];
 extern Block32 D_80081358[];
+extern s32 D_80044B24[];
 
 #endif /* MAIN_DATA_H */

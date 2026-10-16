@@ -140,4 +140,12 @@ typedef struct {
     s32 w[8];
 } Block32;
 
+/* janela de mensagem: trabalhos de 12 bytes a partir de 0x5C */
+typedef struct {
+    u8 pad0[0x5C];
+    struct {
+        u8 unk0[0xC];
+    } work[6];
+} MsgWin;
+
 #endif /* MAIN_H */

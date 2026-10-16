@@ -1,0 +1,26 @@
+/* Gerado por tools/gen_ctx.py WSTAG415: nao edite. Declare a mao em include/ovl/WSTAG415.h */
+#ifndef WSTAG415_AUTO_H
+#define WSTAG415_AUTO_H
+
+/* funcoes ja decompiladas */
+
+/* funcoes ainda em assembly (prototipo desconhecido) */
+s32 func_800143DC();
+s32 func_80014504();
+s32 func_8001F648();
+s32 func_8001FFA8();
+s32 func_800853F8();
+s32 func_800A5DF4();
+s32 func_800A5EE8();
+s32 func_800A5FA8();
+s32 func_800A645C();
+s32 func_800A6558();
+s32 func_800A6ACC();
+s32 func_800A6B04();
+s32 func_800A6C8C();
+s32 func_800A6EC0();
+s32 func_800A6EFC();
+
+/* dados acessados via $gp */
+
+#endif

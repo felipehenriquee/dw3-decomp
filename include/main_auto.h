@@ -4,6 +4,7 @@
 
 /* funcoes ja decompiladas */
 void func_80010F4C(void *arg0, s32 arg1);
+void func_8001104C(void);
 void func_80011DAC(s32 arg0);
 void func_80011DEC(void *arg0, s32 arg1, s32 arg2);
 void func_8001206C(s32 arg0);
@@ -103,6 +104,7 @@ void func_8001932C(s32 arg0);
 u16 func_8001933C(void);
 void func_800194C4(s32 arg0, s32 arg1);
 void func_800194E8(s32 arg0, s32 arg1, s32 arg2);
+void func_8001968C(MsgWin *arg0, s32 arg1, s32 arg2);
 void func_8001A180(void *arg0, s32 arg1);
 void func_8001A1B8(void *arg0, s32 arg1);
 void func_8001A1E8(void *arg0, s16 arg1, s16 arg2);
@@ -292,7 +294,6 @@ s32 VSync();
 s32 VSyncCallback();
 s32 __main();
 s32 func_80010FE0();
-s32 func_8001104C();
 s32 func_800110E0();
 s32 func_80011E74();
 s32 func_80011FB8();
@@ -336,7 +337,6 @@ s32 func_80019224();
 s32 func_80019370();
 s32 func_80019508();
 s32 func_800195B0();
-s32 func_8001968C();
 s32 func_800196E4();
 s32 func_800197A4();
 s32 func_80019FB0();

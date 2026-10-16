@@ -18,7 +18,25 @@ void func_80010F4C(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80010FE0);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001104C);
+void func_8001104C(void) {
+    s32 i;
+    s32 j;
+    s32 id;
+    u8 *p;
+    u8 *sys;
+
+    for (i = 0, sys = D_80048D34; i < 3; i++) {
+        id = (*(s32 (**)(s32))(sys + 0x2718))(i);
+        if (id >= 0) {
+            p = (*(u8 *(**)(s32))(sys + 0x2750))(id);
+            *(s16 *)(p + 0x20) = *(s16 *)(p + 0x22);
+            *(s16 *)(p + 0x24) = *(s16 *)(p + 0x26);
+            for (j = 2; j >= 0; j--) {
+                ((s16 *)(p + 0x42))[j] = 0;
+            }
+        }
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_800110E0);
 
@@ -159,7 +177,26 @@ s32 func_80013694(void) {
     return -1;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_800136F4);
+/* callback da leitura do CD (registrado por func_80013780) */
+void func_800136F4(s32 status) {
+    u8 *cd;
+    s32 n;
+
+    if (status == 1 && func_80013694() == 0) {
+        cd = (u8 *)&D_80044B04;
+        CdGetSector(*(s32 *)(cd + 0x24), 0x200);
+        *(s32 *)(cd + 0x24) += 0x800;
+        n = *(s32 *)(cd + 0x20) - 1;
+        *(s32 *)(cd + 0x20) = n;
+        if (n != 0) {
+            return;
+        }
+    } else {
+        D_80044B24[0] = -1;
+    }
+    func_8002E27C(0);
+    CdControlF(9, 0);
+}
 
 void func_80013780(s32 arg0)
 {
@@ -1116,7 +1153,14 @@ INCLUDE_ASM("asm/nonmatchings/main", func_80019508);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_800195B0);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001968C);
+void func_8001968C(MsgWin *arg0, s32 arg1, s32 arg2) {
+    if ((u32)(arg2 - 1) >= 5) {
+        /* "ＥｘｔＭｅｓｓ：メッセージのワークばんごうがみたいおう" */
+        func_800194C4(arg0, "\x82\x64\x82\x98\x82\x94\x82\x6C\x82\x85\x82\x93\x82\x93\x81\x46\x83\x81\x83\x62\x83\x5A\x81\x5B\x83\x57\x82\xCC\x83\x8F\x81\x5B\x83\x4E\x82\xCE\x82\xF1\x82\xB2\x82\xA4\x82\xAA\x82\xDD\x82\xBD\x82\xA2\x82\xA8\x82\xA4");
+        return;
+    }
+    func_80019370(arg0, &arg0->work[arg2], arg1);
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_800196E4);
 
