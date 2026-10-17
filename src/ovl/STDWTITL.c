@@ -43,7 +43,17 @@ void func_80083438(void) {
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083478);
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083500);
+/* posiciona o CD em pos e le em velocidade dupla ate conseguir */
+void func_80083500(s32 pos) {
+    u8 mode = 0x80;
+
+    do {
+        while (CdControl(2, pos, 0) == 0) {
+        }
+        while (CdControl(0xE, &mode, 0) == 0) {
+        }
+    } while (CdRead2(0x1E0) == 0);
+}
 
 void func_80083568(s32 arg0, M2C_UNK arg1) {
     func_8008714C(0);

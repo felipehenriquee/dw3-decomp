@@ -4,13 +4,13 @@
 
 /* funcoes ja decompiladas */
 Obj *func_80084410(void);
+void func_8008443C(s32 unused, s32 d, s32 *cur, s32 *top, s32 n);
 Obj *func_80084D48(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();
 s32 func_8001AE38();
 s32 func_80084370();
-s32 func_8008443C();
 s32 func_800844A8();
 s32 func_80084808();
 s32 func_800848BC();

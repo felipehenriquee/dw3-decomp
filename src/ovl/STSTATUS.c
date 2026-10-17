@@ -460,6 +460,8 @@ s32 func_8009A670(void) {
     return D_80048D68[0] >= 0x270;
 }
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8009A698);
+s32 func_8009A698(void) {
+    return D_8009B5FC[*(u8 *)D_80048D68] & 0x7F;
+}
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8009A6B8);

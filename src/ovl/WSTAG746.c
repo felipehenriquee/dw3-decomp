@@ -5,7 +5,9 @@
 
 INCLUDE_ASM("asm/ovl/WSTAG746/nonmatchings/WSTAG746", func_800A5DE0);
 
-INCLUDE_ASM("asm/ovl/WSTAG746/nonmatchings/WSTAG746", func_800A5FF4);
+u8 *func_800A5FF4(void) {
+    return func_800143DC(func_800A5DE0, 84, 0, 25);
+}
 
 s32 func_800A6024(void) {
     void *temp_v0;

@@ -3,6 +3,7 @@
 #define FIELDSTG_AUTO_H
 
 /* funcoes ja decompiladas */
+u8 *func_80083CD8(void);
 void func_80084124(void *arg0, s32 arg1);
 void func_80084804(void);
 void func_80084834(void);
@@ -38,6 +39,7 @@ void *func_80088CA0(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_80089490(s32 arg0, s32 arg1);
 void func_80089548(s32 arg0);
 void func_80089BA4(s32 arg0);
+u8 *func_8008B6A4(void);
 void func_8008B770(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void func_8008BFA4(s32 arg0);
 s32 func_8008C0F0(s32 arg0, s32 arg1);
@@ -161,7 +163,6 @@ s32 func_80089F7C();
 s32 func_8008A5E4();
 s32 func_8008A9B0();
 s32 func_8008AA10();
-s32 func_8008B6A4();
 s32 func_8008B6D4();
 s32 func_8008B798();
 s32 func_8008C078();

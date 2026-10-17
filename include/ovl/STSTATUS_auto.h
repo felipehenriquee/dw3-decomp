@@ -28,6 +28,7 @@ void func_80099D5C(void *arg0, s32 arg1);
 s32 func_80099DF0(Fade *f);
 s32 func_80099F5C(s32 arg0, s32 arg1);
 s32 func_8009A670(void);
+s32 func_8009A698(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_8001345C();

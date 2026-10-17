@@ -125,7 +125,24 @@ INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80085CD8);
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80085DA0);
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80085FDC);
+/* cria o objeto de func_80085DA0 com os 6 valores de v */
+Obj *func_80085FDC(s32 arg, s32 *v) {
+    u8 *o = (u8 *)func_80014504(func_80085DA0, 0xC4, 0);
+    s32 i = 0;
+    u8 *p = o;
+
+    *(void **)(o + 0xBC) = func_80085730;
+    *(void **)(o + 0xC0) = func_80085788;
+    *(s32 *)(o + 0x54) = 0x1000;
+    *(s32 *)(o + 0x58) = 6;
+    *(s32 *)(o + 0x50) = arg;
+    do {
+        i++;
+        *(s32 *)(p + 0x7C) = *v++;
+        p += 4;
+    } while (i < 6);
+    return (Obj *)o;
+}
 
 void func_80086074(void *arg0, void *arg1) {
     s32 temp_v0;

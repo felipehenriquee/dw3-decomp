@@ -3,6 +3,7 @@
 #define WFIGHTTS_AUTO_H
 
 /* funcoes ja decompiladas */
+u8 *func_800A7A60(void);
 void func_800A7FCC(s32 arg0, s32 *arg1);
 void func_800A8438(s32 arg0, s32 *arg1);
 void func_800A8760(s32 arg0);

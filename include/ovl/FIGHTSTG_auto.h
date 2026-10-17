@@ -32,6 +32,7 @@ void func_800914EC(s32 arg0, s32 arg1);
 void func_80091B54(s8 arg0);
 void func_80091B8C(void *arg0);
 void func_80091DAC(s32 arg0, s32 arg1);
+u8 *func_80092D50(void);
 void func_80092D80(s32 arg0);
 s32 func_80092DE4(void);
 void func_80093088(void *arg0, s32 arg1);

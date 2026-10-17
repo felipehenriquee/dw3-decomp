@@ -3,6 +3,7 @@
 #define WSTAG746_AUTO_H
 
 /* funcoes ja decompiladas */
+u8 *func_800A5FF4(void);
 s32 func_800A6024(void);
 s32 func_800A60A4(void);
 s32 func_800A6124(void);
@@ -17,7 +18,6 @@ s32 func_80014504();
 s32 func_8001F648();
 s32 func_800853F8();
 s32 func_800A5DE0();
-s32 func_800A5FF4();
 s32 func_800A61AC();
 s32 func_800A6434();
 s32 func_800A65E0();

@@ -9,7 +9,9 @@ INCLUDE_ASM("asm/ovl/WFIGHTTS/nonmatchings/WFIGHTTS", func_800A6A28);
 
 INCLUDE_ASM("asm/ovl/WFIGHTTS/nonmatchings/WFIGHTTS", func_800A6B90);
 
-INCLUDE_ASM("asm/ovl/WFIGHTTS/nonmatchings/WFIGHTTS", func_800A7A60);
+u8 *func_800A7A60(void) {
+    return func_800143DC(func_800A6B90, 0, 0, 0);
+}
 
 INCLUDE_ASM("asm/ovl/WFIGHTTS/nonmatchings/WFIGHTTS", func_800A7A90);
 

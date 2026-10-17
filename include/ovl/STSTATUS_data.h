@@ -11,5 +11,6 @@ extern s32 D_8009B5DC[];
 extern s32 D_80055C48[];
 extern u8 D_8004DE10[];
 extern s32 D_80048D68[];
+extern u8 D_8009B5FC[];
 
 #endif /* STSTATUS_DATA_H */

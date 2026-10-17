@@ -434,7 +434,9 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80092618);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80092684);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80092D50);
+u8 *func_80092D50(void) {
+    return func_800143DC(func_80092684, 108, 28, 14);
+}
 
 void func_80092D80(s32 arg0) {
     void *temp_v0;
