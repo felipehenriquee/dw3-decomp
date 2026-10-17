@@ -781,7 +781,29 @@ void func_800155D4(s32 arg0, s32 arg1, s32 arg2) {
     *temp_v0 &= ~temp_a0;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001561C);
+/* flag i ligada em alguma das duas tabelas de D_80048D34 (0x7C e 0x20F) */
+#define PFLAG(p, i) ((p)[0x7C + (i)] != 0 || (p)[0x20F + (i)] != 0)
+/* confere se todas as flags do conjunto set estao ligadas */
+s32 func_8001561C(s32 set) {
+    s32 r = 0;
+    s8 *p;
+
+    switch (set) {
+    case 0:
+        p = (s8 *)D_80048D34;
+        if (PFLAG(p, 7) && PFLAG(p, 0x59) && PFLAG(p, 0xA7)) {
+            r = 1;
+        }
+        break;
+    case 1:
+        p = (s8 *)D_80048D34;
+        if (PFLAG(p, 0x69) && PFLAG(p, 0x77) && PFLAG(p, 0x83) && PFLAG(p, 0x90) && PFLAG(p, 0x9C)) {
+            r = 1;
+        }
+        break;
+    }
+    return r;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80015754);
 
