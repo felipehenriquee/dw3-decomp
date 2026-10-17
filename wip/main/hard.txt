@@ -39,3 +39,4 @@
 8001BEEC 8001BEEC.c (cursor; s2/s3 trocados, 5 instr)
 8001FE38 8001FE38.c (RLEN; registradores src/dst trocados)
 8001C948 8001C948.c (move janela; registradores a0/a3 e xx/yy, 35 instr)
+800186E0 800186E0.c (vibracao; ordem dos registradores dos parametros)

@@ -625,7 +625,31 @@ INCLUDE_ASM("asm/nonmatchings/main", func_80014908);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001491C);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80014930);
+/* monta o cabecalho do save: titulo (ate 64 bytes SJIS), paleta e 1-3
+   quadros do icone */
+void func_80014930(char *title, Bytes32 *clut, s32 nicons, s32 *icons) {
+    McSave *mc;
+    s32 i;
+
+    if ((u32)(nicons - 1) >= 3) {
+        return;
+    }
+    if ((u32)strlen(title) > 64) {
+        return;
+    }
+    mc = (McSave *)D_80048750;
+    mc->nicons = nicons;
+    (*(void (**)(void *, s32))&D_8004B600)(mc->magic, 0x80);
+    mc->magic[0] = 'S';
+    mc->magic[1] = 'C';
+    mc->blocks = 4;
+    mc->type = (u8)mc->nicons | 0x10;
+    strcpy(mc->title, title);
+    mc->clut = *clut;
+    for (i = 0; i < ((McSave *)D_80048750)->nicons; i++) {
+        ((McSave *)D_80048750)->icon[i] = icons[i];
+    }
+}
 
 /* consulta assincrona do cartao de memoria, com contador de tentativas */
 s32 func_80014AA8(void) {
@@ -1741,7 +1765,44 @@ u16 func_8001933C(void) {
     return D_8004BC04[temp_v1];
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80019370);
+/* copia text para o buffer do trabalho e (realoca se nao couber) */
+void func_80019370(MsgWin *w, MsgWork *e, char *text) {
+    s16 cap;
+
+    if (text != NULL) {
+        e->len = strlen(text);
+        if (e->len == 0) {
+            ((u8 *)w)[0xC1] = 0;
+            return;
+        }
+        ((u8 *)w)[0xC1] = 1;
+        e->unkA = 1;
+        if (e->buf != NULL) {
+            if (e->cap <= e->len) {
+                (*(void (**)(u8 *))&D_8004B5EC)(e->buf);
+                e->buf = NULL;
+                e->cap = 0;
+            }
+        }
+        if (e->buf == NULL) {
+            if ((u16)e->len & 3) {
+                cap = ((u16)e->len & 0xFFFC) + 8;
+            } else {
+                cap = (u16)e->len + 4;
+            }
+            *(s16 *)((u8 *)e + 4) = cap;
+            e->buf = (*(u8 *(**)(s32, s32))&D_8004B5F4)(cap, 2);
+        }
+        (*(void (**)(u8 *, s32))&D_8004B600)(e->buf, e->cap);
+        memcpy(e->buf, text, e->len);
+    } else {
+        /* "Ｎｕｌｌメッセージがわたされました" */
+        func_80019370(w, e, "\x82\x6D\x82\x95\x82\x8C\x82\x8C\x83\x81\x83\x62\x83\x5A\x81\x5B\x83\x57\x82\xAA\x82\xED\x82\xBD\x82\xB3\x82\xEA\x82\xDC\x82\xB5\x82\xBD");
+    }
+    if (*(s16 *)((u8 *)w + 0xAA) == 0) {
+        func_8001A1B8(w, 0);
+    }
+}
 
 void func_800194C4(s32 arg0, s32 arg1) {
     func_80019370(arg0, arg0 + 0x5C, arg1);

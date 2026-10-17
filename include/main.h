@@ -143,13 +143,19 @@ typedef struct {
     s32 w[8];
 } Block32;
 
+/* texto de um trabalho da janela de mensagem */
+typedef struct {
+    u8 *buf;
+    s16 cap; /* tamanho alocado */
+    s16 len;
+    s16 pos; /* posicao de leitura */
+    s16 unkA;
+} MsgWork;
+
 /* janela de mensagem: trabalhos de 12 bytes a partir de 0x5C */
 typedef struct {
     u8 pad0[0x5C];
-    struct {
-        u8 unk0[0xA];
-        s16 unkA;
-    } work[6];
+    MsgWork work[6];
 } MsgWin;
 
 typedef struct {
@@ -212,5 +218,23 @@ typedef struct {
     u32 tag;
     u32 code[2];
 } DrMode;
+
+/* 32 bytes sem alinhamento (paleta do icone) */
+typedef struct {
+    u8 b[32];
+} Bytes32;
+
+/* save do cartao de memoria em D_80048750: cabecalho "SC" em 0x10 */
+typedef struct {
+    u8 pad0[0x10];
+    u8 magic[2];
+    u8 type;
+    u8 blocks;
+    char title[0x5C];
+    Bytes32 clut;
+    u8 pad90[0x314 - 0x90];
+    s32 nicons;
+    s32 icon[3];
+} McSave;
 
 #endif /* MAIN_H */
