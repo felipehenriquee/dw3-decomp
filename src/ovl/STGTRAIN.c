@@ -240,7 +240,12 @@ void func_80088100(void) {
 void func_80088108(void) {
 }
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80088110);
+/* prepara um contexto de desenho e o descarta (sobra de codigo) */
+void func_80088110(void) {
+    u8 g[0xA0];
+
+    func_8001F648(g);
+}
 
 void func_80088130(void) {
 }

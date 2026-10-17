@@ -453,7 +453,12 @@ INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8009A344);
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8009A3E8);
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8009A670);
+s32 func_8009A670(void) {
+    if (D_80048D68[0] >= 0x2D7) {
+        return -1;
+    }
+    return D_80048D68[0] >= 0x270;
+}
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8009A698);
 

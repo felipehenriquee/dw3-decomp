@@ -27,6 +27,7 @@ void func_80099684(void);
 void func_80099D5C(void *arg0, s32 arg1);
 s32 func_80099DF0(Fade *f);
 s32 func_80099F5C(s32 arg0, s32 arg1);
+s32 func_8009A670(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_8001345C();
@@ -123,7 +124,6 @@ s32 func_80099894();
 s32 func_80099A80();
 s32 func_80099FF8();
 s32 func_8009A1BC();
-s32 func_8009A670();
 
 /* dados acessados via $gp */
 

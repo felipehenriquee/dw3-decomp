@@ -36,7 +36,19 @@ void func_800A5DE4(MapPtOut *out, MapPtList **list, s32 x, s32 y) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG855/nonmatchings/WSTAG855", func_800A5EE4);
+void func_800A5EE4(u8 *o) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        func_800A5DE4(D_80099D94[0], D_800A623C, D_80048D34[0x22], D_80048D34[0x23]);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A5F50(s32 arg0) {
     void *temp_v0;

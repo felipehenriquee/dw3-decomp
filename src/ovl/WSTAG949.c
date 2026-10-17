@@ -9,7 +9,19 @@ Obj *func_800A5F38(void) {
     return func_80014504(func_800A5DE4, 0x50, 0);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG949/nonmatchings/WSTAG949", func_800A5F64);
+void func_800A5F64(u8 *o, Obj **out) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        *out = func_800A5F38();
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A5FC8(s32 arg0) {
     void *temp_v0;

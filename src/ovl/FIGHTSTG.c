@@ -552,7 +552,14 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800957B4);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800959B0);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80095E00);
+/* cria o objeto ligado a *p (marca -1 ate ele responder) */
+Obj *func_80095E00(s32 *p) {
+    Obj *o = func_80014504(func_800959B0, 0x390, 0x34);
+
+    o->unk50 = (s32)p;
+    *p = -1;
+    return o;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80095E40);
 
@@ -562,7 +569,14 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80096314);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800967A0);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80096E88);
+/* cria o objeto ligado a *p (marca -1 ate ele responder) */
+Obj *func_80096E88(s32 *p) {
+    Obj *o = func_80014504(func_800967A0, 0xD8, 0x40);
+
+    o->unk50 = (s32)p;
+    *p = -1;
+    return o;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80096EC8);
 
@@ -883,7 +897,13 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009E0CC);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009E428);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009E510);
+void func_8009E510(s32 v) {
+    u8 *p = D_800A4460;
+
+    *(s32 *)(p + 0xDC) = v;
+    *(s32 *)(p + 0xE0) = 0;
+    func_8009E428();
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009E53C);
 
