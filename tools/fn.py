@@ -182,10 +182,13 @@ def apply(name, fn, path):
     if ad.make_ok():
         print('integrada; make OK')
         return True
+    r = ad.run(['make', '-j%d' % os.cpu_count()])
+    err = [ln for ln in (r.stdout + r.stderr).splitlines()
+           if 'stdin:' in ln or 'FALHOU' in ln or 'refer' in ln or 'Erro' in ln]
     for f, c in zip(files, saved):
         open(f, 'w').write(c)
     r = ad.run(['make', '-j%d' % os.cpu_count()])
-    print('make falhou; revertido.\n' + (r.stdout + r.stderr)[-1500:])
+    print('make falhou; revertido.\n' + '\n'.join(err[:20]))
     return False
 
 

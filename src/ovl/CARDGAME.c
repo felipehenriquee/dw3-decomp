@@ -176,7 +176,20 @@ void func_80089EC8(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0x423) = 1;
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80089ED4);
+/* largura: 8 por item do maior dos dois contadores (minimo 3) + 14 */
+s32 func_80089ED4(u8 *o) {
+    s32 n;
+
+    if (o[0x72C] > o[0x79E]) {
+        n = o[0x72C];
+    } else {
+        n = o[0x79E];
+    }
+    if (n < 3) {
+        n = 3;
+    }
+    return n * 8 + 14;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80089F18);
 
@@ -187,8 +200,8 @@ void func_8008AD48(u8 *o, s32 unused, s32 v) {
     *(s8 *)(o + 0x423) = 1;
 }
 
-s32 func_8008AD58(void) {
-    return func_80089ED4();
+s32 func_8008AD58(u8 *o) {
+    return func_80089ED4(o);
 }
 
 s32 func_8008AD78(void) {
