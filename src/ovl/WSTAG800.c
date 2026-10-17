@@ -16,7 +16,9 @@ void func_800A6174(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG800/nonmatchings/WSTAG800", func_800A61C0);
+u8 *func_800A61C0(s32 arg0) {
+    return func_800143DC(func_800A5F00, 100, 0, arg0);
+}
 
 void func_800A61F0(void) {
     M2C_FIELD(func_80014504(func_800A5F00, 0x64, 0), s16 *, 0x52) = 1;
@@ -26,7 +28,9 @@ INCLUDE_ASM("asm/ovl/WSTAG800/nonmatchings/WSTAG800", func_800A6224);
 
 INCLUDE_ASM("asm/ovl/WSTAG800/nonmatchings/WSTAG800", func_800A6344);
 
-INCLUDE_ASM("asm/ovl/WSTAG800/nonmatchings/WSTAG800", func_800A6510);
+u8 *func_800A6510(s32 arg0) {
+    return func_800143DC(func_800A6344, 108, 0, arg0);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG800/nonmatchings/WSTAG800", func_800A6540);
 

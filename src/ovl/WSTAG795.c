@@ -16,7 +16,9 @@ void func_800A6180(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG795/nonmatchings/WSTAG795", func_800A61D0);
+u8 *func_800A61D0(s32 arg0) {
+    return func_800143DC(func_800A5F00, 104, 0, arg0);
+}
 
 void func_800A6200(void) {
     M2C_FIELD(func_80014504(func_800A5F00, 0x68, 0), s32 *, 0x54) = 1;

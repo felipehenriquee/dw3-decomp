@@ -13,7 +13,9 @@ INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A6130);
 
 INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A61C8);
 
-INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A635C);
+u8 *func_800A635C(s32 arg0) {
+    return func_800143DC(func_800A61C8, 84, 0, arg0);
+}
 
 s16 func_800A638C(s16 *st, s16 *tbl, s32 depth) {
     s16 *e = tbl + st[0] * 2;
@@ -97,7 +99,9 @@ INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A6DC4);
 
 INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A6F40);
 
-INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A6F8C);
+u8 *func_800A6F8C(s32 arg0) {
+    return func_800143DC(func_800A6DC4, 96, 16, arg0);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A6FBC);
 
@@ -111,7 +115,9 @@ void func_800A7450(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A749C);
+u8 *func_800A749C(s32 arg0) {
+    return func_800143DC(func_800A72B0, 120, 0, arg0);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A74CC);
 

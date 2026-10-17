@@ -82,7 +82,9 @@ INCLUDE_ASM("asm/ovl/WSTAG545/nonmatchings/WSTAG545", func_800A648C);
 
 INCLUDE_ASM("asm/ovl/WSTAG545/nonmatchings/WSTAG545", func_800A6780);
 
-INCLUDE_ASM("asm/ovl/WSTAG545/nonmatchings/WSTAG545", func_800A6894);
+u8 *func_800A6894(s32 arg0) {
+    return func_800143DC(func_800A648C, 96, 20, arg0);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG545/nonmatchings/WSTAG545", func_800A68C4);
 

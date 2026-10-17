@@ -3,6 +3,7 @@
 #define WSTAG620_AUTO_H
 
 /* funcoes ja decompiladas */
+u8 *func_800A6198(s32 arg0);
 void *func_800A6314(s32 arg0);
 void func_800A63BC(void);
 void func_800A6418(void);

@@ -37,7 +37,9 @@ void func_800A61A4(void) {
     M2C_FIELD(func_80014504(func_800A5F04, 0x6C, 0), s32 *, 0x50) = 1;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG785/nonmatchings/WSTAG785", func_800A61D8);
+u8 *func_800A61D8(s32 arg0) {
+    return func_800143DC(func_800A5F04, 108, 0, arg0);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG785/nonmatchings/WSTAG785", func_800A6208);
 

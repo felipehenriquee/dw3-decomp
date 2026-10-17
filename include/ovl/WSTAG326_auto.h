@@ -3,6 +3,7 @@
 #define WSTAG326_AUTO_H
 
 /* funcoes ja decompiladas */
+u8 *func_800A5F60(s32 arg0);
 void func_800A5F90(void *arg0, s32 arg1);
 void *func_800A6068(s32 arg0);
 

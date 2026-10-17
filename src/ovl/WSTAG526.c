@@ -11,7 +11,9 @@ void func_800A5FF0(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6028);
+u8 *func_800A6028(s32 arg0) {
+    return func_800143DC(func_800A5DE0, 80, 48, arg0);
+}
 
 s16 func_800A6058(s16 *st, s16 *tbl, s32 once, s32 depth) {
     s16 *e = tbl + st[2] * 2;
@@ -95,7 +97,9 @@ void func_800A67A4(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A67C0);
+u8 *func_800A67C0(s32 arg0) {
+    return func_800143DC(func_800A64FC, 100, 0, arg0);
+}
 
 Obj *func_800A67F0(void) {
     return func_80014504(func_800A64FC, 0x64, 0);
@@ -202,7 +206,9 @@ void func_800A734C(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A7368);
+u8 *func_800A7368(s32 arg0) {
+    return func_800143DC(func_800A6FB4, 136, 0, arg0);
+}
 
 void func_800A7398(s8 arg0, s8 arg1, s32 arg2) {
     void *temp_v0;

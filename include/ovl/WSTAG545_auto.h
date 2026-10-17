@@ -8,6 +8,7 @@ s16 func_800A60AC(s16 *st, s16 *tbl, s32 depth);
 void func_800A6304(void *arg0, s32 arg1);
 u8 *func_800A633C(s32 link);
 s16 func_800A636C(s16 *st, s16 *tbl, s32 once, s32 depth);
+u8 *func_800A6894(s32 arg0);
 void *func_800A6984(s32 arg0);
 void func_800A6A2C(void);
 

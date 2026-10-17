@@ -4,7 +4,8 @@ Uso: python3 -I tools/mkobj.py [alvo ...]
 
 Forma: carrega a0..a3 com constantes/enderecos e chama func_800143DC ou
 func_80014504 (eventualmente devolvendo o resultado). O C gerado e
-`u8 *func_X(void) { return func_800143DC(F, n, w, l); }`; a funcao e
+`u8 *func_X(...) { return func_800143DC(F, n, w, l); }` (argumentos
+constantes, enderecos ou parametros repassados); a funcao e
 compilada e comparada, e as que batem vao para o results.json com status
 'ok' (integre com tools/autodecomp.py <alvo> --apply).
 """
@@ -32,7 +33,7 @@ def parse(path):
         m = re.match(r'\s*/\* [0-9A-F]+ [0-9A-F]+ [0-9A-F]+ \*/\s*(\S+)\s*(.*)', ln)
         if m:
             ins.append((m.group(1), [a.strip() for a in m.group(2).split(',')] if m.group(2) else []))
-    regs = {'$zero': '0'}
+    regs = {'$zero': '0', '$a0': 'arg0', '$a1': 'arg1', '$a2': 'arg2', '$a3': 'arg3'}
     ctor = None
     for k, (op, a) in enumerate(ins):
         if op == 'jal':
@@ -97,7 +98,9 @@ def job(args):
     if not r:
         return t, f, None
     ctor, a = r
-    code = 'u8 *%s(void) {\n    return %s(%s);\n}\n' % (f, ctor, ', '.join(a))
+    used = [int(x[3:]) for x in a if x.startswith('arg')]
+    params = ', '.join('s32 arg%d' % i for i in range(max(used) + 1)) if used else 'void'
+    code = 'u8 *%s(%s) {\n    return %s(%s);\n}\n' % (f, params, ctor, ', '.join(a))
     d = os.path.join(R, 'build/mkobj', t)
     os.makedirs(d, exist_ok=True)
     c, o = os.path.join(d, f + '.c'), os.path.join(d, f + '.o')

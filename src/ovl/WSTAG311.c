@@ -65,7 +65,9 @@ INCLUDE_ASM("asm/ovl/WSTAG311/nonmatchings/WSTAG311", func_800A61D0);
 
 INCLUDE_ASM("asm/ovl/WSTAG311/nonmatchings/WSTAG311", func_800A6594);
 
-INCLUDE_ASM("asm/ovl/WSTAG311/nonmatchings/WSTAG311", func_800A6604);
+u8 *func_800A6604(s32 arg0) {
+    return func_800143DC(func_800A61D0, 132, 0, arg0);
+}
 
 Obj *func_800A6634(void) {
     return func_80014504(func_800A61D0, 0x84, 0);
@@ -103,7 +105,9 @@ INCLUDE_ASM("asm/ovl/WSTAG311/nonmatchings/WSTAG311", func_800A6780);
 
 INCLUDE_ASM("asm/ovl/WSTAG311/nonmatchings/WSTAG311", func_800A6B44);
 
-INCLUDE_ASM("asm/ovl/WSTAG311/nonmatchings/WSTAG311", func_800A6BB4);
+u8 *func_800A6BB4(s32 arg0) {
+    return func_800143DC(func_800A6780, 132, 0, arg0);
+}
 
 Obj *func_800A6BE4(void) {
     return func_80014504(func_800A6780, 0x84, 0);

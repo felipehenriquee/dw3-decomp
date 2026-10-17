@@ -6,8 +6,10 @@
 s16 func_800A5E40(s16 *st, s16 *tbl, s32 depth);
 Obj *func_800A6084(void);
 s16 func_800A60B0(s16 *st, s16 *tbl, s32 once, s32 depth);
+u8 *func_800A6604(s32 arg0);
 Obj *func_800A6634(void);
 s16 func_800A6660(s16 *st, s16 *tbl, s32 once, s32 depth);
+u8 *func_800A6BB4(s32 arg0);
 Obj *func_800A6BE4(void);
 void *func_800A6DD0(s32 arg0);
 s16 func_800A6E2C(s16 *st, s16 *tbl, s32 once, s32 depth);

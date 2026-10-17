@@ -3,6 +3,7 @@
 #define WSTAG625_AUTO_H
 
 /* funcoes ja decompiladas */
+u8 *func_800A614C(s32 arg0);
 void *func_800A6204(s32 arg0);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */

@@ -3,12 +3,15 @@
 #define WSTAG780_AUTO_H
 
 /* funcoes ja decompiladas */
+u8 *func_800A635C(s32 arg0);
 s16 func_800A638C(s16 *st, s16 *tbl, s32 depth);
 void func_800A6678(s32 arg0);
 Obj *func_800A6914(void);
 Obj *func_800A69D8(void);
 void func_800A6A04(void *arg0, void *arg1);
+u8 *func_800A6F8C(s32 arg0);
 void func_800A7450(void *arg0, s32 arg1);
+u8 *func_800A749C(s32 arg0);
 void *func_800A75B0(s32 arg0);
 void func_800A760C(void);
 void func_800A7618(void);
@@ -33,7 +36,6 @@ s32 func_800A6B4C();
 s32 func_800A6DC4();
 s32 func_800A6FBC();
 s32 func_800A72B0();
-s32 func_800A749C();
 s32 func_800A74CC();
 
 /* dados acessados via $gp */

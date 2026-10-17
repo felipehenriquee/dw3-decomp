@@ -5,7 +5,9 @@
 
 INCLUDE_ASM("asm/ovl/WSTAG326/nonmatchings/WSTAG326", func_800A5DE0);
 
-INCLUDE_ASM("asm/ovl/WSTAG326/nonmatchings/WSTAG326", func_800A5F60);
+u8 *func_800A5F60(s32 arg0) {
+    return func_800143DC(func_800A5DE0, 80, 0, arg0);
+}
 
 void func_800A5F90(void *arg0, s32 arg1) {
     if ((arg0 != NULL) && (arg1 == 0x35A)) {
