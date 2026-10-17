@@ -73,5 +73,9 @@ extern s32 D_8004B438[];
 extern s32 D_80055D30[];
 extern s32 D_80055C70[];
 extern s32 D_8004B444[];
+extern s32 D_80048C44[];
+extern s32 D_80048C6C[];
+extern s32 D_80048C8C[];
+extern s32 D_80048DA0[];
 
 #endif /* MAIN_DATA_H */

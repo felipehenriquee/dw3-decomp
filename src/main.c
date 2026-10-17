@@ -722,7 +722,36 @@ INCLUDE_ASM("asm/nonmatchings/main", func_8001561C);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80015754);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80015AAC);
+/* dinheiro (D_80048D34 + 0x6C): 0 = tem pelo menos, 1 = ganha, 2 = paga */
+s32 func_80015AAC(s32 op, s32 idx) {
+    s32 r = 0;
+    u8 *p;
+    s32 max;
+
+    switch (op) {
+    case 0:
+        if (D_80048C44[idx] <= D_80048DA0[0]) {
+            r = 1;
+        }
+        break;
+    case 1:
+        max = 9999999;
+        p = D_80048D34;
+        *(s32 *)(p + 0x6C) += D_80048C6C[idx];
+        if (*(s32 *)(p + 0x6C) > max) {
+            *(s32 *)(p + 0x6C) = max;
+        }
+        break;
+    case 2:
+        p = D_80048D34;
+        *(s32 *)(p + 0x6C) -= D_80048C8C[idx];
+        if (*(s32 *)(p + 0x6C) < 0) {
+            *(s32 *)(p + 0x6C) = 0;
+        }
+        break;
+    }
+    return r;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80015B9C);
 
@@ -1791,7 +1820,23 @@ Obj *func_8001BB88(s32 arg0) {
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001BBE8);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001BE00);
+Obj *func_8001BE00(s32 arg0, s32 arg1, s32 arg2) {
+    Obj *o = func_80014504(func_8001BBE8, 0x50, 8);
+    s32 *e = M2C_FIELD(o, s32 **, 0x24);
+    u8 *m;
+
+    e[0] = func_8001AE38((s16)arg0, 1, 0x12, 0xB0);
+    m = (u8 *)e[0];
+    (*(void (**)(void *, s32))(m + 0x160))(m, 3);
+    m = (u8 *)e[0];
+    (*(void (**)(void *, s32, s32))(m + 0x114))(m, arg1, arg2);
+    m = (u8 *)e[0];
+    (*(void (**)(void *, s32))(m + 0x144))(m, 0);
+    m = (u8 *)e[0];
+    (*(void (**)(void *, s32))(m + 0x130))(m, 6);
+    e[1] = func_8001BB88(arg0);
+    return o;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001BEEC);
 

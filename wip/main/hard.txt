@@ -25,3 +25,5 @@
 8001B554 8001B554.c (RLE; ordem addu/lw)
 8001FD50 8001FD50.c (TIM; 1 instr)
 80015FBC 80015FBC.c (booleano com desvios)
+8001C85C 8001C85C.c
+80017924 80017924.c (inventario)
