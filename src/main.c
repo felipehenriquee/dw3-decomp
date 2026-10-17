@@ -1053,7 +1053,60 @@ s32 func_80016124(s32 who, s32 ref) {
     return 0;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_800161D8);
+void func_800161D8(s32 item, s32 add)
+{
+  s8 *p;
+  s32 i;
+  u8 *q;
+  u8 *base;
+  if (add)
+  {
+    p = ((s8 *) D_80048D34) + item;
+    if ((++p[0x7C]) >= 100)
+    {
+      p[0x7C] = 99;
+    }
+    return;
+  }
+  p = ((s8 *) D_80048D34) + item;
+  if (p[0x7C] != 0)
+  {
+    if ((--p[0x7C]) < 0)
+    {
+      p[0x7C] = 0;
+    }
+    return;
+  }
+  if (p[0x20F] == 0)
+  {
+    return;
+  }
+  for (i = 0; i < 3; i++)
+  {
+    base = D_80048D34;
+    if (func_80016124((*((s32 (**)(s32)) (base + 0x2718)))(i), item))
+    {
+      goto found;
+    }
+  }
+
+  q = D_80048D34;
+  for (i = 0; i < 8; i++, q += 0x3DC)
+  {
+    base = q;
+    if (((*((s32 *) (base + 0x760))) >= 3) && func_80016124(i, item))
+    {
+      break;
+    }
+  }
+
+  found:
+  {
+    u8 *b = D_80048D34 + item;
+    b[0x20F]--;
+  }
+
+}
 
 void func_80016314(s32 arg0, s32 arg1) {
     u8 *p;
@@ -1818,7 +1871,24 @@ s32 func_8001902C(s32 port, s32 on) {
     return 0;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80019148);
+/* habilita os motores que o controle aceita (PadInfoAct) e alinha o buffer */
+s32 func_80019148(s32 port)
+{
+  s32 p = port & 0xFF;
+  s32 n = PadInfoAct(p, -1, 0);
+  s32 i;
+  s32 r;
+  for (i = 0; i < n; i++)
+  {
+    r = PadInfoAct(p, i, 2);
+    if (r != 0)
+    {
+      D_8004B7D0[(i + ((((u32) p) >> 4) * 6)) + 0x3C8] = r & 1;
+    }
+  }
+
+ do { return PadSetActAlign(port & 0xFF, D_8004BB98 + ((((u32) (port & 0xFF)) >> 4) * 6)); } while (0);
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80019224);
 
@@ -2297,7 +2367,60 @@ void func_8001B4CC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x6C) = M2C_FIELD(arg0, s32 *, 0x64);
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001B554);
+void func_8001B554(u8 *o)
+{
+  s32 total = 0;
+  u8 *src = *((u8 **) (o + 0x68));
+  u8 c = *src;
+  u8 *dst = *((u8 **) (o + 0x6C));
+  s32 stop = 0;
+  s32 n;
+  s32 i;
+  while (c != 0)
+  {
+    if (c & 0x80)
+    {
+      n = c & 0x7F;
+      src++;
+      for (i = 0; i < n; i++)
+      {
+        *(dst++) = *src;
+      }
+
+      src++;
+    }
+    else
+    {
+      n = *(src++);
+      for (i = 0; i < n; i++)
+      {
+        *(dst++) = *(src++);
+      }
+
+    }
+    if (o || src)
+    {
+      total += n;
+    }
+    else
+    {
+      total += n;
+    }
+    if (total >= (*((s32 *) (o + 0x70))))
+    {
+      stop = 1;
+      *((u8 **) (o + 0x68)) = src;
+      *((u8 **) (o + 0x6C)) = dst;
+      break;
+    }
+    c = *src;
+  }
+
+  if (stop == 0)
+  {
+    (*((void (**)(void *, s32)) (o + 0x2C)))(o, 0);
+  }
+}
 
 s32 func_8001B63C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x70) = 0x10000000;
