@@ -7,6 +7,8 @@ u8 *func_800A7A60(void);
 void func_800A7FCC(s32 arg0, s32 *arg1);
 void func_800A8438(s32 arg0, s32 *arg1);
 void func_800A8760(s32 arg0);
+u8 *func_800A8CE8(s32 arg0, s32 arg1);
+u8 *func_800A931C(s32 arg0, s32 arg1);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_800143DC();
@@ -31,9 +33,7 @@ s32 func_800A7A90();
 s32 func_800A8018();
 s32 func_800A8484();
 s32 func_800A8798();
-s32 func_800A8CE8();
 s32 func_800A8D34();
-s32 func_800A931C();
 
 /* dados acessados via $gp */
 

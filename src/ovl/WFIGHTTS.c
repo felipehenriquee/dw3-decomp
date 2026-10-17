@@ -43,10 +43,22 @@ void func_800A8760(s32 arg0) {
 
 INCLUDE_ASM("asm/ovl/WFIGHTTS/nonmatchings/WFIGHTTS", func_800A8798);
 
-INCLUDE_ASM("asm/ovl/WFIGHTTS/nonmatchings/WFIGHTTS", func_800A8CE8);
+u8 *func_800A8CE8(s32 arg0, s32 arg1) {
+    u8 *o = func_800143DC(func_800A8798, 600, 112, 65535);
+
+    *(s32 *)(o + 0x250) = arg0;
+    *(s32 *)(o + 0x254) = arg1;
+    return o;
+}
 
 INCLUDE_ASM("asm/ovl/WFIGHTTS/nonmatchings/WFIGHTTS", func_800A8D34);
 
-INCLUDE_ASM("asm/ovl/WFIGHTTS/nonmatchings/WFIGHTTS", func_800A931C);
+u8 *func_800A931C(s32 arg0, s32 arg1) {
+    u8 *o = func_800143DC(func_800A8D34, 256, 112, 65535);
+
+    *(s32 *)(o + 0xF8) = arg0;
+    *(s32 *)(o + 0xFC) = arg1;
+    return o;
+}
 
 INCLUDE_RODATA("asm/ovl/WFIGHTTS/nonmatchings/WFIGHTTS", D_800A5DF8);

@@ -98,7 +98,14 @@ u8 *func_800A6718(s32 x, s32 y, s32 p) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG820/nonmatchings/WSTAG820", func_800A6774);
+u8 *func_800A6774(s32 arg0) {
+    u8 *o = func_800143DC(func_800A6488, 108, 0, arg0);
+
+    *(s32 *)(o + 0x54) = 460;
+    *(s32 *)(o + 0x58) = 436;
+    *(s32 *)(o + 0x50) = 60;
+    return o;
+}
 
 void func_800A67BC(void *arg0, s32 arg1) {
     if ((arg0 != NULL) && (arg1 == 0x335)) {

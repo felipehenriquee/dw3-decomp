@@ -50,21 +50,34 @@ def parse(path):
             continue
         if op == 'sw' and a[0] == '$ra':
             continue
+        if op == 'sw' and a[1].endswith('($sp)'):
+            continue
         if not step(regs, op, a):
             return None
     if not ctor:
         return None
-    rest = [i for i in ins[k + 2:]]
-    for op, a in rest:
-        if not (op in ('lw', 'nop', 'jr') or (op == 'addiu' and a[0] == '$sp')):
-            return None
+    # depois da chamada: so gravacoes no objeto (v0) de constantes ou de
+    # parametros guardados, e o epilogo
+    post = []
+    live = {r: v for r, v in regs.items() if r.startswith('$s')}
+    for op, a in ins[k + 2:]:
+        if op in ('lw', 'nop', 'jr') or (op == 'addiu' and a[0] == '$sp'):
+            continue
+        if op == 'addiu' and a[1] == '$zero':
+            live[a[0]] = str(int(a[2], 0))
+            continue
+        m = re.match(r'(-?0x[0-9A-Fa-f]+|\d+)\(\$v0\)$', a[1]) if op in ('sw', 'sh', 'sb') else None
+        if m and a[0] in live:
+            post.append((op, int(m.group(1), 0), live[a[0]]))
+            continue
+        return None
     n = CTORS[ctor]
     args = []
     for r in ('$a0', '$a1', '$a2', '$a3')[:n]:
         if r not in regs:
             return None
         args.append(regs[r])
-    return ctor, args
+    return ctor, args, post
 
 
 def step(regs, op, a):
@@ -97,10 +110,17 @@ def job(args):
     r = parse(p)
     if not r:
         return t, f, None
-    ctor, a = r
-    used = [int(x[3:]) for x in a if x.startswith('arg')]
+    ctor, a, post = r
+    used = [int(x[3:]) for x in a + [v for _, _, v in post] if x.startswith('arg')]
     params = ', '.join('s32 arg%d' % i for i in range(max(used) + 1)) if used else 'void'
-    code = 'u8 *%s(%s) {\n    return %s(%s);\n}\n' % (f, params, ctor, ', '.join(a))
+    if post:
+        ty = {'sw': 's32', 'sh': 's16', 'sb': 's8'}
+        body = '    u8 *o = %s(%s);\n\n' % (ctor, ', '.join(a))
+        body += ''.join('    *(%s *)(o + 0x%X) = %s;\n' % (ty[op], off, v)
+                        for op, off, v in post)
+        code = 'u8 *%s(%s) {\n%s    return o;\n}\n' % (f, params, body)
+    else:
+        code = 'u8 *%s(%s) {\n    return %s(%s);\n}\n' % (f, params, ctor, ', '.join(a))
     d = os.path.join(R, 'build/mkobj', t)
     os.makedirs(d, exist_ok=True)
     c, o = os.path.join(d, f + '.c'), os.path.join(d, f + '.o')
