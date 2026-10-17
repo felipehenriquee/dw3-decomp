@@ -25,6 +25,12 @@ void *func_800A5E28(s32 arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG366/nonmatchings/WSTAG366", func_800A5E84);
+extern struct opaque D_80048ABC;
+void func_800A5E84(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x401D, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x818C, 1);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG366/nonmatchings/WSTAG366", func_800A5ED0);

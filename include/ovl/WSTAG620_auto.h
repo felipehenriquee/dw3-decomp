@@ -5,7 +5,9 @@
 /* funcoes ja decompiladas */
 u8 *func_800A6198(s32 arg0);
 void *func_800A6314(s32 arg0);
+void func_800A6370(void);
 void func_800A63BC(void);
+void func_800A63CC(void);
 void func_800A6418(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */

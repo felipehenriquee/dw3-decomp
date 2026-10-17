@@ -4,6 +4,7 @@
 
 /* funcoes ja decompiladas */
 void *func_800A5E64(s32 arg0);
+void func_800A5EC0(void);
 s16 func_800A6000(s16 *st, s16 *tbl, s32 depth);
 void func_800A60D8(u8 *o);
 u8 *func_800A639C(s32 arg0);

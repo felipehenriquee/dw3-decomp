@@ -14,9 +14,21 @@ void *func_800A5F1C(s32 arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG421/nonmatchings/WSTAG421", func_800A5F78);
+extern struct opaque D_80048ABC;
+void func_800A5F78(void) {
+    u8 *f = (u8 *)&D_80048ABC;
 
-INCLUDE_ASM("asm/ovl/WSTAG421/nonmatchings/WSTAG421", func_800A5FC4);
+    (*(void (**)(s32, s32))(f + 0xC))(0x40A3, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x7400, 1);
+}
+
+extern struct opaque D_80048ABC;
+void func_800A5FC4(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x8016, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x40A7, 1);
+}
 
 void func_800A6010(void) {
     *D_8004B370 = 0x1C;

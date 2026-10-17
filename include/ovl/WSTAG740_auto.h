@@ -6,6 +6,8 @@
 Obj *func_800A606C(void);
 void *func_800A6138(s32 arg0);
 void func_800A64BC(s32 arg0, s32 arg1);
+void func_800A6504(void);
+void func_800A6550(void);
 void func_800A659C(void);
 void func_800A65C8(void);
 void func_800A65F4(void);

@@ -8,6 +8,7 @@ void func_800A5EBC(u8 *o);
 u8 *func_800A61FC(s32 link);
 void *func_800A63DC(s32 arg0);
 void func_800A6438(void);
+void func_800A6448(void);
 void func_800A6494(void);
 void func_800A64A4(void);
 

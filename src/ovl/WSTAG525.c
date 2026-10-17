@@ -18,8 +18,20 @@ void func_800A5EDC(void) {
     ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x4003, 1);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG525/nonmatchings/WSTAG525", func_800A5F08);
+extern struct opaque D_80048ABC;
+void func_800A5F08(void) {
+    u8 *f = (u8 *)&D_80048ABC;
 
-INCLUDE_ASM("asm/ovl/WSTAG525/nonmatchings/WSTAG525", func_800A5F54);
+    (*(void (**)(s32, s32))(f + 0xC))(0x402B, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x7400, 1);
+}
+
+extern struct opaque D_80048ABC;
+void func_800A5F54(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x402C, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8013, 1);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG525/nonmatchings/WSTAG525", func_800A5FA0);

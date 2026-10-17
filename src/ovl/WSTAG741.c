@@ -34,9 +34,21 @@ void func_800A64BC(s32 arg0, s32 arg1) {
     M2C_FIELD(temp_v0, s32 *, 0x58) = arg1;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A6504);
+extern struct opaque D_80048ABC;
+void func_800A6504(void) {
+    u8 *f = (u8 *)&D_80048ABC;
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A6550);
+    (*(void (**)(s32, s32))(f + 0xC))(0x4084, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x7400, 1);
+}
+
+extern struct opaque D_80048ABC;
+void func_800A6550(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x4085, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8233, 1);
+}
 
 void func_800A659C(void) {
     ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x40BA, 1);

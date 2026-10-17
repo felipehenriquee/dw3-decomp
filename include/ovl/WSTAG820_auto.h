@@ -10,6 +10,7 @@ s32 func_800A63C4(s32 x, s32 y, s32 w, s32 h);
 u8 *func_800A6718(s32 x, s32 y, s32 p);
 u8 *func_800A6774(s32 arg0);
 void func_800A67BC(void *arg0, s32 arg1);
+void func_800A67F4(void);
 void func_800A6840(void);
 void func_800A686C(void);
 

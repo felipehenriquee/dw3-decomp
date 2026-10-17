@@ -6,6 +6,8 @@
 s16 func_800A5DE0(s16 *st, s16 *tbl, s32 depth);
 Obj *func_800A5FA8(void);
 void *func_800A6098(s32 arg0);
+void func_800A60F4(void);
+void func_800A6140(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();

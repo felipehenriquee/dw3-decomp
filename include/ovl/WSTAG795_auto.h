@@ -9,6 +9,7 @@ void func_800A6200(void);
 Obj *func_800A654C(void);
 void *func_800A6654(s32 arg0);
 void func_800A66B0(void);
+void func_800A66DC(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_800143DC();

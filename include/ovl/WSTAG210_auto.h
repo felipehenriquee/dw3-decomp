@@ -7,6 +7,7 @@ Obj *func_800A67E0(void);
 Obj *func_800A6DC8(void);
 Obj *func_800A73B0(void);
 void *func_800A74A4(s32 arg0);
+void func_800A7500(void);
 void func_800A754C(void);
 void func_800A76EC(void *arg0, s32 arg1);
 s32 func_800A7780(Fade *f);

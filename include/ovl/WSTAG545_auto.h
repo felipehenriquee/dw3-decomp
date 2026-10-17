@@ -10,6 +10,7 @@ u8 *func_800A633C(s32 link);
 s16 func_800A636C(s16 *st, s16 *tbl, s32 once, s32 depth);
 u8 *func_800A6894(s32 arg0);
 void *func_800A6984(s32 arg0);
+void func_800A69E0(void);
 void func_800A6A2C(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */

@@ -109,10 +109,28 @@ u8 *func_800A6F84(s32 x, s32 y, s32 p) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG800/nonmatchings/WSTAG800", func_800A6FE0);
+extern struct opaque D_80048ABC;
+void func_800A6FE0(void) {
+    u8 *f = (u8 *)&D_80048ABC;
 
-INCLUDE_ASM("asm/ovl/WSTAG800/nonmatchings/WSTAG800", func_800A702C);
+    (*(void (**)(s32, s32))(f + 0xC))(0x1C0A, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x4061, 1);
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG800/nonmatchings/WSTAG800", func_800A7078);
+extern struct opaque D_80048ABC;
+void func_800A702C(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x4044, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x7400, 1);
+}
+
+extern struct opaque D_80048ABC;
+void func_800A7078(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x4045, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x84CB, 1);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG800/nonmatchings/WSTAG800", func_800A70C4);

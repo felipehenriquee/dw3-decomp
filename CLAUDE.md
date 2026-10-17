@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-10-17): EXE **273 de 347** (79%); overlays **1503 de 3292** (45,7%). Total **1776 de 3639 (48,8%)**.
+- [ ] Decompilação (2026-10-17): EXE **273 de 347** (79%); overlays **1612 de 3292** (49,0%). Total **1885 de 3639 (51,8%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -106,7 +106,7 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 ## Próximos passos
 1. **Permuter em segundo plano** (`tools/perm_batch.sh 1200 6`, log em `build/perm/batch3.log`) pode estar rodando: só escreve em `build/perm/`, não mexe nos fontes. Ao terminar, veja `build/perm/zero.txt` e as pastas `output-0-*`; revise o C (tirar `new_var`, casts estranhos) e integre com `tools/fn.py`. Lista das difíceis do EXE: `wip/main/hard.txt`.
 2. **Overlays, das menores para as maiores** (rendeu muito em 2026-10-17): liste as pendentes por tamanho (ver script em `build/w/` ou refaça: contar linhas `/* ` no `.s`), escreva o C com `tools/fn.py <alvo> <func> show/test/apply` e rode `tools/propagate.py` de tempos em tempos (leva o C para as cópias idênticas em outros overlays).
-3. Ferramentas novas: `tools/mkobj.py` (funções que só criam objeto com `func_800143DC`/`func_80014504`), `tools/nearfix.py` (quase-certas do autodecomp: base local, parâmetros pulados), `tools/stmtperm.py` (testa a ordem das instruções simples).
+3. Geradores por forma: `tools/twocall.py` (duas chamadas `D_80048ABC.fn(K, n)`, 97 funções nos WSTAG); vale procurar outras formas repetidas com constantes diferentes (o `propagate.py` só junta formas idênticas). Ferramentas novas: `tools/mkobj.py` (funções que só criam objeto com `func_800143DC`/`func_80014504`), `tools/nearfix.py` (quase-certas do autodecomp: base local, parâmetros pulados), `tools/stmtperm.py` (testa a ordem das instruções simples).
 4. `STDWTITL` a partir de ~0x87300 não preenche delay slots (outra versão de ASPSX/biblioteca?) — investigar antes de decompilar ali.
 5. `func_8001A2AC` do EXE (`wip/main/8001A2AC.c`) bate, mas integrada desloca a rodata em 8 bytes (alinhamento da jtbl gerada pelo C).
 6. Corrigir a divisão do splat em `func_800148C0` (`make split` apaga `build/` — fazer quando nada estiver rodando).

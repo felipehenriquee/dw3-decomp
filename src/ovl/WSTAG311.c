@@ -187,7 +187,13 @@ INCLUDE_ASM("asm/ovl/WSTAG311/nonmatchings/WSTAG311", func_800A73E4);
 
 INCLUDE_ASM("asm/ovl/WSTAG311/nonmatchings/WSTAG311", func_800A7460);
 
-INCLUDE_ASM("asm/ovl/WSTAG311/nonmatchings/WSTAG311", func_800A74C0);
+extern struct opaque D_80048ABC;
+void func_800A74C0(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x4067, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x7400, 1);
+}
 
 void func_800A750C(void) {
     ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) *D_80048AC8)(0x405F, 1);
