@@ -81,7 +81,15 @@ void func_8008327C(u8 *a) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80083330);
+Obj *func_80083330(void) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_8008327C, 0x68, 0);
+    M2C_FIELD(temp_v0, s32 (**)(), 0x64) = func_800830B0;
+    M2C_FIELD(temp_v0, s32 *, 0x50) = 0x1000;
+    M2C_FIELD(temp_v0, s32 *, 0x54) = 6;
+    return temp_v0;
+}
 
 void func_80083378(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = 1;

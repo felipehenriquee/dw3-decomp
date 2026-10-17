@@ -3,7 +3,33 @@
 #include "STGDGLAB_auto.h"
 #include "STGDGLAB_data.h"
 
-INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_80082F48);
+void func_80082F48(u8 *o, Obj **out) {
+    s16 r[4];
+    u8 *sys;
+    u8 *bg;
+
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        sys = D_8004DE10;
+        (*(void (**)(void))(sys + 0x150))();
+        (*(void (**)(s32))(sys + 0x154))(0xF000);
+        (*(void (**)(s32, s32, s32, s32))(sys + 0x174))(0x140, 0xF0, 0, 0);
+        r[0] = 0;
+        r[1] = 0;
+        r[2] = 0x140;
+        r[3] = 0xF0;
+        bg = (*(u8 *(**)(s16 *, s32, s32))(sys + 0x16C))(r, 3, 0x1000);
+        (*(void (**)(u8 *, s32, s32, s32))(bg + 0x12C))(bg, 0, 0, 0);
+        *out = func_8008EFD0();
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80083040(void) {
     return func_80014504(func_80082F48, 0x50, 4);

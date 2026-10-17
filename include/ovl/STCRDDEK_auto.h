@@ -3,6 +3,7 @@
 #define STCRDDEK_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800831F0(u8 *o, Obj **out);
 Obj *func_800832E8(void);
 void func_80083314(void *arg0, s32 arg1, s32 arg2);
 void func_8008339C(u8 *obj);
@@ -36,7 +37,6 @@ s32 func_8001EBF8();
 s32 func_8001F648();
 s32 func_8001FCC0();
 s32 func_8001FFA8();
-s32 func_800831F0();
 s32 func_800835D8();
 s32 func_800837B4();
 s32 func_800838C4();

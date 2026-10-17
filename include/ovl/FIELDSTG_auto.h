@@ -87,6 +87,8 @@ u8 func_800920F8(s32 arg0);
 u8 *func_800921E4(u8 *e, s32 id);
 s32 func_80092214(void);
 u8 *func_80092244(s32 id);
+void func_80092304(s32 id, s32 *count);
+void func_80092350(s32 id, s32 *count);
 void func_80092408(void);
 s32 *func_8009243C(s32 id);
 s32 func_80092484(s32 arg0);

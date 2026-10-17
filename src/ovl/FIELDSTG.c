@@ -764,9 +764,21 @@ u8 *func_80092244(s32 id) {
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092274);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092304);
+void func_80092304(s32 id, s32 *count) {
+    u8 *o = func_80092244(id);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092350);
+    if ((*(s32 (**)(u8 *))(o + 0x138))(o) != 0) {
+        (*count)++;
+    }
+}
+
+void func_80092350(s32 id, s32 *count) {
+    u8 *o = func_80092244(id);
+
+    if ((*(s32 (**)(u8 *))(o + 0x140))(o) == 0) {
+        (*count)++;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8009239C);
 

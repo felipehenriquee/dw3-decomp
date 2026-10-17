@@ -197,7 +197,17 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008966C);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008970C);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800897F8);
+s32 func_800897F8(s32 id) {
+    s32 *e = D_800A2550;
+
+    while (e[0] != 0) {
+        if (e[0] == id) {
+            return ((s16 *)e)[3];
+        }
+        e += 3;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80089844);
 
