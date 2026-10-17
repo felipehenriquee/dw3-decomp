@@ -9,5 +9,6 @@ extern s32 D_80055C48 NOT_GP;
 extern u8 D_800A58C4[];
 extern u16 D_800A5B14[];
 extern s32 D_80055C54[];
+extern u8 D_800A5D5C[];
 
 #endif /* CARDGAME_DATA_H */

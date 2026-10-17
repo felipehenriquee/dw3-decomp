@@ -893,9 +893,21 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009D4B8);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009D61C);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009D72C);
+void func_8009D72C(void) {
+    u8 *d = D_800A43F4;
+    Rec18 *r = &D_80042BCA[*(s32 *)(d + 0x24)];
+    u8 v = r->b[0xA];
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009D768);
+    d[v + 0x38] = v;
+}
+
+void func_8009D768(void) {
+    u8 *d = D_800A43F4;
+    Rec18 *r = &D_80042BCA[*(s32 *)(d + 0x24)];
+    u8 v = r->b[0xA];
+
+    d[v + 0x38] = v;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009D7A4);
 

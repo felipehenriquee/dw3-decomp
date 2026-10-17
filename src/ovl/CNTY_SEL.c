@@ -9,7 +9,13 @@ INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80082E8C);
 
 INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80082EF0);
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80082FC4);
+/* n (0-29) para 0-254; 30 ou mais da 0xFF */
+s32 func_80082FC4(s32 n) {
+    if (n >= 30) {
+        return 0xFF;
+    }
+    return n * 255 / 30;
+}
 
 INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083000);
 

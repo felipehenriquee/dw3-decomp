@@ -9,5 +9,9 @@ extern s32 D_8004B370[];
 extern s32 D_800A8CE4[];
 extern struct opaque D_8004DF8C;
 extern struct opaque D_8004DF9C;
+extern u16 D_800A8392[];
+extern u16 D_800A83C6[];
+extern u16 D_800A849E[];
+extern u16 D_800A84D2[];
 
 #endif /* WSTAG310_DATA_H */

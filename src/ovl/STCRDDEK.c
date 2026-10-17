@@ -134,7 +134,16 @@ void func_8008660C(s32 arg0, s32 arg1) {
 void func_80086664(void) {
 }
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_8008666C);
+void func_8008666C(u8 *o) {
+    struct {
+        u8 pad0[0x7C];
+        void (*fn7C)(s32, s32);
+        u8 pad80[0xA0 - 0x80];
+    } g;
+
+    func_8001F648(&g);
+    g.fn7C(*(s32 *)(o + 0x54), *(s32 *)(o + 0x58));
+}
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800866A8);
 

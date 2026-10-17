@@ -3,6 +3,7 @@
 #define CNTY_SEL_AUTO_H
 
 /* funcoes ja decompiladas */
+s32 func_80082FC4(s32 n);
 Obj *func_800832D8(void);
 void func_80083474(void *arg0, s16 arg1);
 void func_80083594(void);
@@ -20,7 +21,6 @@ s32 func_8001F648();
 s32 func_8001FFA8();
 s32 func_80082CE8();
 s32 func_80082EF0();
-s32 func_80082FC4();
 s32 func_80083000();
 s32 func_80083184();
 s32 func_80083304();

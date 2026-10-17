@@ -267,4 +267,25 @@ typedef struct {
     u8 b[18];
 } Rec18;
 
+/* slot de 200 bytes da CARDGAME (a partir de 0x5A2) */
+typedef struct {
+    s16 v0;
+    s16 v1;
+    s16 v2;
+    u8 pad6[200 - 6];
+} CardSlot;
+
+typedef struct {
+    u8 pad0[0x422];
+    u8 unk422;
+    u8 pad423;
+    s32 unk424;
+    s32 unk428;
+    s32 unk42C;
+    s32 unk430;
+    s32 unk434;
+    u8 pad438[0x5A2 - 0x438];
+    CardSlot slot[1];
+} CardGame;
+
 #endif /* TYPES_H */

@@ -5,7 +5,13 @@
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80083E34);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80083F48);
+void func_80083F48(u8 *o, s32 unused, s32 v, s32 add) {
+    u8 *e = o + (((s8 *)o)[0x575] - 1) * 8;
+
+    if (e[0x584] == v) {
+        *(u16 *)(o + 0x4E0) += add;
+    }
+}
 
 void func_80083F84(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     u8 *base0;
@@ -315,7 +321,13 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008EC44);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008EEC8);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008F0B4);
+void func_8008F0B4(CardGame *g, s32 unused, s32 k) {
+    g->unk422 = 1;
+    g->unk424 = 0;
+    g->unk428 = g->slot[k].v2;
+    g->unk42C = g->slot[k].v0;
+    g->unk430 = 0;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008F0F4);
 
@@ -342,7 +354,14 @@ void func_8008F750(void *arg0, void *arg1) {
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008F790);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008F948);
+s32 func_8008F948(u8 *o) {
+    u8 *e = o + (((s8 *)o)[0x575] - 1) * 8;
+    s32 v = *(s16 *)(e + 0x580);
+
+    o[0x305]++;
+    o[0x304] = v + 1;
+    return 1;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008F978);
 
@@ -352,7 +371,13 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008FF08);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80090058);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009076C);
+void func_8009076C(CardGame *g, s32 unused, s32 k) {
+    g->unk424 = 0;
+    g->unk434 = 0;
+    g->unk428 = g->slot[k].v0;
+    g->unk42C = g->slot[k].v1;
+    g->unk422 = 1;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800907AC);
 
@@ -1307,7 +1332,15 @@ void func_800A1A5C(void *arg0, M2C_UNK arg1) {
     func_8009D9E4(arg0, arg1);
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800A1AF8);
+void func_800A1AF8(u8 *o) {
+    u8 *t = D_800A5D5C;
+    u8 *e;
+
+    o[0x2F4] = 1;
+    e = t + o[0x2F6] * 4;
+    o[0x421] = e[0];
+    o[0x2F7] = e[2];
+}
 
 void func_800A1B2C(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0x5AD) = 0;
