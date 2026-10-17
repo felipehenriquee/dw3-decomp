@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-10-16): EXE **236 de 347** (68%); overlays **1036 de 3292** (31,5%; `W*` 710 de 1646). Total **1272 de 3639 (35,0%)**.
+- [ ] Decompilação (2026-10-17): EXE **266 de 347** (77%); overlays **1169 de 3292** (35,5%; `W*` 710 de 1646). Total **1435 de 3639 (39,4%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -104,13 +104,21 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 - A comparação com decomp.me não foi necessária: tudo foi feito localmente com `tools/cc.sh` + `tools/cc_cmp.py`.
 
 ## Próximos passos
-1. Retomar o reteste dos overlays não-`W` (parou em 500 de 1229; os resultados ficam salvos e o `--run r2` pula o que já foi testado):
-   `python3 -I tools/autodecomp_reps.py --retest --run r2 C F S > build/reps2.log 2>&1` (em segundo plano, ~1-2 h; no fim integra e propaga sozinho).
-2. Depois, rodar de novo os `W*` com o código novo: `python3 -I tools/autodecomp_reps.py --retest --run r3 W`.
-3. Permuter nas difíceis: os diretórios estão em `build/perm/` (EXE; lista e arquivos em `wip/main/hard.txt`). `tools/perm_batch.sh 240 4`; revisar o C antes de integrar.
-4. Corrigir a divisão do splat em `func_800148C0` (os `case`s `func_80014908`/`func_8001491C` viraram funções). Exige `make split`, que apaga `build/` — fazer quando nada estiver rodando.
-5. **Revisão semântica para o port**: `tools/audit_args.py` (chamadas diretas; zerado no EXE). Chamadas indiretas ainda não são auditadas.
-6. Jobs em segundo plano: parar com `tools/stop_jobs.sh` (pega a trava antes de matar) e commitar com `tools/commit_locked.sh "msg"`. Não use `pkill -f` com padrões que aparecem na própria linha de comando.
+1. Retomar o reteste dos `W*` (parou em ~550 de 718; os resultados ficam salvos e o `--run r3` pula o que já foi testado; no fim integra e propaga sozinho):
+   `python3 -I tools/autodecomp_reps.py --retest --run r3 W > build/reps3.log 2>&1` (em segundo plano). O r2 (C/F/S) já terminou e foi integrado.
+2. Permuter nas difíceis do EXE (rodar com a CPU livre, sem o reteste rodando): lista e arquivos em `wip/main/hard.txt`; `tools/perm_setup.py main func_X wip/main/X.c` cria o diretório em `build/perm/` (alguns já criados), depois `tools/perm_batch.sh 240 4`. Revisar o C antes de integrar.
+3. `func_8001A2AC` (`wip/main/8001A2AC.c`) **bate** na comparação, mas o `make` falha: a jump table `jtbl_80010274` tem `INCLUDE_RODATA` próprio — ver se basta remover a linha ou se a ordem da rodata impede (aí usar `extern`, como a `D_80010234` da `func_8001AA10`).
+4. Continuar o EXE à mão (~45 fora da lista difícil, de 90 a 870 instruções).
+5. Corrigir a divisão do splat em `func_800148C0` (os `case`s `func_80014908`/`func_8001491C` viraram funções). Exige `make split`, que apaga `build/` — fazer quando nada estiver rodando.
+6. **Revisão semântica para o port**: `tools/audit_args.py` (chamadas diretas; zerado no EXE). Chamadas indiretas ainda não são auditadas.
+7. Jobs em segundo plano: parar com `tools/stop_jobs.sh` (pega a trava antes de matar) e commitar com `tools/commit_locked.sh "msg"`. Não use `pkill -f` com padrões que aparecem na própria linha de comando.
+
+### Notas da decompilação manual (2026-10-17)
+- `fn.py apply` agora tira o `INCLUDE_RODATA` da rodata usada só pela função quando o C não cita o símbolo (string literal). Se a rodata ficar fora de ordem, o `make` falha e reverte: use `extern char D_X[];` e deixe o `INCLUDE_RODATA`.
+- Rodata dentro do próprio `.s` da função (`dlabel` antes do `glabel`): o literal no C fica na posição certa.
+- Heurística de alias do GCC 2.8: acesso escalar (`*(s16 *)(p + off)`) e acesso a campo de struct agendam diferente; se um `sw`/`sh` muda de lugar, troque um pelo outro.
+- Parâmetro `u8` não gera `andi` na entrada (o chamador já mascara); `(u8)port` e cópia local do parâmetro mudam a alocação de registradores.
+- Tipos novos em `include/main.h`: `MsgWork`, `DrawEnv`, `PolyF4`, `DrMode`, `SortList`/`SndBank`/`SndReq`/`McSave` etc.; `ScriptCtx` ganhou `end` (0x6) e `unkA`.
 
 ### Regras automáticas do autodecomp (resumo)
 - Aridade das funções no contexto do m2c (`tools/arity.py`); assinatura completada com `arg0..argN` quando o corpo usa `argN` (`fix_params`).
