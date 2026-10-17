@@ -104,10 +104,9 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 - A comparação com decomp.me não foi necessária: tudo foi feito localmente com `tools/cc.sh` + `tools/cc_cmp.py`.
 
 ## Próximos passos
-1. Retomar o reteste dos `W*` (parou em ~550 de 718; os resultados ficam salvos e o `--run r3` pula o que já foi testado; no fim integra e propaga sozinho):
-   `python3 -I tools/autodecomp_reps.py --retest --run r3 W > build/reps3.log 2>&1` (em segundo plano). O r2 (C/F/S) já terminou e foi integrado.
+1. Retestes r2 (C/F/S) e r3 (`W*`) concluídos; o r3 não trouxe nenhuma função nova. O autodecomp automático esgotou: o ganho agora vem do permuter e do trabalho manual.
 2. Permuter nas difíceis do EXE (rodar com a CPU livre, sem o reteste rodando): lista e arquivos em `wip/main/hard.txt`; `tools/perm_setup.py main func_X wip/main/X.c` cria o diretório em `build/perm/` (alguns já criados), depois `tools/perm_batch.sh 240 4`. Revisar o C antes de integrar.
-3. `func_8001A2AC` (`wip/main/8001A2AC.c`) **bate** na comparação, mas o `make` falha: a jump table `jtbl_80010274` tem `INCLUDE_RODATA` próprio — ver se basta remover a linha ou se a ordem da rodata impede (aí usar `extern`, como a `D_80010234` da `func_8001AA10`).
+3. `func_8001A2AC` (`wip/main/8001A2AC.c`) **bate** na comparação, mas integrada desloca a rodata em 8 bytes (alinhamento da `jtbl_80010274` gerada pelo C; a jtbl original está dentro do `.s` da função).
 4. Continuar o EXE à mão (~45 fora da lista difícil, de 90 a 870 instruções).
 5. Corrigir a divisão do splat em `func_800148C0` (os `case`s `func_80014908`/`func_8001491C` viraram funções). Exige `make split`, que apaga `build/` — fazer quando nada estiver rodando.
 6. **Revisão semântica para o port**: `tools/audit_args.py` (chamadas diretas; zerado no EXE). Chamadas indiretas ainda não são auditadas.
