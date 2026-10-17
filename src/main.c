@@ -868,7 +868,51 @@ s32 func_80015AAC(s32 op, s32 idx) {
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80015B9C);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80015BD8);
+/* condicoes por bits: tipo 0 conta os bits 0x27-0x2D de D_8004B3B5 (arg 0:
+   algum ligado, 1: dois ou mais desligados, 2: exatamente um desligado);
+   tipo 1: bits 13-16 de D_8004B3A6 todos ligados */
+s32 func_80015BD8(s32 type, s32 arg) {
+    s32 r = 0;
+    s32 on = 0;
+    s32 off = 0;
+    s32 i;
+
+    switch (type) {
+    case 0:
+        for (i = 0x27; i < 0x2E; i++) {
+            if (func_80015590(D_8004B3B5, i, 1)) {
+                on++;
+            } else {
+                off++;
+            }
+        }
+        switch (arg) {
+        case 0:
+            if (on != 0) {
+                r = 1;
+            }
+            break;
+        case 1:
+            if (off >= 2) {
+                r = 1;
+            }
+            break;
+        case 2:
+            if (off == 1) {
+                r = 1;
+            }
+            break;
+        }
+        break;
+    case 1:
+        if (func_80015590(D_8004B3A6, 13, 1) && func_80015590(D_8004B3A6, 14, 1)
+            && func_80015590(D_8004B3A6, 15, 1) && func_80015590(D_8004B3A6, 16, 1)) {
+            r = 1;
+        }
+        break;
+    }
+    return r;
+}
 
 s32 func_80015D4C(void) {
     void *temp_v0;
@@ -2227,7 +2271,49 @@ void func_8001B930(u8 *obj) {
     g.fn84((*(s32 (**)(s32))((u8 *)&D_80044F4C + 0x10))(0x2860000), 10, 0x124, 0xCD);
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001BA2C);
+/* objeto de tela: abre (0x68 cresce 0x199 por quadro ate 0x1000), anima o
+   icone e fecha depois de 5 quadros */
+void func_8001BA2C(u8 *o) {
+    u8 *sys;
+
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(s16 *)(o + 0x6A) = 0x199;
+        break;
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            if ((*(s16 *)(o + 0x68) += *(s16 *)(o + 0x6A)) > 0x1000) {
+                *(s16 *)(o + 0x68) = 0x1000;
+                (*(void (**)(u8 *))(o + 0x3C))(o);
+            }
+            break;
+        case 1:
+            if (*(s32 *)(o + 0x5C) != 0) {
+                func_8001B930(o);
+            }
+            break;
+        case 2:
+            sys = D_8004DE10;
+            if ((*(s32 (**)(void))(sys + 0x188))() - *(s32 *)(o + 0x54) >= 3) {
+                *(s32 *)(o + 0x54) = (*(s32 (**)(void))(sys + 0x188))();
+                if (++*(s32 *)(o + 0x58) >= 5) {
+                    (*(void (**)(u8 *, s32))(o + 0x28))(o, 3);
+                    return;
+                }
+            }
+            break;
+        }
+        func_8001B814(o);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_8001BB88(s32 arg0) {
     Obj *temp_v0;

@@ -102,8 +102,10 @@ typedef struct {
 /* contexto do interpretador: base do script e posicao atual */
 typedef struct {
     u8 *base;
-    s32 unk4;
+    s16 unk4;
+    s16 end;
     s16 pc;
+    u8 unkA;
 } ScriptCtx;
 
 /* tabela em D_80044B3C: 64 entradas de 0x10 bytes */
