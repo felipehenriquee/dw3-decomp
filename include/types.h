@@ -255,4 +255,11 @@ typedef struct {
     s16 v1, v2;
 } MapPtOut;
 
+/* trecho de interpolacao: duracao, valor final e inicial */
+typedef struct {
+    s32 len;
+    s16 to;
+    s16 from;
+} Seg;
+
 #endif /* TYPES_H */

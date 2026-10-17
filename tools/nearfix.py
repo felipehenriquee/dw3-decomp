@@ -10,7 +10,8 @@ results.json com status 'ok' (integre com tools/autodecomp.py <alvo> --apply).
 Variacoes:
 - base local: M2C_FIELD((X + (Y)), T, off) vira um ponteiro u8 * local
   calculado antes (o gcc mantem o offset na instrucao);
-- operandos trocados em M2C_FIELD((X + (Y)), ...).
+- operandos trocados em M2C_FIELD((X + (Y)), ...);
+- assinatura completada com os argN que o m2c pulou.
 """
 import glob
 import itertools
@@ -72,7 +73,31 @@ def hoist(code, keys, swap):
     return code[:i] + decl + code[i:]
 
 
+def fix_sig(code):
+    """Completa a assinatura com os argN que o m2c pulou (parametro sem uso
+    antes de um usado)."""
+    m = re.search(r'^([^\n(]*\w+)\(([^)]*)\)\s*\{', code, re.M)
+    if not m or m.group(2).strip() in ('', 'void'):
+        return code
+    params = [p.strip() for p in m.group(2).split(',')]
+    nums = {}
+    for p in params:
+        n = re.search(r'\barg(\d+)$', p)
+        if not n:
+            return code
+        nums[int(n.group(1))] = p
+    top = max(nums)
+    if len(nums) == top + 1:
+        return code
+    full = [nums.get(i, 's32 arg%d' % i) for i in range(top + 1)]
+    return code[:m.start(2)] + ', '.join(full) + code[m.end(2):]
+
+
 def variants(code):
+    fixed = fix_sig(code)
+    if fixed != code:
+        yield fixed
+        code = fixed
     ks = bases(code)
     seen = set()
     for swap in (False, True):

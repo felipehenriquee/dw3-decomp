@@ -43,7 +43,15 @@ Obj *func_80083804(void) {
     return func_80014504(func_800836DC, 0x58, 0);
 }
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083830);
+/* valor do trecho k no tempo o[0x52] (interpolacao linear) */
+s32 func_80083830(u8 *o, s32 k) {
+    s32 t = *(s16 *)(o + 0x52);
+
+    if (t >= D_800843FC[k].len) {
+        return D_800843FC[k].to;
+    }
+    return D_800843FC[k].from + (D_800843FC[k].to - D_800843FC[k].from) * t / D_800843FC[k].len;
+}
 
 INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083894);
 

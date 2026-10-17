@@ -5,5 +5,6 @@
 /* tipo ainda desconhecido (so o endereco e usado) */
 struct opaque;
 
+extern Seg D_800843FC[];
 
 #endif /* CNTY_SEL_DATA_H */

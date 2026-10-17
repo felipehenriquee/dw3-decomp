@@ -501,7 +501,15 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80094298);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80094478);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009482C);
+/* cria o objeto ligado a *p, guardando o valor antigo */
+Obj *func_8009482C(s32 *p) {
+    Obj *o = func_80014504(func_80094478, 0x74, 0x1C);
+
+    o->unk50 = (s32)p;
+    o->unk54 = *p;
+    *p = -1;
+    return o;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80094878);
 

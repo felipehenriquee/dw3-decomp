@@ -113,8 +113,8 @@ def compare_show(name, fn, obj):
         same = (cw[i] & m) == (ow[i] & m) and 4 * i < size and 4 * i < osize
         ndiff += not same
         print('%s %03X  %-34s %s' % (' ' if same else '*', 4 * i,
-                                     cd[i] if 4 * i < size else '',
-                                     od[i] if 4 * i < osize else ''))
+                                     cd[i] if 4 * i < size and i < len(cd) else '',
+                                     od[i] if 4 * i < osize and i < len(od) else ''))
     print('%s: %s (%d/%d diferentes; tamanho %d vs %d)' % (
         fn, 'OK' if ndiff == 0 else 'DIFERENTE', ndiff, n, size, osize))
     return ndiff == 0
