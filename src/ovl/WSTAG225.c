@@ -25,7 +25,15 @@ s16 func_800A5DE0(s16 *st, s16 *tbl, s32 depth) {
     return e[0];
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG225/nonmatchings/WSTAG225", func_800A5EB8);
+/* zera os 3 contadores e copia o segundo valor de cada tabela */
+void func_800A5EB8(u8 *o) {
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        *(s16 *)(o + i * 8 + 0x5C) = 0;
+        *(s16 *)(o + i * 8 + 0x5E) = D_800A662C[i][1];
+    }
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG225/nonmatchings/WSTAG225", func_800A5EF0);
 

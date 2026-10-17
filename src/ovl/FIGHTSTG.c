@@ -935,12 +935,12 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009E53C);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009E77C);
 
-void func_8009E950(s32 a, s32 b, s32 c, s32 d) {
-    func_8009E77C(a, b, c, d, 0);
+s32 func_8009E950(s32 a, s32 b, s32 c, s32 d) {
+    return func_8009E77C(a, b, c, d, 0);
 }
 
-void func_8009E970(s32 a, s32 b, s32 c, s32 d) {
-    func_8009E77C(a, b, c, d, 1);
+s32 func_8009E970(s32 a, s32 b, s32 c, s32 d) {
+    return func_8009E77C(a, b, c, d, 1);
 }
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009E994);

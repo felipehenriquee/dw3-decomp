@@ -60,6 +60,7 @@ def parse(path):
     # parametros guardados, e o epilogo
     post = []
     live = {r: v for r, v in regs.items() if r.startswith('$s')}
+    live['$zero'] = '0'
     for op, a in ins[k + 2:]:
         if op in ('lw', 'nop', 'jr') or (op == 'addiu' and a[0] == '$sp'):
             continue

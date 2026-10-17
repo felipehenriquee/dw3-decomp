@@ -9,7 +9,12 @@ INCLUDE_ASM("asm/ovl/WSTAG415/nonmatchings/WSTAG415", func_800A5EE8);
 
 INCLUDE_ASM("asm/ovl/WSTAG415/nonmatchings/WSTAG415", func_800A5FA8);
 
-INCLUDE_ASM("asm/ovl/WSTAG415/nonmatchings/WSTAG415", func_800A6230);
+u8 *func_800A6230(s32 arg0) {
+    u8 *o = func_800143DC(func_800A5FA8, 116, 0, arg0);
+
+    *(s32 *)(o + 0x4) = 0;
+    return o;
+}
 
 u8 *func_800A6264(s32 arg0) {
     u8 *o = func_800143DC(func_800A5FA8, 116, 0, arg0);
@@ -80,7 +85,12 @@ INCLUDE_ASM("asm/ovl/WSTAG415/nonmatchings/WSTAG415", func_800A6558);
 
 INCLUDE_ASM("asm/ovl/WSTAG415/nonmatchings/WSTAG415", func_800A698C);
 
-INCLUDE_ASM("asm/ovl/WSTAG415/nonmatchings/WSTAG415", func_800A6A98);
+u8 *func_800A6A98(s32 arg0) {
+    u8 *o = func_800143DC(func_800A6558, 120, 0, arg0);
+
+    *(s32 *)(o + 0x4) = 0;
+    return o;
+}
 
 u8 *func_800A6ACC(s32 arg0) {
     u8 *o = func_800143DC(func_800A6558, 120, 0, arg0);

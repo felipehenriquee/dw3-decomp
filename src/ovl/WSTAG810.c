@@ -16,11 +16,29 @@ void func_800A6178(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG810/nonmatchings/WSTAG810", func_800A61C4);
+u8 *func_800A61C4(s32 arg0) {
+    u8 *o = func_800143DC(func_800A5F00, 104, 0, arg0);
 
-INCLUDE_ASM("asm/ovl/WSTAG810/nonmatchings/WSTAG810", func_800A6200);
+    *(s16 *)(o + 0x52) = 1;
+    *(s8 *)(o + 0x51) = 0;
+    return o;
+}
 
-INCLUDE_ASM("asm/ovl/WSTAG810/nonmatchings/WSTAG810", func_800A623C);
+u8 *func_800A6200(s32 arg0) {
+    u8 *o = func_800143DC(func_800A5F00, 104, 0, arg0);
+
+    *(s16 *)(o + 0x52) = 3;
+    *(s8 *)(o + 0x51) = 0;
+    return o;
+}
+
+u8 *func_800A623C(s32 arg0) {
+    u8 *o = func_800143DC(func_800A5F00, 104, 0, arg0);
+
+    *(s16 *)(o + 0x52) = 5;
+    *(s8 *)(o + 0x51) = 0;
+    return o;
+}
 
 void func_800A6278(s16 arg0) {
     void *temp_v0;

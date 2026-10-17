@@ -10,7 +10,16 @@ void func_80083058(void *arg0, void *arg1, s32 arg2) {
     M2C_FIELD(arg0, u16 *, 0x86) = (u16) M2C_FIELD(arg1, u16 *, 4);
 }
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80083078);
+/* inicia a sequencia p (o primeiro s16 depois do cabecalho e a duracao) */
+void func_80083078(u8 *o, s16 *p) {
+    if (p != NULL) {
+        *(s16 **)(o + 0x8C) = p;
+        *(s32 *)(o + 0x90) = 0;
+        *(s32 *)(o + 0x98) = 0;
+        *(s32 *)(o + 0x94) = p[1];
+        *(s32 *)(o + 0x78) = 0;
+    }
+}
 
 void func_800830A0(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x58) = arg1;
@@ -366,7 +375,13 @@ void func_8008A234(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x64) = arg1;
 }
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008A244);
+/* valor em 0x60 se o bit 0 de 0x50 esta ligado, senao -1 */
+s32 func_8008A244(u8 *o) {
+    if (*(s32 *)(o + 0x50) & 1) {
+        return *(s32 *)(o + 0x60);
+    }
+    return -1;
+}
 
 void func_8008A264(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x50) = 8;
@@ -418,8 +433,8 @@ void func_8008B800(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = 0x32;
 }
 
-void func_8008B814(void *arg0) {
-    func_8008A3E0((s32) arg0, M2C_FIELD(arg0, s32 *, 0x24), 1);
+s32 func_8008B814(void *arg0) {
+    return func_8008A3E0((s32) arg0, M2C_FIELD(arg0, s32 *, 0x24), 1);
 }
 
 void func_8008B838(s32 arg0) {

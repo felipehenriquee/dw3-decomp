@@ -179,20 +179,20 @@ void func_8008AD48(u8 *o, s32 unused, s32 v) {
     *(s8 *)(o + 0x423) = 1;
 }
 
-void func_8008AD58(void) {
-    func_80089ED4();
+s32 func_8008AD58(void) {
+    return func_80089ED4();
 }
 
-void func_8008AD78(void) {
-    func_80089F18();
+s32 func_8008AD78(void) {
+    return func_80089F18();
 }
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008AD98);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008BAA4);
 
-void func_8008BC6C(s32 arg0, s32 arg1, s32 arg2) {
-    func_8008BAA4(arg0, arg1, arg2, 0);
+s32 func_8008BC6C(s32 arg0, s32 arg1, s32 arg2) {
+    return func_8008BAA4(arg0, arg1, arg2, 0);
 }
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008BC8C);
@@ -419,7 +419,15 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80093624);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80093710);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80093ADC);
+void func_80093ADC(u8 *o, s32 unused, s32 k) {
+    u8 *e = o + k * 0x72;
+    s32 v;
+
+    *(s32 *)(o + 0x424) = 0;
+    v = e[0x72C];
+    o[0x422] = 1;
+    *(s32 *)(o + 0x428) = v - 1;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80093B10);
 
@@ -934,12 +942,12 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009C7F8);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009C898);
 
-void func_8009C904(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    func_8009C898(arg0, arg1, 0, arg2, /* extra? */ arg3, /* extra? */ 1);
+s32 func_8009C904(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    return func_8009C898(arg0, arg1, 0, arg2, /* extra? */ arg3, /* extra? */ 1);
 }
 
-void func_8009C938(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    func_8009C898(arg0, arg1, arg2, arg3, /* extra? */ arg4, /* extra? */ 0);
+s32 func_8009C938(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    return func_8009C898(arg0, arg1, arg2, arg3, /* extra? */ arg4, /* extra? */ 0);
 }
 
 void func_8009C960(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {

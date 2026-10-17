@@ -4,6 +4,7 @@
 
 /* funcoes ja decompiladas */
 void func_80083058(void *arg0, void *arg1, s32 arg2);
+void func_80083078(u8 *o, s16 *p);
 void func_800830A0(void *arg0, s32 arg1, s32 arg2);
 void func_800830AC(void *arg0, s32 arg1, s32 arg2);
 void func_800830B8(void *arg0, s32 arg1, s32 arg2);
@@ -37,12 +38,13 @@ void func_8008A1F8(void *arg0, s32 arg1);
 void func_8008A200(void *arg0);
 void func_8008A218(void *arg0);
 void func_8008A234(void *arg0, s32 arg1);
+s32 func_8008A244(u8 *o);
 void func_8008A264(void *arg0);
 void func_8008A274(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_8008A354(void *arg0, void *arg1);
 void func_8008B7F0(void *arg0);
 void func_8008B800(void *arg0);
-void func_8008B814(void *arg0);
+s32 func_8008B814(void *arg0);
 void func_8008B838(s32 arg0);
 void func_8008B8FC(void *arg0, s32 arg1);
 s32 func_8008B990(Fade *f);
@@ -63,7 +65,6 @@ s32 func_8001AE38();
 s32 func_8001B364();
 s32 func_8001F648();
 s32 func_8001FFA8();
-s32 func_80083078();
 s32 func_80083150();
 s32 func_80083930();
 s32 func_80083AEC();
@@ -89,7 +90,6 @@ s32 func_80088348();
 s32 func_800888BC();
 s32 func_80089698();
 s32 func_800897B8();
-s32 func_8008A244();
 s32 func_8008A3E0();
 s32 func_8008A524();
 s32 func_8008AAD4();
