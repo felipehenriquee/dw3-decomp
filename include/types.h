@@ -262,4 +262,9 @@ typedef struct {
     s16 from;
 } Seg;
 
+/* entrada de 18 bytes da tabela em D_80042BCA */
+typedef struct {
+    u8 b[18];
+} Rec18;
+
 #endif /* TYPES_H */

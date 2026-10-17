@@ -19,5 +19,7 @@ extern s32 D_8005CCA8[];
 extern u8 D_800A365C[];
 extern u8 D_8004DE10[];
 extern u8 D_800A4460[];
+extern u8 D_800A3868[];
+extern Rec18 D_80042BCA[];
 
 #endif /* FIGHTSTG_DATA_H */

@@ -788,7 +788,13 @@ void func_800928CC(s32 arg0, s32 arg1) {
     (&D_8009B6C4)[arg0] = arg1;
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800928E4);
+void func_800928E4(s32 v) {
+    u8 *d = D_80048D34;
+
+    if (*(s32 *)(d + 0x26D8) != 0) {
+        *(s32 *)(d + 0x26E0) = v;
+    }
+}
 
 void func_80092908(s32 arg0) {
     D_8004B414 = arg0;

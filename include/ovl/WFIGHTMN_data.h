@@ -4,5 +4,6 @@
 
 /* tipo ainda desconhecido (so o endereco e usado) */
 struct opaque;
+extern u8 D_800A4460[];
 
 #endif /* WFIGHTMN_DATA_H */

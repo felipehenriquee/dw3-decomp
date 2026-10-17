@@ -5,6 +5,7 @@
 /* funcoes ja decompiladas */
 Obj *func_800A6414(void);
 void func_800A69B8(void);
+void func_800AABA0(s32 x);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_800143DC();
@@ -56,7 +57,6 @@ s32 func_800AA06C();
 s32 func_800AA1F0();
 s32 func_800AA9F0();
 s32 func_800AAB10();
-s32 func_800AABA0();
 
 /* dados acessados via $gp */
 

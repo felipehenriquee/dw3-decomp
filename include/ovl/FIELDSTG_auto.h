@@ -86,6 +86,7 @@ s32 func_80092484(s32 arg0);
 void func_800924C8(s32 arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3);
 void func_8009252C(void);
 void func_800928CC(s32 arg0, s32 arg1);
+void func_800928E4(s32 v);
 void func_80092908(s32 arg0);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */

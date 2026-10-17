@@ -765,7 +765,15 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009BA4C);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009BBA8);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009BC14);
+s8 func_8009BC14(s8 a) {
+    u8 *d = D_800A3868;
+    s8 r;
+
+    d[0xAF2] = a;
+    r = func_8009BBA8(0);
+    d[0xAF3] = r;
+    return r;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009BC54);
 
@@ -919,15 +927,23 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009E53C);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009E77C);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009E950);
+void func_8009E950(s32 a, s32 b, s32 c, s32 d) {
+    func_8009E77C(a, b, c, d, 0);
+}
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009E970);
+void func_8009E970(s32 a, s32 b, s32 c, s32 d) {
+    func_8009E77C(a, b, c, d, 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009E994);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009EADC);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009EB94);
+u8 *func_8009EB94(s32 id) {
+    u8 *b = ((u8 *(*)(s32))D_80044F4C)(0x1CC);
+
+    return (u8 *)((*(s32 *)((u8 *)func_8009E994(id) + 0xC) - *(s32 *)b) + (s32)b);
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009EBE0);
 
@@ -975,9 +991,21 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800A13C0);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800A1458);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800A1508);
+/* sorteio: (rand & 0x7F) < chance da entrada k */
+s32 func_800A1508(s32 unused, s32 k) {
+    Rec18 *r = &D_80042BCA[k];
+    s32 c = r->b[0xB];
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800A1558);
+    return (((s32 (*)(void))D_8004DC0C)() & 0x7F) < c;
+}
+
+/* sorteio: (rand & 0x7F) < chance da entrada k */
+s32 func_800A1558(s32 unused, s32 k) {
+    Rec18 *r = &D_80042BCA[k];
+    s32 c = r->b[0xB];
+
+    return (((s32 (*)(void))D_8004DC0C)() & 0x7F) < c;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800A15A8);
 
