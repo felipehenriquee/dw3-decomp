@@ -325,7 +325,15 @@ s32 func_8008EEFC(void *arg0) {
     return 0;
 }
 
-INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008EF58);
+/* o primeiro filho existe e esta no estado 1? */
+s32 func_8008EF58(u8 *o) {
+    u8 *c = **(u8 ***)(o + 0x24);
+
+    if (c != NULL && *(s32 *)(c + 0xC) == 1) {
+        return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008EF8C);
 

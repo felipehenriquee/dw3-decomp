@@ -869,7 +869,15 @@ void func_8009D038(void) {
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009D06C);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009D0EC);
+/* marca o slot livre (de 28 bytes) devolvido pela rotina 0xB04 */
+void func_8009D0EC(void) {
+    u8 *d = D_800A3868;
+    s32 i = (*(s32 (**)(s32))(d + 0xB04))(0x18);
+
+    if (i >= 0) {
+        *(s16 *)(d + i * 28 + 2) = 1;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009D140);
 

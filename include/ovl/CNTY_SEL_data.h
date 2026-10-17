@@ -6,5 +6,6 @@
 struct opaque;
 
 extern Seg D_800843FC[];
+extern Seg D_800843EC[];
 
 #endif /* CNTY_SEL_DATA_H */
