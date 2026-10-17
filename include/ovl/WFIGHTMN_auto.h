@@ -3,7 +3,7 @@
 #define WFIGHTMN_AUTO_H
 
 /* funcoes ja decompiladas */
-void func_800A6414(void);
+Obj *func_800A6414(void);
 void func_800A69B8(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */

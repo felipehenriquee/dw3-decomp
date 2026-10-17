@@ -3438,8 +3438,8 @@ void func_80020B58(u8 *a, s32 *out) {
     }
 }
 
-void func_80020C38(void) {
-    func_80014504(func_80020B58, 0x50, 4);
+Obj *func_80020C38(void) {
+    return func_80014504(func_80020B58, 0x50, 4);
 }
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80020C64);

@@ -3,7 +3,7 @@
 #define WSTAG815_AUTO_H
 
 /* funcoes ja decompiladas */
-void func_800A604C(void);
+Obj *func_800A604C(void);
 s16 func_800A61E4(s16 *st, s16 *tbl, s32 once, s32 depth);
 s32 func_800A63EC(s32 x, s32 y, s32 w, s32 h);
 void func_800A6834(void);

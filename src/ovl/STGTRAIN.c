@@ -84,8 +84,8 @@ void func_80083880(void) {
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80083930);
 
-void func_80083AC0(void) {
-    func_80014504(func_80083930, 0x50, 4);
+Obj *func_80083AC0(void) {
+    return func_80014504(func_80083930, 0x50, 4);
 }
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80083AEC);

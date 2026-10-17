@@ -3,7 +3,7 @@
 #define STGDGLAB_AUTO_H
 
 /* funcoes ja decompiladas */
-void func_80083040(void);
+Obj *func_80083040(void);
 void func_8008306C(void *arg0, s32 arg1, s32 arg2);
 void func_800830F4(u8 *obj);
 void func_80083238(u8 *a);

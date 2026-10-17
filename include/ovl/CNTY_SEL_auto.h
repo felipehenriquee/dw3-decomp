@@ -3,13 +3,13 @@
 #define CNTY_SEL_AUTO_H
 
 /* funcoes ja decompiladas */
-void func_800832D8(void);
+Obj *func_800832D8(void);
 void func_80083474(void *arg0, s16 arg1);
 void func_80083594(void);
-void func_80083804(void);
-void func_80083A68(void);
-void func_80083CEC(void);
-void func_80084394(void);
+Obj *func_80083804(void);
+Obj *func_80083A68(void);
+Obj *func_80083CEC(void);
+Obj *func_80084394(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 ClearImage2();

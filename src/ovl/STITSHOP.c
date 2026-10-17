@@ -5,8 +5,8 @@
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_8008321C);
 
-void func_80083318(void) {
-    func_80014504(func_8008321C, 0x50, 4);
+Obj *func_80083318(void) {
+    return func_80014504(func_8008321C, 0x50, 4);
 }
 
 void func_80083344(void *arg0, s32 arg1, s32 arg2) {

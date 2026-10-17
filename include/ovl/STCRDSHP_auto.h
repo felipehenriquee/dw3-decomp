@@ -11,7 +11,7 @@ void func_80085634(void);
 void func_80085788(void *arg0);
 void func_80086074(void *arg0, void *arg1);
 void func_80087B84(s32 arg0, s32 arg1);
-void func_80087CD4(void);
+Obj *func_80087CD4(void);
 void func_80088FB4(void *arg0, s32 arg1);
 s32 func_80089048(Fade *f);
 

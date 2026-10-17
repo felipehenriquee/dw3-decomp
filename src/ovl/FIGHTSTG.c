@@ -98,14 +98,14 @@ void *func_80087000(s32 arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80087070);
 
-void func_80087160(void) {
-    func_80014504(func_80087070, 0x50, 4);
+Obj *func_80087160(void) {
+    return func_80014504(func_80087070, 0x50, 4);
 }
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008718C);
 
-void func_80087B84(void) {
-    func_80014504(func_8008718C, 0x6C, 0);
+Obj *func_80087B84(void) {
+    return func_80014504(func_8008718C, 0x6C, 0);
 }
 
 void func_80087BB0(void *arg0) {
@@ -178,8 +178,8 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80088394);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80088564);
 
-void func_80088C00(void) {
-    func_80014504(func_80088564, 0x80, 8);
+Obj *func_80088C00(void) {
+    return func_80014504(func_80088564, 0x80, 8);
 }
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80088C2C);
@@ -324,14 +324,14 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008C514);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008C590);
 
-void func_8008C910(void) {
-    func_80014504(func_8008C590, 0xB4, 0x40);
+Obj *func_8008C910(void) {
+    return func_80014504(func_8008C590, 0xB4, 0x40);
 }
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008C93C);
 
-void func_8008CB44(void) {
-    func_80014504(func_8008C93C, 0x54, 4);
+Obj *func_8008CB44(void) {
+    return func_80014504(func_8008C93C, 0x54, 4);
 }
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008CB70);
@@ -373,8 +373,8 @@ void func_80090C44(s8 arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80090C8C);
 
-void func_80090E58(void) {
-    func_80014504(func_80090C8C, 0x70, 4);
+Obj *func_80090E58(void) {
+    return func_80014504(func_80090C8C, 0x70, 4);
 }
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80090E84);
@@ -472,8 +472,8 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800934F0);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80093A74);
 
-void func_80093CC8(void) {
-    func_80014504(func_80093A74, 0x88, 0x14);
+Obj *func_80093CC8(void) {
+    return func_80014504(func_80093A74, 0x88, 0x14);
 }
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80093CF4);
@@ -493,8 +493,8 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80093FEC);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80094064);
 
-void func_8009426C(void) {
-    func_80014504(func_80094064, 0x58, 8);
+Obj *func_8009426C(void) {
+    return func_80014504(func_80094064, 0x58, 8);
 }
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80094298);
@@ -974,6 +974,6 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800A1F74);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800A1FE0);
 
-void func_800A246C(void) {
-    func_80014504(func_800A1FE0, 0xA4, 0);
+Obj *func_800A246C(void) {
+    return func_80014504(func_800A1FE0, 0xA4, 0);
 }

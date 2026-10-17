@@ -29,8 +29,8 @@ s16 func_800A5E40(s16 *st, s16 *tbl, s32 depth) {
 
 INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A5F34);
 
-void func_800A6084(void) {
-    func_80014504(func_800A5F34, 0x60, 0);
+Obj *func_800A6084(void) {
+    return func_80014504(func_800A5F34, 0x60, 0);
 }
 
 /* animacao com o estado em st[2], st[3] (ver func_800A6DD8) */
@@ -68,8 +68,8 @@ INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A6598);
 
 INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A65D4);
 
-void func_800A660C(void) {
-    func_80014504(func_800A61D0, 0x84, 0);
+Obj *func_800A660C(void) {
+    return func_80014504(func_800A61D0, 0x84, 0);
 }
 
 INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A6638);
@@ -80,8 +80,8 @@ INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A6B1C);
 
 INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A6B58);
 
-void func_800A6B90(void) {
-    func_80014504(func_800A6758, 0x9C, 0);
+Obj *func_800A6B90(void) {
+    return func_80014504(func_800A6758, 0x9C, 0);
 }
 
 INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A6BBC);

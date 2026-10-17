@@ -5,8 +5,8 @@
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_80082F48);
 
-void func_80083040(void) {
-    func_80014504(func_80082F48, 0x50, 4);
+Obj *func_80083040(void) {
+    return func_80014504(func_80082F48, 0x50, 4);
 }
 
 void func_8008306C(void *arg0, s32 arg1, s32 arg2) {

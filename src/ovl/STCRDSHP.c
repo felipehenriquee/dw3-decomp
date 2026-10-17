@@ -175,8 +175,8 @@ void func_80087B84(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80087BDC);
 
-void func_80087CD4(void) {
-    func_80014504(func_80087BDC, 0x50, 4);
+Obj *func_80087CD4(void) {
+    return func_80014504(func_80087BDC, 0x50, 4);
 }
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80087D00);

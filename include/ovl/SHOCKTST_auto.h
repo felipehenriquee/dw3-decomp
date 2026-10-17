@@ -3,8 +3,8 @@
 #define SHOCKTST_AUTO_H
 
 /* funcoes ja decompiladas */
-void func_80082E98(void);
-void func_8008499C(void);
+Obj *func_80082E98(void);
+Obj *func_8008499C(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 atoi();

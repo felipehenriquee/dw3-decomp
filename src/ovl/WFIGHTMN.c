@@ -5,8 +5,8 @@
 
 INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A5ECC);
 
-void func_800A6414(void) {
-    func_80014504(func_800A5ECC, 0x54, 0);
+Obj *func_800A6414(void) {
+    return func_80014504(func_800A5ECC, 0x54, 0);
 }
 
 INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A6440);

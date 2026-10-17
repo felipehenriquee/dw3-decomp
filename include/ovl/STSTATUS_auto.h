@@ -3,7 +3,7 @@
 #define STSTATUS_AUTO_H
 
 /* funcoes ja decompiladas */
-void func_80083654(void);
+Obj *func_80083654(void);
 void func_80084C48(s32 arg0);
 void func_80084C90(void *arg0, s32 arg1, s32 arg2);
 void func_80084D18(u8 *obj);

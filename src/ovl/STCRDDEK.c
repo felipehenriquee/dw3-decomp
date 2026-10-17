@@ -5,8 +5,8 @@
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800831F0);
 
-void func_800832E8(void) {
-    func_80014504(func_800831F0, 0x50, 4);
+Obj *func_800832E8(void) {
+    return func_80014504(func_800831F0, 0x50, 4);
 }
 
 void func_80083314(void *arg0, s32 arg1, s32 arg2) {

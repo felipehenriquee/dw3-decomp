@@ -5,8 +5,8 @@
 
 INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_80082DA0);
 
-void func_80082E98(void) {
-    func_80014504(func_80082DA0, 0x50, 4);
+Obj *func_80082E98(void) {
+    return func_80014504(func_80082DA0, 0x50, 4);
 }
 
 INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_80082EC4);
@@ -41,6 +41,6 @@ INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_800843F0);
 
 INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_80084714);
 
-void func_8008499C(void) {
-    func_80014504(func_80084714, 0x5C, 0x10);
+Obj *func_8008499C(void) {
+    return func_80014504(func_80084714, 0x5C, 0x10);
 }

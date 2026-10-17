@@ -61,12 +61,12 @@ s32 func_800A606C(Fade *f) {
 
 INCLUDE_ASM("asm/ovl/WSTAG935/nonmatchings/WSTAG935", func_800A60D8);
 
-void func_800A6A04(void) {
-    func_80014504(func_800A60D8, 0x84, 0x28);
+Obj *func_800A6A04(void) {
+    return func_80014504(func_800A60D8, 0x84, 0x28);
 }
 
 INCLUDE_ASM("asm/ovl/WSTAG935/nonmatchings/WSTAG935", func_800A6A30);
 
-void func_800A739C(void) {
-    func_80014504(func_800A6A30, 0x84, 0x28);
+Obj *func_800A739C(void) {
+    return func_80014504(func_800A6A30, 0x84, 0x28);
 }

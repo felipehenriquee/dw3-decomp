@@ -5,8 +5,8 @@
 /* funcoes ja decompiladas */
 s16 func_800A638C(s16 *st, s16 *tbl, s32 depth);
 void func_800A6678(s32 arg0);
-void func_800A6914(void);
-void func_800A69D8(void);
+Obj *func_800A6914(void);
+Obj *func_800A69D8(void);
 void func_800A6A04(void *arg0, void *arg1);
 void func_800A7450(void *arg0, s32 arg1);
 void *func_800A75B0(s32 arg0);

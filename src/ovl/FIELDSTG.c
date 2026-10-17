@@ -212,8 +212,8 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800873D8);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800874D0);
 
-void func_80087580(void) {
-    func_80014504(func_800874D0, 0x50, 0xC);
+Obj *func_80087580(void) {
+    return func_80014504(func_800874D0, 0x50, 0xC);
 }
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800875AC);

@@ -5,8 +5,8 @@
 
 INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_80082CD0);
 
-void func_80082DC8(void) {
-    func_80014504(func_80082CD0, 0x58, 4);
+Obj *func_80082DC8(void) {
+    return func_80014504(func_80082CD0, 0x58, 4);
 }
 
 void func_80082DF4(void *arg0, s32 arg1, s32 arg2) {

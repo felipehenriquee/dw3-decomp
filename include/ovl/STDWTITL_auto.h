@@ -3,8 +3,8 @@
 #define STDWTITL_AUTO_H
 
 /* funcoes ja decompiladas */
-void func_80082E9C(void);
-void func_80083028(void);
+Obj *func_80082E9C(void);
+Obj *func_80083028(void);
 void func_800833AC(void *arg0);
 void func_800833E4(s32 arg0);
 void func_80083438(void);
@@ -13,7 +13,7 @@ void func_80083F48(s32 arg0);
 void func_800841E0(void *arg0);
 void func_80084218(s32 arg0);
 void func_800844E8(s32 arg0);
-void func_8008483C(void);
+Obj *func_8008483C(void);
 void *func_8008497C(void);
 void func_80084BB0(void *arg0);
 void func_80084BE8(s32 arg0);

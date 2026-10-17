@@ -3,7 +3,7 @@
 #define WSTAG205_AUTO_H
 
 /* funcoes ja decompiladas */
-void func_800A60B0(void);
+Obj *func_800A60B0(void);
 void *func_800A6194(s32 arg0);
 void func_800A623C(void);
 

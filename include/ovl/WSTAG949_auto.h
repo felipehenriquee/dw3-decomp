@@ -3,7 +3,7 @@
 #define WSTAG949_AUTO_H
 
 /* funcoes ja decompiladas */
-void func_800A5F38(void);
+Obj *func_800A5F38(void);
 void *func_800A5FC8(s32 arg0);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */

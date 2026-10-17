@@ -7,8 +7,8 @@ INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80082F58);
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80082FCC);
 
-void func_80083118(void) {
-    func_80014504(func_80082FCC, 0x50, 4);
+Obj *func_80083118(void) {
+    return func_80014504(func_80082FCC, 0x50, 4);
 }
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80083144);
@@ -30,14 +30,14 @@ void func_800833A4(void) {
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_800833E8);
 
-void func_800835C4(void) {
-    func_80014504(func_800833E8, 0x68, 0);
+Obj *func_800835C4(void) {
+    return func_80014504(func_800833E8, 0x68, 0);
 }
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_800835F0);
 
-void func_80083748(void) {
-    func_80014504(func_800835F0, 0x68, 0);
+Obj *func_80083748(void) {
+    return func_80014504(func_800835F0, 0x68, 0);
 }
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80083774);

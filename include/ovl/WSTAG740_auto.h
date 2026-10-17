@@ -3,7 +3,7 @@
 #define WSTAG740_AUTO_H
 
 /* funcoes ja decompiladas */
-void func_800A606C(void);
+Obj *func_800A606C(void);
 void *func_800A6138(s32 arg0);
 void func_800A64BC(s32 arg0, s32 arg1);
 void func_800A659C(void);

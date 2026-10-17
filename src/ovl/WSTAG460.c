@@ -52,8 +52,8 @@ void func_800A630C(void *arg0) {
 
 INCLUDE_ASM("asm/ovl/WSTAG460/nonmatchings/WSTAG460", func_800A6328);
 
-void func_800A6358(void) {
-    func_80014504(func_800A6118, 0x5C, 0);
+Obj *func_800A6358(void) {
+    return func_80014504(func_800A6118, 0x5C, 0);
 }
 
 s16 func_800A6384(s16 *st, s16 *tbl, s32 once, s32 depth) {
@@ -95,8 +95,8 @@ void func_800A676C(void *arg0) {
 
 INCLUDE_ASM("asm/ovl/WSTAG460/nonmatchings/WSTAG460", func_800A6788);
 
-void func_800A67B8(void) {
-    func_80014504(func_800A64A4, 0x64, 0);
+Obj *func_800A67B8(void) {
+    return func_80014504(func_800A64A4, 0x64, 0);
 }
 
 s16 func_800A67E4(s16 *st, s16 *tbl, s32 once, s32 depth) {

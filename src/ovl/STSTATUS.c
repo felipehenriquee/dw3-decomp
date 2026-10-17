@@ -5,8 +5,8 @@
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80083558);
 
-void func_80083654(void) {
-    func_80014504(func_80083558, 0x50, 4);
+Obj *func_80083654(void) {
+    return func_80014504(func_80083558, 0x50, 4);
 }
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80083680);

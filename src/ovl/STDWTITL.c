@@ -5,14 +5,14 @@
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80082D70);
 
-void func_80082E9C(void) {
-    func_80014504(func_80082D70, 0x50, 4);
+Obj *func_80082E9C(void) {
+    return func_80014504(func_80082D70, 0x50, 4);
 }
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80082EC8);
 
-void func_80083028(void) {
-    func_80014504(func_80082EC8, 0x50, 0xC);
+Obj *func_80083028(void) {
+    return func_80014504(func_80082EC8, 0x50, 0xC);
 }
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083054);
@@ -109,8 +109,8 @@ INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_8008453C);
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80084628);
 
-void func_8008483C(void) {
-    func_80014504(func_80084628, 0x54, 0);
+Obj *func_8008483C(void) {
+    return func_80014504(func_80084628, 0x54, 0);
 }
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80084868);

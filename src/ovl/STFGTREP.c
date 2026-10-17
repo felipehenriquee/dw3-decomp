@@ -5,8 +5,8 @@
 
 INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80082E70);
 
-void func_80082F6C(void) {
-    func_80014504(func_80082E70, 0x50, 4);
+Obj *func_80082F6C(void) {
+    return func_80014504(func_80082E70, 0x50, 4);
 }
 
 void func_80082F98(void *arg0, s32 arg1, s32 arg2) {

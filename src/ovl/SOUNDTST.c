@@ -5,8 +5,8 @@
 
 INCLUDE_ASM("asm/ovl/SOUNDTST/nonmatchings/SOUNDTST", func_80084370);
 
-void func_80084410(void) {
-    func_80014504(func_80084370, 0x50, 4);
+Obj *func_80084410(void) {
+    return func_80014504(func_80084370, 0x50, 4);
 }
 
 INCLUDE_ASM("asm/ovl/SOUNDTST/nonmatchings/SOUNDTST", func_8008443C);
@@ -21,6 +21,6 @@ INCLUDE_ASM("asm/ovl/SOUNDTST/nonmatchings/SOUNDTST", func_800848BC);
 
 INCLUDE_ASM("asm/ovl/SOUNDTST/nonmatchings/SOUNDTST", func_80084B2C);
 
-void func_80084D48(void) {
-    func_80014504(func_80084B2C, 0x74, 0x2C);
+Obj *func_80084D48(void) {
+    return func_80014504(func_80084B2C, 0x74, 0x2C);
 }

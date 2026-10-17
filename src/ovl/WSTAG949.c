@@ -5,8 +5,8 @@
 
 INCLUDE_ASM("asm/ovl/WSTAG949/nonmatchings/WSTAG949", func_800A5DE4);
 
-void func_800A5F38(void) {
-    func_80014504(func_800A5DE4, 0x50, 0);
+Obj *func_800A5F38(void) {
+    return func_80014504(func_800A5DE4, 0x50, 0);
 }
 
 INCLUDE_ASM("asm/ovl/WSTAG949/nonmatchings/WSTAG949", func_800A5F64);

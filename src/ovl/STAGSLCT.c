@@ -3,10 +3,23 @@
 #include "STAGSLCT_auto.h"
 #include "STAGSLCT_data.h"
 
-INCLUDE_ASM("asm/ovl/STAGSLCT/nonmatchings/STAGSLCT", func_800849CC);
+/* estado 0: cria o objeto e guarda em *out */
+void func_800849CC(u8 *o, Obj **out) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        *out = func_80085EA4();
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
-void func_80084A30(void) {
-    func_80014504(func_800849CC, 0x50, 4);
+Obj *func_80084A30(void) {
+    return func_80014504(func_800849CC, 0x50, 4);
 }
 
 INCLUDE_ASM("asm/ovl/STAGSLCT/nonmatchings/STAGSLCT", func_80084A5C);
@@ -37,6 +50,6 @@ INCLUDE_RODATA("asm/ovl/STAGSLCT/nonmatchings/STAGSLCT", D_800849A4);
 
 INCLUDE_ASM("asm/ovl/STAGSLCT/nonmatchings/STAGSLCT", func_80084D9C);
 
-void func_80085EA4(void) {
-    func_80014504(func_80084D9C, 0, 0);
+Obj *func_80085EA4(void) {
+    return func_80014504(func_80084D9C, 0, 0);
 }

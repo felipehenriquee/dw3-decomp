@@ -30,7 +30,7 @@ void func_800870DC(void *arg0, s32 arg1, void *arg2);
 void func_800872C0(void *arg0);
 s32 func_800872CC(void *arg0);
 s32 func_800872D8(void *arg0);
-void func_80087580(void);
+Obj *func_80087580(void);
 void func_80088190(s32 arg0);
 void func_800881B8(void *arg0, s32 arg1, M2C_UNK arg2);
 void func_80088A4C(s32 arg0);

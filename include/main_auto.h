@@ -270,7 +270,7 @@ void func_80020574(s32 id);
 s16 func_8002090C(s32 arg0, s16 arg1, s16 arg2);
 void func_8002096C(s32 id, s16 voice);
 void func_80020B58(u8 *a, s32 *out);
-void func_80020C38(void);
+Obj *func_80020C38(void);
 void func_80020D10(s32 arg0);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */

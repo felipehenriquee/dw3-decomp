@@ -4,7 +4,7 @@
 
 /* funcoes ja decompiladas */
 s16 func_800A5DE0(s16 *st, s16 *tbl, s32 depth);
-void func_800A5FA8(void);
+Obj *func_800A5FA8(void);
 void *func_800A6084(s32 arg0);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */

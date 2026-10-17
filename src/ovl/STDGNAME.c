@@ -5,8 +5,8 @@
 
 INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80082F8C);
 
-void func_80083084(void) {
-    func_80014504(func_80082F8C, 0x50, 4);
+Obj *func_80083084(void) {
+    return func_80014504(func_80082F8C, 0x50, 4);
 }
 
 void func_800830B0(void *arg0, s32 arg1, s32 arg2) {

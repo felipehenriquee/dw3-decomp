@@ -29,8 +29,8 @@ s16 func_800A5DE0(s16 *st, s16 *tbl, s32 depth) {
 
 INCLUDE_ASM("asm/ovl/WSTAG731/nonmatchings/WSTAG731", func_800A5ED4);
 
-void func_800A5F94(void) {
-    func_80014504(func_800A5ED4, 0x54, 0);
+Obj *func_800A5F94(void) {
+    return func_80014504(func_800A5ED4, 0x54, 0);
 }
 
 INCLUDE_ASM("asm/ovl/WSTAG731/nonmatchings/WSTAG731", func_800A5FC0);

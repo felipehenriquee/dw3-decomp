@@ -3,8 +3,8 @@
 #define SOUNDTST_AUTO_H
 
 /* funcoes ja decompiladas */
-void func_80084410(void);
-void func_80084D48(void);
+Obj *func_80084410(void);
+Obj *func_80084D48(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();

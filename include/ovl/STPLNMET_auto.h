@@ -3,11 +3,11 @@
 #define STPLNMET_AUTO_H
 
 /* funcoes ja decompiladas */
-void func_80083118(void);
+Obj *func_80083118(void);
 void func_80083398(void *arg0, s32 arg1, s32 arg2);
 void func_800833A4(void);
-void func_800835C4(void);
-void func_80083748(void);
+Obj *func_800835C4(void);
+Obj *func_80083748(void);
 void func_80083D38(s32 arg0);
 void func_80083D70(void *arg0, s32 arg1);
 s32 func_80083E04(Fade *f);

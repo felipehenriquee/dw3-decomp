@@ -3,7 +3,7 @@
 #define STITSHOP_AUTO_H
 
 /* funcoes ja decompiladas */
-void func_80083318(void);
+Obj *func_80083318(void);
 void func_80083344(void *arg0, s32 arg1, s32 arg2);
 void func_800833CC(u8 *obj);
 void func_80083510(u8 *a);

@@ -5,20 +5,20 @@
 
 INCLUDE_ASM("asm/ovl/WSTAG220/nonmatchings/WSTAG220", func_800A5E74);
 
-void func_800A6430(void) {
-    func_80014504(func_800A5E74, 0x64, 0x14);
+Obj *func_800A6430(void) {
+    return func_80014504(func_800A5E74, 0x64, 0x14);
 }
 
 INCLUDE_ASM("asm/ovl/WSTAG220/nonmatchings/WSTAG220", func_800A645C);
 
-void func_800A6A18(void) {
-    func_80014504(func_800A645C, 0x64, 0x14);
+Obj *func_800A6A18(void) {
+    return func_80014504(func_800A645C, 0x64, 0x14);
 }
 
 INCLUDE_ASM("asm/ovl/WSTAG220/nonmatchings/WSTAG220", func_800A6A44);
 
-void func_800A7000(void) {
-    func_80014504(func_800A6A44, 0x64, 0x14);
+Obj *func_800A7000(void) {
+    return func_80014504(func_800A6A44, 0x64, 0x14);
 }
 
 void func_800A702C(void *arg0) {
