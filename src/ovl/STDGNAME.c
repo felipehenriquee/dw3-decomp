@@ -172,12 +172,13 @@ void func_8008656C(void *arg0) {
     M2C_FIELD(temp_v0, M2C_UNK (**)(void *, M2C_UNK, M2C_UNK), 0x64)(temp_v0, 0, 0x1E);
 }
 
-void func_800865B0(void) {
+Obj *func_800865B0(void) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_8008645C, 0x6C, 0x10);
     M2C_FIELD(temp_v0, void (**)(void *), 0x68) = func_8008656C;
     M2C_FIELD(temp_v0, s32 *, 0x50) = 0x1000;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_800865F0);

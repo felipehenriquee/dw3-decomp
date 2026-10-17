@@ -81,13 +81,14 @@ void func_80083164(u8 *a) {
     }
 }
 
-void func_80083218(void) {
+Obj *func_80083218(void) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80083164, 0x68, 0);
     M2C_FIELD(temp_v0, s32 (**)(), 0x64) = func_80082F98;
     M2C_FIELD(temp_v0, s32 *, 0x50) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x54) = 6;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80083260);
@@ -153,12 +154,13 @@ INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80084EC4);
 
 INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_800857F0);
 
-void func_80085B24(void) {
+Obj *func_80085B24(void) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_800857F0, 0xA0, 0x1C);
     M2C_FIELD(temp_v0, s32 *, 0x50) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x54) = 7;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80085B60);

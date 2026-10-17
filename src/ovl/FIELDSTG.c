@@ -171,7 +171,13 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800869C8);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80086C78);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80086C9C);
+u8 *func_80086C9C(s32 a) {
+    u8 *o = func_800143DC(func_800869C8, 0x134, 0x7C, 4);
+
+    *(s32 *)(o + 0x64) = a;
+    *(void **)(o + 0x130) = func_80086C78;
+    return o;
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80086CE4);
 
@@ -226,7 +232,13 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80087854);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80087974);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80087D68);
+u8 *func_80087D68(s32 a) {
+    u8 *o = func_800143DC(func_80087974, 0x1C0, 8, 9);
+
+    *(s32 *)(o + 4) = a;
+    D_80099DD4[0] = 1;
+    return o;
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80087DB0);
 
@@ -768,13 +780,24 @@ void func_80092408(void) {
     *(s32 *)(o + 0x10C) = 0;
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8009243C);
+/* procura id na tabela de 12 bytes (0 termina) */
+s32 *func_8009243C(s32 id) {
+    s32 *e = D_8009B3E8;
+
+    while (e[0] != 0) {
+        if (e[0] == id) {
+            return e;
+        }
+        e += 3;
+    }
+    return NULL;
+}
 
 s32 func_80092484(s32 arg0) {
     s32 var_v1;
     void *temp_v0;
 
-    temp_v0 = func_8009243C();
+    temp_v0 = func_8009243C(arg0);
     var_v1 = 0;
     if (temp_v0 != NULL) {
         var_v1 = M2C_FIELD(temp_v0, s32 (**)(s32), 4)(arg0);

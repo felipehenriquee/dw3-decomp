@@ -5,7 +5,7 @@
 /* funcoes ja decompiladas */
 Obj *func_80083118(void);
 void func_80083398(void *arg0, s32 arg1, s32 arg2);
-void func_800833A4(void);
+Obj *func_800833A4(void);
 Obj *func_800835C4(void);
 Obj *func_80083748(void);
 void func_80083D38(s32 arg0);
@@ -17,7 +17,7 @@ void func_80085ECC(void *arg0, void *arg1);
 void func_80086EAC(void *arg0);
 void func_80086F60(s32 arg0);
 void func_80087AC0(s32 arg0);
-void func_800882A4(void);
+Obj *func_800882A4(void);
 void func_80088438(void *arg0, s32 arg1);
 s32 func_800884CC(Fade *f);
 void func_80088538(Lerp *l, s32 from, s32 to, s32 n);

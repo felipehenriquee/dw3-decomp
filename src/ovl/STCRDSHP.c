@@ -100,13 +100,14 @@ void func_80085580(u8 *a) {
     }
 }
 
-void func_80085634(void) {
+Obj *func_80085634(void) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80085580, 0x68, 0);
     M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32), 0x64) = func_800853B4;
     M2C_FIELD(temp_v0, s32 *, 0x50) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x54) = 0;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80085678);

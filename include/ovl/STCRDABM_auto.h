@@ -6,7 +6,7 @@
 void func_80082D88(void *arg0, s32 arg1, s32 arg2);
 void func_80082E10(u8 *obj);
 void func_80082F54(u8 *a);
-void func_80083008(void);
+Obj *func_80083008(void);
 void func_80083114(void *arg0, s32 arg1);
 void func_8008314C(void *arg0);
 void func_80083A78(s32 arg0);

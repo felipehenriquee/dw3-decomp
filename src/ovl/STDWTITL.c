@@ -264,12 +264,13 @@ s32 func_80085F38(void *arg0) {
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80085F44);
 
-void func_80086018(void) {
+Obj *func_80086018(void) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80085F44, 0x60, 0);
     M2C_FIELD(temp_v0, s32 (**)(s32), 0x58) = func_80085F0C;
     M2C_FIELD(temp_v0, s32 (**)(void *), 0x5C) = func_80085F38;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_8008605C);

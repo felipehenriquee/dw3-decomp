@@ -20,12 +20,13 @@ void func_80083398(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x60) = arg2;
 }
 
-void func_800833A4(void) {
+Obj *func_800833A4(void) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80083144, 0x84, 0);
     M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32), 0x7C) = func_80083310;
     M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32), 0x80) = func_80083398;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_800833E8);
@@ -201,12 +202,13 @@ INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80088070);
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80088138);
 
-void func_800882A4(void) {
+Obj *func_800882A4(void) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80088138, 0x6C, 0x28);
     M2C_FIELD(temp_v0, s32 *, 0x50) = 0x1001;
     M2C_FIELD(temp_v0, s32 *, 0x54) = 5;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_800882E0);

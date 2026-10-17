@@ -81,13 +81,14 @@ void func_80083510(u8 *a) {
     }
 }
 
-void func_800835C4(void) {
+Obj *func_800835C4(void) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80083510, 0x68, 0);
     M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32), 0x64) = func_80083344;
     M2C_FIELD(temp_v0, s32 *, 0x50) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x54) = 6;
+    return temp_v0;
 }
 
 void func_8008360C(void *arg0, void *arg1) {

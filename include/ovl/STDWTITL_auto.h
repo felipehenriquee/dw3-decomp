@@ -29,7 +29,7 @@ void func_80085C68(s16 arg0);
 s32 func_80085CD4(s32 arg0);
 void func_80085F0C(void *arg0);
 s32 func_80085F38(void *arg0);
-void func_80086018(void);
+Obj *func_80086018(void);
 void func_800867A8(void *arg0);
 void func_800867E0(s32 arg0);
 void func_80086DB0(s32 arg0);

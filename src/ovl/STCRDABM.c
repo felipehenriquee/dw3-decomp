@@ -75,13 +75,14 @@ void func_80082F54(u8 *a) {
     }
 }
 
-void func_80083008(void) {
+Obj *func_80083008(void) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80082F54, 0x68, 0);
     M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32), 0x64) = func_80082D88;
     M2C_FIELD(temp_v0, s32 *, 0x50) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x54) = 0;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_8008304C);

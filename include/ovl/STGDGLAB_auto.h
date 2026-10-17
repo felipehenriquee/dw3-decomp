@@ -7,7 +7,7 @@ Obj *func_80083040(void);
 void func_8008306C(void *arg0, s32 arg1, s32 arg2);
 void func_800830F4(u8 *obj);
 void func_80083238(u8 *a);
-void func_800832EC(void);
+Obj *func_800832EC(void);
 s32 func_80083550(s32 arg0, u32 arg1);
 void *func_80085408(void *arg0);
 void func_80087018(s32 arg0, s32 arg1);
@@ -18,7 +18,7 @@ void func_8008A670(void *arg0, s32 arg1, s32 arg2);
 void func_8008A67C(void *arg0, s32 arg1, s32 arg2);
 void func_8008A690(void *arg0, s32 arg1, s32 arg2);
 void func_8008A6A4(void *arg0, s32 arg1);
-void func_8008A8C4(void);
+Obj *func_8008A8C4(void);
 void func_8008C230(s32 arg0);
 void func_8008D774(s32 arg0, s32 arg1);
 void func_8008DFA0(void *arg0);
@@ -26,7 +26,8 @@ void func_8008EABC(s32 arg0, s32 arg1, s32 arg2);
 s32 func_8008EEA0(void *arg0);
 s32 func_8008EEFC(void *arg0);
 s32 func_8008EF58(u8 *o);
-void func_8008EFD0(void);
+void func_8008EF8C(u8 *o);
+Obj *func_8008EFD0(void);
 void func_8008F22C(void *arg0, s32 arg1);
 s32 func_8008F2C0(Fade *f);
 void func_8008F32C(Lerp *l, s32 from, s32 to, s32 n);
@@ -75,7 +76,6 @@ s32 func_8008E8D0();
 s32 func_8008EB30();
 s32 func_8008EC50();
 s32 func_8008ED0C();
-s32 func_8008EF8C();
 
 /* dados acessados via $gp */
 
