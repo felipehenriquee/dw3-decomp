@@ -85,5 +85,6 @@ extern u8 D_80055BEC[];
 extern s32 D_800518B4[];
 extern struct opaque D_80044F44;
 extern s32 D_8005CCB0[];
+extern u8 D_80048AD8[];
 
 #endif /* MAIN_DATA_H */

@@ -185,4 +185,30 @@ typedef struct {
     s16 slot;
 } SndReq;
 
+/* DRAWENV da PsyQ (0x5C bytes) */
+typedef struct {
+    s16 clip[4];
+    s16 ofs[2];
+    s16 tw[4];
+    u16 tpage;
+    u8 dtd, dfe, isbg, r0, g0, b0;
+    u32 dr_env[16];
+} DrawEnv;
+
+/* POLY_F4 da PsyQ */
+typedef struct {
+    u32 tag;
+    u8 r0, g0, b0, code;
+    s16 x0, y0;
+    s16 x1, y1;
+    s16 x2, y2;
+    s16 x3, y3;
+} PolyF4;
+
+/* DR_MODE da PsyQ */
+typedef struct {
+    u32 tag;
+    u32 code[2];
+} DrMode;
+
 #endif /* MAIN_H */

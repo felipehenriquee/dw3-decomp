@@ -80,7 +80,35 @@ void func_80011DEC(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x60) = -(0xFF00 / arg2);
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80011E74);
+/* escurece a tela: retangulo semitransparente 320x256 com cor obj[0x5C] >> 8 */
+void func_80011E74(u8 *obj) {
+    u8 *sys = D_8004DE10;
+    u8 *o;
+    u32 *ot;
+    PolyF4 *p;
+    DrMode *m;
+    s32 c;
+
+    o = (*(u8 *(**)(s32))(sys + 0x17C))(*(s32 *)(obj + 0x50));
+    ot = (*(u32 *(**)(u8 *, s32))(o + 0x138))(o, *(s32 *)(obj + 0x54));
+    p = (*(PolyF4 *(**)(void))(sys + 0x158))();
+    ((u8 *)p)[3] = 5;
+    p->code = 0x2A;
+    m = (DrMode *)(p + 1);
+    c = *(s32 *)(obj + 0x5C) >> 8;
+    p->x0 = p->x2 = 0;
+    p->y0 = p->y1 = 0;
+    p->x1 = p->x3 = 320;
+    p->y2 = p->y3 = 256;
+    p->r0 = p->g0 = p->b0 = c;
+    p->tag = (p->tag & 0xFF000000) | (*ot & 0xFFFFFF);
+    *ot = (*ot & 0xFF000000) | ((u32)p & 0xFFFFFF);
+    ((u8 *)m)[3] = 1;
+    m->code[0] = 0xE1000245;
+    m->tag = (m->tag & 0xFF000000) | (*ot & 0xFFFFFF);
+    *ot = (*ot & 0xFF000000) | ((u32)m & 0xFFFFFF);
+    (*(void (**)(void *))(sys + 0x15C))((u8 *)m + 8);
+}
 
 void func_80011FB8(u8 *a) {
     s32 v;
@@ -851,7 +879,43 @@ s32 func_80015D4C(void) {
 }
 /* Warning: struct opaque is not defined (only forward-declared) */
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80015D90);
+/* avalia a condicao id da tabela D_80048AD8 (entradas de 3 bytes: id, tipo<<4|n,
+   parametro; fim em 0xFF) e compara o resultado com want */
+s32 func_80015D90(s32 id, s32 want) {
+    s32 r = 0;
+    u8 *e = D_80048AD8;
+    s32 lo, prm;
+
+    while (e[0] != 0xFF) {
+        if (e[0] == id) {
+            lo = e[1] & 0xF;
+            prm = e[2];
+            switch (e[1] & 0xF0) {
+            case 0x00:
+                r = func_8001561C(lo);
+                break;
+            case 0x10:
+                r = func_80015754(lo, prm);
+                break;
+            case 0x20:
+                r = func_80015AAC(lo, prm);
+                break;
+            case 0x30:
+                r = func_80015B9C(lo, prm);
+                break;
+            case 0x40:
+                r = func_80015BD8(lo, prm);
+                break;
+            case 0x50:
+                r = func_80015D4C();
+                break;
+            }
+            break;
+        }
+        e += 3;
+    }
+    return want == r;
+}
 
 /* compara com o valor em D_8004B370 (igual se arg1, diferente se nao) */
 s32 func_80015EC8(s32 arg0, s32 arg1) {
@@ -2495,7 +2559,34 @@ void func_8001DDDC(Unk8001DDA0 *db) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001DE68);
+/* desenha o quadro: DRAWENV do contexto (descendo 256 linhas no buffer 1),
+   encadeado no fim da OT, e DrawOTag */
+void func_8001DE68(Unk8001DDA0 *ctx) {
+    DrawEnv env;
+    u32 *ot;
+    u32 *last;
+    u32 *prim;
+    u8 *sys;
+
+    env = *(DrawEnv *)ctx;
+    env.ofs[0] = *(s16 *)((u8 *)ctx + 0x6C);
+    env.ofs[1] = *(s16 *)((u8 *)ctx + 0x6E);
+    func_8001DDDC(ctx);
+    sys = D_8004DE10;
+    prim = *(u32 **)(sys + 0x20);
+    ot = (u32 *)ctx->ot[*(s32 *)(sys + 0x34)] + ctx->otLen;
+    last = ot - 1;
+    if (*(s32 *)(sys + 0x34) != 0) {
+        env.clip[1] += 256;
+        env.ofs[1] += 256;
+    }
+    SetDrawEnv(prim, &env);
+    *prim = (*prim & 0xFF000000) | (*last & 0xFFFFFF);
+    *last = (*last & 0xFF000000) | ((u32)prim & 0xFFFFFF);
+    prim += 16;
+    *(u32 **)(sys + 0x20) = prim;
+    DrawOTag(last);
+}
 
 u32 *func_8001DFA8(Unk8001DDA0 *arg0, s32 arg1) {
     return (u32 *)arg0->ot[D_8004DE44[0]] + arg1;

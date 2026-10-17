@@ -32,3 +32,4 @@
 80013ADC 80013ADC.c (entrada mais antiga; dois ponteiros de laco)
 800176AC 800176AC.c (itens equipados; ordem addu base/offset, 11 instr)
 80018310 80018310.c (init dos controles; mascara 0x7F/0xFF e registradores)
+800161D8 800161D8.c (inventario: base compartilhada no ramo de remocao, 5 instr)
