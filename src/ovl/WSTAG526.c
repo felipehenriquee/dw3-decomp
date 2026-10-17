@@ -50,7 +50,9 @@ void func_800A6364(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6380);
+u8 *func_800A6380(s32 link) {
+    return func_800143DC(func_800A6178, 0x5C, 0, link);
+}
 
 Obj *func_800A63B0(void) {
     return func_80014504(func_800A6178, 0x5C, 0);
@@ -136,7 +138,9 @@ void func_800A6AF4(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6B10);
+u8 *func_800A6B10(s32 link) {
+    return func_800143DC(func_800A693C, 0x5C, 0, link);
+}
 
 Obj *func_800A6B40(void) {
     return func_80014504(func_800A693C, 0x5C, 0);

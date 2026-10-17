@@ -46,7 +46,9 @@ void func_800A6304(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG545/nonmatchings/WSTAG545", func_800A633C);
+u8 *func_800A633C(s32 link) {
+    return func_800143DC(func_800A6184, 0x58, 0, link);
+}
 
 s16 func_800A636C(s16 *st, s16 *tbl, s32 once, s32 depth) {
     s16 *e = tbl + st[2] * 2;

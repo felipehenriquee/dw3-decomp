@@ -122,7 +122,34 @@ void func_80083A78(s32 arg0) {
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
 }
 
-INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_80083AD8);
+/* estado 0: limpa a tela, cria o objeto de fundo e o objeto principal */
+void func_80083AD8(u8 *o, Obj **out) {
+    s16 r[4];
+    u8 *sys;
+    u8 *bg;
+
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        sys = D_8004DE10;
+        (*(void (**)(void))(sys + 0x150))();
+        (*(void (**)(s32))(sys + 0x154))(0xF000);
+        (*(void (**)(s32, s32, s32, s32))(sys + 0x174))(0x140, 0xF0, 0, 0);
+        r[0] = 0;
+        r[1] = 0;
+        r[2] = 0x140;
+        r[3] = 0xF0;
+        bg = (*(u8 *(**)(s16 *, s32, s32))(sys + 0x16C))(r, 3, 0x1000);
+        (*(void (**)(u8 *, s32, s32, s32))(bg + 0x12C))(bg, 0, 0, 0);
+        *out = func_8008566C();
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80083BD0(void) {
     return func_80014504(func_80083AD8, 0x50, 4);
@@ -142,12 +169,12 @@ INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_80084C38);
 
 INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_80085540);
 
-void func_8008566C(void) {
-    void *temp_v0;
+Obj *func_8008566C(void) {
+    Obj *o = func_80014504(func_80085540, 0xD8, 0x4C);
 
-    temp_v0 = func_80014504(func_80085540, 0xD8, 0x4C);
-    M2C_FIELD(temp_v0, s32 *, 0x50) = 0x1000;
-    M2C_FIELD(temp_v0, s32 *, 0x54) = 7;
+    o->unk50 = 0x1000;
+    o->unk54 = 7;
+    return o;
 }
 
 INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_800856A8);

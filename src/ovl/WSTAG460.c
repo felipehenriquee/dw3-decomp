@@ -50,7 +50,9 @@ void func_800A630C(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG460/nonmatchings/WSTAG460", func_800A6328);
+u8 *func_800A6328(s32 link) {
+    return func_800143DC(func_800A6118, 0x5C, 0, link);
+}
 
 Obj *func_800A6358(void) {
     return func_80014504(func_800A6118, 0x5C, 0);

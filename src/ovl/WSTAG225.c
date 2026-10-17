@@ -31,7 +31,9 @@ INCLUDE_ASM("asm/ovl/WSTAG225/nonmatchings/WSTAG225", func_800A5EF0);
 
 INCLUDE_ASM("asm/ovl/WSTAG225/nonmatchings/WSTAG225", func_800A6174);
 
-INCLUDE_ASM("asm/ovl/WSTAG225/nonmatchings/WSTAG225", func_800A61E0);
+u8 *func_800A61E0(s32 link) {
+    return func_800143DC(func_800A5EF0, 0x70, 0, link);
+}
 
 Obj *func_800A6210(void) {
     return func_80014504(func_800A5EF0, 0x70, 0);

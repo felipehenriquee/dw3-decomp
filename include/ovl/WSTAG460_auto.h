@@ -6,6 +6,7 @@
 void func_800A5F90(void *arg0, s32 arg1);
 s16 func_800A5FF8(s16 *st, s16 *tbl, s32 once, s32 depth);
 void func_800A630C(void *arg0);
+u8 *func_800A6328(s32 link);
 Obj *func_800A6358(void);
 s16 func_800A6384(s16 *st, s16 *tbl, s32 once, s32 depth);
 void func_800A676C(void *arg0);

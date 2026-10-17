@@ -35,7 +35,20 @@ Obj *func_800A5FCC(void) {
     return func_80014504(func_800A5ED4, 0x58, 0);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG232/nonmatchings/WSTAG232", func_800A5FF8);
+/* estado 0: cria o objeto e guarda em *out */
+void func_800A5FF8(u8 *o, Obj **out) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        *out = func_800A5FCC();
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A605C(s32 arg0) {
     void *temp_v0;

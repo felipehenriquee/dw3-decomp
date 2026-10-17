@@ -45,6 +45,12 @@ void func_8008B814(void *arg0);
 void func_8008B838(s32 arg0);
 void func_8008B8FC(void *arg0, s32 arg1);
 s32 func_8008B990(Fade *f);
+void func_8008BBD0(void);
+s32 func_8008C064(s32 i);
+s32 func_8008C0A4(s32 i);
+s32 func_8008C0C0(s32 i);
+s32 func_8008C0E4(s32 i);
+s32 func_8008C108(s32 i);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 ApplyMatrixSV();

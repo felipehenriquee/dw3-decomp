@@ -33,7 +33,19 @@ Obj *func_800A6040(void) {
     return func_80014504(func_800A5ED4, 0x5C, 0);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG645/nonmatchings/WSTAG645", func_800A606C);
+void func_800A606C(u8 *o, Obj **out) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        *out = func_800A6040();
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A60D0(s32 arg0) {
     void *temp_v0;

@@ -37,7 +37,9 @@ void func_800A6170(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG750/nonmatchings/WSTAG750", func_800A61C0);
+u8 *func_800A61C0(s32 link) {
+    return func_800143DC(func_800A5EF0, 0x70, 0, link);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG750/nonmatchings/WSTAG750", func_800A61F0);
 
@@ -99,7 +101,14 @@ s32 func_800A6688(s32 x, s32 y, s32 w, s32 h) {
 
 INCLUDE_ASM("asm/ovl/WSTAG750/nonmatchings/WSTAG750", func_800A674C);
 
-INCLUDE_ASM("asm/ovl/WSTAG750/nonmatchings/WSTAG750", func_800A69DC);
+u8 *func_800A69DC(s32 x, s32 y, s32 p) {
+    u8 *o = func_800143DC(func_800A674C, 0x6C, 0, 0x17);
+
+    *(s32 *)(o + 0x54) = x;
+    *(s32 *)(o + 0x58) = y;
+    *(s32 *)(o + 0x50) = p;
+    return o;
+}
 
 void func_800A6A38(void) {
     *D_8004B370 = 0x20;

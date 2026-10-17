@@ -471,7 +471,11 @@ INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008BAA8);
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008BB38);
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008BBD0);
+void func_8008BBD0(void) {
+    if (D_8008CFD4[0] != -1) {
+        (*(void (**)(s32))&D_80044F50)(D_8008CE3C[D_8008CFD4[0] * 4]);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008BC1C);
 
@@ -483,17 +487,29 @@ INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008BD90);
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008BE54);
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008C064);
+s32 func_8008C064(s32 i) {
+    return D_8008CE3C[i * 4];
+}
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008C080);
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008C0A4);
+s32 func_8008C0A4(s32 i) {
+    s32 *t = D_8008CE3C;
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008C0C0);
+    return (t + i * 4)[3];
+}
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008C0E4);
+s32 func_8008C0C0(s32 i) {
+    return D_8008CFCC[i * 20 + 4];
+}
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008C108);
+s32 func_8008C0E4(s32 i) {
+    return D_8008CFCC[i * 20 + 5];
+}
+
+s32 func_8008C108(s32 i) {
+    return D_8008CFCC[i * 20 + 6];
+}
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008C12C);
 

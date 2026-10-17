@@ -25,13 +25,23 @@ s16 func_800A5DE4(s16 *st, s16 *tbl, s32 depth) {
     return e[0];
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG212/nonmatchings/WSTAG212", func_800A5EBC);
+/* zera os 3 contadores e copia o segundo valor de cada tabela */
+void func_800A5EBC(u8 *o) {
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        *(s16 *)(o + i * 8 + 0x5C) = 0;
+        *(s16 *)(o + i * 8 + 0x5E) = D_800A816C[i][1];
+    }
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG212/nonmatchings/WSTAG212", func_800A5EF4);
 
 INCLUDE_ASM("asm/ovl/WSTAG212/nonmatchings/WSTAG212", func_800A6148);
 
-INCLUDE_ASM("asm/ovl/WSTAG212/nonmatchings/WSTAG212", func_800A61FC);
+u8 *func_800A61FC(s32 link) {
+    return func_800143DC(func_800A5EF4, 0x70, 0, link);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG212/nonmatchings/WSTAG212", func_800A622C);
 

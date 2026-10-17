@@ -6,12 +6,14 @@
 void func_800A5FF0(void *arg0, s32 arg1);
 s16 func_800A6058(s16 *st, s16 *tbl, s32 once, s32 depth);
 void func_800A6364(void *arg0);
+u8 *func_800A6380(s32 link);
 Obj *func_800A63B0(void);
 s16 func_800A63DC(s16 *st, s16 *tbl, s32 once, s32 depth);
 void func_800A67A4(void *arg0);
 Obj *func_800A67F0(void);
 s16 func_800A681C(s16 *st, s16 *tbl, s32 once, s32 depth);
 void func_800A6AF4(void *arg0);
+u8 *func_800A6B10(s32 link);
 Obj *func_800A6B40(void);
 s16 func_800A6B6C(s16 *st, s16 *tbl, s32 once, s32 depth);
 s32 func_800A6C8C(void *arg0, s32 arg1);

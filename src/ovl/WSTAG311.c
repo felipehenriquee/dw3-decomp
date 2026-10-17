@@ -169,7 +169,15 @@ s32 func_800A7034(s32 x, s32 y, s32 w, s32 h) {
 
 INCLUDE_ASM("asm/ovl/WSTAG311/nonmatchings/WSTAG311", func_800A70F8);
 
-INCLUDE_ASM("asm/ovl/WSTAG311/nonmatchings/WSTAG311", func_800A7388);
+/* cria o objeto de func_800A70F8 com posicao (x, y) e parametro p */
+u8 *func_800A7388(s32 x, s32 y, s32 p) {
+    u8 *o = func_800143DC(func_800A70F8, 0x6C, 0, 0x17);
+
+    *(s32 *)(o + 0x54) = x;
+    *(s32 *)(o + 0x58) = y;
+    *(s32 *)(o + 0x50) = p;
+    return o;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG311/nonmatchings/WSTAG311", func_800A73E4);
 

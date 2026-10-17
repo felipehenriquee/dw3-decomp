@@ -10,8 +10,9 @@ void func_80083008(void);
 void func_80083114(void *arg0, s32 arg1);
 void func_8008314C(void *arg0);
 void func_80083A78(s32 arg0);
+void func_80083AD8(u8 *o, Obj **out);
 Obj *func_80083BD0(void);
-void func_8008566C(void);
+Obj *func_8008566C(void);
 void func_800858A0(void *arg0, s32 arg1);
 s32 func_80085934(Fade *f);
 
@@ -27,7 +28,6 @@ s32 func_800835BC();
 s32 func_80083734();
 s32 func_80083780();
 s32 func_80083848();
-s32 func_80083AD8();
 s32 func_80083BFC();
 s32 func_80083E14();
 s32 func_800840AC();
