@@ -149,7 +149,19 @@ def apply(name, fn, path):
     if line not in src:
         print('%s nao esta pendente em src/%s.c' % (fn, name))
         return False
-    open(files[0], 'w').write(src.replace(line, body.strip(), 1))
+    src = src.replace(line, body.strip(), 1)
+    # rodata so desta funcao (strings, jump tables) que o C agora gera:
+    # sai o INCLUDE_RODATA, senao ela entra duas vezes
+    asm = open(T.p(T.asm + '/' + fn + '.s')).read()
+    for sym in sorted(set(re.findall(r'\b((?:D|jtbl)_[0-9A-F]{8})\b', asm))):
+        rl = re.search(r'^INCLUDE_RODATA\([^)]*\b%s\);\n\n?' % sym, src, re.M)
+        if not rl or re.search(r'\b%s\b' % sym, body):
+            continue
+        others = subprocess.run(['grep', '-rlw', sym, T.p(T.asm)],
+                                capture_output=True, text=True).stdout.split()
+        if all(os.path.basename(o) in (fn + '.s', sym + '.s') for o in others):
+            src = src.replace(rl.group(), '', 1)
+    open(files[0], 'w').write(src)
     if types:
         # as typedefs vao para o header: os prototipos gerados usam elas
         h = saved[3]

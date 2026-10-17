@@ -431,7 +431,28 @@ void func_80013EFC(s32 arg0) {
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80013F60);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80013FF4);
+/* libera as entradas da tabela de arquivos cujo buffer termina em addr ou depois */
+void func_80013FF4(u32 addr) {
+    Unk80044B3C *e = (Unk80044B3C *)D_80044B3C;
+    s32 i = 0;
+    u8 *cd = (u8 *)&D_80048740;
+    u8 *heap = (u8 *)&D_8004B5DC;
+    u32 end;
+
+    for (; i < 64; i++, e++) {
+        if (e->id != 0) {
+            end = e->unkC + 0x20;
+            if (end + ((*(s32 (**)(s32))(cd + 4))(e->id) << 11) >= addr) {
+                (*(void (**)(s32))(heap + 0x10))(e->unkC);
+                e->id = 0;
+                e->unkC = 0;
+                e->unk8 = 0;
+                e->unk2 = 0;
+                e->unk0 = 0;
+            }
+        }
+    }
+}
 
 s32 func_800140D8(u32 arg0) {
     s32 idx = arg0 & 0xFFFF;
@@ -1465,13 +1486,88 @@ s32 func_80018AA0(s32 arg0) {
     return 0;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80018AD8);
+/* estado do controle (PadGetState); desconectado limpa os bits da porta,
+   6 (pronto) habilita a vibracao uma vez */
+s32 func_80018AD8(u8 port) {
+    s32 st;
+    s32 m;
+
+    st = PadGetState(port & 0xFF);
+    switch (st) {
+    case 0:
+    case 1:
+        m = ((port >> 2) & 0x3C) | (port & 3);
+        *(s32 *)D_8004B7D0 = *(s32 *)D_8004B7D0 & ~m & 0xF3FFFFFF;
+        return 0;
+    case 2:
+        return st;
+    case 6:
+        if (!(*(s32 *)D_8004B7D0 & 0x8000000)) {
+            if (*(s32 *)D_8004B7D0 & 0x4000000) {
+                *(s32 *)D_8004B7D0 |= 0x8000000;
+            } else if (func_80019148(port & 0xFF) != 0) {
+                *(s32 *)D_8004B7D0 |= 0x4000000;
+            }
+        }
+        return st;
+    case 3:
+    case 4:
+    case 5:
+    default:
+        return 0;
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80018BCC);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80018F44);
+/* le o controle da porta; sem dados (ou desconectado) zera os botoes
+   e retorna 0 */
+s32 func_80018F44(s32 port, u8 *buf) {
+    u8 n = port;
+    u8 *base;
+    u8 *p;
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001902C);
+    if (buf[0] != 0 || func_80018AD8(n) == 0) {
+        base = D_8004B7D0;
+        p = base + ((port & 3) * 0x70 + ((n >> 4) & 1) * 0x1C0);
+        *(u16 *)(p + 0x48) = 0;
+        *(u16 *)(p + 0x4A) = 0;
+        *(u16 *)(p + 0x4E) = 0;
+        return 0;
+    }
+    switch (PadInfoMode(n, 2, 0)) {
+    case 4:
+    case 7:
+        func_80019224(n);
+    }
+    func_80018BCC(n, buf, 0);
+    return 1;
+}
+
+/* liga/desliga o modo analogico do controle (so DualShock: modos 4 e 7) */
+s32 func_8001902C(s32 port, s32 on) {
+    s32 bit;
+    s32 mode;
+    u32 n = port & 0xFF;
+
+    if (func_80018AD8(n) != 0) {
+        mode = PadInfoMode(n, 2, 0);
+        if (mode == 4 || mode == 7) {
+            bit = (n >> 4) * 4 | (port & 3);
+            if (on) {
+                *(s32 *)D_8004B7D0 |= 1 << bit;
+                PadSetMainMode(n, PadInfoMode(n, 3, 0), 3);
+            } else {
+                *(s32 *)D_8004B7D0 &= ~(1 << bit);
+                PadSetMainMode(n, PadInfoMode(n, 3, 0), 2);
+            }
+            *(s32 *)D_8004B7D0 &= 0xF3FFFFFF;
+            return 1;
+        }
+        return 0;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80019148);
 
@@ -1725,7 +1821,29 @@ s32 func_8001A6E8(void *arg0, ScriptCtx *ctx) {
     return 0;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001A73C);
+/* comando de script: repete o bloco w[0xBF] vezes (contador em loop+0x18) */
+s32 func_8001A73C(u8 *w, ScriptCtx *ctx, u8 *loop) {
+    s16 n = ++*(s16 *)(loop + 0x18);
+
+    if (n == 1) {
+        *(s32 *)(loop + 0x10) = ctx->pc + 2;
+    } else if (n >= w[0xBF]) {
+        *(u16 *)(w + 0xA6) = *(s32 *)(loop + 0x10);
+        if (w[0xBF] >= 2) {
+            w[0xBF]--;
+            func_80019FB0(w);
+            w[0xBF]++;
+        }
+        return 0x8000;
+    }
+    *(s16 *)(w + 0xB8) = 0;
+    if (w[0xC2] != 0) {
+        *(u16 *)(w + 0xBA) += *(u16 *)(w + 0xB6);
+    } else {
+        *(u16 *)(w + 0xBA) += (s8)(*(u8 **)(w + 0x50))[1];
+    }
+    return 0x8004;
+}
 
 s32 func_8001A82C(void *arg0, ScriptCtx *ctx) {
     if (ctx->base[ctx->pc + 2] < 5) {
@@ -1748,7 +1866,37 @@ s32 func_8001AA08(void) {
     return 0x8003;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001AA10);
+/* comando de script: le o proximo caractere do texto n da janela */
+s32 func_8001AA10(MsgWin *w, ScriptCtx *ctx, u8 *out) {
+    u32 n = ctx->base[ctx->pc + 2];
+    u8 *e = (u8 *)w + n * 12;
+    s32 c;
+    s32 r;
+
+    if (*(s32 *)(e + 0x5C) == 0) {
+        /* "メッセージがせっていされていません" */
+        func_8001968C(w, (s32)D_80010234, n);
+        return 0x8003;
+    }
+    if (*(s16 *)(e + 0x64) >= *(s16 *)(e + 0x62)) {
+        return 0x8003;
+    }
+    c = (*(s32 (**)(s32, s32, s32))&D_8004DE0C)(*(s32 *)(e + 0x5C) + *(s16 *)(e + 0x64),
+                                                e[0x66], *(s32 *)((u8 *)w + 0x50));
+    *(s16 *)(out + 0x14) = c;
+    *(s16 *)(out + 0x16) = ((u32)(c << 16) >> 24);
+    if (((u32)(c << 16) >> 24) == 2) {
+        return 0x8000;
+    }
+    if (*(s16 *)((u8 *)w + 0xAA) != 0) {
+        return func_8001A48C(w, &w->work[n], out, (u8 *)&w->work[n] + 8);
+    }
+    r = func_8001A48C(w, &w->work[n], out, (u8 *)&w->work[n] + 8);
+    if (r == 1) {
+        return 2;
+    }
+    return r;
+}
 
 s32 func_8001AB30(void *arg0, ScriptCtx *ctx) {
     if (ctx->base[ctx->pc + 2] < 0xFF) {
@@ -1907,9 +2055,65 @@ void func_8001B7B8(void) {
     M2C_FIELD(temp_v0, s32 (**)(void *), 0x78) = func_8001B6EC;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001B814);
+/* desenha as duas metades da janela (estado 0: textura deslizando; 2: imagem fixa) */
+void func_8001B814(u8 *obj) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        s32 unk78;
+        void (*fn7C)(s32, s32);
+        s32 unk80;
+        void (*fn84)(s32, s32, s32, s32);
+        void (*fn88)(s32);
+        void (*fn8C)(s32, s32, s32);
+        s32 unk90;
+        void (*fn94)(s32, s32);
+        u8 pad98[0xA0 - 0x98];
+    } g;
+    s32 i = 0;
+    u8 *sys = (u8 *)D_80044B38;
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001B930);
+    for (; i < 2; i++) {
+        func_8001F648(&g);
+        g.fn7C(*(s32 *)(obj + 0x50), 0);
+        g.fn74(0x140, 0);
+        if (*(s32 *)(obj + 0x10) == 0) {
+            g.fn8C(*(s16 *)(obj + 0x68), 0x1000, 0x1000);
+            g.fn94(0x140 - i * 0x140, 0xC4);
+        } else if (*(s32 *)(obj + 0x10) == 2) {
+            g.fn88(*(s32 *)(obj + 0x58));
+        }
+        g.fn84((*(s32 (**)(s32))(sys + 0x424))(0x2860000), i + 8, 0, 0xA6);
+    }
+}
+
+/* desenha o icone animado (quadro troca a cada 4 tiques, 5 quadros) */
+void func_8001B930(u8 *obj) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        s32 unk78;
+        void (*fn7C)(s32, s32);
+        s32 unk80;
+        void (*fn84)(s32, s32, s32, s32);
+        void (*fn88)(s32);
+        u8 pad8C[0xA0 - 0x8C];
+    } g;
+    u8 *sys;
+
+    func_8001F648(&g);
+    g.fn7C(*(s32 *)(obj + 0x50), 0);
+    g.fn74(0x140, 0);
+    sys = D_8004DE10;
+    if ((*(s32 (**)(void))(sys + 0x188))() - *(s32 *)(obj + 0x60) >= 4) {
+        *(s32 *)(obj + 0x60) = (*(s32 (**)(void))(sys + 0x188))();
+        if (++*(s32 *)(obj + 0x64) >= 5) {
+            *(s32 *)(obj + 0x64) = 0;
+        }
+    }
+    g.fn88(*(s32 *)(obj + 0x64));
+    g.fn84((*(s32 (**)(s32))((u8 *)&D_80044F4C + 0x10))(0x2860000), 10, 0x124, 0xCD);
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001BA2C);
 

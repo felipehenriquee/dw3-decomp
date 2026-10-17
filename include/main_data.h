@@ -14,7 +14,7 @@ struct opaque;
 
 extern s32 D_800100C4 NOT_GP;
 extern s32 D_800100C8 NOT_GP;
-extern s32 D_80010234 NOT_GP;
+extern char D_80010234[];
 extern u8 D_80042BA8[];
 extern s32 D_80044F6C NOT_GP;
 extern u16 D_800474A4[];
@@ -78,5 +78,7 @@ extern s32 D_80048C6C[];
 extern s32 D_80048C8C[];
 extern s32 D_80048DA0[];
 extern s32 D_8004B370[];
+extern struct opaque D_80048740;
+extern struct opaque D_8004DE0C;
 
 #endif /* MAIN_DATA_H */

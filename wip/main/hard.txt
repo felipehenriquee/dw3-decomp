@@ -28,3 +28,5 @@
 8001C85C 8001C85C.c
 80017924 80017924.c (inventario)
 80019224 80019224.c (vibracao; mascara da porta, 5 instr)
+8001E240 8001E240.c (lista ordenada; contador do laco, 9 instr)
+80013ADC 80013ADC.c (entrada mais antiga; dois ponteiros de laco)
