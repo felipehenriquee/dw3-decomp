@@ -374,6 +374,16 @@ s32 func_80087F70(Fade *f) {
     return 0;
 }
 
-INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_80087FDC);
+void func_80087FDC(Lerp *l, s32 from, s32 to, s32 n) {
+  if (from != to)
+  {
+    l->frames = n;
+    l->acc = from << 8;
+    l->step = ((to - from) << 8) / l->frames;
+    l->cur = from;
+    l->target = to;
+    l->active = 1;
+  }
+}
 
 INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_8008801C);

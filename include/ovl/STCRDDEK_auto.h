@@ -26,6 +26,7 @@ void func_80088AC8(void);
 void func_8008A0B8(void);
 void func_8008A2D8(void *arg0, s32 arg1);
 s32 func_8008A36C(Fade *f);
+void func_8008A3D8(Lerp *l, s32 from, s32 to, s32 n);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();

@@ -75,7 +75,9 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80085F38);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80085FD0);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80086090);
+s16 func_80086090(s32 a, s32 b, s32 c) {
+    return D_800A5844[D_8005CCB0[0]][a][b][c];
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800860D4);
 

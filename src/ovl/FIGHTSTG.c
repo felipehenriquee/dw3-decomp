@@ -775,7 +775,13 @@ s8 func_8009BC14(s8 a) {
     return r;
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009BC54);
+s8 func_8009BC54(void) {
+    u8 *d = D_800A3868;
+    s8 r = func_8009BBA8(((s8 *)d)[0xAF3] + 1);
+
+    d[0xAF3] = r;
+    return r;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009BC94);
 

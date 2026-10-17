@@ -17,6 +17,7 @@ void func_80084B98(void *arg0, void *arg1);
 void func_80085B24(void);
 void func_80085C90(void *arg0, s32 arg1);
 s32 func_80085D24(Fade *f);
+void func_80085D90(Lerp *l, s32 from, s32 to, s32 n);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();

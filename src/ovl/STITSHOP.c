@@ -402,7 +402,17 @@ s32 func_8008C370(Fade *f) {
     return 0;
 }
 
-INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_8008C3DC);
+void func_8008C3DC(Lerp *l, s32 from, s32 to, s32 n) {
+  if (from != to)
+  {
+    l->frames = n;
+    l->acc = from << 8;
+    l->step = ((to - from) << 8) / l->frames;
+    l->cur = from;
+    l->target = to;
+    l->active = 1;
+  }
+}
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_8008C41C);
 

@@ -15,6 +15,7 @@ Obj *func_80083BD0(void);
 Obj *func_8008566C(void);
 void func_800858A0(void *arg0, s32 arg1);
 s32 func_80085934(Fade *f);
+void func_800859A0(Lerp *l, s32 from, s32 to, s32 n);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();

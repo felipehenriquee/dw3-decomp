@@ -28,6 +28,7 @@ void func_80084CA8(void *arg0);
 void func_80087798(s32 arg0);
 void func_80087EDC(void *arg0, s32 arg1);
 s32 func_80087F70(Fade *f);
+void func_80087FDC(Lerp *l, s32 from, s32 to, s32 n);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 ApplyMatrixSV();

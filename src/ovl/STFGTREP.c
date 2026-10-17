@@ -197,7 +197,17 @@ s32 func_80085D24(Fade *f) {
     return 0;
 }
 
-INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80085D90);
+void func_80085D90(Lerp *l, s32 from, s32 to, s32 n) {
+  if (from != to)
+  {
+    l->frames = n;
+    l->acc = from << 8;
+    l->step = ((to - from) << 8) / l->frames;
+    l->cur = from;
+    l->target = to;
+    l->active = 1;
+  }
+}
 
 INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80085DD0);
 

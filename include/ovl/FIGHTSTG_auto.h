@@ -54,6 +54,7 @@ void func_8009AB74(s32 *arg0, s32 arg1, s32 arg2);
 void func_8009B460(void *arg0, s32 arg1, s32 arg2);
 void func_8009B6E4(void *arg0);
 s8 func_8009BC14(s8 a);
+s8 func_8009BC54(void);
 void func_8009C4BC(s32 arg0);
 void func_8009C4F8(s32 arg0);
 void func_8009C534(u8 arg0);

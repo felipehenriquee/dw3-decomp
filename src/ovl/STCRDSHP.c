@@ -274,7 +274,17 @@ s32 func_80089048(Fade *f) {
     return 0;
 }
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_800890B4);
+void func_800890B4(Lerp *l, s32 from, s32 to, s32 n) {
+  if (from != to)
+  {
+    l->frames = n;
+    l->acc = from << 8;
+    l->step = ((to - from) << 8) / l->frames;
+    l->cur = from;
+    l->target = to;
+    l->active = 1;
+  }
+}
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_800890F4);
 

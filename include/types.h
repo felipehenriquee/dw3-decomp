@@ -288,4 +288,15 @@ typedef struct {
     CardSlot slot[1];
 } CardGame;
 
+/* interpolacao em ponto fixo 24.8 */
+typedef struct {
+    s32 frames;
+    s32 unk4;
+    s32 cur;
+    s32 acc;
+    s32 target;
+    s32 step;
+    s32 active;
+} Lerp;
+
 #endif /* TYPES_H */

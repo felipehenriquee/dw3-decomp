@@ -213,6 +213,17 @@ s32 func_80085934(Fade *f) {
     return 0;
 }
 
-INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_800859A0);
+/* inicia a interpolacao de from ate to em n quadros */
+void func_800859A0(Lerp *l, s32 from, s32 to, s32 n) {
+  if (from != to)
+  {
+    l->frames = n;
+    l->acc = from << 8;
+    l->step = ((to - from) << 8) / l->frames;
+    l->cur = from;
+    l->target = to;
+    l->active = 1;
+  }
+}
 
 INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_800859E0);

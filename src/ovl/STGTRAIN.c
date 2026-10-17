@@ -483,7 +483,17 @@ s32 func_8008B990(Fade *f) {
     return 0;
 }
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008B9FC);
+void func_8008B9FC(Lerp *l, s32 from, s32 to, s32 n) {
+  if (from != to)
+  {
+    l->frames = n;
+    l->acc = from << 8;
+    l->step = ((to - from) << 8) / l->frames;
+    l->cur = from;
+    l->target = to;
+    l->active = 1;
+  }
+}
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008BA3C);
 
