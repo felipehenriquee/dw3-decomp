@@ -4,6 +4,8 @@
 
 /* funcoes ja decompiladas */
 void *func_800A5EE4(s32 arg0);
+s16 func_800A5F40(s16 *st, s16 *tbl, s32 once, s32 depth);
+s32 func_800A6148(s32 x, s32 y, s32 w, s32 h);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_800143DC();
@@ -11,9 +13,7 @@ s32 func_80014504();
 s32 func_8001F648();
 s32 func_800853F8();
 s32 func_800A5DE0();
-s32 func_800A5F40();
 s32 func_800A6060();
-s32 func_800A6148();
 s32 func_800A620C();
 s32 func_800A649C();
 

@@ -43,3 +43,5 @@
 8001A2AC 8001A2AC.c (BATE na comparacao; integrado, a rodata cresce 8 bytes: alinhamento da jtbl_80010274 gerada pelo C)
 8001D264 8001D264.c (decodifica caractere; forma dos lacos de busca, 64 instr)
 8002006C 8002006C.c (comando de som; registradores s3-s8)
+8001851C 8001851C.c (leitura por vsync; laco externo com ponteiros, ~45 instr)
+80019FB0 80019FB0.c (pula bloco do script; arvore dos switches)

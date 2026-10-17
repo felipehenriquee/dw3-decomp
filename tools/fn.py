@@ -6,7 +6,7 @@ Uso:
   python3 -I tools/fn.py <nome> <func> apply <arq.c>   integra e roda o make
 
 <arq.c> tem a funcao e, se precisar, typedefs e declaracoes `extern` de
-dados no topo. No apply, as typedefs vao para include/<nome>.h, as
+dados no topo. No apply, as typedefs vao para include/types.h, as
 declaracoes de simbolos D_ para include/<nome>_data.h (substituindo a
 anterior) e o resto entra em src/<nome>.c no lugar do INCLUDE_ASM. Se o
 make nao bater, tudo volta como estava.
@@ -142,7 +142,7 @@ def apply(name, fn, path):
     types, code = split_types(open(path).read())
     decls, body = split_decls(code)
     T = Target(name)
-    files = [T.p(T.src), T.p(T.auto), T.p(T.data), T.p(T.hdr)]
+    files = [T.p(T.src), T.p(T.auto), T.p(T.data), T.p('include/types.h')]
     saved = [open(f).read() for f in files]
     src = saved[0]
     line = T.include_line(fn)
@@ -163,7 +163,8 @@ def apply(name, fn, path):
             src = src.replace(rl.group(), '', 1)
     open(files[0], 'w').write(src)
     if types:
-        # as typedefs vao para o header: os prototipos gerados usam elas
+        # as typedefs vao para include/types.h (incluido por todos): os
+        # prototipos gerados usam elas e o propagate.py leva o C a outros alvos
         h = saved[3]
         i = h.rindex('\n#endif')
         h = h[:i].rstrip() + '\n\n' + '\n\n'.join(types) + '\n' + h[i:]

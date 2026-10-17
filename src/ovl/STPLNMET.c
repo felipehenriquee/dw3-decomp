@@ -59,7 +59,24 @@ void func_80083D70(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80083E04);
+s32 func_80083E04(Fade *f) {
+    if (f->active == 0) {
+        return 1;
+    }
+    f->value += f->speed;
+    if (f->speed > 0) {
+        if (f->value > 0x1000) {
+            f->value = 0x1000;
+            f->active = 0;
+            return 1;
+        }
+    } else if (f->value < 0) {
+        f->value = 0;
+        f->active = 0;
+        return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80083E70);
 
@@ -209,7 +226,24 @@ void func_80088438(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_800884CC);
+s32 func_800884CC(Fade *f) {
+    if (f->active == 0) {
+        return 1;
+    }
+    f->value += f->speed;
+    if (f->speed > 0) {
+        if (f->value > 0x1000) {
+            f->value = 0x1000;
+            f->active = 0;
+            return 1;
+        }
+    } else if (f->value < 0) {
+        f->value = 0;
+        f->active = 0;
+        return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80088538);
 

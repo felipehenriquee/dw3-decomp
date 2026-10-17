@@ -20,4 +20,6 @@ typedef unsigned long long u64;
 #define NULL 0
 #endif
 
+#include "types.h"
+
 #endif /* COMMON_H */

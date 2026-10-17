@@ -3,6 +3,7 @@
 #define WSTAG212_AUTO_H
 
 /* funcoes ja decompiladas */
+s16 func_800A5DE4(s16 *st, s16 *tbl, s32 depth);
 void *func_800A63DC(s32 arg0);
 void func_800A6438(void);
 void func_800A6494(void);
@@ -12,7 +13,6 @@ void func_800A64A4(void);
 s32 func_800143DC();
 s32 func_80014504();
 s32 func_800853F8();
-s32 func_800A5DE4();
 s32 func_800A5EBC();
 s32 func_800A5EF4();
 s32 func_800A622C();

@@ -33,6 +33,7 @@ void func_800867A8(void *arg0);
 void func_800867E0(s32 arg0);
 void func_80086DB0(s32 arg0);
 void func_80086FA0(void *arg0, s32 arg1);
+s32 func_80087034(Fade *f);
 void func_8008714C(s32 arg0);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */

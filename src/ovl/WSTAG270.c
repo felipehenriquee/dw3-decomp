@@ -54,4 +54,21 @@ void func_800A6C08(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG270/nonmatchings/WSTAG270", func_800A6C9C);
+s32 func_800A6C9C(Fade *f) {
+    if (f->active == 0) {
+        return 1;
+    }
+    f->value += f->speed;
+    if (f->speed > 0) {
+        if (f->value > 0x1000) {
+            f->value = 0x1000;
+            f->active = 0;
+            return 1;
+        }
+    } else if (f->value < 0) {
+        f->value = 0;
+        f->active = 0;
+        return 1;
+    }
+    return 0;
+}

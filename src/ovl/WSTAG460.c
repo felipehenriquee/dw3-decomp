@@ -13,7 +13,33 @@ void func_800A5F90(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/ovl/WSTAG460/nonmatchings/WSTAG460", func_800A5FC8);
 
-INCLUDE_ASM("asm/ovl/WSTAG460/nonmatchings/WSTAG460", func_800A5FF8);
+s16 func_800A5FF8(s16 *st, s16 *tbl, s32 once, s32 depth) {
+    s16 *e = tbl + st[2] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[3] -= dt;
+    }
+    if (st[3] <= 0) {
+        st[2]++;
+        e += 2;
+        st[3] += e[1];
+        if (once) {
+            if (e[0] == 0xFF) {
+                return 0xFF;
+            }
+        } else if (e[0] == 0xFF) {
+            e = tbl;
+            st[2] = 0;
+            st[3] += e[1];
+        }
+        func_800A5FF8(st, tbl, once, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG460/nonmatchings/WSTAG460", func_800A6118);
 
@@ -30,7 +56,33 @@ void func_800A6358(void) {
     func_80014504(func_800A6118, 0x5C, 0);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG460/nonmatchings/WSTAG460", func_800A6384);
+s16 func_800A6384(s16 *st, s16 *tbl, s32 once, s32 depth) {
+    s16 *e = tbl + st[2] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[3] -= dt;
+    }
+    if (st[3] <= 0) {
+        st[2]++;
+        e += 2;
+        st[3] += e[1];
+        if (once) {
+            if (e[0] == 0xFF) {
+                return 0xFF;
+            }
+        } else if (e[0] == 0xFF) {
+            e = tbl;
+            st[2] = 0;
+            st[3] += e[1];
+        }
+        func_800A6384(st, tbl, once, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG460/nonmatchings/WSTAG460", func_800A64A4);
 
@@ -47,7 +99,33 @@ void func_800A67B8(void) {
     func_80014504(func_800A64A4, 0x64, 0);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG460/nonmatchings/WSTAG460", func_800A67E4);
+s16 func_800A67E4(s16 *st, s16 *tbl, s32 once, s32 depth) {
+    s16 *e = tbl + st[2] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[3] -= dt;
+    }
+    if (st[3] <= 0) {
+        st[2]++;
+        e += 2;
+        st[3] += e[1];
+        if (once) {
+            if (e[0] == 0xFF) {
+                return 0xFF;
+            }
+        } else if (e[0] == 0xFF) {
+            e = tbl;
+            st[2] = 0;
+            st[3] += e[1];
+        }
+        func_800A67E4(st, tbl, once, depth + 1);
+    }
+    return e[0];
+}
 
 s32 func_800A6904(void *arg0, s32 arg1) {
     s32 var_a1;

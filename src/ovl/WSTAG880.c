@@ -3,9 +3,52 @@
 #include "WSTAG880_auto.h"
 #include "WSTAG880_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG880/nonmatchings/WSTAG880", func_800A5DE0);
+void func_800A5DE0(MapPtOut *out, MapPtList **list, s32 x, s32 y) {
+    MapPtList *l;
+    MapPt *p;
 
-INCLUDE_ASM("asm/ovl/WSTAG880/nonmatchings/WSTAG880", func_800A5EE0);
+    for (;;) {
+        l = *list;
+        if (l == NULL) {
+            return;
+        }
+        if (l->x == x && l->y == y) {
+            break;
+        }
+        list++;
+    }
+    p = l->pts;
+    out->v0 = p->v0;
+    out->v3 = p->v3;
+    out->v4 = p->v4;
+    out->v5 = p->v5;
+    out->v1 = p->v1;
+    out->v2 = p->v2;
+    while (p->next != NULL) {
+        p = p->next;
+        out++;
+        out->v0 = p->v0;
+        out->v3 = p->v3;
+        out->v4 = p->v4;
+        out->v5 = p->v5;
+        out->v1 = p->v1;
+        out->v2 = p->v2;
+    }
+}
+
+void func_800A5EE0(u8 *o) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        func_800A5DE0(D_80099D94[0], D_800A64C4, D_80048D34[0x22], D_80048D34[0x23]);
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A5F54(s32 arg0) {
     void *temp_v0;

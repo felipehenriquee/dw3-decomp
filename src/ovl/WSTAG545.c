@@ -16,7 +16,27 @@ void func_800A6054(s32 arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(temp_v0, s32 *, 0x54) = arg2;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG545/nonmatchings/WSTAG545", func_800A60AC);
+s16 func_800A60AC(s16 *st, s16 *tbl, s32 depth) {
+    s16 *e = tbl + st[2] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[3] -= dt;
+    }
+    if (st[3] <= 0) {
+        st[2]++;
+        e += 2;
+        st[3] += e[1];
+        if (e[0] == 0xFF) {
+            return 0xFF;
+        }
+        func_800A60AC(st, tbl, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG545/nonmatchings/WSTAG545", func_800A6184);
 
@@ -28,7 +48,33 @@ void func_800A6304(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/ovl/WSTAG545/nonmatchings/WSTAG545", func_800A633C);
 
-INCLUDE_ASM("asm/ovl/WSTAG545/nonmatchings/WSTAG545", func_800A636C);
+s16 func_800A636C(s16 *st, s16 *tbl, s32 once, s32 depth) {
+    s16 *e = tbl + st[2] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[3] -= dt;
+    }
+    if (st[3] <= 0) {
+        st[2]++;
+        e += 2;
+        st[3] += e[1];
+        if (once) {
+            if (e[0] == 0xFF) {
+                return 0xFF;
+            }
+        } else if (e[0] == 0xFF) {
+            e = tbl;
+            st[2] = 0;
+            st[3] += e[1];
+        }
+        func_800A636C(st, tbl, once, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG545/nonmatchings/WSTAG545", func_800A648C);
 

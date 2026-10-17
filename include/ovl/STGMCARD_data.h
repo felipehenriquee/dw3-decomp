@@ -6,5 +6,6 @@
 struct opaque;
 extern s32 D_80088798 NOT_GP;
 extern s32 D_80055C48[];
+extern u8 D_8004DE10[];
 
 #endif /* STGMCARD_DATA_H */

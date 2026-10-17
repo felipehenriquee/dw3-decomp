@@ -5,6 +5,7 @@
 /* funcoes ja decompiladas */
 void func_80083318(void);
 void func_80083344(void *arg0, s32 arg1, s32 arg2);
+void func_800833CC(u8 *obj);
 void func_80083510(u8 *a);
 void func_800835C4(void);
 void func_8008360C(void *arg0, void *arg1);
@@ -25,6 +26,7 @@ void func_8008B484(s32 arg0, s32 arg1);
 void func_8008B524(void *arg0, void *arg1);
 void *func_8008C118(void);
 void func_8008C2DC(void *arg0, s32 arg1);
+s32 func_8008C370(Fade *f);
 s32 func_8008C4CC(s32 arg0, M2C_UNK arg1);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
@@ -34,7 +36,6 @@ s32 func_8001B364();
 s32 func_8001F648();
 s32 func_8001FFA8();
 s32 func_8008321C();
-s32 func_800833CC();
 s32 func_800836F8();
 s32 func_80083810();
 s32 func_80083970();

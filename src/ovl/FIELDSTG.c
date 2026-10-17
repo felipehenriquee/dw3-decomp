@@ -119,7 +119,28 @@ void func_80085AC4(s32 arg0) {
     M2C_FIELD(func_80014504(func_80085590, 0x6C, 0), s32 *, 0x50) = arg0;
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80085AFC);
+/* animacao sem laco: no fim (0xFF) para e retorna 0xFF */
+s16 func_80085AFC(s16 *st, s16 *tbl, s32 depth) {
+    s16 *e = tbl + st[2] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[3] -= dt;
+    }
+    if (st[3] <= 0) {
+        st[2]++;
+        e += 2;
+        st[3] += e[1];
+        if (e[0] == 0xFF) {
+            return 0xFF;
+        }
+        func_80085AFC(st, tbl, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80085BD4);
 
@@ -660,7 +681,28 @@ void func_80091FDC(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092070);
+/* passo de um fade: soma p[1] em p[2] ate 0x1000 (subindo) ou 0 (descendo);
+   retorna 1 quando termina */
+s32 func_80092070(s32 *p) {
+    s32 v;
+
+    if (p[3] == 0) {
+        return 1;
+    }
+    p[2] = v = p[2] + p[1];
+    if (p[1] > 0) {
+        if (v > 0x1000) {
+            p[2] = 0x1000;
+            p[3] = 0;
+            return 1;
+        }
+    } else if (v < 0) {
+        p[2] = 0;
+        p[3] = 0;
+        return 1;
+    }
+    return 0;
+}
 
 s32 func_800920DC(s32 arg0) {
     return (&D_80099E00)[arg0];

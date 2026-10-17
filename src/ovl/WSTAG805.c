@@ -30,7 +30,22 @@ INCLUDE_ASM("asm/ovl/WSTAG805/nonmatchings/WSTAG805", func_800A641C);
 
 INCLUDE_ASM("asm/ovl/WSTAG805/nonmatchings/WSTAG805", func_800A644C);
 
-INCLUDE_ASM("asm/ovl/WSTAG805/nonmatchings/WSTAG805", func_800A65A0);
+s32 func_800A65A0(s32 x, s32 y, s32 w, s32 h) {
+    s16 r[4];
+    u8 *o = (*(u8 *(**)(s32))&D_8004DF8C)(0x1002);
+
+    (*(void (**)(u8 *, s16 *))(o + 0x128))(o, r);
+    if (x + w < r[0]) {
+        return 0;
+    }
+    if (r[0] + r[2] < x) {
+        return 0;
+    }
+    if (y + h < r[1]) {
+        return 0;
+    }
+    return r[1] + r[3] >= y;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG805/nonmatchings/WSTAG805", func_800A6664);
 

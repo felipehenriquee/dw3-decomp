@@ -40,7 +40,24 @@ void func_800A5FFC(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG924/nonmatchings/WSTAG924", func_800A6090);
+s32 func_800A6090(Fade *f) {
+    if (f->active == 0) {
+        return 1;
+    }
+    f->value += f->speed;
+    if (f->speed > 0) {
+        if (f->value > 0x1000) {
+            f->value = 0x1000;
+            f->active = 0;
+            return 1;
+        }
+    } else if (f->value < 0) {
+        f->value = 0;
+        f->active = 0;
+        return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG924/nonmatchings/WSTAG924", func_800A60FC);
 

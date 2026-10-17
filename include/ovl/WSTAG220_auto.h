@@ -9,6 +9,7 @@ void func_800A7000(void);
 void func_800A702C(void *arg0);
 void *func_800A7074(s32 arg0);
 void func_800A7230(void *arg0, s32 arg1);
+s32 func_800A72C4(Fade *f);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();

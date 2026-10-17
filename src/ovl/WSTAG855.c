@@ -3,7 +3,38 @@
 #include "WSTAG855_auto.h"
 #include "WSTAG855_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG855/nonmatchings/WSTAG855", func_800A5DE4);
+void func_800A5DE4(MapPtOut *out, MapPtList **list, s32 x, s32 y) {
+    MapPtList *l;
+    MapPt *p;
+
+    for (;;) {
+        l = *list;
+        if (l == NULL) {
+            return;
+        }
+        if (l->x == x && l->y == y) {
+            break;
+        }
+        list++;
+    }
+    p = l->pts;
+    out->v0 = p->v0;
+    out->v3 = p->v3;
+    out->v4 = p->v4;
+    out->v5 = p->v5;
+    out->v1 = p->v1;
+    out->v2 = p->v2;
+    while (p->next != NULL) {
+        p = p->next;
+        out++;
+        out->v0 = p->v0;
+        out->v3 = p->v3;
+        out->v4 = p->v4;
+        out->v5 = p->v5;
+        out->v1 = p->v1;
+        out->v2 = p->v2;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG855/nonmatchings/WSTAG855", func_800A5EE4);
 

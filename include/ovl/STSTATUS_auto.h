@@ -6,6 +6,7 @@
 void func_80083654(void);
 void func_80084C48(s32 arg0);
 void func_80084C90(void *arg0, s32 arg1, s32 arg2);
+void func_80084D18(u8 *obj);
 void func_80084E5C(u8 *a);
 void func_80084F10(void);
 void func_80086450(s32 arg0);
@@ -24,6 +25,7 @@ void func_80099450(void *arg0, s32 arg1, s32 arg2);
 void func_80099464(void *arg0, s32 arg1);
 void func_80099684(void);
 void func_80099D5C(void *arg0, s32 arg1);
+s32 func_80099DF0(Fade *f);
 s32 func_80099F5C(s32 arg0, s32 arg1);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
@@ -40,7 +42,6 @@ s32 func_80083B58();
 s32 func_80083C94();
 s32 func_80084238();
 s32 func_80084A98();
-s32 func_80084D18();
 s32 func_80084F54();
 s32 func_8008519C();
 s32 func_800853E0();

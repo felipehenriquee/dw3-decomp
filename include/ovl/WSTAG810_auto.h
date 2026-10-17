@@ -6,6 +6,8 @@
 void func_800A6178(void *arg0, s32 arg1);
 void func_800A6278(s16 arg0);
 void *func_800A6418(s32 arg0);
+s16 func_800A6474(s16 *st, s16 *tbl, s32 once, s32 depth);
+s32 func_800A667C(s32 x, s32 y, s32 w, s32 h);
 void func_800A6BDC(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
@@ -18,9 +20,7 @@ s32 func_800A61C4();
 s32 func_800A6200();
 s32 func_800A623C();
 s32 func_800A62B8();
-s32 func_800A6474();
 s32 func_800A6594();
-s32 func_800A667C();
 s32 func_800A6740();
 s32 func_800A69D0();
 s32 func_800A6A2C();

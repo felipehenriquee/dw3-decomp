@@ -3,7 +3,29 @@
 #include "WSTAG635_auto.h"
 #include "WSTAG635_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG635/nonmatchings/WSTAG635", func_800A5DE0);
+s16 func_800A5DE0(s16 *st, s16 *tbl, s32 depth) {
+    s16 *e = tbl + st[0] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[1] -= dt;
+    }
+    if (st[1] <= 0) {
+        st[0]++;
+        e += 2;
+        st[1] += e[1];
+        if (e[0] == 0xFF) {
+            e = tbl;
+            st[0] = 0;
+            st[1] += e[1];
+        }
+        func_800A5DE0(st, tbl, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG635/nonmatchings/WSTAG635", func_800A5ED4);
 
@@ -11,7 +33,39 @@ void func_800A6040(void) {
     func_80014504(func_800A5ED4, 0x5C, 0);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG635/nonmatchings/WSTAG635", func_800A606C);
+/* procura em list a entrada de (x, y) e copia a lista de pontos dela em out */
+void func_800A606C(MapPtOut *out, MapPtList **list, s32 x, s32 y) {
+    MapPtList *l;
+    MapPt *p;
+
+    for (;;) {
+        l = *list;
+        if (l == NULL) {
+            return;
+        }
+        if (l->x == x && l->y == y) {
+            break;
+        }
+        list++;
+    }
+    p = l->pts;
+    out->v0 = p->v0;
+    out->v3 = p->v3;
+    out->v4 = p->v4;
+    out->v5 = p->v5;
+    out->v1 = p->v1;
+    out->v2 = p->v2;
+    while (p->next != NULL) {
+        p = p->next;
+        out++;
+        out->v0 = p->v0;
+        out->v3 = p->v3;
+        out->v4 = p->v4;
+        out->v5 = p->v5;
+        out->v1 = p->v1;
+        out->v2 = p->v2;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG635/nonmatchings/WSTAG635", func_800A616C);
 

@@ -5,6 +5,7 @@
 /* funcoes ja decompiladas */
 void func_80082DC8(void);
 void func_80082DF4(void *arg0, s32 arg1, s32 arg2);
+void func_80082E7C(u8 *obj);
 void func_80082FC0(u8 *a);
 void func_80083074(void);
 void func_800830B8(void *arg0);
@@ -26,6 +27,7 @@ void func_80084C70(void *arg0);
 void func_80084CA8(void *arg0);
 void func_80087798(s32 arg0);
 void func_80087EDC(void *arg0, s32 arg1);
+s32 func_80087F70(Fade *f);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 ApplyMatrixSV();
@@ -38,7 +40,6 @@ s32 func_8001F648();
 s32 func_8001FCC0();
 s32 func_8001FFA8();
 s32 func_80082CD0();
-s32 func_80082E7C();
 s32 func_800830E0();
 s32 func_8008316C();
 s32 func_800836C4();

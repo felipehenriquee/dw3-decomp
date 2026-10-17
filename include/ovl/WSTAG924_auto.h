@@ -6,6 +6,7 @@
 void func_800A5E44(void *arg0);
 void *func_800A5E8C(s32 arg0);
 void func_800A5FFC(void *arg0, s32 arg1);
+s32 func_800A6090(Fade *f);
 void func_800A6A68(void);
 void func_800A7400(void);
 

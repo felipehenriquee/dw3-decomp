@@ -3,7 +3,29 @@
 #include "WSTAG310_auto.h"
 #include "WSTAG310_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A5E40);
+s16 func_800A5E40(s16 *st, s16 *tbl, s32 depth) {
+    s16 *e = tbl + st[0] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[1] -= dt;
+    }
+    if (st[1] <= 0) {
+        st[0]++;
+        e += 2;
+        st[1] += e[1];
+        if (e[0] == 0xFF) {
+            e = tbl;
+            st[0] = 0;
+            st[1] += e[1];
+        }
+        func_800A5E40(st, tbl, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A5F34);
 
@@ -11,7 +33,34 @@ void func_800A6084(void) {
     func_80014504(func_800A5F34, 0x60, 0);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A60B0);
+/* animacao com o estado em st[2], st[3] (ver func_800A6DD8) */
+s16 func_800A60B0(s16 *st, s16 *tbl, s32 once, s32 depth) {
+    s16 *e = tbl + st[2] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[3] -= dt;
+    }
+    if (st[3] <= 0) {
+        st[2]++;
+        e += 2;
+        st[3] += e[1];
+        if (once) {
+            if (e[0] == 0xFF) {
+                return 0xFF;
+            }
+        } else if (e[0] == 0xFF) {
+            e = tbl;
+            st[2] = 0;
+            st[3] += e[1];
+        }
+        func_800A60B0(st, tbl, once, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A61D0);
 
@@ -46,21 +95,105 @@ void *func_800A6D7C(s32 arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A6DD8);
+/* como a animacao em laco, mas com once != 0 para no fim (retorna 0xFF) */
+s16 func_800A6DD8(s16 *st, s16 *tbl, s32 once, s32 depth) {
+    s16 *e = tbl + st[0] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[1] -= dt;
+    }
+    if (st[1] <= 0) {
+        st[0]++;
+        e += 2;
+        st[1] += e[1];
+        if (once) {
+            if (e[0] == 0xFF) {
+                return 0xFF;
+            }
+        } else if (e[0] == 0xFF) {
+            e = tbl;
+            st[0] = 0;
+            st[1] += e[1];
+        }
+        func_800A6DD8(st, tbl, once, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A6EF8);
 
-INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A6FE8);
+/* o retangulo (x, y, w, h) toca o retangulo do objeto 0x1002? */
+s32 func_800A6FE8(s32 x, s32 y, s32 w, s32 h) {
+    s16 r[4];
+    u8 *o = (*(u8 *(**)(s32))&D_8004DF8C)(0x1002);
+
+    (*(void (**)(u8 *, s16 *))(o + 0x128))(o, r);
+    if (x + w < r[0]) {
+        return 0;
+    }
+    if (r[0] + r[2] < x) {
+        return 0;
+    }
+    if (y + h < r[1]) {
+        return 0;
+    }
+    return r[1] + r[3] >= y;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A70AC);
 
 INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A72CC);
 
-INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A7338);
+s16 func_800A7338(s16 *st, s16 *tbl, s32 once, s32 depth) {
+    s16 *e = tbl + st[0] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[1] -= dt;
+    }
+    if (st[1] <= 0) {
+        st[0]++;
+        e += 2;
+        st[1] += e[1];
+        if (once) {
+            if (e[0] == 0xFF) {
+                return 0xFF;
+            }
+        } else if (e[0] == 0xFF) {
+            e = tbl;
+            st[0] = 0;
+            st[1] += e[1];
+        }
+        func_800A7338(st, tbl, once, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A7458);
 
-INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A7540);
+s32 func_800A7540(s32 x, s32 y, s32 w, s32 h) {
+    s16 r[4];
+    u8 *o = (*(u8 *(**)(s32))&D_8004DF8C)(0x1002);
+
+    (*(void (**)(u8 *, s16 *))(o + 0x128))(o, r);
+    if (x + w < r[0]) {
+        return 0;
+    }
+    if (r[0] + r[2] < x) {
+        return 0;
+    }
+    if (y + h < r[1]) {
+        return 0;
+    }
+    return r[1] + r[3] >= y;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A7604);
 

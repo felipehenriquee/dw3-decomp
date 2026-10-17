@@ -16,6 +16,7 @@ void func_80083120(void *arg0, s32 arg1);
 void func_80083880(void);
 void func_80083AC0(void);
 void func_80085EF4(void *arg0, s32 arg1, s32 arg2);
+void func_80085F7C(u8 *obj);
 void func_800860C0(u8 *a);
 void func_80086174(void);
 void func_80086B24(void *arg0, void *arg1);
@@ -43,6 +44,7 @@ void func_8008B800(void *arg0);
 void func_8008B814(void *arg0);
 void func_8008B838(s32 arg0);
 void func_8008B8FC(void *arg0, s32 arg1);
+s32 func_8008B990(Fade *f);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 ApplyMatrixSV();
@@ -66,7 +68,6 @@ s32 func_80084838();
 s32 func_8008517C();
 s32 func_80085BB0();
 s32 func_80085DD8();
-s32 func_80085F7C();
 s32 func_800861BC();
 s32 func_800862D0();
 s32 func_800863D4();

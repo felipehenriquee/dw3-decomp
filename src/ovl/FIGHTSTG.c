@@ -230,7 +230,34 @@ void func_8008A83C(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x60) = (s32) -(0xFF00 / arg2);
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008A8C4);
+void func_8008A8C4(u8 *obj) {
+    u8 *sys = D_8004DE10;
+    u8 *o;
+    u32 *ot;
+    PolyF4 *p;
+    DrMode *m;
+    s32 c;
+
+    o = (*(u8 *(**)(s32))(sys + 0x17C))(*(s32 *)(obj + 0x50));
+    ot = (*(u32 *(**)(u8 *, s32))(o + 0x138))(o, *(s32 *)(obj + 0x54));
+    p = (*(PolyF4 *(**)(void))(sys + 0x158))();
+    ((u8 *)p)[3] = 5;
+    p->code = 0x2A;
+    m = (DrMode *)(p + 1);
+    c = *(s32 *)(obj + 0x5C) >> 8;
+    p->x0 = p->x2 = 0;
+    p->y0 = p->y1 = 0;
+    p->x1 = p->x3 = 320;
+    p->y2 = p->y3 = 256;
+    p->r0 = p->g0 = p->b0 = c;
+    p->tag = (p->tag & 0xFF000000) | (*ot & 0xFFFFFF);
+    *ot = (*ot & 0xFF000000) | ((u32)p & 0xFFFFFF);
+    ((u8 *)m)[3] = 1;
+    m->code[0] = 0xE1000245;
+    m->tag = (m->tag & 0xFF000000) | (*ot & 0xFFFFFF);
+    *ot = (*ot & 0xFF000000) | ((u32)m & 0xFFFFFF);
+    (*(void (**)(void *))(sys + 0x15C))((u8 *)m + 8);
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008AA08);
 

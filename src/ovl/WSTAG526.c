@@ -13,7 +13,33 @@ void func_800A5FF0(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6028);
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6058);
+s16 func_800A6058(s16 *st, s16 *tbl, s32 once, s32 depth) {
+    s16 *e = tbl + st[2] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[3] -= dt;
+    }
+    if (st[3] <= 0) {
+        st[2]++;
+        e += 2;
+        st[3] += e[1];
+        if (once) {
+            if (e[0] == 0xFF) {
+                return 0xFF;
+            }
+        } else if (e[0] == 0xFF) {
+            e = tbl;
+            st[2] = 0;
+            st[3] += e[1];
+        }
+        func_800A6058(st, tbl, once, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6178);
 
@@ -30,7 +56,33 @@ void func_800A63B0(void) {
     func_80014504(func_800A6178, 0x5C, 0);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A63DC);
+s16 func_800A63DC(s16 *st, s16 *tbl, s32 once, s32 depth) {
+    s16 *e = tbl + st[2] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[3] -= dt;
+    }
+    if (st[3] <= 0) {
+        st[2]++;
+        e += 2;
+        st[3] += e[1];
+        if (once) {
+            if (e[0] == 0xFF) {
+                return 0xFF;
+            }
+        } else if (e[0] == 0xFF) {
+            e = tbl;
+            st[2] = 0;
+            st[3] += e[1];
+        }
+        func_800A63DC(st, tbl, once, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A64FC);
 
@@ -47,7 +99,33 @@ void func_800A67F0(void) {
     func_80014504(func_800A64FC, 0x64, 0);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A681C);
+s16 func_800A681C(s16 *st, s16 *tbl, s32 once, s32 depth) {
+    s16 *e = tbl + st[2] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[3] -= dt;
+    }
+    if (st[3] <= 0) {
+        st[2]++;
+        e += 2;
+        st[3] += e[1];
+        if (once) {
+            if (e[0] == 0xFF) {
+                return 0xFF;
+            }
+        } else if (e[0] == 0xFF) {
+            e = tbl;
+            st[2] = 0;
+            st[3] += e[1];
+        }
+        func_800A681C(st, tbl, once, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A693C);
 
@@ -64,7 +142,33 @@ void func_800A6B40(void) {
     func_80014504(func_800A693C, 0x5C, 0);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6B6C);
+s16 func_800A6B6C(s16 *st, s16 *tbl, s32 once, s32 depth) {
+    s16 *e = tbl + st[2] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[3] -= dt;
+    }
+    if (st[3] <= 0) {
+        st[2]++;
+        e += 2;
+        st[3] += e[1];
+        if (once) {
+            if (e[0] == 0xFF) {
+                return 0xFF;
+            }
+        } else if (e[0] == 0xFF) {
+            e = tbl;
+            st[2] = 0;
+            st[3] += e[1];
+        }
+        func_800A6B6C(st, tbl, once, depth + 1);
+    }
+    return e[0];
+}
 
 s32 func_800A6C8C(void *arg0, s32 arg1) {
     s32 var_a1;

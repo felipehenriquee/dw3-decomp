@@ -3,7 +3,27 @@
 #include "WSTAG212_auto.h"
 #include "WSTAG212_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG212/nonmatchings/WSTAG212", func_800A5DE4);
+s16 func_800A5DE4(s16 *st, s16 *tbl, s32 depth) {
+    s16 *e = tbl + st[2] * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        st[3] -= dt;
+    }
+    if (st[3] <= 0) {
+        st[2]++;
+        e += 2;
+        st[3] += e[1];
+        if (e[0] == 0xFF) {
+            return 0xFF;
+        }
+        func_800A5DE4(st, tbl, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG212/nonmatchings/WSTAG212", func_800A5EBC);
 
