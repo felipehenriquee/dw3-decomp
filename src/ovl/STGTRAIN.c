@@ -121,7 +121,35 @@ void func_80085EF4(void *arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80085F7C);
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_800860C0);
+void func_800860C0(u8 *a) {
+    s32 v;
+
+    switch (*(s32 *)(a + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(void *))(a + 0x38))(a);
+        break;
+    case 1:
+        if (*(s32 *)(a + 0x10) == 0) {
+            break;
+        }
+        v = *(s32 *)(a + 0x5C) + *(s32 *)(a + 0x60);
+        *(s32 *)(a + 0x5C) = v;
+        if (*(s32 *)(a + 0x58) == 0) {
+            if (v > 0xFF00) {
+                *(s32 *)(a + 0x5C) = 0xFF00;
+                *(s32 *)(a + 0xC) = 2;
+            }
+        } else if (v < 0) {
+            *(s32 *)(a + 0x5C) = 0;
+            *(s32 *)(a + 0xC) = 2;
+        }
+    case 2:
+        func_80085F7C(a);
+    case 3:
+        break;
+    }
+}
 
 void func_80086174(void) {
     void *temp_v0;

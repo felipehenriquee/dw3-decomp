@@ -13,5 +13,9 @@ extern u8 D_800A435C[];
 extern s32 D_800A4464 NOT_GP;
 extern s32 D_800A4468 NOT_GP;
 extern s32 D_800A4780 NOT_GP;
+extern s32 D_8004B44C[];
+extern s32 D_8004DF8C[];
+extern s32 D_8005CCA8[];
+extern u8 D_800A365C[];
 
 #endif /* FIGHTSTG_DATA_H */

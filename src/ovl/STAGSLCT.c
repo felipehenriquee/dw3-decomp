@@ -37,4 +37,6 @@ INCLUDE_RODATA("asm/ovl/STAGSLCT/nonmatchings/STAGSLCT", D_800849A4);
 
 INCLUDE_ASM("asm/ovl/STAGSLCT/nonmatchings/STAGSLCT", func_80084D9C);
 
-INCLUDE_ASM("asm/ovl/STAGSLCT/nonmatchings/STAGSLCT", func_80085EA4);
+void func_80085EA4(void) {
+    func_80014504(func_80084D9C, 0, 0);
+}

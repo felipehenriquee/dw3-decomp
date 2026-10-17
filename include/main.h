@@ -170,4 +170,19 @@ typedef struct {
     s32 active;
 } Fade;
 
+/* banco de som carregado (D_80055BEC, entradas de 0x18 bytes) */
+typedef struct {
+    s32 id;
+    s16 vab;
+    s16 nseq;
+    s16 seq[8];
+} SndBank;
+
+/* pedido de carga do banco de som (D_80055BEC + 0x50) */
+typedef struct {
+    s32 *data;
+    s16 state;
+    s16 slot;
+} SndReq;
+
 #endif /* MAIN_H */

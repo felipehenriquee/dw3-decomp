@@ -24,7 +24,35 @@ void func_80083314(void *arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_8008339C);
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800834E0);
+void func_800834E0(u8 *a) {
+    s32 v;
+
+    switch (*(s32 *)(a + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(void *))(a + 0x38))(a);
+        break;
+    case 1:
+        if (*(s32 *)(a + 0x10) == 0) {
+            break;
+        }
+        v = *(s32 *)(a + 0x5C) + *(s32 *)(a + 0x60);
+        *(s32 *)(a + 0x5C) = v;
+        if (*(s32 *)(a + 0x58) == 0) {
+            if (v > 0xFF00) {
+                *(s32 *)(a + 0x5C) = 0xFF00;
+                *(s32 *)(a + 0xC) = 2;
+            }
+        } else if (v < 0) {
+            *(s32 *)(a + 0x5C) = 0;
+            *(s32 *)(a + 0xC) = 2;
+        }
+    case 2:
+        func_8008339C(a);
+    case 3:
+        break;
+    }
+}
 
 void func_80083594(void) {
     void *temp_v0;
@@ -41,7 +69,14 @@ INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800837B4);
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800838C4);
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80083934);
+void func_80083934(s32 arg0) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_800838C4, 0x70, 0);
+    M2C_FIELD(temp_v0, s32 *, 0x54) = 0x1000;
+    M2C_FIELD(temp_v0, s32 *, 0x58) = 5;
+    M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+}
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_8008397C);
 
@@ -59,7 +94,15 @@ INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80085210);
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80086574);
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_8008660C);
+void func_8008660C(s32 arg0, s32 arg1) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_80086574, 0x494, 0xD4);
+    M2C_FIELD(temp_v0, s32 *, 0x54) = 0x1000;
+    M2C_FIELD(temp_v0, s32 *, 0x58) = 6;
+    M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    M2C_FIELD(temp_v0, s32 *, 0x5C) = arg1;
+}
 
 void func_80086664(void) {
 }
@@ -117,7 +160,21 @@ void func_800887C8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = 0xA;
 }
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800887D4);
+void *func_800887D4(s32 arg0) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_800884E8, 0xF4, 0x34);
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32), 0xEC) = func_800886C8;
+    M2C_FIELD(temp_v0, void (**)(void *), 0xF0) = func_800887C8;
+    M2C_FIELD(temp_v0, s32 *, 0x54) = 0x1000;
+    M2C_FIELD(temp_v0, s32 *, 0x58) = 3;
+    M2C_FIELD(temp_v0, s32 *, 0x50) = 2;
+    M2C_FIELD(temp_v0, s32 *, 0x94) = 0xA;
+    M2C_FIELD(temp_v0, s32 *, 0x64) = -1;
+    func_80088634((s32) temp_v0, arg0);
+    func_80088628(temp_v0, 0x280, 0x100);
+    return temp_v0;
+}
 
 void func_80088874(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x58) = arg1;
@@ -142,7 +199,17 @@ void func_800888A8(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800888B0);
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80088AC8);
+void func_80088AC8(void) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_800888B0, 0x9C, 0);
+    M2C_FIELD(temp_v0, void (**)(void *, s32, s32), 0x8C) = func_80088874;
+    M2C_FIELD(temp_v0, void (**)(void *, s32, s32), 0x90) = func_80088880;
+    M2C_FIELD(temp_v0, void (**)(void *, s32, s32), 0x94) = func_80088894;
+    M2C_FIELD(temp_v0, void (**)(void *, s32), 0x98) = func_800888A8;
+    M2C_FIELD(temp_v0, s32 *, 0x50) = 0x1000;
+    M2C_FIELD(temp_v0, s32 *, 0x54) = 3;
+}
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80088B34);
 
@@ -156,7 +223,14 @@ INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80089354);
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80089E98);
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_8008A0B8);
+void func_8008A0B8(void) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_80089E98, 0x120, 0x6C);
+    M2C_FIELD(temp_v0, s32 (**)(s32), 0x11C) = func_8008924C;
+    M2C_FIELD(temp_v0, s32 *, 0x50) = 0x1000;
+    M2C_FIELD(temp_v0, s32 *, 0x54) = 7;
+}
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_8008A100);
 

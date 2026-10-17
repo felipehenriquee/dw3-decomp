@@ -55,7 +55,27 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80086D28);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80086D78);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80086EB0);
+void func_80086EB0(void *arg0, s32 arg1, s32 arg2, s8 arg3) {
+    s32 var_v1;
+    void *var_v0;
+
+    if (arg2 > 0) {
+        var_v1 = 0x27;
+        var_v0 = arg0 + 0x27;
+        do {
+            M2C_FIELD(var_v0, s8 *, 0x49E) = 0;
+            var_v1 -= 1;
+            var_v0 -= 1;
+        } while (var_v1 >= 0);
+    } else {
+        M2C_FIELD(arg0, s8 *, 0x49E) = 0;
+    }
+    func_80086A18((s32) arg0, arg1);
+    M2C_FIELD(arg0, s8 *, 0x423) = 1;
+    M2C_FIELD(arg0, s8 *, 0x499) = arg3;
+    M2C_FIELD(arg0, s32 *, 0x43C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x440) = -1;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80086F24);
 
@@ -132,7 +152,9 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008AD98);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008BAA4);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008BC6C);
+void func_8008BC6C(s32 arg0, s32 arg1, s32 arg2) {
+    func_8008BAA4(arg0, arg1, arg2, 0);
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008BC8C);
 
@@ -230,7 +252,10 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008F2D8);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008F2EC);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008F530);
+void func_8008F530(s32 arg0, s32 arg1) {
+    func_8008F2D8(arg0, arg1, -0x80, 0x10);
+    M2C_FIELD(arg0, s32 *, 0x438) = 0;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008F560);
 
@@ -396,7 +421,17 @@ void func_80096160(void *arg0) {
     M2C_FIELD(arg0, s16 *, 0x5A) = 0x1000;
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80096180);
+void func_80096180(s16 arg0, s16 arg1) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_80095FB4, 0x74, 0);
+    M2C_FIELD(temp_v0, void (**)(void *, s16, s16), 0x68) = func_80096144;
+    M2C_FIELD(temp_v0, void (**)(void *), 0x6C) = func_80096160;
+    M2C_FIELD(temp_v0, void (**)(void *), 0x70) = func_80096150;
+    M2C_FIELD(temp_v0, s16 *, 0x54) = arg0;
+    M2C_FIELD(temp_v0, s16 *, 0x56) = arg1;
+    M2C_FIELD(temp_v0, s8 *, 0x63) = 0;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800961F0);
 
@@ -495,7 +530,19 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80099DE8);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80099ED4);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80099F60);
+void func_80099F60(s32 arg0, s32 arg1) {
+    s32 temp_s0;
+    s32 temp_s2;
+
+    func_80099BE4(arg0, arg1, 0, arg0 + 0xA8);
+    func_80099BE4(arg0, arg1, 1, arg0 + 0xFC);
+    temp_s2 = arg0 + 0x60;
+    func_80099440(temp_s2, arg1, 0);
+    temp_s0 = arg0 + 0xB4;
+    func_80099440(temp_s0, arg1, 1);
+    func_80098898(temp_s2, arg1, 0);
+    func_80098898(temp_s0, arg1, 1);
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80099FFC);
 
@@ -764,9 +811,13 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009C7F8);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009C898);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009C904);
+void func_8009C904(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_8009C898(arg0, arg1, 0, arg2, /* extra? */ arg3, /* extra? */ 1);
+}
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009C938);
+void func_8009C938(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    func_8009C898(arg0, arg1, arg2, arg3, /* extra? */ arg4, /* extra? */ 0);
+}
 
 void func_8009C960(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     void *temp_a0;
@@ -932,11 +983,60 @@ s16 func_8009D140(s32 arg0) {
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009D15C);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009D310);
+void func_8009D310(s32 arg0) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_8009BBA8, 0xF48, 0x38);
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32, s32), 0xEA0) = func_8009CAE0;
+    M2C_FIELD(temp_v0, void (**)(s32, s32, s16), 0xEA4) = func_8009BE40;
+    M2C_FIELD(temp_v0, void (**)(s32, s32), 0xEA8) = func_8009BE78;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32, s32), 0xEAC) = func_8009BEAC;
+    M2C_FIELD(temp_v0, void (**)(s32, s32), 0xEB0) = func_8009BF5C;
+    M2C_FIELD(temp_v0, void (**)(void *, s32), 0xEB8) = func_8009CC4C;
+    M2C_FIELD(temp_v0, s32 (**)(s32), 0xEB4) = func_8009CDA4;
+    M2C_FIELD(temp_v0, void (**)(void *, s32, s8, s16, s32), 0xEE4) = func_8009C054;
+    M2C_FIELD(temp_v0, void (**)(void *), 0xEE8) = func_8009C0DC;
+    M2C_FIELD(temp_v0, void (**)(void *, s16), 0xEF0) = func_8009C16C;
+    M2C_FIELD(temp_v0, void (**)(void *), 0xEEC) = func_8009C124;
+    M2C_FIELD(temp_v0, void (**)(void *, s16), 0xEF4) = func_8009C174;
+    M2C_FIELD(temp_v0, void (**)(void *), 0xEF8) = func_8009C1CC;
+    M2C_FIELD(temp_v0, void (**)(void *), 0xEFC) = func_8009C214;
+    M2C_FIELD(temp_v0, void (**)(void *, s16), 0xF00) = func_8009C25C;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32), 0xED8) = func_80098864;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32, s16, s16), 0xEDC) = func_8009BFCC;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32, s8, s16, s32), 0xEE0) = func_8009C010;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32, s32), 0xF08) = func_8009C9A0;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32), 0xF0C) = func_8009CA3C;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32, s32, s32), 0xF10) = func_8009CA80;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32), 0xF2C) = func_8009C654;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32), 0xF30) = func_8009C6E8;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32), 0xF34) = func_8009C770;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32), 0xF38) = func_8009C7F8;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32), 0xF28) = func_8009C5D8;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32, s32), 0xF14) = func_8009C510;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32), 0xF18) = func_8009CDFC;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32), 0xF1C) = func_8009CE28;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32, s32), 0xF20) = func_8009C904;
+    M2C_FIELD(temp_v0, s32 (**)(), 0xF24) = func_8009C938;
+    M2C_FIELD(temp_v0, void (**)(s32, s16, s16, s32, s32), 0xF04) = func_8009CE94;
+    M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    M2C_FIELD(temp_v0, s32 (**)(s32), 0xEC4) = func_8009C350;
+    M2C_FIELD(temp_v0, s32 (**)(s32), 0xEC8) = func_8009C2D0;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32), 0xEBC) = func_8009C438;
+    M2C_FIELD(temp_v0, void (**)(s32, s32), 0xED0) = func_8009C4A4;
+    M2C_FIELD(temp_v0, void (**)(s32, s32), 0xED4) = func_8009C4D8;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32), 0xEC0) = func_8009C3C0;
+    M2C_FIELD(temp_v0, s32 (**)(s32), 0xECC) = func_8009C264;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32), 0xF3C) = func_8009CFBC;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32), 0xF40) = func_8009CF60;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32), 0xF44) = func_8009D15C;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009D540);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009D6B4);
+void func_8009D6B4(void) {
+    func_80014504(func_8009D540, 0x58, 0);
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009D6E0);
 
@@ -968,7 +1068,24 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009F04C);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009F110);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009F8C0);
+s32 func_8009F8C0(void *arg0) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (M2C_FIELD(arg0, u8 *, 0x2F9) == 0) {
+        M2C_FIELD(arg0, u8 *, 0x421) = 0xA7;
+        M2C_FIELD(arg0, s8 *, 0x2F4) = 1;
+        M2C_FIELD(arg0, u8 *, 0x2F9) = 1U;
+    } else {
+        if (M2C_FIELD(arg0, s32 *, 0x440) == 0) {
+            M2C_FIELD(arg0, s8 *, 0x2F5) = 0;
+        } else {
+            M2C_FIELD(arg0, s8 *, 0x2F5) = 1;
+        }
+        var_v1 = 1;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009F910);
 
@@ -1072,7 +1189,19 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800A2DF8);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800A2F00);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800A3240);
+void *func_800A3240(s8 arg0) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_800A2F00, 0x824, 0x1C);
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32), 0x810) = func_8009F04C;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32, s32), 0x814) = func_8009EEFC;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32), 0x818) = func_800A0754;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32), 0x81C) = func_800A0708;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32), 0x820) = func_800A3934;
+    M2C_FIELD(temp_v0, s8 *, 0x2E8) = arg0;
+    ((M2C_UNK (*)(M2C_UNK)) *D_80055C54)(0x27);
+    return temp_v0;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800A32D8);
 
@@ -1124,7 +1253,16 @@ void func_800A35B0(void *arg0) {
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800A35BC);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800A367C);
+void func_800A367C(s8 arg0) {
+    void *temp_v0;
+
+    temp_v0 = func_80014504(func_800A35BC, 0x78, 4);
+    M2C_FIELD(temp_v0, void (**)(void *, s8, s8, s8), 0x68) = func_800A3548;
+    M2C_FIELD(temp_v0, s32 (**)(s32, s32, s32, s32), 0x6C) = func_800A3558;
+    M2C_FIELD(temp_v0, s32 (**)(void *), 0x70) = func_800A35A4;
+    M2C_FIELD(temp_v0, s8 *, 0x5C) = arg0;
+    M2C_FIELD(temp_v0, void (**)(void *), 0x74) = func_800A35B0;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800A36E4);
 

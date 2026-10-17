@@ -553,7 +553,33 @@ void func_800142F4(void *arg0) {
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80014308);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_800143DC);
+/* cria um objeto: fn e a rotina de atualizacao (0x48), work bytes de area
+   de trabalho (0x24, em palavras em 0x20), 0x28-0x4C os metodos de estado;
+   com link != 0 o objeto ja entra na lista */
+u8 *func_800143DC(void (*fn)(), s32 size, s32 work, s32 link) {
+    u8 *heap = (u8 *)&D_8004B5DC;
+    u8 *o = (*(u8 *(**)(s32, s32))(heap + 0x20))(size, 2);
+
+    if (work != 0) {
+        *(s32 *)(o + 0x24) = (*(s32 (**)(s32, s32))(heap + 0x20))(work, 2);
+        *(s32 *)(o + 0x20) = work / 4;
+    }
+    *(void **)(o + 0x28) = func_80014274;
+    *(void **)(o + 0x2C) = func_80014288;
+    *(void **)(o + 0x30) = func_80014298;
+    *(void **)(o + 0x34) = func_800142A4;
+    *(void **)(o + 0x38) = func_800142AC;
+    *(void **)(o + 0x3C) = func_800142C8;
+    *(void **)(o + 0x40) = func_800142E0;
+    *(void **)(o + 0x44) = func_800142F4;
+    *(s32 *)(o + 0x48) = (s32)fn;
+    *(void **)(o + 0x4C) = func_80014308;
+    if (link != 0) {
+        *(s32 *)o = link;
+        (*(void (**)(u8 *))&D_8004B7B4)(o);
+    }
+    return o;
+}
 
 Obj *func_80014504(void (*fn)(), s32 size, s32 prio) {
     return (Obj *)func_800143DC(fn, size, prio, 0);
@@ -2298,7 +2324,34 @@ void func_8001D860(void) {
     *(s32 *)(p + 0x28) = 0;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001D8CC);
+/* configura os dois DISPENV (D_8004DE10 + 0x38): entrelacado 320x480 em
+   24 bits, buffers lado a lado ou um embaixo do outro; PAL desce 24 linhas */
+void func_8001D8CC(s32 w, s32 h, s32 dbl, s32 inter) {
+    s32 t;
+    if (dbl) {
+        if (inter) {
+            SetDefDispEnv(D_8004DE10 + 0x38, 0, 0, 320, t = 480);
+            D_8004DE10[0x48] = 1;
+            D_8004DE10[0x49] = 1;
+            SetDefDispEnv(D_8004DE10 + 0x4C, t, 0, 320, t);
+            D_8004DE10[0x5C] = 1;
+            D_8004DE10[0x5D] = 1;
+        } else {
+            SetDefDispEnv(D_8004DE10 + 0x38, 0, 0, w, h);
+            SetDefDispEnv(D_8004DE10 + 0x4C, w, 0, w, h);
+        }
+    } else {
+        SetDefDispEnv(D_8004DE10 + 0x38, 0, 0, w, h);
+        SetDefDispEnv(D_8004DE10 + 0x4C, 0, 256, w, h);
+    }
+    if (D_8005CCB0[0]) {
+        u8 *p = D_8004DE10;
+        *(s16 *)(p + 0x42) = 24;
+        *(s16 *)(p + 0x56) = 24;
+    }
+    GsInit3D();
+    SetGeomOffset(0, 0);
+}
 
 void func_8001DA00(s32 arg0, M2C_UNK arg1, M2C_UNK arg2, s32 arg3) {
     SetDefDispEnv(D_8004DE48, arg0, arg1, arg2, arg3);
@@ -2852,7 +2905,31 @@ s32 func_8002043C(void) {
     return (s16) *D_80055C40 != 0;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8002044C);
+/* troca o banco de som do slot: fecha as sequencias e o VAB atuais e pede
+   a carga do banco id */
+void func_8002044C(s32 slot, s32 id) {
+    SndBank *b = (SndBank *)(D_80055BEC + slot * 0x18);
+    SndReq *req = (SndReq *)(D_80055BEC + 0x50);
+    s32 i, j;
+    s32 *p;
+
+    b->id = id;
+    if (b->vab != -1) {
+        for (i = 0; i < b->nseq; i++) {
+            for (j = 0; j < 16; j++) {
+                SsSepStop(b->seq[i], (s16)j);
+            }
+            SsSepClose(b->seq[i]);
+        }
+        SsVabClose(b->vab);
+        b->vab = -1;
+    }
+    req->state = 1;
+    p = (s32 *)D_800518B4[id];
+    req->slot = slot;
+    req->data = p;
+    (*(void (**)(s32))&D_80044F44)(p[1]);
+}
 
 void func_80020574(s32 id) {
     u8 *p = D_800519EC;

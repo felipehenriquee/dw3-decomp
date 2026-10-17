@@ -5,7 +5,9 @@
 /* funcoes ja decompiladas */
 void func_80082DC8(void);
 void func_80082DF4(void *arg0, s32 arg1, s32 arg2);
+void func_80082FC0(u8 *a);
 void func_80083074(void);
+void func_800830B8(void *arg0);
 void func_80083B6C(s32 arg0);
 void func_80083BD8(void *arg0);
 void func_80083C0C(void *arg0, s32 arg1, s32 arg2);
@@ -37,8 +39,6 @@ s32 func_8001FCC0();
 s32 func_8001FFA8();
 s32 func_80082CD0();
 s32 func_80082E7C();
-s32 func_80082FC0();
-s32 func_800830B8();
 s32 func_800830E0();
 s32 func_8008316C();
 s32 func_800836C4();

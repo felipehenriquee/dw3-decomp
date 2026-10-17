@@ -20,5 +20,10 @@ extern s32 D_8009B3C4 NOT_GP;
 extern s32 D_8009B6C4 NOT_GP;
 extern s32 D_8009B8F8 NOT_GP;
 extern s32 D_8009B8FC NOT_GP;
+extern s32 D_80044F5C[];
+extern s32 D_80099838[];
+extern s32 D_80099DC8[];
+extern s32 D_80099DD8[];
+extern u8 D_8009A458[];
 
 #endif /* FIELDSTG_DATA_H */

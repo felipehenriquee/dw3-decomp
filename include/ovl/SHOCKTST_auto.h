@@ -4,6 +4,7 @@
 
 /* funcoes ja decompiladas */
 void func_80082E98(void);
+void func_8008499C(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 atoi();
@@ -28,7 +29,6 @@ s32 func_800842E0();
 s32 func_8008436C();
 s32 func_800843F0();
 s32 func_80084714();
-s32 func_8008499C();
 s32 strcspn();
 
 /* dados acessados via $gp */

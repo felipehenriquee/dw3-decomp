@@ -30,3 +30,5 @@
 80019224 80019224.c (vibracao; mascara da porta, 5 instr)
 8001E240 8001E240.c (lista ordenada; contador do laco, 9 instr)
 80013ADC 80013ADC.c (entrada mais antiga; dois ponteiros de laco)
+800176AC 800176AC.c (itens equipados; ordem addu base/offset, 11 instr)
+80018310 80018310.c (init dos controles; mascara 0x7F/0xFF e registradores)
