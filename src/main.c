@@ -1165,7 +1165,20 @@ s32 func_80016D94(u32 arg0) {
     return ((Unk80048D34 *)D_80048D34)->unk70[arg0];
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80016DC0);
+/* escolhe o grupo arg0 (3 ids de D_8004B490) e marca os 3 personagens */
+void func_80016DC0(s32 arg0) {
+    s32 i;
+    s16 v;
+    u8 *base;
+
+    for (i = 0; i < 3; i++) {
+        v = D_8004B490[i + arg0 * 3];
+        base = D_80048D34;
+        ((Unk80048D34 *)base)->unk70[i] = v;
+        *(s32 *)((u8 *)&((Unk80048D34_3DC *)base)[v] + 0x760) = v + 3;
+    }
+    D_8004B374[0] = arg0;
+}
 
 void func_80016E2C(s32 arg0, s32 arg1) {
     u8 *temp_a0;
@@ -1317,9 +1330,33 @@ INCLUDE_ASM("asm/nonmatchings/main", func_80017898);
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80017924);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80017A1C);
+/* le o registro i (de 20 bytes) do personagem arg0 com id arg1 */
+s32 func_80017A1C(s32 arg0, s32 arg1, Rec14 *out) {
+    s32 i = func_8001764C(arg0, arg1);
+    u8 *base;
+    s32 k;
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80017AB4);
+    if (i != -1) {
+        base = D_80048D34;
+        k = i * 5;
+        *out = ((Unk80048D34_Rec *)(base + (arg0 * 247 + k) * 4))->rec;
+    }
+    return i;
+}
+
+/* grava o registro i do personagem arg0 com id arg1 */
+s32 func_80017AB4(s32 arg0, s32 arg1, Rec14 *in) {
+    s32 i = func_8001764C(arg0, arg1);
+    u8 *base;
+    s32 k;
+
+    if (i != -1) {
+        base = D_80048D34;
+        k = i * 5;
+        ((Unk80048D34_Rec *)(base + (arg0 * 247 + k) * 4))->rec = *in;
+    }
+    return i;
+}
 
 void *func_80017B4C(s32 arg0) {
     return (arg0 * 0x3DC) + D_8004949C;
@@ -1410,7 +1447,39 @@ void func_80017D08(s8 *arg0, s8 arg1, s32 arg2) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80017D2C);
+/* malloc (primeiro bloco livre que cabe, a partir do inicio do heap) */
+/* aloca size bytes (first fit, divide o bloco se sobrar) */
+void *func_80017D2C(u32 size, s32 tag) {
+    HeapBlock *b;
+    HeapBlock *nb;
+    u32 avail;
+    u32 split;
+
+    size = (size + 3) >> 2 << 2;
+    split = size + 20;
+    b = D_8004B5E0[0];
+    if (b->tag != 1) {
+        do {
+            if (b->tag == 0) {
+                avail = (u8 *)b->next - (u8 *)b - sizeof(HeapBlock);
+                if (avail >= size) {
+                    if (split < avail) {
+                        nb = (HeapBlock *)((u8 *)b + size + sizeof(HeapBlock));
+                        nb->unk0 = b;
+                        nb->next = b->next;
+                        nb->tag = 0;
+                        b->next->unk0 = nb;
+                        b->next = nb;
+                    }
+                    b->tag = tag;
+                    return b + 1;
+                }
+            }
+            b = b->next;
+        } while (b->tag != 1);
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80017DDC);
 

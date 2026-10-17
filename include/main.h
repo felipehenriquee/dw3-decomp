@@ -237,4 +237,14 @@ typedef struct {
     s32 icon[3];
 } McSave;
 
+/* registro de 20 bytes em D_80048D34 (44 por personagem, a partir de 0x7B8) */
+typedef struct {
+    s32 w[5];
+} Rec14;
+
+typedef struct {
+    u8 pad0[0x7B8];
+    Rec14 rec;
+} Unk80048D34_Rec;
+
 #endif /* MAIN_H */
