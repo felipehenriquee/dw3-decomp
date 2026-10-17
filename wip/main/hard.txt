@@ -41,3 +41,5 @@
 8001C948 8001C948.c (move janela; registradores a0/a3 e xx/yy, 35 instr)
 800186E0 800186E0.c (vibracao; ordem dos registradores dos parametros)
 8001A2AC 8001A2AC.c (BATE na comparacao; integrado, a rodata cresce 8 bytes: alinhamento da jtbl_80010274 gerada pelo C)
+8001D264 8001D264.c (decodifica caractere; forma dos lacos de busca, 64 instr)
+8002006C 8002006C.c (comando de som; registradores s3-s8)
