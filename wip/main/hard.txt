@@ -27,3 +27,4 @@
 80015FBC 80015FBC.c (booleano com desvios)
 8001C85C 8001C85C.c
 80017924 80017924.c (inventario)
+80019224 80019224.c (vibracao; mascara da porta, 5 instr)

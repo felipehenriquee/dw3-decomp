@@ -374,7 +374,23 @@ void func_80013BE4(void) {
 }
 /* Warning: struct opaque is not defined (only forward-declared) */
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80013C30);
+/* abre a entrada id da tabela de arquivos (ou so atualiza se ja esta aberta) */
+void func_80013C30(s32 id) {
+    s16 *p = (s16 *)func_800139FC(id);
+
+    if (p != NULL) {
+        M2C_FIELD(p, s32 *, 8) = (*(s32 (**)(void))&D_8004DF98)();
+        return;
+    }
+    p = (s16 *)func_80013A34();
+    M2C_FIELD(p, s32 *, 4) = id;
+    M2C_FIELD(p, s32 *, 0xC) = (*(s32 (**)(s32, s32))&D_8004B5F4)(
+        (*(s32 (**)(s32))&D_80048744)(id) << 11, 3);
+    p[0] = 1;
+    M2C_FIELD(p, s32 *, 8) = 0;
+    p[1] = 0;
+    D_80044B38[0] = 1;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80013CDC);
 
@@ -768,11 +784,48 @@ s32 func_80015D4C(void) {
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80015D90);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80015EC8);
+/* compara com o valor em D_8004B370 (igual se arg1, diferente se nao) */
+s32 func_80015EC8(s32 arg0, s32 arg1) {
+    if (arg1 != 0) {
+        if (D_8004B370[0] == arg0) {
+            return 1;
+        }
+    } else if (D_8004B370[0] != arg0) {
+        return 1;
+    }
+    return 0;
+}
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80015F04);
+/* testa as flags s8 0x7C/0x20F de D_80048D34 (alguma ligada se arg1, as duas desligadas se nao) */
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80015F70);
+s32 func_80015F04(s32 arg0, s32 arg1) {
+    s8 *p;
+    if (arg1 != 0) {
+        p = (s8 *)D_80048D34 + arg0;
+        if (p[0x7C] != 0 || p[0x20F] != 0) {
+            return 1;
+        }
+    } else {
+        p = (s8 *)D_80048D34 + arg0;
+        if (p[0x7C] == 0 && p[0x20F] == 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+/* testa a flag s8 arg0 de D_80048D34+0x3A2 (ligada se arg1, desligada se nao) */
+
+s32 func_80015F70(s32 arg0, s32 arg1) {
+    if (arg1 != 0) {
+        if ((s8)D_80048D34[arg0 + 0x3A2] != 0) {
+            return 1;
+        }
+    } else if ((s8)D_80048D34[arg0 + 0x3A2] == 0) {
+        return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80015FBC);
 
@@ -1341,7 +1394,22 @@ void func_800188C0(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80018928);
+/* troca dois bytes da configuracao do controle (0xA4 + a, 0xA4 + b) */
+
+void func_80018928(s32 port, s32 a, s32 b) {
+    u8 *base = D_8004B7D0;
+    s32 o1 = (port & 3) * 0x70;
+    s32 o2;
+    u8 *pa, *pb;
+    u8 t;
+    a += o1;
+    o2 = ((u32)(port & 0xFF) >> 4) * 0x1C0;
+    pa = base + (a + o2);
+    pb = base + (b + o1 + o2);
+    t = pa[0xA4];
+    pa[0xA4] = pb[0xA4];
+    pb[0xA4] = t;
+}
 
 u8 func_80018980(s32 arg0, s32 arg1) {
     return D_8004B7D0[arg1 + arg0 * 0x1C0 + 0xA4];
@@ -1459,7 +1527,30 @@ void func_80019508(char *buf, s32 n) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_800195B0);
+/* escreve um numero no trabalho n da janela de mensagem */
+void func_800195B0(MsgWin *w, u32 n, s32 value) {
+    char buf[16];
+    s32 i;
+    u8 *p;
+
+    if (n >= 6) {
+        /* "Ｄｉｇｉｔ：メッセージのワークばんごうがみたいおう" */
+        func_800194C4(w, "\x82\x63\x82\x89\x82\x87\x82\x89\x82\x94\x81\x46\x83\x81\x83\x62\x83\x5A\x81\x5B\x83\x57\x82\xCC\x83\x8F\x81\x5B\x83\x4E\x82\xCE\x82\xF1\x82\xB2\x82\xA4\x82\xAA\x82\xDD\x82\xBD\x82\xA2\x82\xA8\x82\xA4");
+        return;
+    }
+    i = 15;
+    p = (u8 *)buf + 15;
+    for (; i >= 0; i--) {
+        *p-- = 0;
+    }
+    func_80019508(buf, value);
+    for (i = 0; buf[i] != 0; i++) {
+        /* digito ASCII -> indice da fonte */
+        buf[i] -= 0x2C;
+    }
+    func_80019370(w, &w->work[n], buf);
+    w->work[n].unkA = 0;
+}
 
 void func_8001968C(MsgWin *arg0, s32 arg1, s32 arg2) {
     if ((u32)(arg2 - 1) >= 5) {
@@ -1619,7 +1710,20 @@ s32 func_8001A478(void *arg0) {
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001A48C);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001A6E8);
+/* comando de script: 7 guarda a posicao seguinte em 0xA6, o resto vai para func_80019FB0 */
+
+s32 func_8001A6E8(void *arg0, ScriptCtx *ctx) {
+    switch (ctx->base[ctx->pc + 1]) {
+    case 0:
+    default:
+        func_80019FB0(arg0, ctx);
+        break;
+    case 7:
+        M2C_FIELD(arg0, s16 *, 0xA6) = ctx->pc + 2;
+        break;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001A73C);
 
@@ -2092,7 +2196,25 @@ void func_8001DDA0(Unk8001DDA0 *arg0) {
     ClearOTagR(arg0->ot[D_8004DE44[0]], arg0->otLen);
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001DDDC);
+/* compacta a ordering table: cada entrada passa a apontar direto para a
+   proxima entrada que nao esta vazia */
+void func_8001DDDC(Unk8001DDA0 *db) {
+    u32 m = 0xFFFFFF;
+    u32 *ot = (u32 *)db->ot[D_8004DE44[0]];
+    u32 *p = ot + db->otLen - 1;
+    u32 *q;
+
+    while (p != ot) {
+        q = p - 1;
+        if ((*p & m) == ((u32)q & m)) {
+            while ((*q & m) == ((u32)(q - 1) & m)) {
+                q--;
+            }
+            *p = (u32)q & m;
+        }
+        p = q;
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/main", func_8001DE68);
 
@@ -2268,7 +2390,26 @@ void func_8001E7EC(s32 n) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_8001E890);
+/* aplica o estado de D_8005CD08 pelas rotinas preenchidas por func_8001FFA8 */
+void func_8001E890(void) {
+    struct {
+        u8 pad0[0x20];
+        void (*fn20)(s32);
+        void (*fn24)(s32, s32);
+        void (*fn28)(s32, s32);
+        s32 unk2C;
+        s32 unk30;
+        s32 unk34;
+    } obj;
+
+    func_8001FFA8(&obj);
+    obj.fn24(((s32 *)D_8005CD08)[1] + ((s32 *)D_8005CD08)[5] * 16,
+             ((s32 *)D_8005CD08)[2] + ((s32 *)D_8005CD08)[6] * 32);
+    obj.fn28(((s32 *)D_8005CD08)[3],
+             ((s32 *)D_8005CD08)[4] + ((s32 *)D_8005CD08)[5] * ((s32 *)D_8005CD08)[7]
+             + ((s32 *)D_8005CD08)[6]);
+    obj.fn20(((s32 *)D_8005CD08)[0] + 0xC);
+}
 
 void func_8001E938(s32 arg0, s32 arg1) {
     void *obj;

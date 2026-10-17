@@ -145,7 +145,8 @@ typedef struct {
 typedef struct {
     u8 pad0[0x5C];
     struct {
-        u8 unk0[0xC];
+        u8 unk0[0xA];
+        s16 unkA;
     } work[6];
 } MsgWin;
 
