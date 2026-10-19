@@ -6,10 +6,11 @@ Como o tools/propagate.py, mas a forma ignora os imediatos: uma funcao
 pendente com a mesma forma de uma ja em C (a menos das constantes) recebe
 o C dela com os simbolos trocados na ordem e as constantes trocadas pelo
 valor (a n-esima constante do asm do modelo vira a n-esima da pendente;
-valores com mapeamento ambiguo ficam como estao). O resultado e compilado
+valores com mais de um destino: testa as combinacoes). O resultado e compilado
 e comparado; os que batem vao para o results.json e sao integrados com o
 tools/autodecomp.py <alvo> --apply.
 """
+import itertools
 import multiprocessing
 import os
 import re
@@ -51,39 +52,61 @@ def build_index():
     return idx
 
 
-def remap_consts(code, ca, cb):
+def remaps(code, ca, cb, limit=64):
+    """Versoes do C com as constantes de ca trocadas pelas de cb. Valores
+    com mais de um destino geram uma versao por combinacao (ate limit)."""
     if len(ca) != len(cb):
-        return None
-    m = {}
-    bad = set()
-    for a, b in zip(ca, cb):
-        if a in m and m[a] != b:
-            bad.add(a)
-        m[a] = b
-    m = {a: b for a, b in m.items() if a != b and a not in bad}
-    if not m:
-        return code
-
-    def sub(x):
-        tok = x.group()
+        return []
+    dest = {}
+    for x, y in zip(ca, cb):
+        dest.setdefault(x, [])
+        if y not in dest[x]:
+            dest[x].append(y)
+    toks = list(NUM.finditer(code))
+    choices = []
+    for m in toks:
         try:
-            v = int(tok, 0)
+            v = int(m.group(), 0)
         except ValueError:
-            return tok
+            choices.append([None])
+            continue
+        opts = None
         for key in (v, v & 0xFFFFFFFF, v - (1 << 32) if v >= 1 << 31 else v):
-            if key in m:
-                nv = m[key]
-                return ('0x%X' % nv if tok.lower().startswith(('0x', '-0x')) and nv >= 0 else str(nv))
-        return tok
-    return NUM.sub(sub, code)
+            if key in dest:
+                opts = dest[key]
+                break
+        choices.append(opts if opts else [None])
+    out = []
+    for combo in itertools.product(*choices):
+        if len(out) >= limit:
+            break
+        parts, last = [], 0
+        for m, nv in zip(toks, combo):
+            parts.append(code[last:m.start()])
+            tok = m.group()
+            if nv is None or nv == int(tok, 0):
+                parts.append(tok)
+            else:
+                parts.append('0x%X' % nv if tok.lower().startswith(('0x', '-0x')) and nv >= 0 else str(nv))
+            last = m.end()
+        parts.append(code[last:])
+        v = ''.join(parts)
+        if v not in out:
+            out.append(v)
+    return out
 
 
 def job(args):
     tb, fb, syms_b, cb, models = args
     for ta, fa, syms_a, ca in models:
-        r = pr.candidate((tb, fb, syms_b, ta, fa, syms_a), transform=lambda c: remap_consts(c, ca, cb))
-        if r[2]:
-            return r
+        code = pr.c_function(open(Target(ta).p(Target(ta).src)).read(), fa)
+        if code is None:
+            continue
+        for k in range(len(remaps(code, ca, cb))):
+            r = pr.candidate((tb, fb, syms_b, ta, fa, syms_a),
+                             transform=lambda c, k=k: (remaps(c, ca, cb) + [None] * (k + 1))[k])
+            if r[2]:
+                return r
     return tb, fb, None
 
 

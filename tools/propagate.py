@@ -135,6 +135,17 @@ def candidate(job, transform=None):
             decls.append(d)
         else:
             return tb, fb, None
+    # dados usados pelo C que nao aparecem no asm com o mesmo nome (ex.:
+    # &D_X + 0x10 no C, D_X+0x10 com outro nome no asm): mesma declaracao
+    for s in sorted(set(re.findall(r'\bD_[0-9A-F]{8}\b', code)) - set(syms_b)):
+        if decl_of(Tb, s) is None:
+            d = decl_of(Ta, s)
+            if d is None:
+                return tb, fb, None
+            pd = ad.parse_decl(d)
+            if pd:
+                types[s] = list(pd[1])
+            decls.append(d)
     full = '\n'.join(decls) + '\n' + code
     d = os.path.join(R, 'build/propagate', tb)
     os.makedirs(d, exist_ok=True)
