@@ -13,7 +13,13 @@ Obj *func_800A604C(void) {
 
 INCLUDE_ASM("asm/ovl/WSTAG815/nonmatchings/WSTAG815", func_800A6078);
 
-INCLUDE_ASM("asm/ovl/WSTAG815/nonmatchings/WSTAG815", func_800A6184);
+u8 *func_800A6184(s32 a) {
+    u8 *o = func_800143DC(func_800A6078, 0x54, 0x1C, 0x17);
+
+    *(s32 *)(o + 0x50) = a;
+    ((void (*)(void))D_800A725C[0])();
+    return o;
+}
 
 s16 func_800A61E4(s16 *st, s16 *tbl, s32 once, s32 depth) {
     s16 *e = tbl + st[0] * 2;

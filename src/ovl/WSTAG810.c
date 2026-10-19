@@ -117,7 +117,16 @@ u8 *func_800A69D0(s32 x, s32 y, s32 p) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG810/nonmatchings/WSTAG810", func_800A6A2C);
+s32 func_800A6A2C(void) {
+    u8 *d = D_80048D34;
+
+    if (*(s32 *)(d + 0x26E4) != 0) {
+        ((void (*)(s32, s32))D_8009B704[0])(7, 0x6ED0003);
+        D_80099D94[0] = (s32)D_800A7AAC;
+        *(s32 *)(d + 0x26E4) = 0;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG810/nonmatchings/WSTAG810", func_800A6A90);
 

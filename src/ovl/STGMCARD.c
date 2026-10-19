@@ -190,7 +190,12 @@ void func_800841FC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = 4;
 }
 
-INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_80084240);
+void func_80084240(u8 *o) {
+    u8 *d = D_80088768;
+
+    (*(void (**)(u8 *, s32, s32, s32))(d + 0x30))(o + 0xB0, *(s32 *)(d + 8) * 68, *(s32 *)(d + 4) * 68, 5);
+    *(s32 *)(o + 0x10) = 7;
+}
 
 void func_800842A0(void *arg0) {
     ((M2C_UNK (*)(s32, M2C_UNK, M2C_UNK, M2C_UNK)) D_80088798)(arg0 + 0x5C, 0xDE, 0, 0xA);
@@ -341,7 +346,17 @@ INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_80087C18);
 
 INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_80087DF0);
 
-INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_80087E78);
+/* libera os dois buffers do cartao */
+void func_80087E78(void) {
+    u8 *d = D_80088768;
+
+    if (*(u8 **)(d + 0x10) != NULL) {
+        (*(void (**)(u8 *))&D_8004B5EC)(*(u8 **)(d + 0x10));
+    }
+    if (*(u8 **)(d + 0xC) != NULL) {
+        (*(void (**)(u8 *))&D_8004B5EC)(*(u8 **)(d + 0xC));
+    }
+}
 
 void func_80087EDC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = 1;

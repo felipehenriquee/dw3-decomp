@@ -5,7 +5,15 @@
 
 INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80082CE8);
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80082E8C);
+/* limpa a tela, cria o objeto da selecao de pais e toca o som 0x21 */
+Obj *func_80082E8C(void) {
+    Obj *o;
+
+    ClearImage2(D_800843C8, 0, 0, 0);
+    o = func_80014504(func_80082CE8, 0x50, 4);
+    ((void (*)(s32))D_80055C54[0])(0x21);
+    return o;
+}
 
 INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80082EF0);
 
