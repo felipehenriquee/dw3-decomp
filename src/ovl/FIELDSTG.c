@@ -597,97 +597,209 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80090FB0);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8009116C);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800915A0);
+extern struct opaque D_80048ABC;
+void func_800915A0(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x707E, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8B19, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x400, 1);
+}
 
 s32 func_80091600(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x400, 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8009162C);
+extern struct opaque D_80048ABC;
+void func_8009162C(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x707E, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8B1F, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x401, 1);
+}
 
 s32 func_8009168C(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x401, 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800916B8);
+extern struct opaque D_80048ABC;
+void func_800916B8(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x707F, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8B1A, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x402, 1);
+}
 
 s32 func_80091718(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x402, 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091744);
+extern struct opaque D_80048ABC;
+void func_80091744(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x707F, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8B20, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x403, 1);
+}
 
 s32 func_800917A4(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x403, 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800917D0);
+extern struct opaque D_80048ABC;
+void func_800917D0(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x7080, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8489, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x404, 1);
+}
 
 s32 func_80091830(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x404, 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8009185C);
+extern struct opaque D_80048ABC;
+void func_8009185C(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x7080, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8495, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x405, 1);
+}
 
 s32 func_800918BC(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x405, 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800918E8);
+extern struct opaque D_80048ABC;
+void func_800918E8(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x7081, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x847C, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x406, 1);
+}
 
 s32 func_80091948(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x406, 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091974);
+extern struct opaque D_80048ABC;
+void func_80091974(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x7081, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8462, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x407, 1);
+}
 
 s32 func_800919D4(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x407, 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091A00);
+extern struct opaque D_80048ABC;
+void func_80091A00(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x7082, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8ADE, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x408, 1);
+}
 
 s32 func_80091A60(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x408, 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091A8C);
+extern struct opaque D_80048ABC;
+void func_80091A8C(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x7082, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8AE8, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x409, 1);
+}
 
 s32 func_80091AEC(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x409, 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091B18);
+extern struct opaque D_80048ABC;
+void func_80091B18(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x7083, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8AF4, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x40A, 1);
+}
 
 s32 func_80091B78(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x40A, 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091BA4);
+extern struct opaque D_80048ABC;
+void func_80091BA4(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x7083, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8AF3, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x40B, 1);
+}
 
 s32 func_80091C04(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x40B, 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091C30);
+extern struct opaque D_80048ABC;
+void func_80091C30(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x7084, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8B01, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x40C, 1);
+}
 
 s32 func_80091C90(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x40C, 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091CBC);
+extern struct opaque D_80048ABC;
+void func_80091CBC(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x7085, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8B0D, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x40D, 1);
+}
 
 s32 func_80091D1C(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x40D, 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091D48);
+extern struct opaque D_80048ABC;
+void func_80091D48(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x7086, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8B02, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x40E, 1);
+}
 
 s32 func_80091DA8(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x40E, 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80091DD4);
+extern struct opaque D_80048ABC;
+void func_80091DD4(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x7087, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8B0F, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x40F, 1);
+}
 
 s32 func_80091E34(void) {
     return ((M2C_UNK (*)(M2C_UNK, M2C_UNK)) D_80048AC8)(0x40F, 1);

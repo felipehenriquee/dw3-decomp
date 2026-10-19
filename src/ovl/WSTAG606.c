@@ -3,7 +3,27 @@
 #include "WSTAG606_auto.h"
 #include "WSTAG606_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG606/nonmatchings/WSTAG606", func_800A5DE0);
+extern struct opaque D_80048ABC;
+/* estado 0: se as flags 0x407E (ligada) e 0x407F (desligada) batem, cria o evento */
+void func_800A5DE0(u8 *o, s32 *w) {
+    u8 *f;
+
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        f = (u8 *)&D_80048ABC;
+        if ((*(s32 (**)(s32, s32))(f + 0x10))(0x407E, 1) != 0
+            && (*(s32 (**)(s32, s32))(f + 0x10))(0x407F, 0) != 0) {
+            w[0] = func_800853F8(0x50A);
+        }
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A5E80(s32 arg0) {
     void *temp_v0;

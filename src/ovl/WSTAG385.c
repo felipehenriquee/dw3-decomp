@@ -3,7 +3,27 @@
 #include "WSTAG385_auto.h"
 #include "WSTAG385_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG385/nonmatchings/WSTAG385", func_800A5DE4);
+extern struct opaque D_80048ABC;
+/* estado 0: se as flags 0x402D (ligada) e 0x402E (desligada) batem, cria o evento */
+void func_800A5DE4(u8 *o, s32 *w) {
+    u8 *f;
+
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        f = (u8 *)&D_80048ABC;
+        if ((*(s32 (**)(s32, s32))(f + 0x10))(0x402D, 1) != 0
+            && (*(s32 (**)(s32, s32))(f + 0x10))(0x402E, 0) != 0) {
+            w[0] = func_800853F8(0x4FC);
+        }
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A5E84(s32 arg0) {
     void *temp_v0;

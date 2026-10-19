@@ -15,6 +15,7 @@ void *func_800A6DD0(s32 arg0);
 s16 func_800A6E2C(s16 *st, s16 *tbl, s32 once, s32 depth);
 s32 func_800A7034(s32 x, s32 y, s32 w, s32 h);
 u8 *func_800A7388(s32 x, s32 y, s32 p);
+void func_800A7460(void);
 void func_800A74C0(void);
 void func_800A750C(void);
 void func_800A7538(void);

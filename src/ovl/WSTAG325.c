@@ -15,7 +15,26 @@ void func_800A5F90(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG325/nonmatchings/WSTAG325", func_800A5FC8);
+/* estado 0: se as flags 0x4008 (ligada) e 0x4009 (desligada) batem, cria o evento */
+void func_800A5FC8(u8 *o, s32 *w) {
+    u8 *f;
+
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        f = (u8 *)&D_80048ABC;
+        if ((*(s32 (**)(s32, s32))(f + 0x10))(0x4008, 1) != 0
+            && (*(s32 (**)(s32, s32))(f + 0x10))(0x4009, 0) != 0) {
+            w[1] = func_800853F8(0x178);
+        }
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A6068(s32 arg0) {
     void *temp_v0;

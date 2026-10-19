@@ -91,5 +91,6 @@ extern u8 D_8004B3A6[];
 extern u8 D_8004B490[];
 extern s32 D_8004B374[];
 extern u8 D_8004BB98[];
+extern u8 D_80048CB4[];
 
 #endif /* MAIN_DATA_H */

@@ -9,7 +9,25 @@ Obj *func_800A606C(void) {
     return func_80014504(func_800A5DE4, 0x54, 0xC);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG741/nonmatchings/WSTAG741", func_800A6098);
+void func_800A6098(u8 *o, s32 *w) {
+    u8 *f;
+
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        f = (u8 *)&D_80048ABC;
+        if ((*(s32 (**)(s32, s32))(f + 0x10))(0x4084, 1) != 0
+            && (*(s32 (**)(s32, s32))(f + 0x10))(0x4085, 0) != 0) {
+            w[1] = func_800853F8(0x510);
+        }
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A6138(s32 arg0) {
     void *temp_v0;

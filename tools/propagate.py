@@ -105,8 +105,9 @@ def build_index():
     return index
 
 
-def candidate(job):
-    """Testa o C de A (renomeado) na funcao pendente B."""
+def candidate(job, transform=None):
+    """Testa o C de A (renomeado) na funcao pendente B. transform(code)
+    ajusta o C depois da troca de simbolos (None: nao serve)."""
     tb, fb, syms_b, ta, fa, syms_a = job
     Ta, Tb = Target(ta), Target(tb)
     code = c_function(open(Ta.p(Ta.src)).read(), fa)
@@ -115,6 +116,10 @@ def candidate(job):
     ren = dict(zip(syms_a, syms_b))
     ren[fa] = fb
     code = SYM.sub(lambda m: ren.get(m.group(), m.group()), code)
+    if transform:
+        code = transform(code)
+        if code is None:
+            return tb, fb, None
     # tipos dos dados: os que A usava
     types, decls = {}, []
     for sa, sb in zip(syms_a, syms_b):

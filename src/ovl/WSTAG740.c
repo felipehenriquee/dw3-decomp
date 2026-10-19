@@ -9,7 +9,27 @@ Obj *func_800A606C(void) {
     return func_80014504(func_800A5DE4, 0x54, 0xC);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG740/nonmatchings/WSTAG740", func_800A6098);
+extern struct opaque D_80048ABC;
+/* estado 0: se as flags 0x403F (ligada) e 0x4040 (desligada) batem, cria o evento */
+void func_800A6098(u8 *o, s32 *w) {
+    u8 *f;
+
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        f = (u8 *)&D_80048ABC;
+        if ((*(s32 (**)(s32, s32))(f + 0x10))(0x403F, 1) != 0
+            && (*(s32 (**)(s32, s32))(f + 0x10))(0x4040, 0) != 0) {
+            w[0] = func_800853F8(0x321);
+        }
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A6138(s32 arg0) {
     void *temp_v0;

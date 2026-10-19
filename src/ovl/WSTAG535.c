@@ -3,7 +3,27 @@
 #include "WSTAG535_auto.h"
 #include "WSTAG535_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG535/nonmatchings/WSTAG535", func_800A5DE0);
+extern struct opaque D_80048ABC;
+/* estado 0: se as flags 0x4055 (ligada) e 0x4056 (desligada) batem, cria o evento */
+void func_800A5DE0(u8 *o, s32 *w) {
+    u8 *f;
+
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        f = (u8 *)&D_80048ABC;
+        if ((*(s32 (**)(s32, s32))(f + 0x10))(0x4055, 1) != 0
+            && (*(s32 (**)(s32, s32))(f + 0x10))(0x4056, 0) != 0) {
+            w[0] = func_800853F8(0x4EF);
+        }
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A5E80(s32 arg0) {
     void *temp_v0;

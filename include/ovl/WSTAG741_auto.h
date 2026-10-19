@@ -4,6 +4,7 @@
 
 /* funcoes ja decompiladas */
 Obj *func_800A606C(void);
+void func_800A6098(u8 *o, s32 *w);
 void *func_800A6138(s32 arg0);
 void func_800A64BC(s32 arg0, s32 arg1);
 void func_800A6504(void);
@@ -30,7 +31,6 @@ s32 func_80014504();
 s32 func_8001F648();
 s32 func_800853F8();
 s32 func_800A5DE4();
-s32 func_800A6098();
 s32 func_800A6194();
 s32 func_800A626C();
 s32 func_800A6324();

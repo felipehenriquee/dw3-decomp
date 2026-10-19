@@ -8,6 +8,8 @@ void func_800A5EE8(void);
 void func_800A5F14(void);
 void func_800A5F40(void);
 void func_800A5F6C(void);
+void func_800A5F98(void);
+void func_800A5FE4(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();

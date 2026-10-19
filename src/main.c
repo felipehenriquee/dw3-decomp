@@ -890,7 +890,19 @@ s32 func_80015AAC(s32 op, s32 idx) {
     return r;
 }
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80015B9C);
+/* D_8004B370 esta na faixa [lo, hi] da entrada arg1 de D_80048CB4? */
+s32 func_80015B9C(s32 unused, s32 k) {
+    s32 v = D_8004B370[0];
+    s32 lo = D_80048CB4[k * 2];
+    u8 *range = &D_80048CB4[k * 2];
+    s32 hi = range[1];
+    s32 ret = 0;
+
+    if (v >= lo) {
+        ret = !(hi < v);
+    }
+    return ret;
+}
 
 /* condicoes por bits: tipo 0 conta os bits 0x27-0x2D de D_8004B3B5 (arg 0:
    algum ligado, 1: dois ou mais desligados, 2: exatamente um desligado);
