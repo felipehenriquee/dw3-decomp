@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-10-17): EXE **273 de 347** (79%); overlays **1612 de 3292** (49,0%). Total **1885 de 3639 (51,8%)**.
+- [ ] Decompilação (2026-10-19): EXE **274 de 347** (79%); overlays **1692 de 3292** (51,4%). Total **1966 de 3639 (54,0%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -112,6 +112,14 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 6. Corrigir a divisão do splat em `func_800148C0` (`make split` apaga `build/` — fazer quando nada estiver rodando).
 7. Revisão semântica para o port (`tools/audit_args.py`).
 8. Jobs em segundo plano: parar com `tools/stop_jobs.sh` e commitar com `tools/commit_locked.sh "msg"`.
+
+### Notas da decompilação manual (2026-10-19)
+- `tools/fuzzyprop.py`: propagação que ignora constantes (troca símbolos e números; valores ambíguos testam combinações). `tools/twocall.py` agora cobre N chamadas `D_80048ABC.fn(K, n)`.
+- Overlays linkam com `build/ovl_syms.txt` (união de todos os `undefined_syms_auto.txt`), então o C pode citar um símbolo do EXE que o asm do overlay não usa (ex.: `&D_80048ABC + 0x10` no lugar de `D_80048ACC`).
+- `propagate.candidate` leva junto as declarações de dados que o C usa e o asm não cita.
+- Parâmetros gravados na pilha logo na entrada (`sw a0,0x18(sp)` ...) = struct passada por valor (ex.: `Pair32`, `Pair32x2` em `types.h`).
+- Família "inicialização de mapa" (`func_800A5E84` e variantes, dezenas de WSTAG): ainda não bate; as constantes carregadas no início (t0/a3) sugerem parâmetros de função `inline`. Tentativas em `wip/ovl/WSTAG371_800A5E84*.c`.
+- Funções de 2–3 instruções `jlabel` (ex.: `FIGHTSTG func_8008B66C..`) são `case` de `switch` separados pelo splat, não funções.
 
 ### Notas da decompilação manual (2026-10-17)
 - Typedefs ficam em `include/types.h` (incluído pelo `common.h`): o `fn.py apply` grava lá, e assim o `propagate.py` consegue usar o mesmo C em outros overlays.
