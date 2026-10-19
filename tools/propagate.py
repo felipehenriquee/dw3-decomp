@@ -142,9 +142,8 @@ def candidate(job, transform=None):
             d = decl_of(Ta, s)
             if d is None:
                 return tb, fb, None
-            pd = ad.parse_decl(d)
-            if pd:
-                types[s] = list(pd[1])
+            # vai junto do C (o --apply grava o extern no _data.h)
+            code = d + '\n' + code
             decls.append(d)
     full = '\n'.join(decls) + '\n' + code
     d = os.path.join(R, 'build/propagate', tb)

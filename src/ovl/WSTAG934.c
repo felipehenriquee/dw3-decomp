@@ -20,7 +20,17 @@ void func_800A6218(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG934/nonmatchings/WSTAG934", func_800A628C);
+extern struct opaque D_80048ABC;
+u8 *func_800A628C(s32 link) {
+    u8 *o = func_800143DC(func_800A5DFC, 0x6C, 0, link);
+
+    if ((*(s32 (**)(s32, s32))((u8 *)&D_80048ABC + 0x10))(0x1C3D, 1) != 0) {
+        *(s16 *)(o + 0x58) = 1;
+    } else {
+        *(s16 *)(o + 0x58) = 0;
+    }
+    return o;
+}
 
 void func_800A62F4(void *arg0) {
     switch (M2C_FIELD(arg0, s32 *, 0xC)) {

@@ -128,7 +128,16 @@ s32 func_800A6A2C(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG810/nonmatchings/WSTAG810", func_800A6A90);
+s32 func_800A6A90(void) {
+    u8 *d = D_80048D34;
+
+    if (*(s32 *)(d + 0x26E4) == 0) {
+        ((void (*)(s32, s32))D_8009B704[0])(7, 0x6ED0004);
+        D_80099D94[0] = (s32)D_800A7DAC;
+        *(s32 *)(d + 0x26E4) = 0x20;
+    }
+    return 0;
+}
 
 extern struct opaque D_80048ABC;
 void func_800A6AF8(void) {

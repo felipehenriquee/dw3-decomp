@@ -171,7 +171,11 @@ u8 *func_80087E28(u8 *o, s32 id) {
     return NULL;
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80087E7C);
+void func_80087E7C(u8 *o, s32 id, s32 v) {
+    func_80087C70(o, v);
+    o += func_80087BF8(o, id) * 0x4C;
+    *(s32 *)(o + 0x54) = v;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80087EE4);
 

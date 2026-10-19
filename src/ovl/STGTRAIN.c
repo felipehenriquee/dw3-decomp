@@ -208,7 +208,20 @@ INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_800865A0);
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_800866CC);
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80086ABC);
+/* 3 se algum dos dois itens e 0x151, 6 se e 0x152, senao 0 */
+s32 func_80086ABC(u8 *o) {
+    u8 *p = ((u8 *(*)(s32))D_8004B484[0])(*(s32 *)(o + 0x5C));
+    s16 a = *(s16 *)(p + 0x3C8);
+    s16 b;
+
+    if (a == 0x151 || (b = *(s16 *)(p + 0x3CA)) == 0x151) {
+        return 3;
+    }
+    if (a == 0x152 || b == 0x152) {
+        return 6;
+    }
+    return 0;
+}
 
 void func_80086B24(void *arg0, void *arg1) {
     s32 temp_v0;

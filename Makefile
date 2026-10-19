@@ -60,9 +60,15 @@ $(BUILD)/$(BASENAME).elf: linker/$(BASENAME).ld
 	$(LD) $(LDFLAGS) -T $< -T linker/$(BASENAME).undefined_syms_auto.txt \
 		-T linker/$(BASENAME).undefined_funcs_auto.txt -Map $(@:.elf=.map) -o $@
 
-$(BUILD)/ovl/%.elf: linker/ovl/%.ld
+# simbolos de dados usados por qualquer overlay (o C de um overlay pode citar
+# um simbolo que o asm dele nao usa, ex.: &D_80048ABC + 0x10)
+$(BUILD)/ovl_syms.txt: $(wildcard linker/ovl/*.undefined_syms_auto.txt)
 	@mkdir -p $(dir $@)
-	$(LD) $(LDFLAGS) -T $< -T linker/ovl/$*.undefined_syms_auto.txt \
+	cat linker/ovl/*.undefined_syms_auto.txt | sort -u > $@
+
+$(BUILD)/ovl/%.elf: linker/ovl/%.ld $(BUILD)/ovl_syms.txt
+	@mkdir -p $(dir $@)
+	$(LD) $(LDFLAGS) -T $< -T $(BUILD)/ovl_syms.txt -T linker/ovl/$*.undefined_syms_auto.txt \
 		-T linker/ovl/$*.undefined_funcs_auto.txt -Map $(@:.elf=.map) -o $@
 
 $(EXE): $(BUILD)/$(BASENAME).elf

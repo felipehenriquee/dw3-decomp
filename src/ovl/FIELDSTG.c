@@ -28,7 +28,17 @@ void func_80084124(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80084198);
+/* cria o objeto; 0x58 = flag 0x1C3D ligada */
+u8 *func_80084198(s32 link) {
+    u8 *o = func_800143DC(func_80083D08, 0x6C, 0, link);
+
+    if ((*(s32 (**)(s32, s32))((u8 *)&D_80048ABC + 0x10))(0x1C3D, 1) != 0) {
+        *(s16 *)(o + 0x58) = 1;
+    } else {
+        *(s16 *)(o + 0x58) = 0;
+    }
+    return o;
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80084200);
 
