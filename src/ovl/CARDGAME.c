@@ -95,7 +95,19 @@ void func_80086A18(s32 arg0, void *arg1) {
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80086A30);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80086D28);
+void func_80086D28(s32 a, s32 b, s32 mode) {
+    s32 n = 0;
+
+    switch (mode) {
+    case 1:
+        n = 6;
+        break;
+    case 2:
+        n = 12;
+        break;
+    }
+    func_80086A30(a, b, n);
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80086D78);
 
@@ -127,7 +139,23 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800870A4);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008722C);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80087308);
+/* nenhum dos itens marcados? (so com o modo < 6) */
+s32 func_80087308(u8 *o, s32 unused, u8 *p) {
+    s32 r = 1;
+    s32 i;
+    s32 n;
+
+    if (o[0x444] < 6) {
+        n = *(s16 *)(p + 0xA);
+        for (i = 0; i < n; i++) {
+            if (*(s8 *)(o + i + 0x446) != 0) {
+                r = 0;
+                break;
+            }
+        }
+    }
+    return r;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008735C);
 
