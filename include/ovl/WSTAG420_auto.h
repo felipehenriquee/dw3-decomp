@@ -6,6 +6,7 @@
 void func_800A5DE0(u8 *o, s32 *w);
 void *func_800A5E74(s32 arg0);
 void func_800A5ED0(void);
+void func_800A5F1C(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();

@@ -38,6 +38,12 @@ void func_800A5ED0(void) {
     (*(void (**)(s32, s32))(f + 0xC))(0x7401, 1);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG420/nonmatchings/WSTAG420", func_800A5F1C);
+void func_800A5F1C(void) {
+    u8 *f = (u8 *)&D_80048ABC;
+
+    (*(void (**)(s32, s32))(f + 0xC))(0x8028, 1);
+    (*(void (**)(s32, s32))(f + 0xC))(0x8009, 1);
+    D_8004B370[0] = 5;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG420/nonmatchings/WSTAG420", func_800A5F74);

@@ -1174,7 +1174,18 @@ void func_8009CE94(s32 arg0, s16 arg1, s16 arg2, s32 arg3, s32 arg4) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009CF60);
+u8 func_8009CF60(u8 *o, s32 i) {
+    struct {
+        u8 *p0;
+        u8 pad4[0x2C - 4];
+        void (*fn2C)(s32);
+        u8 pad30[0x58 - 0x30];
+    } g;
+
+    func_8001EBF8(&g);
+    g.fn2C((*(s16 **)(o + 0x50))[i] + 1);
+    return *g.p0;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009CFBC);
 

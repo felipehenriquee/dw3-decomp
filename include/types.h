@@ -299,4 +299,14 @@ typedef struct {
     s32 active;
 } Lerp;
 
+/* par de valores (8 bytes) */
+typedef struct {
+    s32 x, y;
+} Pair32;
+
+/* dois pares passados por valor */
+typedef struct {
+    Pair32 a, b;
+} Pair32x2;
+
 #endif /* TYPES_H */
