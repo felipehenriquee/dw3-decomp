@@ -3,7 +3,23 @@
 #include "WSTAG335_auto.h"
 #include "WSTAG335_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG335/nonmatchings/WSTAG335", func_800A5DE4);
+/* estado 0: espera curta (laco vazio) e passa ao estado 1 */
+void func_800A5DE4(u8 *o) {
+    s32 i;
+
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        for (i = 13; i >= 0; i--) {
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A5E3C(s32 arg0) {
     void *temp_v0;

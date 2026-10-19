@@ -1127,7 +1127,12 @@ void func_8009CC4C(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009CDA4);
+void func_8009CDA4(u8 *o) {
+    u8 *heap = (u8 *)&D_8004B5DC;
+
+    (*(void (**)(u8 *, s32))(heap + 0x24))(o + 0x90, 10);
+    (*(void (**)(u8 *, s32))(heap + 0x24))(o + 0xE4, 10);
+}
 
 s32 func_8009CDFC(s32 arg0, s32 arg1) {
     void *temp_a0;

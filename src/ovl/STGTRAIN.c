@@ -451,7 +451,19 @@ void func_8008B838(s32 arg0) {
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
 }
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008B8A4);
+void func_8008B8A4(void) {
+    struct {
+        u8 pad0[0x24];
+        void (*fn24)(s32, s32);
+        s32 unk28;
+        void (*fn2C)(s32);
+        u8 pad30[0x38 - 0x30];
+    } g;
+
+    func_8001FFA8(&g);
+    g.fn24(0x240, 0x100);
+    g.fn2C((*(s32 (**)(s32))&D_80044F5C)(0x28D0000));
+}
 
 void func_8008B8FC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = 1;

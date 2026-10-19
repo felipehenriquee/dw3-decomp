@@ -22,7 +22,19 @@ void func_800A6218(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/ovl/WSTAG261/nonmatchings/WSTAG261", func_800A628C);
 
-INCLUDE_ASM("asm/ovl/WSTAG261/nonmatchings/WSTAG261", func_800A62F4);
+void func_800A62F4(u8 *o, s32 *w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        w[0] = func_800A628C(0x33B);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A634C(s32 arg0) {
     void *temp_v0;

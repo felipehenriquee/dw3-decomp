@@ -11,5 +11,6 @@ extern s32 D_8008CFD4[];
 extern s32 D_8008CE3C[];
 extern struct opaque D_80044F50;
 extern s32 D_8008CFCC[];
+extern struct opaque D_80044F5C;
 
 #endif /* STGTRAIN_DATA_H */

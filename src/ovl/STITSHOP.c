@@ -355,7 +355,14 @@ INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_8008B908);
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_8008BFB0);
 
-INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_8008C0C4);
+void func_8008C0C4(u8 *o) {
+    u8 *w = *(u8 **)(o + 0x24);
+    u8 *c = *(u8 **)(w + 0x8);
+
+    (*(void (**)(u8 *, s32, s32))(c + 0x118))(c, 0, D_80048DA0[0]);
+    c = *(u8 **)(w + 0x8);
+    (*(void (**)(u8 *, s32))(c + 0x148))(c, 1);
+}
 
 void *func_8008C118(void) {
     void *temp_v0;

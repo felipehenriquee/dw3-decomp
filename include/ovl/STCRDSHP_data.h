@@ -6,5 +6,6 @@
 struct opaque;
 extern s32 D_80055C48[];
 extern u8 D_8004DE10[];
+extern s32 D_80048DA0[];
 
 #endif /* STCRDSHP_DATA_H */

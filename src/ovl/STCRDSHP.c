@@ -112,7 +112,18 @@ Obj *func_80085634(void) {
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80085678);
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80085730);
+/* guarda os 6 valores atuais (0x7C) em 0x94 e carrega v */
+void func_80085730(u8 *o, s32 *v) {
+    s32 i;
+
+    for (i = 0; i < 6; i++) {
+        ((s32 *)(o + 0x94))[i] = ((s32 *)(o + 0x7C))[i];
+        ((s32 *)(o + 0x7C))[i] = *v++;
+    }
+    *(s32 *)(o + 0x68) = 0;
+    *(s32 *)(o + 0x70) = 0;
+    (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+}
 
 void func_80085788(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK (**)(), 0x2C)(arg0, 1);
@@ -233,7 +244,14 @@ INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_800880C4);
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_8008838C);
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80088AFC);
+void func_80088AFC(u8 *o) {
+    u8 *w = *(u8 **)(o + 0x24);
+    u8 *c = *(u8 **)(w + 0x10);
+
+    (*(void (**)(u8 *, s32, s32))(c + 0x118))(c, 0, D_80048DA0[0]);
+    c = *(u8 **)(w + 0x10);
+    (*(void (**)(u8 *, s32))(c + 0x148))(c, 1);
+}
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80088B50);
 

@@ -78,7 +78,14 @@ s16 func_8008695C(s32 arg0) {
     return M2C_FIELD(((arg0 * 0x58) + ((s32 (*)(M2C_UNK)) D_80044F4C)(0x1CB)), s16 *, 6);
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800869A8);
+u8 *func_800869A8(s32 a, s32 b) {
+    u8 *o = func_800143DC(func_80086304, 0xEC, 4, 0x15);
+
+    *(void **)(o + 0xE8) = func_800868C0;
+    *(s32 *)(o + 0x50) = a;
+    *(s32 *)(o + 0xAC) = b;
+    return o;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80086A00);
 

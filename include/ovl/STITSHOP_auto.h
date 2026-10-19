@@ -25,6 +25,7 @@ void func_8008B340(void *arg0, s32 arg1);
 void func_8008B430(void *arg0, s32 arg1);
 void func_8008B484(s32 arg0, s32 arg1);
 void func_8008B524(void *arg0, void *arg1);
+void func_8008C0C4(u8 *o);
 void *func_8008C118(void);
 void func_8008C2DC(void *arg0, s32 arg1);
 s32 func_8008C370(Fade *f);
@@ -72,7 +73,6 @@ s32 func_8008B378();
 s32 func_8008B60C();
 s32 func_8008B908();
 s32 func_8008BFB0();
-s32 func_8008C0C4();
 
 /* dados acessados via $gp */
 
