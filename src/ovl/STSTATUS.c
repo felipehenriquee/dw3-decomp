@@ -299,7 +299,17 @@ INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_800937A4);
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80093930);
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_800939E8);
+s32 func_800939E8(s32 a, s32 k) {
+    u8 buf[0x30];
+    u8 c;
+
+    ((void (*)(s32, u8 *))D_8004B468[0])(a, buf);
+    {
+        Rec18 *r = &D_80042BCA[k];
+        c = r->b[0xC];
+    }
+    return (c << 6) + c * *(s16 *)(buf + 0x12) / 8;
+}
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80093A58);
 

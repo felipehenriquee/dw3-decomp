@@ -468,7 +468,11 @@ void func_80091DAC(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80091DF4);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80092244);
+void func_80092244(u8 *o, Block34 *src) {
+    *(Block34 *)(o + 0x54) = *src;
+    *(s32 *)(o + 0xF0) = 0x1000;
+    (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800922B4);
 

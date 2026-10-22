@@ -317,4 +317,9 @@ typedef struct {
     s32 pad8;
 } Seg12;
 
+/* registro de 0x34 bytes copiado como struct */
+typedef struct {
+    s32 w[13];
+} Block34;
+
 #endif /* TYPES_H */
