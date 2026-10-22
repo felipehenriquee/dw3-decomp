@@ -47,7 +47,22 @@ Obj *func_800A6210(void) {
     return func_80014504(func_800A5EF0, 0x70, 0);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG225/nonmatchings/WSTAG225", func_800A623C);
+/* estado 0: no capitulo 1 cria o evento 5 */
+void func_800A623C(u8 *o, s32 *w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        if (D_8004B370[0] == 1) {
+            w[0] = func_800853F8(5);
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A62B4(s32 arg0) {
     void *temp_v0;

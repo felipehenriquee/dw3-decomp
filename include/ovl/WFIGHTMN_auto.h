@@ -5,6 +5,7 @@
 /* funcoes ja decompiladas */
 Obj *func_800A6414(void);
 void func_800A69B8(void);
+void func_800A8458(u8 *o, u8 *w);
 void func_800AABA0(s32 x);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */

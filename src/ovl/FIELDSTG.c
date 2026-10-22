@@ -401,9 +401,26 @@ void func_8008BFA4(s32 arg0) {
     M2C_FIELD(temp_s0, s32 *, 0xC) = func_800853F8((s16) D_800978D8[arg0]);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008C000);
+void func_8008C000(void) {
+    u8 *o = ((u8 *(*)(s32, s32, s32))D_8004B7BC)(7, -1, -1);
+    u8 *w = *(u8 **)(o + 0x24);
+    u8 *m = D_80099D80;
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008C078);
+    *(s32 *)(m + 0x50) = 1;
+    *(s32 *)(m + 0x58) = 1;
+    *(s32 *)(w + 0x10) = func_80011DAC(0x1002);
+    (*(void (**)(u8 *, s32))(o + 0x2C))(o, 2);
+}
+
+void func_8008C078(s32 a, s32 *p, s32 b) {
+    u8 *o = ((u8 *(*)(s32, s32, s32))D_8004B7BC)(7, -1, -1);
+
+    *(s32 *)(o + 0x70) = a;
+    *(s32 *)(o + 0x74) = p[0];
+    *(s32 *)(o + 0x78) = p[1];
+    *(s32 *)(o + 0x7C) = b;
+    (*(void (**)(u8 *, s32))(o + 0x2C))(o, 3);
+}
 
 s32 func_8008C0F0(s32 arg0, s32 arg1) {
     s32 var_v0;
