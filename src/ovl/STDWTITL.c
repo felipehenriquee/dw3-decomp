@@ -73,7 +73,13 @@ INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800838B0);
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083944);
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083C70);
+Obj *func_80083C70(s32 a, s32 b) {
+    Obj *o = func_80014504(func_80083944, 0x54, 0);
+
+    D_80089268[0] = a;
+    D_8008926C[0] = b;
+    return o;
+}
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083CC0);
 
