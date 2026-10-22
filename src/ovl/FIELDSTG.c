@@ -156,13 +156,14 @@ s16 func_80085AFC(s16 *st, s16 *tbl, s32 depth) {
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80085BD4);
 
-void func_80085E0C(s32 arg0, s32 arg1, s16 arg2) {
+Obj *func_80085E0C(s32 arg0, s32 arg1, s16 arg2) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80085BD4, 0x7C, 0);
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
     M2C_FIELD(temp_v0, s32 *, 0x54) = arg1;
     M2C_FIELD(temp_v0, s16 *, 0x58) = arg2;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80085E64);
@@ -201,7 +202,19 @@ u8 *func_80086C9C(s32 a) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80086CE4);
+/* desenha a tela em blocos de 128x128 */
+void func_80086CE4(s32 a, s32 b) {
+    u8 *o = (*(u8 *(**)(s32))&D_8004DF8C)(a);
+    s32 x, y;
+
+    if (o != NULL) {
+        for (y = 0; y < 0xF0; y += 0x80) {
+            for (x = 0; x < 0x140; x += 0x80) {
+                func_80086060(o, x, y, b);
+            }
+        }
+    }
+}
 
 void func_80086D6C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x50) = ((s32 (*)()) D_8004DF98)();
@@ -333,12 +346,13 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80088EEC);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80089038);
 
-void func_80089490(s32 arg0, s32 arg1) {
+Obj *func_80089490(s32 arg0, s32 arg1) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80089038, 0x58, 4);
     M2C_FIELD(temp_v0, s32 *, 0x54) = arg1;
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800894D8);
@@ -508,7 +522,18 @@ u8 *func_8008DC58(void) {
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008DC90);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008DD40);
+void func_8008DD40(s32 a, s32 b, s32 c) {
+    u8 *o = ((u8 *(*)(s32, s32, s32))D_8004B7BC)(0x10, -1, -1);
+
+    if (o != NULL) {
+        *(s32 *)(o + 0x7C) = 0;
+        *(s32 *)(o + 0x80) = a;
+        *(s32 *)(o + 0x88) = b;
+        *(s32 *)(o + 0x8C) = c;
+        *(Pair32 *)(o + 0x68) = *(Pair32 *)(o + 0x54);
+        (*(void (**)(u8 *, s32))(o + 0x2C))(o, 1);
+    }
+}
 
 void func_8008DDC8(s32 arg0) {
     void *temp_v0;

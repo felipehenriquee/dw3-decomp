@@ -121,7 +121,7 @@ void func_80084AE0(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x68) = 1;
 }
 
-void func_80084AEC(s32 arg0, s32 arg1, s32 arg2) {
+Obj *func_80084AEC(s32 arg0, s32 arg1, s32 arg2) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_800848E4, 0x174, 0x30);
@@ -136,6 +136,7 @@ void func_80084AEC(s32 arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(temp_v0, s16 *, 0x134) = -1;
     M2C_FIELD(temp_v0, s32 *, 0x5C) = arg1;
     M2C_FIELD(temp_v0, s32 *, 0x60) = arg2;
+    return temp_v0;
 }
 
 void func_80084B98(void *arg0, void *arg1) {
@@ -165,7 +166,18 @@ Obj *func_80085B24(void) {
 
 INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80085B60);
 
-INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80085C08);
+/* algum dos 3 arquivos (0x55, 0x4E, 0x6A a partir de D_8005CCA8) existe? */
+s32 func_80085C08(void) {
+    u8 *f = (u8 *)D_80044B38;
+
+    if ((*(s32 (**)(s32))(f + 0x404))(D_8005CCA8[0] + 0x55) != 0) {
+        return 1;
+    }
+    if ((*(s32 (**)(s32))(f + 0x404))(D_8005CCA8[0] + 0x4E) != 0) {
+        return 1;
+    }
+    return (*(s32 (**)(s32))(f + 0x404))(D_8005CCA8[0] + 0x6A) != 0;
+}
 
 void func_80085C90(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = 1;

@@ -193,12 +193,13 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80088054);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800880F0);
 
-void func_8008834C(s32 arg0, s32 arg1) {
+Obj *func_8008834C(s32 arg0, s32 arg1) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_800880F0, 0x70, 8);
     M2C_FIELD(temp_v0, s32 *, 0x58) = arg0;
     M2C_FIELD(temp_v0, s32 *, 0x5C) = arg1;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80088394);
@@ -246,12 +247,13 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80089BE4);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80089CD8);
 
-void func_8008A7F4(s32 arg0, s32 arg1) {
+Obj *func_8008A7F4(s32 arg0, s32 arg1) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80089CD8, 0x74, 0x18);
     M2C_FIELD(temp_v0, s32 *, 4) = arg0;
     M2C_FIELD(temp_v0, s32 *, 8) = arg1;
+    return temp_v0;
 }
 
 void func_8008A83C(void *arg0, s32 arg1, s32 arg2) {
@@ -419,25 +421,27 @@ void func_8008EE4C(s32 arg0) {
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008EE84);
 
-void func_8008F57C(s8 arg0, s32 arg1, s32 arg2) {
+Obj *func_8008F57C(s8 arg0, s32 arg1, s32 arg2) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_8008EE84, 0x8C, 4);
     M2C_FIELD(temp_v0, s8 *, 0x70) = arg0;
     M2C_FIELD(temp_v0, s32 *, 0x74) = arg1;
     M2C_FIELD(temp_v0, s32 *, 0x84) = arg2;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008F5D4);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008F714);
 
-void func_80090C44(s8 arg0, s32 arg1) {
+Obj *func_80090C44(s8 arg0, s32 arg1) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_8008F714, 0x84, 4);
     M2C_FIELD(temp_v0, s8 *, 0x50) = arg0;
     M2C_FIELD(temp_v0, s32 *, 0x54) = arg1;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80090C8C);
@@ -448,12 +452,13 @@ Obj *func_80090E58(void) {
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80090E84);
 
-void func_800914EC(s32 arg0, s32 arg1) {
+Obj *func_800914EC(s32 arg0, s32 arg1) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80090E84, 0x80, 4);
     M2C_FIELD(temp_v0, s32 *, 0x74) = arg0;
     M2C_FIELD(temp_v0, s32 *, 0x78) = arg1;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80091534);
@@ -481,12 +486,13 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80091C1C);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80091CF4);
 
-void func_80091DAC(s32 arg0, s32 arg1) {
+Obj *func_80091DAC(s32 arg0, s32 arg1) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80091CF4, 0xE8, 0);
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
     M2C_FIELD(temp_v0, s32 *, 0x54) = arg1;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80091DF4);
@@ -636,13 +642,14 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80094D50);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80094F08);
 
-void func_800953E4(s32 arg0, s32 arg1, s32 arg2) {
+Obj *func_800953E4(s32 arg0, s32 arg1, s32 arg2) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80094F08, 0xEC, 0x60);
     M2C_FIELD(temp_v0, s32 *, 0x54) = arg0;
     M2C_FIELD(temp_v0, s32 *, 0x58) = arg1;
     M2C_FIELD(temp_v0, s32 *, 0x5C) = arg2;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009543C);

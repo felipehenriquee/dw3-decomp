@@ -21,13 +21,14 @@ INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80084238);
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80084A98);
 
-void func_80084C48(s32 arg0) {
+Obj *func_80084C48(s32 arg0) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80084A98, 0xD4, 0xA0);
     M2C_FIELD(temp_v0, s32 *, 0x54) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x58) = 6;
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    return temp_v0;
 }
 
 void func_80084C90(void *arg0, s32 arg1, s32 arg2) {
@@ -124,13 +125,14 @@ INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80085B6C);
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_800862A0);
 
-void func_80086450(s32 arg0) {
+Obj *func_80086450(s32 arg0) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_800862A0, 0xD4, 0x9C);
     M2C_FIELD(temp_v0, s32 *, 0x54) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x58) = 6;
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80086498);
@@ -178,7 +180,7 @@ INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80089BF0);
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008B3C8);
 
-void func_8008B4CC(void *arg0) {
+Obj *func_8008B4CC(void *arg0) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_8008B3C8, 0xFC, 0x90);
@@ -186,6 +188,7 @@ void func_8008B4CC(void *arg0) {
     M2C_FIELD(temp_v0, s32 *, 0x58) = 6;
     M2C_FIELD(temp_v0, void **, 0x50) = arg0;
     M2C_FIELD(temp_v0, s32 *, 0x70) = (s32) M2C_FIELD(arg0, s32 *, 0x7C);
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008B520);
@@ -212,7 +215,7 @@ INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008DDB0);
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008E744);
 
-void func_8008E8F8(s32 arg0) {
+Obj *func_8008E8F8(s32 arg0) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_8008E744, 0x14C, 0x110);
@@ -220,6 +223,7 @@ void func_8008E8F8(s32 arg0) {
     M2C_FIELD(temp_v0, s32 *, 0x54) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x58) = 6;
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008E94C);
@@ -256,13 +260,14 @@ INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80090264);
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80091D18);
 
-void func_80091E4C(s32 arg0) {
+Obj *func_80091E4C(s32 arg0) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80091D18, 0x45C, 0xD4);
     M2C_FIELD(temp_v0, s32 *, 0x54) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x58) = 6;
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80091E94);
@@ -327,13 +332,14 @@ INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80094FBC);
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80096380);
 
-void func_80096548(s32 arg0) {
+Obj *func_80096548(s32 arg0) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80096380, 0x1F4, 0xB4);
     M2C_FIELD(temp_v0, s32 *, 0x54) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x58) = 6;
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80096590);
@@ -346,13 +352,14 @@ INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8009744C);
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_800980B0);
 
-void func_8009824C(s32 arg0) {
+Obj *func_8009824C(s32 arg0) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_800980B0, 0xF4, 0x8C);
     M2C_FIELD(temp_v0, s32 *, 0x54) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x58) = 2;
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80098294);

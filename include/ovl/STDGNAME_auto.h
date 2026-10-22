@@ -12,7 +12,7 @@ void func_80083378(void *arg0, s32 arg1);
 s32 func_8008340C(Fade *f);
 void func_800851B8(void *arg0, s32 arg1, s32 arg2);
 void func_80085358(void *arg0);
-void func_80086144(s32 arg0);
+Obj *func_80086144(s32 arg0);
 void func_8008656C(void *arg0);
 Obj *func_800865B0(void);
 void func_80086730(void *arg0, s32 arg1);

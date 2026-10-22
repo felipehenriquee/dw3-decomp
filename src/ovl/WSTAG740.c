@@ -46,12 +46,13 @@ INCLUDE_ASM("asm/ovl/WSTAG740/nonmatchings/WSTAG740", func_800A626C);
 
 INCLUDE_ASM("asm/ovl/WSTAG740/nonmatchings/WSTAG740", func_800A6324);
 
-void func_800A64BC(s32 arg0, s32 arg1) {
+Obj *func_800A64BC(s32 arg0, s32 arg1) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_800A6324, 0x6C, 0);
     M2C_FIELD(temp_v0, s32 *, 0x54) = arg0;
     M2C_FIELD(temp_v0, s32 *, 0x58) = arg1;
+    return temp_v0;
 }
 
 extern struct opaque D_80048ABC;

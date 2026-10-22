@@ -46,7 +46,7 @@ Obj *func_80095E2C(void);
 void func_80096144(void *arg0, s16 arg1, s16 arg2);
 void func_80096150(void *arg0);
 void func_80096160(void *arg0);
-void func_80096180(s16 arg0, s16 arg1);
+Obj *func_80096180(s16 arg0, s16 arg1);
 void func_800967F8(void *arg0);
 void func_80096808(void *arg0);
 void func_80096E24(s32 arg0, M2C_UNK arg1);
@@ -93,7 +93,7 @@ void func_8009CE94(s32 arg0, s16 arg1, s16 arg2, s32 arg3, s32 arg4);
 u8 func_8009CF60(u8 *o, s32 i);
 void func_8009D0B0(void *arg0, M2C_UNK arg1, s32 arg2);
 s16 func_8009D140(s32 arg0);
-void func_8009D310(s32 arg0);
+Obj *func_8009D310(s32 arg0);
 Obj *func_8009D6B4(void);
 s32 func_8009F8C0(void *arg0);
 void func_800A0548(void *arg0);
@@ -107,7 +107,7 @@ void func_800A3488(void *arg0);
 void func_800A3548(void *arg0, s8 arg1, s8 arg2, s8 arg3);
 s32 func_800A35A4(void *arg0);
 void func_800A35B0(void *arg0);
-void func_800A367C(s8 arg0);
+Obj *func_800A367C(s8 arg0);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_80014504();

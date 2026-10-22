@@ -210,13 +210,14 @@ u8 *func_800A7368(s32 arg0) {
     return func_800143DC(func_800A6FB4, 136, 0, arg0);
 }
 
-void func_800A7398(s8 arg0, s8 arg1, s32 arg2) {
+Obj *func_800A7398(s8 arg0, s8 arg1, s32 arg2) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_800A6FB4, 0x88, 0);
     M2C_FIELD(temp_v0, s32 *, 0x54) = arg2;
     M2C_FIELD(temp_v0, s8 *, 0x53) = arg1;
     M2C_FIELD(temp_v0, s8 *, 0x52) = arg0;
+    return temp_v0;
 }
 
 void func_800A73F0(u8 *o, s32 *w) {

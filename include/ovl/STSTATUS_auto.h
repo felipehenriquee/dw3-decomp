@@ -4,22 +4,22 @@
 
 /* funcoes ja decompiladas */
 Obj *func_80083654(void);
-void func_80084C48(s32 arg0);
+Obj *func_80084C48(s32 arg0);
 void func_80084C90(void *arg0, s32 arg1, s32 arg2);
 void func_80084D18(u8 *obj);
 void func_80084E5C(u8 *a);
 Obj *func_80084F10(void);
-void func_80086450(s32 arg0);
+Obj *func_80086450(s32 arg0);
 void *func_800882C8(void *arg0);
-void func_8008B4CC(void *arg0);
-void func_8008E8F8(s32 arg0);
+Obj *func_8008B4CC(void *arg0);
+Obj *func_8008E8F8(s32 arg0);
 void func_8008F4E8(s32 arg0, s32 arg1);
 s32 func_8008F55C(s32 arg0);
-void func_80091E4C(s32 arg0);
+Obj *func_80091E4C(s32 arg0);
 void *func_80093678(s32 arg0, s32 arg1, s32 arg2);
 s32 func_800939E8(s32 a, s32 k);
-void func_80096548(s32 arg0);
-void func_8009824C(s32 arg0);
+Obj *func_80096548(s32 arg0);
+Obj *func_8009824C(s32 arg0);
 void func_80099430(void *arg0, s32 arg1, s32 arg2);
 void func_8009943C(void *arg0, s32 arg1, s32 arg2);
 void func_80099450(void *arg0, s32 arg1, s32 arg2);

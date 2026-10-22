@@ -122,7 +122,7 @@ void func_80085934(void *arg0) {
     M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0x234)(temp_a0);
 }
 
-void func_8008596C(s32 arg0) {
+Obj *func_8008596C(s32 arg0) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80085890, 0xC8, 0x24);
@@ -130,6 +130,7 @@ void func_8008596C(s32 arg0) {
     M2C_FIELD(temp_v0, s32 *, 0x58) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x5C) = 4;
     M2C_FIELD(temp_v0, s32 *, 0x54) = arg0;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_800859C0);
@@ -147,7 +148,7 @@ void func_8008739C(void *arg0) {
     M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0x234)(temp_a0);
 }
 
-void func_800873D4(s32 arg0) {
+Obj *func_800873D4(s32 arg0) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_800872F4, 0xCC, 0x38);
@@ -155,6 +156,7 @@ void func_800873D4(s32 arg0) {
     M2C_FIELD(temp_v0, s32 *, 0x58) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x5C) = 4;
     M2C_FIELD(temp_v0, s32 *, 0x54) = arg0;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80087428);
@@ -232,7 +234,7 @@ void func_80088878(void *arg0) {
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_800888E4);
 
-void func_800889A8(s32 arg0, s32 arg1, s32 arg2) {
+Obj *func_800889A8(s32 arg0, s32 arg1, s32 arg2) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80087EC0, 0x704, 0x50);
@@ -248,6 +250,7 @@ void func_800889A8(s32 arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
     M2C_FIELD(temp_v0, s32 *, 0x5C) = arg2;
     M2C_FIELD(temp_v0, s32 *, 0x60) = arg1;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80088A64);
@@ -318,7 +321,7 @@ void func_8008B430(void *arg0, s32 arg1) {
     func_80089274((s32) arg0, temp_s1, arg1);
 }
 
-void func_8008B484(s32 arg0, s32 arg1) {
+Obj *func_8008B484(s32 arg0, s32 arg1) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_8008AF68, 0x248, 0xAC);
@@ -333,6 +336,7 @@ void func_8008B484(s32 arg0, s32 arg1) {
     M2C_FIELD(temp_v0, s32 *, 0x1E4) = arg1;
     M2C_FIELD(temp_v0, s32 *, 0x1E8) = 1;
     M2C_FIELD(temp_v0, s32 *, 0x1F0) = 1;
+    return temp_v0;
 }
 
 void func_8008B524(void *arg0, void *arg1) {

@@ -156,12 +156,13 @@ INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80085B70);
 
 INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80085DE4);
 
-void func_80086144(s32 arg0) {
+Obj *func_80086144(s32 arg0) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80085DE4, 0xE0, 0x28);
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
     M2C_FIELD(temp_v0, s32 *, 0x54) = 0x1000;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80086184);

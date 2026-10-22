@@ -276,13 +276,14 @@ void func_80088130(void) {
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80088138);
 
-void func_800881CC(s32 arg0) {
+Obj *func_800881CC(s32 arg0) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80088138, 0x6C, 0);
     M2C_FIELD(temp_v0, s32 *, 0x54) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x58) = 6;
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    return temp_v0;
 }
 
 void func_80088214(void *arg0, void *arg1) {
@@ -312,7 +313,7 @@ void func_80089758(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = 0x1E;
 }
 
-void func_80089764(s32 arg0) {
+Obj *func_80089764(s32 arg0) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80089698, 0xFC, 0x28);
@@ -320,6 +321,7 @@ void func_80089764(s32 arg0) {
     M2C_FIELD(temp_v0, s32 *, 0x54) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x58) = 6;
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    return temp_v0;
 }
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_800897B8);
@@ -403,7 +405,7 @@ void func_8008A264(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = 0;
 }
 
-void func_8008A274(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+Obj *func_8008A274(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_800897B8, 0xD4, 0xC);
@@ -421,6 +423,7 @@ void func_8008A274(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_FIELD(temp_v0, s32 *, 0x74) = arg2;
     M2C_FIELD(temp_v0, s32 *, 0x78) = arg3;
     M2C_FIELD(temp_v0, s32 (**)(s32), 0xC8) = func_8008A264;
+    return temp_v0;
 }
 
 void func_8008A354(void *arg0, void *arg1) {
@@ -452,7 +455,7 @@ s32 func_8008B814(void *arg0) {
     return func_8008A3E0((s32) arg0, M2C_FIELD(arg0, s32 *, 0x24), 1);
 }
 
-void func_8008B838(s32 arg0) {
+Obj *func_8008B838(s32 arg0) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_8008B520, 0x114, 0x10);
@@ -462,6 +465,7 @@ void func_8008B838(s32 arg0) {
     M2C_FIELD(temp_v0, s32 *, 0x54) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x58) = 6;
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    return temp_v0;
 }
 
 void func_8008B8A4(void) {

@@ -112,7 +112,7 @@ INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_80083780);
 
 INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_80083848);
 
-void func_80083A78(s32 arg0) {
+Obj *func_80083A78(s32 arg0) {
     void *temp_v0;
 
     temp_v0 = func_80014504(func_80083848, 0x8C, 0);
@@ -121,6 +121,7 @@ void func_80083A78(s32 arg0) {
     M2C_FIELD(temp_v0, s32 *, 0x54) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 0x58) = 6;
     M2C_FIELD(temp_v0, s32 *, 0x50) = arg0;
+    return temp_v0;
 }
 
 /* estado 0: limpa a tela, cria o objeto de fundo e o objeto principal */
