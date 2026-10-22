@@ -172,7 +172,15 @@ s32 func_800A6FE8(s32 x, s32 y, s32 w, s32 h) {
 
 INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A70AC);
 
-INCLUDE_ASM("asm/ovl/WSTAG310/nonmatchings/WSTAG310", func_800A72CC);
+u8 *func_800A72CC(s32 link) {
+    u8 *o = func_800143DC(func_800A70AC, 0x6C, 0, link);
+
+    *(s32 *)(o + 0x54) = 0x26C;
+    *(s32 *)(o + 0x58) = 0xFC;
+    ((void (*)(s32))D_80055C48[0])(0x4001D);
+    *(s32 *)(o + 0x50) = 0x14;
+    return o;
+}
 
 s16 func_800A7338(s16 *st, s16 *tbl, s32 once, s32 depth) {
     s16 *e = tbl + st[0] * 2;

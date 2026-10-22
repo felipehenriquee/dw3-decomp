@@ -151,7 +151,23 @@ INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_800862F0);
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_800869C8);
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80086E40);
+void func_80086E40(u8 *o, s32 flag) {
+    s32 x = *(s32 *)(o + 0x24);
+    s32 i;
+
+    if (flag) {
+        *(s32 *)(o + 0xC) = 2;
+        func_80086074(o, x, 0);
+    } else {
+        *(s32 *)(o + 0xC) = 1;
+        *(s32 *)(o + 0x10) = 0;
+        for (i = 2; i >= 0; i--) {
+            *(s32 *)(o + i * 4 + 0x70) = 0;
+        }
+        *(s32 *)(o + 0x60) = 0;
+        func_80086074(o, x, 1);
+    }
+}
 
 void func_80086EAC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = 0x32;

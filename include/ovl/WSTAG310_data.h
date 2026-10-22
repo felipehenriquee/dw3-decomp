@@ -13,5 +13,6 @@ extern u16 D_800A8392[];
 extern u16 D_800A83C6[];
 extern u16 D_800A849E[];
 extern u16 D_800A84D2[];
+extern s32 D_80055C48[];
 
 #endif /* WSTAG310_DATA_H */
