@@ -186,7 +186,14 @@ void func_8008666C(u8 *o) {
     g.fn7C(*(s32 *)(o + 0x54), *(s32 *)(o + 0x58));
 }
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800866A8);
+void func_800866A8(u8 *o) {
+    u8 *p = D_8004B7D0;
+    s32 bits = (*(s32 (**)(s32))(p + 0x3F4))(0);
+
+    if ((bits >> (*(s32 (**)(s32, s32))(p + 0x408))(0, 0xE)) & 1) {
+        *(s32 *)(o + 0xC) = 3;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_8008671C);
 

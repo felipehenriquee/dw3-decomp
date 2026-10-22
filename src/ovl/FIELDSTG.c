@@ -171,7 +171,19 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80085ED4);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80086060);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80086284);
+/* procura na lista (30) o objeto cujo metodo 0x244 devolve id */
+u8 *func_80086284(u8 **list, s32 id) {
+    s32 i;
+    u8 *o;
+
+    for (i = 0; i < 30; i++) {
+        o = list[i + 1];
+        if ((*(s32 (**)(u8 *))(o + 0x244))(o) == id) {
+            return o;
+        }
+    }
+    return NULL;
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800862FC);
 

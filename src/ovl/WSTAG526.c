@@ -219,7 +219,21 @@ void func_800A7398(s8 arg0, s8 arg1, s32 arg2) {
     M2C_FIELD(temp_v0, s8 *, 0x52) = arg0;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A73F0);
+void func_800A73F0(u8 *o, s32 *w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        if (D_8004B370[0] < 30) {
+            w[0] = func_800A6028(0x33D);
+        }
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A7460(s32 arg0) {
     void *temp_v0;

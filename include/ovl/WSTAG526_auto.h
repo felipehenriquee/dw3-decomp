@@ -22,6 +22,7 @@ s32 func_800A6C8C(void *arg0, s32 arg1);
 void func_800A734C(void *arg0);
 u8 *func_800A7368(s32 arg0);
 void func_800A7398(s8 arg0, s8 arg1, s32 arg2);
+void func_800A73F0(u8 *o, s32 *w);
 void *func_800A7460(s32 arg0);
 void func_800A74BC(void);
 
@@ -35,7 +36,6 @@ s32 func_800A693C();
 s32 func_800A6CC8();
 s32 func_800A6E38();
 s32 func_800A6FB4();
-s32 func_800A73F0();
 s32 rcos();
 s32 rsin();
 

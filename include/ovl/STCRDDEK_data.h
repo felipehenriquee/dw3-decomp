@@ -6,5 +6,6 @@
 struct opaque;
 extern s32 D_80055C48[];
 extern u8 D_8004DE10[];
+extern u8 D_8004B7D0[];
 
 #endif /* STCRDDEK_DATA_H */

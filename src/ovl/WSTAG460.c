@@ -174,7 +174,21 @@ void func_800A6F54(s8 arg0, s8 arg1, s32 arg2) {
     M2C_FIELD(temp_v0, s8 *, 0x52) = arg0;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG460/nonmatchings/WSTAG460", func_800A6FAC);
+void func_800A6FAC(u8 *o, s32 *w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        if (D_8004B370[0] < 15) {
+            w[0] = func_800A5FC8(0x33E);
+        }
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A701C(s32 arg0) {
     void *temp_v0;

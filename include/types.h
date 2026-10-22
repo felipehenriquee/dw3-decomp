@@ -322,4 +322,9 @@ typedef struct {
     s32 w[13];
 } Block34;
 
+/* registro de 0x3C bytes copiado como struct */
+typedef struct {
+    s32 w[15];
+} Block3C;
+
 #endif /* TYPES_H */

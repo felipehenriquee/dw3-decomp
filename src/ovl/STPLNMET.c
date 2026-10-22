@@ -3,7 +3,10 @@
 #include "STPLNMET_auto.h"
 #include "STPLNMET_data.h"
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80082F58);
+void func_80082F58(s32 a, s32 b, u8 *o, s16 *p) {
+    (*(void (**)(u8 *, s32, s32))(o + 0x118))(o, p[2] / 2, p[3] / 2);
+    (*(void (**)(u8 *, s32))(o + 0x148))(o, 5);
+}
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80082FCC);
 
