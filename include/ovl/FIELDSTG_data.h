@@ -33,5 +33,6 @@ extern s32 D_8009B724[];
 extern struct opaque D_80048ABC;
 extern struct opaque D_8004DF8C;
 extern u8 D_80099D80[];
+extern s32 D_8004B420[];
 
 #endif /* FIELDSTG_DATA_H */

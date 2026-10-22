@@ -369,7 +369,27 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008C2CC);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008C454);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008C514);
+/* comando de script: 0 cria (func_800930C0), 1 remove o objeto em *slot */
+void func_8008C514(u8 *o, s32 *slot) {
+    s16 *p = *(s16 **)(o + 0x8C);
+    s32 op = *p++;
+    s32 arg;
+
+    *(s16 **)(o + 0x8C) = p;
+    arg = *p++;
+    *(s16 **)(o + 0x8C) = p;
+
+    switch (op) {
+    case 0:
+        *slot = (s32)func_800930C0(arg);
+        break;
+    case 1:
+        if (*slot != 0) {
+            func_80093088((void *)*slot, arg);
+        }
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008C590);
 
@@ -513,8 +533,11 @@ void func_80093088(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, M2C_UNK (**)(), 0x28)(arg0, 2);
 }
 
-void func_800930C0(s32 arg0) {
-    M2C_FIELD(func_80014504(func_80092F7C, 0x58, 0), s32 *, 0x50) = (s32) (0xFF / arg0);
+Obj *func_800930C0(s32 n) {
+    Obj *o = func_80014504(func_80092F7C, 0x58, 0);
+
+    o->unk50 = 0xFF / n;
+    return o;
 }
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80093108);

@@ -6,6 +6,7 @@
 Obj *func_800A6414(void);
 void func_800A69B8(void);
 void func_800A8458(u8 *o, u8 *w);
+u8 *func_800A9FF0(void);
 void func_800AABA0(s32 x);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */

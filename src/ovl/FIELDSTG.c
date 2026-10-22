@@ -355,7 +355,22 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80089610);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80089700);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80089B28);
+void func_80089B28(u8 *o) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(s32 *)(o + 0x10) = *(s32 *)(o + 0x8);
+    case 1:
+        if (func_80089700(o) != 0) {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 3);
+        }
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void func_80089BA4(s32 arg0) {
     M2C_FIELD(func_80014504(func_80089B28, 0x54, 0), s32 *, 8) = arg0;
@@ -446,7 +461,14 @@ Obj *func_8008C8B4(Pair32x2 v) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008C910);
+/* sorteia uma das o[0x50] entradas (20 bytes) de o[0x54], marca e copia 8 bytes */
+void func_8008C910(u8 *o) {
+    s32 i = ((s32 (*)(void))D_8004DC0C)() % *(s32 *)(o + 0x50);
+
+    D_8004B420[0] = i;
+    *(s32 *)(*(u8 **)(o + 0x54) + i * 20 + 0x10) = 1;
+    *(Pair32 *)(o + 0x60) = *(Pair32 *)(*(u8 **)(o + 0x54) + i * 20 + 8);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008C98C);
 
