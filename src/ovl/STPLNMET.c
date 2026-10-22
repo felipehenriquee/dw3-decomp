@@ -16,7 +16,22 @@ Obj *func_80083118(void) {
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80083144);
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80083310);
+void func_80083310(u8 *o, s32 a, s32 b) {
+    struct {
+        u8 pad0[0x24];
+        void (*fn24)(s32, s32);
+        s32 unk28;
+        void (*fn2C)(s32);
+        u8 pad30[0x38 - 0x30];
+    } g;
+
+    *(s32 *)(o + 0x50) = a;
+    *(s32 *)(o + 0x54) = b;
+    func_8001FFA8(&g);
+    g.fn24(a, b);
+    g.fn2C((*(s32 (**)(s32))&D_80044F5C)(0x8A70000));
+    *(s32 *)(o + 0x58) = 1;
+}
 
 void func_80083398(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x5C) = arg1;

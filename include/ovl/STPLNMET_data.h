@@ -5,5 +5,6 @@
 /* tipo ainda desconhecido (so o endereco e usado) */
 struct opaque;
 extern s32 D_80055C48[];
+extern struct opaque D_80044F5C;
 
 #endif /* STPLNMET_DATA_H */

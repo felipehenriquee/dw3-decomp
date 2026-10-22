@@ -67,7 +67,21 @@ void func_800A606C(MapPtOut *out, MapPtList **list, s32 x, s32 y) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG635/nonmatchings/WSTAG635", func_800A616C);
+/* estado 0: cria o objeto, carrega os pontos do mapa na posicao do jogador */
+void func_800A616C(u8 *o, s32 *w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        w[0] = func_800A6040();
+        func_800A606C(D_80099D94[0], D_800A6640, D_80048D34[0x22], D_80048D34[0x23]);
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A61F4(s32 arg0) {
     void *temp_v0;
