@@ -77,6 +77,7 @@ void func_8009CF00(s32 arg0);
 void func_8009CFB0(void);
 void func_8009CFF4(void);
 void func_8009D038(void);
+void func_8009D06C(void);
 void func_8009D0EC(void);
 void func_8009D470(void);
 void func_8009D72C(void);

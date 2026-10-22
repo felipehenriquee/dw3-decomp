@@ -660,9 +660,36 @@ void func_8008FE68(void *arg0) {
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008FED0);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80090E70);
+/* liga a rotina func_8008ED2C nos 3 objetos de tipo 5 da tabela */
+void func_80090E70(void) {
+    s32 i = 0;
+    u8 *sys = D_8004B610;
+    void *fn = func_8008ED2C;
+    s32 *id = D_80097CB4;
+    u8 *o;
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80090EF0);
+    for (; i < 3; i++, id++) {
+        o = (*(u8 *(**)(s32, s32, s32))(sys + 0x1AC))(5, -1, *id);
+        if (o != NULL) {
+            *(void **)(o + 0x108) = fn;
+        }
+    }
+}
+
+void func_80090EF0(void) {
+    s32 i = 0;
+    u8 *sys = D_8004B610;
+    void *fn = func_8008EAE8;
+    s32 *id = D_80097CC0;
+    u8 *o;
+
+    for (; i < 3; i++, id++) {
+        o = (*(u8 *(**)(s32, s32, s32))(sys + 0x1AC))(5, -1, *id);
+        if (o != NULL) {
+            *(void **)(o + 0x108) = fn;
+        }
+    }
+}
 
 void func_80090F70(void *arg0, void *arg1) {
     void *temp_a2;

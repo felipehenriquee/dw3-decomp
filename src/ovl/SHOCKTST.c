@@ -33,7 +33,16 @@ INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_80083EA4);
 
 INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_800842E0);
 
-INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_8008436C);
+Obj *func_8008436C(s32 n) {
+    u8 *heap;
+    u8 *o = (u8 *)func_80014504(func_80083EA4, 0x88, 0x24);
+
+    *(s32 *)(o + 0x78) = n;
+    heap = (u8 *)&D_8004B5DC;
+    *(u8 **)(o + 0x7C) = (*(u8 *(**)(s32, s32))(heap + 0x20))(n * 2, 2);
+    *(u8 **)(o + 0x80) = (*(u8 *(**)(s32, s32))(heap + 0x20))(*(s32 *)(o + 0x78) * 2, 2);
+    return (Obj *)o;
+}
 
 INCLUDE_RODATA("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", D_80082D24);
 

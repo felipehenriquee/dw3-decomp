@@ -258,7 +258,16 @@ Obj *func_8008A8C4(void) {
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008A92C);
 
-INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008AD18);
+void func_8008AD18(u8 *o) {
+    s32 i;
+    u8 **c = *(u8 ***)(o + 0x24);
+
+    for (i = 0; i < *(s32 *)(o + 0x20) - 1; i++, c++) {
+        if (*c != NULL) {
+            (*(void (**)(u8 *, s32))(*c + 0x144))(*c, 0);
+        }
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008AD98);
 

@@ -4,6 +4,7 @@
 
 /* funcoes ja decompiladas */
 Obj *func_80082E98(void);
+Obj *func_8008436C(s32 n);
 Obj *func_8008499C(void);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
@@ -26,7 +27,6 @@ s32 func_80083B2C();
 s32 func_80083DB4();
 s32 func_80083EA4();
 s32 func_800842E0();
-s32 func_8008436C();
 s32 func_800843F0();
 s32 func_80084714();
 s32 strcspn();
