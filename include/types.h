@@ -309,4 +309,12 @@ typedef struct {
     Pair32 a, b;
 } Pair32x2;
 
+/* trecho de interpolacao de 12 bytes: duracao, valor final e inicial */
+typedef struct {
+    s32 len;
+    s16 to;
+    s16 from;
+    s32 pad8;
+} Seg12;
+
 #endif /* TYPES_H */

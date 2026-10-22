@@ -920,7 +920,15 @@ void func_80092350(s32 id, s32 *count) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8009239C);
+/* torna p relativo a posicao do objeto 0x1002 */
+void func_8009239C(s32 *p) {
+    s32 v[2];
+    u8 *o = (*(u8 *(**)(s32))&D_8004DF8C)(0x1002);
+
+    (*(void (**)(u8 *, s32 *))(o + 0x11C))(o, v);
+    p[0] -= v[0];
+    p[1] -= v[1];
+}
 
 /* limpa 0x10C do objeto 1 (ou do 2, se o 1 nao existe) */
 void func_80092408(void) {

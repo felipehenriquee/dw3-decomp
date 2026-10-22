@@ -878,7 +878,22 @@ void func_8009C25C(void *arg0, s16 arg1) {
     M2C_FIELD(arg0, s16 *, 0xE04) = arg1;
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009C264);
+void func_8009C264(u8 *o) {
+    *(s16 *)(o + 0x60) = *(s16 *)(o + 0x62) = *(s16 *)(o + 0x64) = 0;
+    *(s16 *)(o + 0x6C) = 0;
+    *(s16 *)(o + 0x6E) = 0xF1;
+    *(s16 *)(o + 0x80) = 0x147;
+    *(s16 *)(o + 0x82) = 0x8F;
+    *(s16 *)(o + 0x9C) = 0x140;
+    *(s16 *)(o + 0x9E) = 0xBD;
+    *(s16 *)(o + 0xB4) = *(s16 *)(o + 0xB6) = *(s16 *)(o + 0xB8) = 0;
+    *(s16 *)(o + 0xC0) = 0;
+    *(s16 *)(o + 0xC2) = -0x64;
+    *(s16 *)(o + 0xD4) = 0x147;
+    *(s16 *)(o + 0xD6) = 0x50;
+    *(s16 *)(o + 0xF0) = 0x140;
+    *(s16 *)(o + 0xF2) = 0x26;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009C2D0);
 
