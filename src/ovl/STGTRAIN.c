@@ -528,7 +528,22 @@ void func_8008B9FC(Lerp *l, s32 from, s32 to, s32 n) {
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008BA3C);
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008BAA8);
+/* troca o banco k (carrega o arquivo da tabela) */
+s32 func_8008BAA8(s32 k) {
+    s32 *d;
+
+    if (k < 0) {
+        return 0;
+    }
+    d = D_8008CFCC;
+    if (k != d[2]) {
+        (*(void (**)(void *, s32))&D_8004B600)(d + 1, 0x2D8);
+        d[2] = k;
+        ((void (*)(s32))D_80044F44[0])(D_8008CE3C[k * 4]);
+        d[1] = 0;
+    }
+    return 1;
+}
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008BB38);
 

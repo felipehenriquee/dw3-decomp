@@ -95,7 +95,17 @@ void func_800830B8(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK (**)(), 0x2C)(arg0, 1);
 }
 
-INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_800830E0);
+void func_800830E0(u8 *o) {
+    s32 i = 0;
+    u8 **c;
+
+    (*(void (**)(u8 *, s32))(o + 0x2C))(o, 2);
+    for (c = *(u8 ***)(o + 0x24); i < *(s32 *)(o + 0x20); i++, c++) {
+        if (*c != NULL) {
+            (*(void (**)(u8 *, s32))(*c + 0x144))(*c, 0);
+        }
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_8008316C);
 

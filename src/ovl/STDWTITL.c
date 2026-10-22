@@ -147,7 +147,23 @@ void func_80084868(u8 *o, s32 *w) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800848EC);
+void func_800848EC(u8 *o, s32 a) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        if (((s32 (*)(void))D_80055C60[0])() == 0) {
+            (*(void (**)(u8 *))(o + 0x38))(o);
+            ((void (*)(void))D_80088238[0])();
+        }
+        break;
+    case 1:
+        func_80084868(o, a);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_8008497C(void) {
     void *temp_v0;
