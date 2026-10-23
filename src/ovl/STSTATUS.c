@@ -275,7 +275,24 @@ void func_8008EF48(u8 *o, u8 *b, s32 c) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008F000);
+void func_8008F000(u8 *o, u8 *b, s32 c) {
+    s32 i;
+    u8 *f;
+    s32 v;
+    s32 *q;
+    if (c != 0) {
+        q = (s32 *)(D_8009AF6C[0] + 0xB4);
+        for (i = 0; i < 5; i++) {
+            f = (u8 *)D_80044B38;
+            v = (*(s32 (**)(s32))(f + 0x414))(D_8005CCA8[0] + 0xB0);
+            (*(void (**)(u8 *, s32, s32))(((u8 **)(b + 0xA4))[i] + 0x114))(((u8 **)(b + 0xA4))[i], v, *q + i);
+        }
+    } else {
+        for (i = 0; i < 5; i++) {
+            (*(void (**)(u8 *, s32))(((u8 **)(b + 0xA4))[i] + 0x144))(((u8 **)(b + 0xA4))[i], 0);
+        }
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008F0DC);
 
