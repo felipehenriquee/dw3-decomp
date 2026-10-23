@@ -24,5 +24,7 @@ extern s32 D_80044F5C[];
 extern s32 D_80044B38[];
 extern struct opaque D_80048ABC;
 extern u8 *D_8009AF6C[];
+extern s32 D_8005CCF0[];
+extern s32 D_8009A988[];
 
 #endif /* STSTATUS_DATA_H */

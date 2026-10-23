@@ -45,5 +45,6 @@ extern s32 D_800A4664[];
 extern s32 D_8004DF9C[];
 extern s32 D_800A4570[];
 extern s32 D_800A4644[];
+extern s32 D_800A453C[];
 
 #endif /* FIGHTSTG_DATA_H */
