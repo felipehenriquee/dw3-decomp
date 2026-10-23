@@ -128,7 +128,32 @@ Obj *func_80085634(void) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80085678);
+void func_80085678(u8 *o) {
+    struct {
+        u8 pad0[0x2C];
+        void (*fn2C)(s32);
+        void (*fn30)(void);
+        u8 pad34[8];
+        void (*fn3C)(s32, s32);
+        void (*fn40)(s32, s32);
+        void (*fn44)(s32, s32);
+        u8 pad48[0x10];
+    } t;
+    s32 i;
+    s32 *p;
+
+    func_8001EBF8(&t);
+    t.fn3C(0x140, 0x100);
+    t.fn40(0x300, 0x100);
+    for (i = 0, p = (s32 *)(o + 0x7C); i < 6; i++) {
+        if ((u32)(*p - 1) >= 0x13A) {
+            break;
+        }
+        t.fn2C(*p++);
+        t.fn44(0, i);
+        t.fn30();
+    }
+}
 
 /* guarda os 6 valores atuais (0x7C) em 0x94 e carrega v */
 void func_80085730(u8 *o, s32 *v) {

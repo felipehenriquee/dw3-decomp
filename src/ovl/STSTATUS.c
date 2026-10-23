@@ -249,7 +249,16 @@ INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008E94C);
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008ED04);
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008EF48);
+void func_8008EF48(u8 *o, u8 *b, s32 c) {
+    if (c != 0) {
+        (*(void (**)(u8 *, s32, s32))(*(u8 **)(b + 0xA0) + 0x114))(*(u8 **)(b + 0xA0), ((s32 (*)(s32))D_80044F4C[0])(D_8005CCA8[0] + 0xB0), 5);
+        (*(void (**)(u8 *, s32, s32))(*(u8 **)(b + 0x9C) + 0x118))(*(u8 **)(b + 0x9C), 0, D_80048DA0[0]);
+        (*(void (**)(u8 *, s32))(*(u8 **)(b + 0x9C) + 0x148))(*(u8 **)(b + 0x9C), 1);
+    } else {
+        (*(void (**)(u8 *, s32))(*(u8 **)(b + 0xA0) + 0x144))(*(u8 **)(b + 0xA0), 0);
+        (*(void (**)(u8 *, s32))(*(u8 **)(b + 0x9C) + 0x144))(*(u8 **)(b + 0x9C), 0);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008F000);
 
@@ -317,7 +326,18 @@ void *func_80093678(s32 arg0, s32 arg1, s32 arg2) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_800936EC);
+void func_800936EC(u8 *o) {
+    s32 k = *(s32 *)(o + 0x5C);
+    s32 i;
+    if (k == 0) {
+        *(s32 *)(o + 0x68) = ((s32 (*)(s32, u8 *))D_80042BA4[0])(D_8009A890[0], o + 0x394);
+        for (i = 0; i < *(s32 *)(o + 0x68); i++) {
+            *(s16 *)(o + i * 2 + 0x6C) = *(s16 *)(o + i * 2 + 0x394);
+        }
+    } else {
+        *(s32 *)(o + 0x68) = ((s32 (*)(s32, u8 *))D_80042BA4[0])(D_8009A890[k], o + 0x6C);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_800937A4);
 

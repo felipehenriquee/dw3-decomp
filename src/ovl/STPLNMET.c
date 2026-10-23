@@ -322,7 +322,25 @@ Obj *func_800882A4(void) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_800882E0);
+void func_800882E0(void) {
+    struct {
+        u8 pad0[0x24];
+        void (*fn24)(s32, s32);
+        u8 pad28[4];
+        void (*fn2C)(s32);
+        u8 pad30[8];
+    } g;
+    u8 *f;
+
+    func_8001FFA8(&g);
+    g.fn24(0x280, 0x100);
+    f = (u8 *)D_80044B38;
+    g.fn2C((*(s32 (**)(s32))(f + 0x424))(0x28B0000));
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x8D);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x4E);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x86);
+    (*(void (**)(s32))(f + 0x40C))(0x771);
+}
 
 s32 func_80088398(void) {
     u8 *f = (u8 *)D_80044B38;
