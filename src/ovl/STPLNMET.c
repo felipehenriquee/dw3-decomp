@@ -128,7 +128,28 @@ void func_80085D50(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = 0xA;
 }
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80085D5C);
+void func_80085D5C(u8 *o, s32 f) {
+    s32 i;
+    s32 x = *(s32 *)(o + 0x24);
+    if (f != 0) {
+        *(s32 *)(o + 0xC) = 2;
+        func_80084060(o, x, 0);
+        for (i = *(s32 *)(o + 0x94) - 1; i >= 0; i--) {
+            if (*(u16 *)(o + i * 2 + 0x78) != 0x4081) {
+                break;
+            }
+        }
+        if (i == *(s32 *)(o + 0x94) - 1) {
+            *(s32 *)(o + 0x90) = i;
+        } else {
+            *(s32 *)(o + 0x90) = i + 1;
+        }
+    } else {
+        *(s32 *)(o + 0xC) = 1;
+        *(s32 *)(o + 0x10) = 2;
+        func_80084060(o, x, 1);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80085E10);
 

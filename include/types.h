@@ -386,4 +386,6 @@ typedef struct { s16 x, y; u8 pad[200 - 4]; } CgSlot59C;
 
 typedef struct { u8 pad[0x59C]; CgSlot59C s[1]; } CgObj59C;
 
+typedef struct { s16 x, y; } W212Pt;
+
 #endif /* TYPES_H */

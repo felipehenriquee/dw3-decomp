@@ -43,7 +43,25 @@ void func_8008443C(s32 unused, s32 d, s32 *cur, s32 *top, s32 n) {
 
 INCLUDE_ASM("asm/ovl/SOUNDTST/nonmatchings/SOUNDTST", func_800844A8);
 
-INCLUDE_ASM("asm/ovl/SOUNDTST/nonmatchings/SOUNDTST", func_80084808);
+void func_80084808(u8 *o) {
+    s32 m;
+    switch (*(s32 *)(o + 0x14)) {
+    case 0:
+    default:
+        m = *(s32 *)(o + 0x5C);
+        if (m == 1) {
+            ((void (*)(s32, s32))D_80055C58[0])(0, 1);
+        } else {
+            ((void (*)(s32))D_80055C54[0])(m);
+        }
+        *(s32 *)(o + 0x14) += 1;
+    case 1:
+        if (((s32 (*)(void))D_80055C60[0])() == 0) {
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        }
+        break;
+    }
+}
 
 INCLUDE_RODATA("asm/ovl/SOUNDTST/nonmatchings/SOUNDTST", D_80082CB0);
 

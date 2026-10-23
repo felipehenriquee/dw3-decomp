@@ -149,7 +149,26 @@ INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80086DD4);
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008744C);
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80088214);
+void func_80088214(u8 *o, s32 b) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(s32 *)(o + 0x6C) = 0;
+        func_80086498(o, b);
+        *(s32 *)(o + 0x6CC) = *(s32 *)(o + 0x6EC) = *(s32 *)(o + 0x6DC) = *(s32 *)(o + 0x6FC) = 10;
+        break;
+    case 1:
+        func_8008744C(o, b);
+        func_80086DD4(o);
+        break;
+    case 2:
+        break;
+    case 3:
+        *(s32 *)(*(u8 **)(o + 0x50) + 0x70) = 0;
+        break;
+    }
+}
 
 void *func_800882C8(void *arg0) {
     void *temp_v0;

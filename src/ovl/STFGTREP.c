@@ -115,7 +115,21 @@ void func_80084A20(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = 0x14;
 }
 
-INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80084A2C);
+s32 func_80084A2C(u8 *o) {
+    u8 *t;
+    u8 *p;
+    s32 r;
+    if (*(s32 *)(o + 0x64) == 0) {
+        t = (u8 *)D_80048D34;
+        p = (*(u8 *(**)(s32))(t + 0x2750))((*(s32 (**)(s32))(t + 0x2718))(*(s32 *)(o + 0x5C)));
+        if (*(s16 *)(p + 0x3C8) == 0x141 || *(s16 *)(p + 0x3CA) == 0x141) {
+            *(s32 *)(o + 0x60) += *(s32 *)(o + 0x60) / 5;
+        }
+    }
+    r = *(s32 *)(o + 0x60);
+    *(s32 *)(o + 0x64) = 1;
+    return r;
+}
 
 void func_80084AE0(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x68) = 1;

@@ -6,5 +6,8 @@
 struct opaque;
 extern s32 D_8004BBC4[];
 extern s32 D_8004B440[];
+extern s32 D_80055C54[];
+extern s32 D_80055C58[];
+extern s32 D_80055C60[];
 
 #endif /* SOUNDTST_DATA_H */

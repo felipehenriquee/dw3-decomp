@@ -37,7 +37,27 @@ void func_800A5EBC(u8 *o) {
 
 INCLUDE_ASM("asm/ovl/WSTAG212/nonmatchings/WSTAG212", func_800A5EF4);
 
-INCLUDE_ASM("asm/ovl/WSTAG212/nonmatchings/WSTAG212", func_800A6148);
+void func_800A6148(u8 *o, s32 id) {
+    s32 k;
+    if (o == 0) {
+        return;
+    }
+    k = 0;
+    switch (id) {
+    case 0x33B:
+        k = 1;
+    case 0x33A:
+        k++;
+    case 0x32F:
+        break;
+    default:
+        return;
+    }
+    *(s32 *)(o + 0x50) = D_800A817C[k].x;
+    *(s32 *)(o + 0x54) = D_800A817C[k].y;
+    (*(void (**)(u8 *, s32))(o + 0x2C))(o, 1);
+    ((void (*)(s32))D_80055C48[0])(D_800A8188[k]);
+}
 
 u8 *func_800A61FC(s32 link) {
     return func_800143DC(func_800A5EF4, 0x70, 0, link);
