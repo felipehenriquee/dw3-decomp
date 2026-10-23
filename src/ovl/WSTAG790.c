@@ -11,7 +11,7 @@ void func_800A60D0(void *arg0, s32 arg1) {
     }
 }
 
-u8 *func_800A6108(void) {
+u8 *func_800A6108(s32 unused) {
     return func_800143DC(func_800A5DF4, 112, 0, 809);
 }
 
@@ -27,7 +27,23 @@ u8 *func_800A625C(s32 link) {
     return func_800143DC(func_800A6138, 0x5C, 0, link);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG790/nonmatchings/WSTAG790", func_800A628C);
+void func_800A628C(u8 *o, s32 *w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        w[2] = func_800A6108(0x329);
+        w[1] = func_800A625C(0x328);
+        if (D_8004B370[0] == 1) {
+            w[0] = func_800853F8(4);
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A631C(s32 arg0) {
     void *temp_v0;
