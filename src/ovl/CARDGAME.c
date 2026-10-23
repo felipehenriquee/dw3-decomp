@@ -1275,7 +1275,20 @@ void func_8009BA3C(s32 arg0, void *arg1) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009BAC8);
+void func_8009BAC8(CgObjE *o, s32 b) {
+    s32 i, k;
+    for (i = 39; i >= 0; i--) {
+        func_8009B890(o, b, &o->e[i]);
+        func_8009B76C(o, &o->e[i]);
+    }
+    for (k = 0; k < 2; k++) {
+        for (i = 39; i >= 0; i--) {
+            if ((k == 0 && o->e[i].h12E != 0) || (k != 0 && o->e[i].h12E == 0)) {
+                func_8009BA3C(o, &o->e[i]);
+            }
+        }
+    }
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009BBA8);
 
