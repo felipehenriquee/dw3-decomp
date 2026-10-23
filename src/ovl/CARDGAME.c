@@ -127,7 +127,28 @@ s32 func_80085F38(u8 *o, s32 n) {
     return res;
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80085FD0);
+s32 func_80085FD0(u8 *o, u8 *b, s32 n) {
+    struct {
+        u8 *p0;
+        u8 pad4[0x28];
+        void (*fn2C)(s32);
+        u8 pad30[0x28];
+    } t;
+    s32 r = 0;
+    u8 *p;
+
+    if (o[0x2F8] == 6) {
+        func_8001EBF8(&t);
+        t.fn2C(((CgArr50 *)o)->a[n] + 1);
+        p = t.p0;
+        if (p[3] == 0x10) {
+            r = !(b[p[0] - 1] < p[5]);
+        }
+    } else {
+        r = func_80085F38(o, n);
+    }
+    return r;
+}
 
 s16 func_80086090(s32 a, s32 b, s32 c) {
     return D_800A5844[D_8005CCB0[0]][a][b][c];

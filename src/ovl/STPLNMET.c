@@ -151,7 +151,26 @@ void func_80085D5C(u8 *o, s32 f) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80085E10);
+u8 *func_80085E10(s32 s) {
+    s32 k;
+    u8 *o = (u8 *)func_80014504(func_80085A70, 0xF8, 0x34);
+    *(void **)(o + 0xEC) = func_80085C50;
+    *(void **)(o + 0xF0) = func_80085D5C;
+    *(void **)(o + 0xF4) = func_80085D50;
+    *(s32 *)(o + 0x54) = 0x1001;
+    *(s32 *)(o + 0x58) = 6;
+    k = D_8005CCA8[0];
+    *(s32 *)(o + 0x50) = 0;
+    *(s32 *)(o + 0x64) = -1;
+    if (k == 0) {
+        *(s32 *)(o + 0x94) = 5;
+    } else {
+        *(s32 *)(o + 0x94) = 8;
+    }
+    func_80085BBC(o, s);
+    func_80085BB0(o, 0x140, 0x100);
+    return o;
+}
 
 void func_80085ECC(void *arg0, void *arg1) {
     s32 temp_a0;

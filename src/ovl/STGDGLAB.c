@@ -363,7 +363,29 @@ Obj *func_8008EABC(s32 arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008EB30);
 
-INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008EC50);
+void func_8008EC50(u8 *o) {
+    s32 i, j;
+    u8 *t;
+    t = (u8 *)D_80048D34;
+    *(s32 *)(o + 0x60) = 0;
+    for (i = 0; i < 3; i++) {
+        if (((s32 *)(t + 0x70))[i] >= 0) {
+            *(s32 *)(o + 0x60) += 1;
+        }
+    }
+    t = (u8 *)D_80048D34;
+    for (i = 0; i < 3; i++) {
+        if (((s32 *)(t + 0x70))[i] < 0) {
+            for (j = i; j < 3; j++) {
+                if (((s32 *)(t + 0x70))[j] >= 0) {
+                    ((s32 *)(t + 0x70))[i] = ((s32 *)(t + 0x70))[j];
+                    ((s32 *)(t + 0x70))[j] = -1;
+                    break;
+                }
+            }
+        }
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008ED0C);
 

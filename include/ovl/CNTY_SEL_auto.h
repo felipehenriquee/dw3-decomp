@@ -16,6 +16,7 @@ s32 func_80083830(u8 *o, s32 k);
 void func_80083894(u8 *o);
 Obj *func_80083A68(void);
 s32 func_80083A94(u8 *o, s32 k);
+void func_80083B00(u8 *o);
 Obj *func_80083CEC(void);
 Obj *func_80084394(void);
 
@@ -32,7 +33,6 @@ s32 func_80083304();
 s32 func_8008347C();
 s32 func_800836DC();
 s32 func_80083940();
-s32 func_80083B00();
 s32 func_80083BC0();
 s32 func_80083D18();
 

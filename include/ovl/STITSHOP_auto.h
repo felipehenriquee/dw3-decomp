@@ -30,6 +30,7 @@ Obj *func_8008B484(s32 arg0, s32 arg1);
 void func_8008B524(void *arg0, void *arg1);
 void func_8008C0C4(u8 *o);
 void *func_8008C118(void);
+void func_8008C17C(void);
 s32 func_8008C238(void);
 void func_8008C2DC(void *arg0, s32 arg1);
 s32 func_8008C370(Fade *f);
