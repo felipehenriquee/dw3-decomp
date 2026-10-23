@@ -35,7 +35,24 @@ Obj *func_800832D8(void) {
 
 INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083304);
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_800833DC);
+void func_800833DC(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        void (*fn88)(s32);
+        u8 pad8C[0xA0 - 0x8C];
+    } g;
+
+    func_8001F648(&g);
+    g.fn7C(0x100, 1);
+    g.fn74(0x280, 0);
+    g.fn88(*(s16 *)(o + 0x56));
+    g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x8A30000), *(s16 *)(o + 0x54) + 4, 0, 0);
+}
 
 void func_80083474(void *arg0, s16 arg1) {
     M2C_FIELD(arg0, s16 *, 0x54) = arg1;

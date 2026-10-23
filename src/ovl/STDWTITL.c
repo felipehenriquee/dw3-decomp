@@ -70,7 +70,19 @@ INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800836D8);
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083760);
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800838B0);
+void func_800838B0(TitlBlink *o) {
+    volatile s32 c = 0x800000;
+    while (o->done == 0) {
+        c--;
+        if (c == 0) {
+            o->done = 1;
+            o->sel = o->sel == 0;
+            o->x = o->pt[o->sel].x;
+            o->y = o->pt[o->sel].y;
+        }
+    }
+    o->done = 0;
+}
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083944);
 

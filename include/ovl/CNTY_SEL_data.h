@@ -10,5 +10,6 @@ extern Seg D_800843EC[];
 extern u8 D_800843C8[];
 extern s32 D_80055C54[];
 extern Seg12 D_8008440C[];
+extern s32 D_80044F5C[];
 
 #endif /* CNTY_SEL_DATA_H */

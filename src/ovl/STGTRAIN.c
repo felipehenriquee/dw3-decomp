@@ -258,23 +258,39 @@ void *func_80088070(s32 arg0, s32 arg1, s32 arg2) {
     return temp_v0;
 }
 
-void func_80088100(void) {
+void func_80088100(u8 *o, s32 b) {
 }
 
-void func_80088108(void) {
+void func_80088108(u8 *o, s32 b, s32 c) {
 }
 
 /* prepara um contexto de desenho e o descarta (sobra de codigo) */
-void func_80088110(void) {
+void func_80088110(u8 *o) {
     u8 g[0xA0];
 
     func_8001F648(g);
 }
 
-void func_80088130(void) {
+void func_80088130(u8 *o, s32 b) {
 }
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80088138);
+void func_80088138(u8 *o, s32 b) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        func_80088100(o, b);
+        func_80088108(o, b, 1);
+        break;
+    case 1:
+        func_80088130(o, b);
+        func_80088110(o);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_800881CC(s32 arg0) {
     void *temp_v0;

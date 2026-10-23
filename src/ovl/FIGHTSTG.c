@@ -9,7 +9,15 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800835F4);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80083854);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800839C0);
+void func_800839C0(u8 *o) {
+    s32 i;
+    Elem84 *e = *(Elem84 **)(o + 0x54);
+    for (i = 0; i < *(s32 *)(o + 0x50); i++, e++) {
+        e->b[0] = e->a[0];
+        e->b[1] = e->a[1];
+        e->b[2] = e->a[2];
+    }
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80083A54);
 
@@ -850,7 +858,15 @@ void func_8009B460(void *arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009B4EC);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009B650);
+u8 *func_8009B650(u8 *a, S16x3 *b, s32 n) {
+    u8 *o = (u8 *)func_80014504(func_8009B4EC, 0x68, 0);
+    *(u8 **)(o + 0x50) = a;
+    *(S16x3 *)(o + 0x5A) = *b;
+    *(S16x3 *)(o + 0x54) = *(S16x3 *)(a + 0x1C);
+    *(s32 *)(o + 0x60) = 0;
+    *(s32 *)(o + 0x64) = 0x1000 / n;
+    return o;
+}
 
 void func_8009B6E4(void *arg0) {
     s32 temp_v1;

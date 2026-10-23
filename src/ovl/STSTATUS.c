@@ -454,7 +454,17 @@ s32 func_80099DF0(Fade *f) {
     return 0;
 }
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80099E5C);
+void func_80099E5C(s32 *o, s32 a, s32 b, s32 n) {
+    if (a != b) {
+        ((void (*)(s32))D_80055C48[0])(0x40019);
+        o[0] = n;
+        o[3] = a << 8;
+        o[2] = a;
+        o[4] = b;
+        o[6] = 1;
+        o[5] = ((b - a) << 8) / o[0];
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80099EF0);
 

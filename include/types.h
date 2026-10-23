@@ -327,4 +327,21 @@ typedef struct {
     s32 w[15];
 } Block3C;
 
+typedef struct { s16 v[4]; } S16x4;
+
+typedef struct { u8 pad0[0x10]; S16x4 a[3]; u8 pad28[0x44]; S16x4 b[3]; } Elem84;
+
+typedef struct { s16 x, y, z; } S16x3;
+
+typedef struct { s16 x, y; s32 pad; } TitlPt;
+
+typedef struct { u8 pad0[0x18]; TitlPt pt[2]; s32 sel; s16 x, y; s32 pad30; s32 done; } TitlBlink;
+
+/* objeto com um array s16 em 0x50 */
+typedef struct { u8 pad[0x50]; s16 a[1]; } CgArr50;
+
+typedef struct { u8 pad0[0xA]; s16 n; u8 padC[0x58]; s16 a[1]; } CgList;
+
+typedef struct { u8 pad[0xC]; u8 id; u8 padD; } CgCard14;
+
 #endif /* TYPES_H */

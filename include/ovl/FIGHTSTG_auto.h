@@ -3,6 +3,7 @@
 #define FIGHTSTG_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800839C0(u8 *o);
 void func_800844F8(u8 *o, s32 k, s32 v);
 s32 func_80084554(void *arg0);
 void func_800868C0(void *arg0, s32 arg1, s32 arg2, s32 arg3);
@@ -65,6 +66,7 @@ void func_8009A6BC(s32 unused, u8 *w, s32 flag);
 void func_8009AB74(s32 *arg0, s32 arg1, s32 arg2);
 Obj *func_8009B0C8(Block32 *src);
 void func_8009B460(void *arg0, s32 arg1, s32 arg2);
+u8 *func_8009B650(u8 *a, S16x3 *b, s32 n);
 void func_8009B6E4(void *arg0);
 s8 func_8009BC14(s8 a);
 s8 func_8009BC54(void);
@@ -115,7 +117,6 @@ s32 func_8001FFA8();
 s32 func_800832D0();
 s32 func_800835F4();
 s32 func_80083854();
-s32 func_800839C0();
 s32 func_80083A54();
 s32 func_80083C30();
 s32 func_80083E0C();
@@ -244,7 +245,6 @@ s32 func_8009ADD4();
 s32 func_8009AF4C();
 s32 func_8009B13C();
 s32 func_8009B4EC();
-s32 func_8009B650();
 s32 func_8009B774();
 s32 func_8009B864();
 s32 func_8009B930();
