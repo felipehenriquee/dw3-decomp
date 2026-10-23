@@ -57,7 +57,25 @@ s16 func_800A638C(s16 *st, s16 *tbl, s32 depth) {
     return e[0];
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A6480);
+void func_800A6480(u8 *o, s32 tex) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[8];
+        void (*fn80)(s32, s32);
+        void (*fn84)(s32, s32, s32, s32);
+        void (*fn88)(s32);
+        u8 pad8C[0xA0 - 0x8C];
+    } g;
+
+    if (*(s32 *)(o + 0xC) == 1) {
+        func_8001F648(&g);
+        g.fn74(0x140, 0x100);
+        g.fn80(tex, 4);
+        g.fn88(0);
+        g.fn84(((s32 (*)(s32))D_80044F5C[0])(D_80099D8C), *(s32 *)(o + 0x50), *(s32 *)(o + 0x54), *(s32 *)(o + 0x58));
+    }
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A652C);
 
