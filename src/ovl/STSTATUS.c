@@ -478,7 +478,25 @@ INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80099FF8);
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8009A1BC);
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8009A344);
+s32 func_8009A344(s32 bit, s32 m, s32 id) {
+    u8 *p;
+    if (id != -1) {
+        p = *((u8 **(*)(s32))D_80042B98[0])(id);
+        if (!((p[4] >> bit) & 1)) {
+            return 0;
+        }
+        if (p[2] == 1) {
+            if (m == 3) {
+                return 0;
+            }
+        } else if (p[2] == 2) {
+            if (m == 2) {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8009A3E8);
 

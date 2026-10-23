@@ -9,5 +9,6 @@ extern s32 D_800A4468[];
 extern struct opaque D_8004B5DC;
 extern u8 D_80042B84[];
 extern u8 D_80048D34[];
+extern u8 D_800A3868[];
 
 #endif /* WFIGHTMN_DATA_H */

@@ -9,5 +9,7 @@ extern s32 D_8004B43C NOT_GP;
 extern s32 D_80055C48[];
 extern u8 D_8004DE10[];
 extern s32 D_80048DA0[];
+extern s32 D_80044B38[];
+extern s32 D_8005CCA8[];
 
 #endif /* STITSHOP_DATA_H */

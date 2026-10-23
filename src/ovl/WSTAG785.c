@@ -33,8 +33,10 @@ s16 func_800A5DE4(s16 *st, s16 *tbl, s32 once, s32 depth) {
 
 INCLUDE_ASM("asm/ovl/WSTAG785/nonmatchings/WSTAG785", func_800A5F04);
 
-void func_800A61A4(void) {
-    M2C_FIELD(func_80014504(func_800A5F04, 0x6C, 0), s32 *, 0x50) = 1;
+Obj *func_800A61A4(void) {
+    Obj *o = func_80014504(func_800A5F04, 0x6C, 0);
+    M2C_FIELD(o, s32 *, 0x50) = 1;
+    return o;
 }
 
 u8 *func_800A61D8(s32 arg0) {
@@ -51,7 +53,28 @@ u8 *func_800A6510(s32 link) {
 
 INCLUDE_ASM("asm/ovl/WSTAG785/nonmatchings/WSTAG785", func_800A6540);
 
-INCLUDE_ASM("asm/ovl/WSTAG785/nonmatchings/WSTAG785", func_800A660C);
+void func_800A660C(u8 *o, Obj **w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        switch (D_8004B370[0]) {
+        case 0:
+            w[0] = func_800853F8(1);
+            break;
+        case 1:
+            w[1] = func_800A61A4();
+            w[0] = func_800853F8(3);
+            break;
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        w[1] = 0;
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A66B0(s32 arg0) {
     void *temp_v0;
