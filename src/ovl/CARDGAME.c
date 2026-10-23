@@ -847,7 +847,41 @@ void func_80096950(u8 *o) {
     g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x25D0003), 0, s, s);
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80096A94);
+void func_80096A94(u8 *p, s32 scale) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        void (*fn88)(s32);
+        void (*fn8C)(s32, s32, s32);
+        u8 pad90[4];
+        void (*fn94)(s32, s32);
+        u8 pad98[0xA0 - 0x98];
+    } g;
+    s32 v, i, d, n;
+    u8 *f;
+
+    func_8001F648(&g);
+    g.fn7C(0x100, p[0x10]);
+    g.fn74(0x340, 0);
+    if (scale != 0) {
+        g.fn94(*(s16 *)(p + 0xA), *(s16 *)(p + 0xC));
+        g.fn8C(*(s16 *)(p + 6), *(s16 *)(p + 8), 0x1000);
+    }
+    v = *(s16 *)p;
+    for (i = 0; i < p[0xE]; i++) {
+        d = v % 10;
+        if (i == 0 || p[0xF] != 0 || d != 0 || v / 10 != 0) {
+            f = (u8 *)D_80044B38;
+            n = i + 1;
+            g.fn84((*(s32 (**)(s32))(f + 0x424))(0x25D0003), d + 0x14, *(s16 *)(p + 2) + (p[0xE] - n) * 7, *(s16 *)(p + 4));
+        }
+        v /= 10;
+    }
+}
 
 void func_80096C20(s32 a, s32 b, s32 i, s16 *p) {
     struct {
