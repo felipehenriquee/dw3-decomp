@@ -923,7 +923,17 @@ void func_80096E24(s32 arg0, M2C_UNK arg1) {
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80096E8C);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80097238);
+void func_80097238(s32 a, u8 **w, u8 *p) {
+    s32 v[2];
+    s32 i, y;
+    v[0] = p[0x14];
+    v[1] = p[0x15];
+    for (i = 0, y = 4; i < 2; i++, y += 13) {
+        (*(void (**)(u8 *, s32, s32))(w[i + 1] + 0x134))(w[i + 1], (s16)(*(u16 *)p + 0x67), (s16)(*(u16 *)(p + 2) + y));
+        (*(void (**)(u8 *, s32, s32))(w[i + 1] + 0x118))(w[i + 1], 0, v[i]);
+        (*(void (**)(u8 *, s32))(w[i + 1] + 0x148))(w[i + 1], 1);
+    }
+}
 
 void func_80097310(s32 arg0, void *arg1, void *arg2, M2C_UNK arg3, s32 arg4) {
     if (M2C_FIELD(arg1, s32 *, 0x10) != 0) {
