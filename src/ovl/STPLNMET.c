@@ -312,7 +312,16 @@ Obj *func_80087AC0(s32 arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80087B14);
+void func_80087B14(u8 *o, u8 *b) {
+    s32 i = 0;
+    u8 *f = (u8 *)D_80044B38;
+    for (; i < 3; i++) {
+        ((u8 **)(b + 0x1C))[i] = (u8 *)func_8001AE38(*(s16 *)(o + 0x50), 3, D_80089A80[i * 2], 0x12);
+        (*(void (**)(u8 *, s32, s32))(((u8 **)(b + 0x1C))[i] + 0x114))(((u8 **)(b + 0x1C))[i], (*(s32 (**)(s32))(f + 0x414))(D_8005CCA8[0] + 0x8D), i + 3);
+        (*(void (**)(u8 *, s32))(((u8 **)(b + 0x1C))[i] + 0x138))(((u8 **)(b + 0x1C))[i], 1);
+        (*(void (**)(u8 *, s32))(((u8 **)(b + 0x1C))[i] + 0x144))(((u8 **)(b + 0x1C))[i], 0);
+    }
+}
 
 void func_80087BF4(u8 *o, u8 *b, s32 c) {
     s32 i;
