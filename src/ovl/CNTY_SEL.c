@@ -73,7 +73,28 @@ s32 func_800835CC(u8 *o, s32 k) {
     return D_800843EC[k].from + (D_800843EC[k].to - D_800843EC[k].from) * t / D_800843EC[k].len;
 }
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083630);
+void func_80083630(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        u8 pad88[4];
+        void (*fn8C)(s32, s32, s32);
+        u8 pad90[4];
+        void (*fn94)(s32, s32);
+        u8 pad98[0xA0 - 0x98];
+    } g;
+
+    func_8001F648(&g);
+    g.fn7C(0x100, 1);
+    g.fn74(0x280, 0);
+    g.fn94(0x94, 0);
+    g.fn8C(*(s16 *)(o + 0x54), *(s16 *)(o + 0x56), 0x1000);
+    g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x8A30000), 2, 0x94, 0);
+}
 
 INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_800836DC);
 
@@ -91,7 +112,28 @@ s32 func_80083830(u8 *o, s32 k) {
     return D_800843FC[k].from + (D_800843FC[k].to - D_800843FC[k].from) * t / D_800843FC[k].len;
 }
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083894);
+void func_80083894(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        u8 pad88[4];
+        void (*fn8C)(s32, s32, s32);
+        u8 pad90[4];
+        void (*fn94)(s32, s32);
+        u8 pad98[0xA0 - 0x98];
+    } g;
+
+    func_8001F648(&g);
+    g.fn7C(0x100, 1);
+    g.fn74(0x280, 0);
+    g.fn94(0x140, 0x14);
+    g.fn8C(*(s16 *)(o + 0x54), *(s16 *)(o + 0x56), 0x1000);
+    g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x8A30000), 1, 0x140, 0x14);
+}
 
 INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083940);
 

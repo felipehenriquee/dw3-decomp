@@ -156,7 +156,24 @@ INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80085B18);
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80085F48);
 
-INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_800872F4);
+void func_800872F4(u8 *o, s32 b) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        func_800859C0(o, b);
+        *(s32 *)(o + 0xBC) = *(s32 *)(o + 0xAC) = *(s32 *)(o + 0x9C) = *(s32 *)(o + 0x8C) = *(s32 *)(o + 0x7C) = 10;
+        *(s32 *)(o + 0x68) = 1;
+        break;
+    case 1:
+        func_80085F48(o, b);
+        func_80085B18(o, b);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void func_8008739C(void *arg0) {
     void *temp_a0;
