@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-10-23, 3ª sessão): EXE **275 de 347** (79%); overlays **1927 de 3292** (58.5%). Total **2202 de 3639 (60.5%)**.
+- [ ] Decompilação (2026-10-23, 4ª sessão): EXE **275 de 347** (79%); overlays **1948 de 3292** (59.2%). Total **2223 de 3639 (61.1%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -129,6 +129,8 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 - Tabela 2D de bytes (`D_800975C0[][9]`): declare como array 2D, não `u8 *` com `row * 9`.
 - Chamada repetida nos dois ramos de um `if` (ex.: `g.fn88(...)`) mantém o `lw` duplicado do original; uma chamada só após o `if` não bate.
 - Cópia de registrador antes de um `sb` (`move v0,s1; sb v0`): atribuição encadeada `r = e[0x42] = 1;`.
+- **Registradores de parâmetros trocados** (ex.: `tex` em s4 em vez de s2): copie o parâmetro numa variável local no início (`s32 t = tex;`, `u8 *p = o;`). Resolveu a família gráfica WSTAG735/736/745/746/750/815/820 e a WSTAG785 `func_800A6540`; não resolveu WSTAG226/210, FIELDSTG `func_8008F128` e CARDGAME `func_8009BEAC`.
+- Load repetido de um campo (o original relê `e->28`): escreva a expressão onde ela é usada em vez de guardar num temporário.
 - Booleano `c == 0`/`c != 0` usado como índice: declare `u8 c` e guarde em variável (`k = c == 0`) para sair `sltiu` em vez de desvio.
 - Laço com contador reaproveitado: o original pode reutilizar a variável de um laço anterior como contador do seguinte (troca de registradores).
 - Comparação contra o valor do `switch` (`k == *(s32 *)(o + 0xC)` dentro do `case 1`) mantém o `bne` com registrador.
