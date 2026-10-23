@@ -291,7 +291,33 @@ u8 *func_8008966C(s32 a, S16x4 *p, s32 c, Pair32 *q, s32 e) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008970C);
+void func_8008970C(u8 *o, Obj **w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        *(s32 *)(o + 0xA8) = 1;
+        *(s32 *)(o + 0xAC) = 0x1004;
+        *(s32 *)(o + 0x88) = 0;
+        *(s32 *)(o + 0xB0) = 0;
+        *(s16 *)(o + 0x90) = *(s16 *)(o + 0x5C);
+        *(s16 *)(o + 0x92) = *(s16 *)(o + 0x5E);
+        *(s16 *)(o + 0x94) = *(s16 *)(o + 0x60);
+        *(s16 *)(o + 0x96) = *(s16 *)(o + 0x64);
+        *(s16 *)(o + 0x98) = *(s16 *)(o + 0x66);
+        *(s16 *)(o + 0x9A) = *(s16 *)(o + 0x68);
+        w[0] = (Obj *)func_800847C4(*(s32 *)(o + 0x54), *(s32 *)(o + 0x58), *(s32 *)(o + 0x6C), *(s32 *)(o + 0x70), o + 0x74);
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        if (*(s32 *)(o + 0x84) != 0) {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 3);
+        }
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 s32 func_800897F8(s32 id) {
     s32 *e = D_800A2550;
