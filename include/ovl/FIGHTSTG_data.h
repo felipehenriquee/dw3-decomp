@@ -27,5 +27,7 @@ extern s32 D_800A2550[];
 extern s32 D_800A4648[];
 extern u8 D_80048D34[];
 extern s32 D_800A37FC[];
+extern S16Pair D_800A4530;
+extern s32 D_800A4670[];
 
 #endif /* FIGHTSTG_DATA_H */

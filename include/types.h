@@ -344,4 +344,8 @@ typedef struct { u8 pad0[0xA]; s16 n; u8 padC[0x58]; s16 a[1]; } CgList;
 
 typedef struct { u8 pad[0xC]; u8 id; u8 padD; } CgCard14;
 
+typedef struct { s32 v[8]; } S32x8;
+
+typedef struct { s16 n; s16 k; } S16Pair;
+
 #endif /* TYPES_H */

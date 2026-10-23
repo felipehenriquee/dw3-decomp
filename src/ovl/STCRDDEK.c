@@ -161,7 +161,23 @@ INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80084890);
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80085210);
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80086574);
+void func_80086574(u8 *o, s32 b) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        func_8008397C(o, b);
+        *(s32 *)(o + 0x484) = *(s32 *)(o + 0x474) = *(s32 *)(o + 0x464) = *(s32 *)(o + 0x454) = *(s32 *)(o + 0x444) = 10;
+        break;
+    case 1:
+        func_80085210(o, b);
+        func_80084890(o);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_8008660C(s32 arg0, s32 arg1) {
     void *temp_v0;

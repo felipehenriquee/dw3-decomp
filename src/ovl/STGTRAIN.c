@@ -561,7 +561,15 @@ s32 func_8008BAA8(s32 k) {
     return 1;
 }
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008BB38);
+s32 func_8008BB38(void) {
+    s32 *t = D_8008CE3C;
+    s32 *s = D_8008CFCC;
+    u8 *f = D_80044B38;
+    if ((*(s32 (**)(s32))(f + 0x404))(t[s[2] * 4]) == 0) {
+        s[1] = (*(s32 (**)(s32))(f + 0x414))(t[s[2] * 4]);
+    }
+    return s[1];
+}
 
 void func_8008BBD0(void) {
     if (D_8008CFD4[0] != -1) {
