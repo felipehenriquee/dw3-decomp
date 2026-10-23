@@ -10,5 +10,7 @@ extern s32 D_800A8B18[];
 extern struct opaque D_8004DF8C;
 extern struct opaque D_8004DF9C;
 extern s32 D_80055C48[];
+extern s32 D_80044F5C[];
+extern s32 D_80099D8C NOT_GP;
 
 #endif /* WSTAG311_DATA_H */

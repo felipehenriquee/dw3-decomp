@@ -14,5 +14,7 @@ extern s32 D_8009B704[];
 extern s32 D_80099D94[];
 extern u8 D_800A7AAC[];
 extern u8 D_800A7DAC[];
+extern s32 D_80044F5C[];
+extern s32 D_80099D8C NOT_GP;
 
 #endif /* WSTAG810_DATA_H */
