@@ -120,6 +120,7 @@ void func_800A3488(void *arg0);
 void func_800A3548(void *arg0, s8 arg1, s8 arg2, s8 arg3);
 s32 func_800A35A4(void *arg0);
 void func_800A35B0(void *arg0);
+void func_800A35BC(u8 *o);
 Obj *func_800A367C(s8 arg0);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
@@ -302,7 +303,6 @@ s32 func_800A2DF8();
 s32 func_800A2F00();
 s32 func_800A32D8();
 s32 func_800A3558();
-s32 func_800A35BC();
 s32 func_800A36E4();
 s32 func_800A3934();
 s32 func_800A3D90();

@@ -1743,7 +1743,26 @@ void func_800A35B0(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x50) = 2;
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800A35BC);
+void func_800A35BC(u8 *o) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        if (*(s32 *)(o + 0x50) == 1) {
+            func_800A3488(o);
+        }
+        ((void (*)(u8 *, CgPt16, CgPt16))func_800A32D8)(o, D_800A5D94[0], D_800A5D94[1]);
+        if (*(s32 *)(o + 0x50) == 2) {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 3);
+        }
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_800A367C(s8 arg0) {
     void *temp_v0;

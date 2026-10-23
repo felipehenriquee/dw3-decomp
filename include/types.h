@@ -398,4 +398,6 @@ typedef struct { u8 pad[0xC]; u8 *s[1]; } FdTbl;
 
 typedef struct { s32 pad; s32 *e[8]; } FdSet4;
 
+typedef struct { s16 x, y; } CgPt16;
+
 #endif /* TYPES_H */

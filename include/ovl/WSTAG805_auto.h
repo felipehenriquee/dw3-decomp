@@ -8,6 +8,7 @@ u8 *func_800A5F9C(s32 arg0);
 void func_800A63C4(void *arg0, s32 arg1);
 u8 *func_800A641C(s32 link);
 s32 func_800A65A0(s32 x, s32 y, s32 w, s32 h);
+void func_800A6664(u8 *o, s32 tex, s32 i);
 Obj *func_800A6990(s32 arg0, s32 arg1, s32 arg2);
 void *func_800A6B44(s32 arg0);
 void func_800A6BA0(void);
@@ -23,7 +24,6 @@ s32 func_800A5DE4();
 s32 func_800A5FCC();
 s32 func_800A60CC();
 s32 func_800A644C();
-s32 func_800A6664();
 s32 func_800A6724();
 s32 func_800A69E8();
 

@@ -51,7 +51,24 @@ s32 func_800A65A0(s32 x, s32 y, s32 w, s32 h) {
     return r[1] + r[3] >= y;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG805/nonmatchings/WSTAG805", func_800A6664);
+void func_800A6664(u8 *o, s32 tex, s32 i) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[8];
+        void (*fn80)(s32, s32);
+        void (*fn84)(s32, s32, s32, s32);
+        void (*fn88)(s32);
+        u8 pad8C[0xA0 - 0x8C];
+    } g;
+    s16 *p = (s16 *)(o + (i * 12 + 0x60));
+
+    func_8001F648(&g);
+    g.fn74(0x140, 0x100);
+    g.fn80(tex, 10);
+    g.fn88(p[3]);
+    g.fn84(((s32 (*)(s32))D_80044F5C[0])(D_80099D8C), p[2], *(s32 *)(o + 0x50), *(s32 *)(o + 0x54));
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG805/nonmatchings/WSTAG805", func_800A6724);
 
