@@ -212,7 +212,23 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80086F24);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800870A4);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008722C);
+void func_8008722C(u8 *o, u8 *x, CgList *l) {
+    s32 i;
+    s32 r;
+    for (i = 0; i < l->n; i++) {
+        r = func_80085FD0(o, (u8 *)l + 0xC, l->a[i]);
+        if (r != 0 && *(s8 *)(o + i + 0x46F) == 0) {
+            o[i + 0x446] = 1;
+        } else {
+            o[i + 0x446] = 0;
+            if (*(s8 *)(o + i + 0x46F) == 0) {
+                x[i * 0x4C + 0x151] = 1;
+                continue;
+            }
+        }
+        x[i * 0x4C + 0x151] = 0;
+    }
+}
 
 /* nenhum dos itens marcados? (so com o modo < 6) */
 s32 func_80087308(u8 *o, s32 unused, u8 *p) {
