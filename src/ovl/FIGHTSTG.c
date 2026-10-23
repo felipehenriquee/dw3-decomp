@@ -1320,7 +1320,27 @@ u8 *func_8009EB94(s32 id) {
     return (u8 *)((*(s32 *)((u8 *)func_8009E994(id) + 0xC) - *(s32 *)b) + (s32)b);
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009EBE0);
+void func_8009EBE0(s32 m, s32 *pmin, s32 *pmax) {
+    u8 *b = ((u8 *(*)(s32))D_80044F4C)(0x1CC);
+    u8 *p = b + *(s32 *)(b + 4);
+    s32 mn = 0xFF;
+    s32 mx = 0;
+    s32 i = 0;
+    s32 t;
+    for (; *(s16 *)p != 0; p += 4, i++) {
+        t = p[3] >= 0x3A;
+        if (t == m) {
+            if (i < mn) {
+                mn = i;
+            }
+            if (mx < i) {
+                mx = i;
+            }
+        }
+    }
+    *pmin = mn;
+    *pmax = mx;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009EC94);
 

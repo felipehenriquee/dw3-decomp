@@ -714,7 +714,14 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80096E8C);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80097238);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80097310);
+void func_80097310(s32 arg0, void *arg1, void *arg2, M2C_UNK arg3, s32 arg4) {
+    if (M2C_FIELD(arg1, s32 *, 0x10) != 0) {
+        M2C_FIELD(arg2, M2C_UNK (**)(void *, s16, s16), 0x134)(arg2, (s16) (M2C_FIELD(arg1, u16 *, 0) + D_800A59A8[arg4]), (s16) (M2C_FIELD(arg1, u16 *, 2) + 4));
+        M2C_FIELD(arg2, M2C_UNK (**)(void *, s32, s32), 0x114)(arg2, ((s32 (*)(M2C_UNK)) *D_80044F4C)(arg3), M2C_FIELD(arg1, s32 *, 0x10));
+        return;
+    }
+    M2C_FIELD(arg2, M2C_UNK (**)(void *, M2C_UNK), 0x144)(arg2, 0);
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800973E4);
 

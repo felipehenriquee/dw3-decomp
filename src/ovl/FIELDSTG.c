@@ -539,7 +539,19 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008CCC8);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008CE40);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008CF1C);
+void func_8008CF1C(void) {
+    u8 *o = ((u8 *(*)(s32, s32, s32))D_8004B7BC)(0xB, -1, -1);
+    s32 i;
+    if (o != 0) {
+        for (i = 0; i < *(s32 *)(o + 0x50); i++) {
+            if (*(s32 *)(*(u8 **)(o + 0x54) + i * 20 + 8) >= 1000) {
+                *(s32 *)(o + 0x58) = i;
+                *(s32 *)(o + 0x5C) = 1;
+                (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+            }
+        }
+    }
+}
 
 void func_8008CFD4(u8 *o, s32 tex) {
     struct {
