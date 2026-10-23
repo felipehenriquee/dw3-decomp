@@ -11,5 +11,7 @@ extern s32 D_800A7850[];
 extern struct opaque D_8004DF8C;
 extern struct opaque D_8004DF9C;
 extern s16 *D_800A7244[];
+extern s32 D_80099D8C;
+extern s32 D_80044F5C[];
 
 #endif /* WSTAG750_DATA_H */
