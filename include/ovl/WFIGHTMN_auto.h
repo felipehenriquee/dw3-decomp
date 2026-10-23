@@ -9,6 +9,7 @@ void func_800A69B8(void);
 void func_800A8458(u8 *o, u8 *w);
 void func_800A9C10(u8 *o);
 u8 *func_800A9FF0(void);
+void func_800AA06C(u8 side, s32 k);
 void func_800AABA0(s32 x);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
@@ -56,7 +57,6 @@ s32 func_800A6B18();
 s32 func_800A6C44();
 s32 func_800A7328();
 s32 func_800A9CB4();
-s32 func_800AA06C();
 s32 func_800AA1F0();
 s32 func_800AA9F0();
 s32 func_800AAB10();

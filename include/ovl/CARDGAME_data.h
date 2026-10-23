@@ -13,5 +13,6 @@ extern u8 D_800A5D5C[];
 extern s16 D_800A5844[][3][4][2];
 extern s32 D_8005CCB0[];
 extern struct opaque D_8004B5DC;
+extern s32 D_80044F5C[];
 
 #endif /* CARDGAME_DATA_H */

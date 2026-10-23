@@ -132,7 +132,26 @@ u8 *func_800A9FF0(void) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800AA06C);
+void func_800AA06C(u8 side, s32 k) {
+    Rec18 *r = &D_80042BCA[k];
+    s32 ok;
+    u8 t;
+    if (side == 0 && D_800A4536 == 4) {
+        ok = 0;
+        if (r->b[0x10] != 5 && r->b[0x10] != 12) {
+            t = r->b[0xA];
+            if (t >= 2 && (u8)(t - 9) >= 2) {
+                ok = t != 12;
+            }
+            if (r->b[7] >= 2) {
+                ok = 1;
+            }
+            if (ok) {
+                D_800A4538 = k;
+            }
+        }
+    }
+}
 
 INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800AA110);
 

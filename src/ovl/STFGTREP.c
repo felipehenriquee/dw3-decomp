@@ -164,7 +164,24 @@ Obj *func_80085B24(void) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80085B60);
+void func_80085B60(void) {
+    struct {
+        u8 pad0[0x24];
+        void (*fn24)(s32, s32);
+        u8 pad28[4];
+        void (*fn2C)(s32);
+        u8 pad30[8];
+    } g;
+    u8 *f;
+
+    func_8001FFA8(&g);
+    g.fn24(0x280, 0);
+    f = (u8 *)D_80044B38;
+    g.fn2C((*(s32 (**)(s32))(f + 0x424))(0x7A00000));
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x55);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x4E);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x6A);
+}
 
 /* algum dos 3 arquivos (0x55, 0x4E, 0x6A a partir de D_8005CCA8) existe? */
 s32 func_80085C08(void) {

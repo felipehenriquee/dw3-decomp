@@ -183,7 +183,28 @@ INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_80087600);
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008820C);
 
-INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_800885EC);
+void func_800885EC(u8 *o, s32 b) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(s32 *)(o + 0x54) = 8;
+        *(s32 *)(o + 0x64) = 10;
+        *(s32 *)(o + 0x74) = 10;
+        *(s32 *)(o + 0x84) = 10;
+        *(s32 *)(o + 0x94) = 10;
+        *(s32 *)(o + 0xA4) = 8;
+        func_80087070(o, b);
+        break;
+    case 1:
+        func_80087600(o, b);
+        func_8008820C(o, b);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80088694(s32 arg0) {
     void *temp_v0;

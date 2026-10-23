@@ -10,5 +10,8 @@ extern struct opaque D_8004B5DC;
 extern u8 D_80042B84[];
 extern u8 D_80048D34[];
 extern u8 D_800A3868[];
+extern Rec18 D_80042BCA[];
+extern s16 D_800A4536;
+extern s16 D_800A4538;
 
 #endif /* WFIGHTMN_DATA_H */
