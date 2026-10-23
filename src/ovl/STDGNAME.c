@@ -154,7 +154,25 @@ void func_80085358(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = 0xA;
 }
 
-INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80085364);
+u8 *func_80085364(s32 s, s32 b) {
+    s32 k;
+    u8 *o = (u8 *)func_80014504(func_80085078, 0xF8, 0x34);
+    *(void **)(o + 0xF0) = func_80085258;
+    *(void **)(o + 0xF4) = func_80085358;
+    *(s32 *)(o + 0x54) = 0x1000;
+    *(s32 *)(o + 0x58) = 3;
+    k = D_8005CCA8[0];
+    *(s32 *)(o + 0x50) = 1;
+    *(s32 *)(o + 0x64) = b;
+    if (k == 0) {
+        *(s32 *)(o + 0x94) = 5;
+    } else {
+        *(s32 *)(o + 0x94) = 8;
+    }
+    func_800851C4(o, s);
+    func_800851B8(o, 0x280, 0x100);
+    return o;
+}
 
 INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80085420);
 

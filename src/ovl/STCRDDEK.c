@@ -364,7 +364,14 @@ Obj *func_8008A0B8(void) {
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_8008A100);
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_8008A21C);
+s32 func_8008A21C(void) {
+    u8 *f = (u8 *)D_80044B38;
+    if ((*(s32 (**)(s32))(f + 0x404))(D_8005CCA8[0] + 0x16) != 0) return 1;
+    if ((*(s32 (**)(s32))(f + 0x404))(D_8005CCA8[0] + 0x1D) != 0) return 1;
+    if ((*(s32 (**)(s32))(f + 0x404))(D_8005CCA8[0] + 0x32) != 0) return 1;
+    if ((*(s32 (**)(s32))(f + 0x404))(D_8005CCA8[0] + 0x86) != 0) return 1;
+    return (*(s32 (**)(s32))(f + 0x404))(0x771) != 0;
+}
 
 void func_8008A2D8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = 1;
