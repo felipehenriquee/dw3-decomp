@@ -4,6 +4,7 @@
 
 /* funcoes ja decompiladas */
 Obj *func_800A63CC(void);
+void func_800A63F8(u8 *o, Obj **w);
 void *func_800A64B8(s32 arg0);
 void func_800A6608(void *arg0, s32 arg1);
 s32 func_800A669C(Fade *f);
@@ -15,7 +16,6 @@ s32 func_8001B364();
 s32 func_8001F648();
 s32 func_800853F8();
 s32 func_800A5E10();
-s32 func_800A63F8();
 
 /* dados acessados via $gp */
 

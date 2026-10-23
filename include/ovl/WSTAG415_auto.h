@@ -3,6 +3,7 @@
 #define WSTAG415_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800A5EE8(u8 *o, s32 tex);
 u8 *func_800A6230(s32 arg0);
 u8 *func_800A6264(s32 arg0);
 u8 *func_800A629C(s32 arg0);
@@ -27,7 +28,6 @@ s32 func_8001F648();
 s32 func_8001FFA8();
 s32 func_800853F8();
 s32 func_800A5DF4();
-s32 func_800A5EE8();
 s32 func_800A5FA8();
 s32 func_800A645C();
 s32 func_800A6558();
