@@ -354,7 +354,33 @@ void func_8008A8C4(u8 *obj) {
     (*(void (**)(void *))(sys + 0x15C))((u8 *)m + 8);
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008AA08);
+void func_8008AA08(u8 *o) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        *(s32 *)(o + 0xC) = 1;
+        break;
+    case 1:
+        if (*(s32 *)(o + 0x10) == 0) {
+            break;
+        }
+        *(s32 *)(o + 0x5C) += *(s32 *)(o + 0x60);
+        if (*(s32 *)(o + 0x58) == 0) {
+            if (*(s32 *)(o + 0x5C) > 0xFF00) {
+                *(s32 *)(o + 0x5C) = 0xFF00;
+                *(s32 *)(o + 0xC) = 2;
+            }
+        } else if (*(s32 *)(o + 0x5C) < 0) {
+            *(s32 *)(o + 0x5C) = 0;
+            *(s32 *)(o + 0xC) = 2;
+        }
+    case 2:
+        func_8008A8C4(o);
+        break;
+    case 3:
+        break;
+    }
+}
 
 Obj *func_8008AAAC(void) {
     void *temp_v0;

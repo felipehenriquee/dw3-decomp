@@ -11,5 +11,6 @@ extern u8 D_80088768[];
 extern struct opaque D_8004B5EC;
 extern s32 D_80044B38[];
 extern s32 D_8005CCA8[];
+extern s32 D_80044F4C[];
 
 #endif /* STGMCARD_DATA_H */

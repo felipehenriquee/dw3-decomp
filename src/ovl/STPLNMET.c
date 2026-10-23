@@ -273,7 +273,13 @@ Obj *func_800882A4(void) {
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_800882E0);
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80088398);
+s32 func_80088398(void) {
+    u8 *f = (u8 *)D_80044B38;
+    if ((*(s32 (**)(s32))(f + 0x404))(D_8005CCA8[0] + 0x8D) != 0) return 1;
+    if ((*(s32 (**)(s32))(f + 0x404))(D_8005CCA8[0] + 0x4E) != 0) return 1;
+    if ((*(s32 (**)(s32))(f + 0x404))(D_8005CCA8[0] + 0x86) != 0) return 1;
+    return (*(s32 (**)(s32))(f + 0x404))(0x771) != 0;
+}
 
 void func_80088438(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = 1;

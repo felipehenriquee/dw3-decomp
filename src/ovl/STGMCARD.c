@@ -246,7 +246,16 @@ Obj *func_800849F0(s32 arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_80084A80);
+void func_80084A80(u8 *o, u8 *b, s32 c) {
+    s32 t;
+    if (c != 0) {
+        t = ((s32 (*)(s32))D_80044F4C[0])(D_8005CCA8[0] + 0x78);
+        (*(void (**)(u8 *, s32, s32))(*(u8 **)(b + 0x14) + 0x114))(*(u8 **)(b + 0x14), t, 0x28);
+        (*(void (**)(u8 *, s32, s32))(*(u8 **)(b + 0x14) + 0x118))(*(u8 **)(b + 0x14), 1, *(s32 *)(o + 0x64) + 1);
+    } else {
+        (*(void (**)(u8 *, s32))(*(u8 **)(b + 0x14) + 0x144))(*(u8 **)(b + 0x14), 0);
+    }
+}
 
 void func_80084B20(void *arg0, void *arg1) {
     void *temp_a0;

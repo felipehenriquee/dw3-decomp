@@ -17,7 +17,24 @@ INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_800843C0);
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_800844B8);
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_800852CC);
+void func_800852CC(u8 *o, s32 b) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        func_8008300C(o, b);
+        *(s32 *)(o + 0x700) = *(s32 *)(o + 0x6F0) = *(s32 *)(o + 0x710) = *(s32 *)(o + 0x720) = 10;
+        func_800843C0(o);
+        break;
+    case 1:
+        func_800844B8(o, b);
+        func_80083BA8(o);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_8008536C(s32 arg0) {
     void *temp_v0;

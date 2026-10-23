@@ -263,8 +263,9 @@ typedef struct {
 } Seg;
 
 /* entrada de 18 bytes da tabela em D_80042BCA */
-typedef struct {
+typedef union {
     u8 b[18];
+    u16 h[9];
 } Rec18;
 
 /* slot de 200 bytes da CARDGAME (a partir de 0x5A2) */

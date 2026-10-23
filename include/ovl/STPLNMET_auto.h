@@ -23,6 +23,7 @@ Obj *func_80086F60(s32 arg0);
 void func_80087A30(u8 *o, s32 a);
 Obj *func_80087AC0(s32 arg0);
 Obj *func_800882A4(void);
+s32 func_80088398(void);
 void func_80088438(void *arg0, s32 arg1);
 s32 func_800884CC(Fade *f);
 void func_80088538(Lerp *l, s32 from, s32 to, s32 n);
