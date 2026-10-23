@@ -37,6 +37,7 @@ s32 func_80099F5C(s32 arg0, s32 arg1);
 s32 func_8009A344(s32 bit, s32 m, s32 id);
 s32 func_8009A670(void);
 s32 func_8009A698(void);
+void func_8009A6B8(s32 *out);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 func_8001345C();

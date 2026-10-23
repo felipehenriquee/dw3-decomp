@@ -587,4 +587,23 @@ s32 func_8009A698(void) {
     return D_8009B5FC[*(u8 *)D_80048D68] & 0x7F;
 }
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8009A6B8);
+void func_8009A6B8(s32 *out) {
+    s32 lo, hi, i, k, r;
+    u8 *t;
+    u8 *f;
+    if (func_8009A670() == 0) {
+        lo = 0x200;
+        hi = 0x26F;
+    } else {
+        lo = 0x270;
+        hi = 0x2D6;
+    }
+    for (i = lo; i <= hi; i++) {
+        k = D_8009B5FC[(u8)i] & 0x7F;
+        f = (u8 *)&D_80048ABC;
+        r = (*(s32 (**)(s32, s32))(f + 0x10))((u8)i | 0x2000, 1);
+        if (r == 1) {
+            out[k] = r;
+        }
+    }
+}
