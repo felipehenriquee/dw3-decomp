@@ -397,7 +397,25 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008D854);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008D938);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008DA2C);
+void func_8008DA2C(u8 *o, u8 *x, s32 i, s32 j) {
+    s32 jj = j * 7;
+    u8 *e = o + (i * 57 + jj) * 2;
+    s16 n;
+    switch (e[0x738]) {
+    case 0:
+        ((CgArr614 *)o)->a[*(s16 *)(o + 0x5A2)] = *(s16 *)(e + 0x72E);
+        n = *(s16 *)(o + 0x5A2) + 1;
+        *(s16 *)(o + 0x5A2) = n;
+        (*(void (**)(u8 *, s32, s32, s32))(x + 0xEA0))(x, 0, 7, n);
+        break;
+    case 1:
+        ((CgArr6DC *)o)->a[*(s16 *)(o + 0x66A)] = *(s16 *)(e + 0x72E);
+        n = *(s16 *)(o + 0x66A) + 1;
+        *(s16 *)(o + 0x66A) = n;
+        (*(void (**)(u8 *, s32, s32, s32))(x + 0xEA0))(x, 1, 7, n);
+        break;
+    }
+}
 
 s32 func_8008DAF4(s32 arg0, M2C_UNK arg1, s32 arg2, s32 arg3) {
     s32 var_a2;
@@ -417,7 +435,25 @@ s32 func_8008DAF4(s32 arg0, M2C_UNK arg1, s32 arg2, s32 arg3) {
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008DB7C);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008DC70);
+void func_8008DC70(u8 *o, u8 *x, s32 i, s32 j) {
+    s32 jj = j * 7;
+    u8 *e = o + (i * 57 + jj) * 2;
+    s16 n;
+    switch (e[0x738]) {
+    case 0:
+        ((CgArr600 *)o)->a[*(s16 *)(o + 0x5A6)] = *(s16 *)(e + 0x72E);
+        n = *(s16 *)(o + 0x5A6) + 1;
+        *(s16 *)(o + 0x5A6) = n;
+        (*(void (**)(u8 *, s32, s32, s32))(x + 0xEA0))(x, 0, 6, n);
+        break;
+    case 1:
+        ((CgArr6C8 *)o)->a[*(s16 *)(o + 0x66E)] = *(s16 *)(e + 0x72E);
+        n = *(s16 *)(o + 0x66E) + 1;
+        *(s16 *)(o + 0x66E) = n;
+        (*(void (**)(u8 *, s32, s32, s32))(x + 0xEA0))(x, 1, 6, n);
+        break;
+    }
+}
 
 s32 func_8008DD38(s32 arg0, M2C_UNK arg1, s32 arg2, s32 arg3) {
     s32 var_a2;
@@ -1149,7 +1185,22 @@ void func_8009C4D8(s32 arg0, s32 arg1) {
     M2C_FIELD(temp_a0, s16 *, 0xA8) = 0x1000;
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009C510);
+s32 func_8009C510(u8 *o, s32 i, s32 a, s32 b) {
+    ((void (*)(u8 *, s32))D_8004B600[0])(o + (i * 76 + 0x108), 0x4C);
+    o += i * 76;
+    o[0x14A] = o[0x14D] = 1;
+    *(s32 *)(o + 0x108) = a;
+    *(s32 *)(o + 0x10C) = b;
+    *(s16 *)(o + 0x122) = *(s16 *)(o + 0x126) = *(s16 *)(o + 0x120) = *(s16 *)(o + 0x124) = 0x1000;
+    *(s16 *)(o + 0x140) = *(s16 *)(o + 0x142) = 0;
+    *(s16 *)(o + 0x12C) = i;
+    o[0x14B] = 0;
+    o[0x14C] = 0;
+    o[0x14F] = 0;
+    o[0x151] = 0;
+    *(s16 *)(o + 0x12E) = 0;
+    return 0;
+}
 
 s32 func_8009C5D8(s32 arg0, s32 arg1) {
     void *temp_s0;

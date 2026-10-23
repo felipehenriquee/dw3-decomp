@@ -176,7 +176,27 @@ INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_800857B0);
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80085BAC);
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80085CD8);
+void func_80085CD8(u8 *o) {
+    switch (*(s32 *)(o + 0x10)) {
+    case 0:
+    default:
+        break;
+    case 1:
+        if (*(s32 *)(o + 0x64) != 0) {
+            *(s32 *)(o + 0x64) -= 1;
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+            *(s32 *)(o + 0x18) = ((s32 (*)(void))D_8004DF98[0])();
+        } else {
+            *(s32 *)(o + 0xC) = 3;
+        }
+        break;
+    case 2:
+        if (((s32 (*)(void))D_8004DF98[0])() - *(s32 *)(o + 0x18) >= 2) {
+            *(s32 *)(o + 0x10) = 1;
+        }
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80085DA0);
 

@@ -406,4 +406,12 @@ typedef struct { u8 pad[0x64]; s16 a[1]; } ItArr64;
 
 typedef struct { u8 pad[0x14]; s16 a[1]; } CgArr14;
 
+typedef struct { u8 pad[0x614]; s16 a[1]; } CgArr614;
+
+typedef struct { u8 pad[0x6DC]; s16 a[1]; } CgArr6DC;
+
+typedef struct { u8 pad[0x600]; s16 a[1]; } CgArr600;
+
+typedef struct { u8 pad[0x6C8]; s16 a[1]; } CgArr6C8;
+
 #endif /* TYPES_H */
