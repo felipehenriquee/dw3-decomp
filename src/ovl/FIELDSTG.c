@@ -732,7 +732,39 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008EAE8);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008ED2C);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008EEF0);
+void func_8008EEF0(u8 *o) {
+    s32 x, y, tx, ty, d, px, py;
+    if (*(s32 *)(o + 0xEC) == 0) {
+        return;
+    }
+    x = *(s32 *)(o + 0x50);
+    y = *(s32 *)(o + 0x54);
+    tx = *(s32 *)(o + 0xF0);
+    ty = *(s32 *)(o + 0xF4);
+    px = x >> 8;
+    py = y >> 8;
+    if ((x >> 9) != (tx >> 1) || (y >> 9) != (ty >> 1)) {
+        d = 0;
+        if (px < tx) {
+            d = 0x20;
+        } else if (tx < px) {
+            d = 0x80;
+        }
+        if (py < ty) {
+            d |= 0x40;
+        } else if (ty < py) {
+            d |= 0x10;
+        }
+        *(s32 *)(o + 0xBC) = 1;
+        func_8008E13C(o, d >> 4);
+    } else {
+        *(s32 *)(o + 0x50) = tx << 8;
+        *(s32 *)(o + 0xEC) = 0;
+        *(s32 *)(o + 0x54) = *(s32 *)(o + 0xF4) << 8;
+        *(s32 *)(o + 0x60) = *(s32 *)(o + 0xF8);
+        (*(void (**)(u8 *, s32))(o + 0x2C))(o, 1);
+    }
+}
 
 void func_8008EFD0(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_FIELD(arg0, s32 *, 0xEC) = 1;
