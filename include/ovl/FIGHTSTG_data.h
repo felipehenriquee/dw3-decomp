@@ -40,5 +40,7 @@ extern FtCardCur D_800A4558;
 extern s16 D_800A4536;
 extern FtE32d D_800A44D0[];
 extern s32 D_80044B38[];
+extern u8 D_800A45C0[];
+extern s32 D_800A4664[];
 
 #endif /* FIGHTSTG_DATA_H */
