@@ -717,7 +717,26 @@ Obj *func_8009482C(s32 *p) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80094878);
+void func_80094878(void) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        u8 pad88[0xA0 - 0x88];
+    } g;
+    s32 t = ((s32 (*)(s32))D_80044F5C[0])(0x4550000);
+
+    func_8001F648(&g);
+    g.fn7C(0x1005, 1);
+    g.fn74(0x200, 0);
+    if (((s32 (*)(void))D_8004DF98)() & 0x10) {
+        g.fn84(t, 0x1F, 0x18, 0xAB);
+        g.fn84(t, 0x20, 0x48, 0xAB);
+    }
+}
 
 void func_8009492C(s32 arg0, void *arg1) {
     s32 temp_a0;

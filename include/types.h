@@ -370,4 +370,20 @@ typedef struct { s32 a; s32 b; Pair32 c; } FtE16;
 
 typedef struct { s16 id; s16 idx; s16 pad[2]; } FtMap8;
 
+/* bloco de 0x72 bytes da CARDGAME (a partir de 0x72C) */
+typedef struct { u8 b0; u8 pad[0x71]; } CgE72;
+
+typedef struct { u8 pad[0x72C]; CgE72 e[1]; } CgObj72C;
+
+/* entrada de 14 bytes dentro do bloco de 0x72 (a partir de +8) */
+typedef struct { s16 x, y; u8 pad[10]; } CgSub14;
+
+typedef struct { u8 n; u8 pad1[7]; CgSub14 s[7]; u8 pad[0x72 - 8 - 98]; } CgE72b;
+
+typedef struct { u8 pad[0x72C]; CgE72b e[1]; } CgObj72Cb;
+
+typedef struct { s16 x, y; u8 pad[200 - 4]; } CgSlot59C;
+
+typedef struct { u8 pad[0x59C]; CgSlot59C s[1]; } CgObj59C;
+
 #endif /* TYPES_H */
