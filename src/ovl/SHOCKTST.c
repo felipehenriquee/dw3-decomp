@@ -13,7 +13,18 @@ INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_80082EC4);
 
 INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_80083064);
 
-INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_80083274);
+void func_80083274(u8 *o, u8 *b, s32 n) {
+    s32 i;
+    u8 *p;
+    p = *(u8 **)b;
+    (*(void (**)(u8 *, s32, s32))(p + 0x118))(p, 1, n);
+    for (i = 0; i < 2; i++) {
+        p = ((u8 **)(b + 0x18))[i];
+        (*(void (**)(u8 *, s32, s32))(p + 0x118))(p, 1, (((u8 **)(o + 0x7C))[i] + n * 2)[1]);
+        p = ((u8 **)(b + 0x10))[i];
+        (*(void (**)(u8 *, s32, s32))(p + 0x118))(p, 1, (((u8 **)(o + 0x7C))[i] + n * 2)[0]);
+    }
+}
 
 void func_8008332C(u8 *o, u8 *b, s32 n) {
     s32 i;

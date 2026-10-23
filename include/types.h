@@ -388,4 +388,8 @@ typedef struct { u8 pad[0x59C]; CgSlot59C s[1]; } CgObj59C;
 
 typedef struct { s16 x, y; } W212Pt;
 
+typedef struct { s16 id; u8 idx; u8 kind; } FtCard4;
+
+typedef struct { s32 id; s32 isB; s32 idx; s32 kind; u8 *p10; u8 *p14; } FtCardCur;
+
 #endif /* TYPES_H */

@@ -591,7 +591,33 @@ void func_80091B8C(void *arg0) {
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80091C1C);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80091CF4);
+void func_80091CF4(u8 *o) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+    case 1:
+        switch (*(s32 *)(o + 0x14)) {
+        case 0:
+        default:
+            if (((s32 (*)(s32))D_8004DF8C[0])(0x1009) != 0) {
+                func_80091C1C(o);
+                *(s32 *)(o + 0xE4) = 2;
+                (*(void (**)(u8 *))(o + 0x40))(o);
+            }
+            break;
+        case 1:
+            break;
+        }
+        if (*(s32 *)(o + 0xE4) != 0) {
+            func_80091B8C(o);
+        }
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80091DAC(s32 arg0, s32 arg1) {
     void *temp_v0;
@@ -1312,7 +1338,24 @@ s32 func_8009E970(s32 a, s32 b, s32 c, s32 d) {
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009E994);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009EADC);
+void func_8009EADC(s32 i) {
+    u8 *b = ((u8 *(*)(s32))D_80044F4C)(0x1CC);
+    FtCard4 *e = (FtCard4 *)(b + *(s32 *)(b + 4)) + i;
+    u8 *ta = b + *(s32 *)(b + 8);
+    u8 *tb = b + *(s32 *)(b + 0xC);
+    FtCardCur *d = &D_800A4558;
+    s32 idx;
+    d->id = e->id;
+    idx = e->idx;
+    d->idx = idx;
+    d->kind = e->kind;
+    d->isB = e->kind >= 0x3A;
+    if (d->isB == 0) {
+        d->p14 = d->p10 = ta + idx * 0xC4;
+    } else {
+        d->p14 = d->p10 = tb + idx * 72;
+    }
+}
 
 u8 *func_8009EB94(s32 id) {
     u8 *b = ((u8 *(*)(s32))D_80044F4C)(0x1CC);
