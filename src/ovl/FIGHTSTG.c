@@ -616,7 +616,30 @@ void func_80091B8C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xE4) = (s32) (M2C_FIELD(arg0, s32 *, 0xE4) - 1);
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80091C1C);
+void func_80091C1C(u8 *o) {
+    u8 *p = ((u8 *(*)(s32))D_800A4570[0])(*(s32 *)(o + 0x50));
+    s32 k = 6;
+    s16 *e;
+    s32 v;
+    if (*(s32 *)(*(u8 **)(o + 0x54) + 0x18) != 0) {
+        k = 7;
+    }
+    e = (s16 *)(p + k * 6);
+    *(s32 *)(o + 0x58) = e[0xD];
+    *(s32 *)(o + 0x5C) = -e[0xE];
+    *(s32 *)(o + 0x60) = -e[0xF];
+    *(s32 *)(o + 0x64) = e[0x31];
+    *(s32 *)(o + 0x68) = -e[0x32];
+    *(s32 *)(o + 0x6C) = -e[0x33];
+    v = ((FtArrAA *)p)->a[k];
+    *(s16 *)(o + 0xCC) = 0;
+    *(s16 *)(o + 0xCE) = 0;
+    *(s16 *)(o + 0xD0) = 0;
+    *(s32 *)(o + 0xD4) = 0;
+    *(s32 *)(o + 0xD8) = 0;
+    *(s32 *)(o + 0xDC) = 0;
+    *(s32 *)(o + 0x78) = v;
+}
 
 void func_80091CF4(u8 *o) {
     switch (*(s32 *)(o + 0xC)) {
