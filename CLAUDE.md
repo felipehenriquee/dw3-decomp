@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-10-23): EXE **274 de 347** (79%); overlays **1878 de 3292** (57.0%). Total **2152 de 3639 (59.1%)**.
+- [ ] Decompilação (2026-10-23, 2ª sessão): EXE **274 de 347** (79%); overlays **1897 de 3292** (57.6%). Total **2171 de 3639 (59.7%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -126,6 +126,10 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 - Construtor/gráfico `func_8001F648(&g)`: struct local de 0xA0 com os ponteiros de função; o deslocamento na pilha − 0x10 é o campo.
 - Funções que só trocam s0/s1 (o vs w) entre overlays idênticos (WSTAG226, WSTAG210) não fecharam; ver `skip.txt`.
 - `Rec18` virou union (`b[18]`, `h[9]`).
+- Tabela 2D de bytes (`D_800975C0[][9]`): declare como array 2D, não `u8 *` com `row * 9`.
+- Chamada repetida nos dois ramos de um `if` (ex.: `g.fn88(...)`) mantém o `lw` duplicado do original; uma chamada só após o `if` não bate.
+- Cópia de registrador antes de um `sb` (`move v0,s1; sb v0`): atribuição encadeada `r = e[0x42] = 1;`.
+- Funções gráficas do CARDGAME (`0x25D000x`) seguem um modelo: struct `g` de `func_8001F648`, `fn7C(0x100,1)`, `fn74(0x280|0x340,0)`, `fn94`, `fn8C`, `fn84`.
 - CARDGAME `func_800A4440/4494`: jump table no começo da rodata do overlay; o C não consegue colocá-la lá.
 
 ### Notas da decompilação manual (2026-10-22)

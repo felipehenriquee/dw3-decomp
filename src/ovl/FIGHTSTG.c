@@ -811,7 +811,29 @@ void func_8009492C(s32 arg0, void *arg1) {
     M2C_FIELD(temp_a0_2, M2C_UNK (**)(s32, M2C_UNK), 0x138)(temp_a0_2, 2);
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80094A00);
+void func_80094A00(void) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        u8 pad88[0xA0 - 0x88];
+    } g;
+    u8 *f;
+    s32 t;
+
+    func_8001F648(&g);
+    g.fn7C(0x1005, 1);
+    f = (u8 *)D_80044B38;
+    t = (*(s32 (**)(s32))(f + 0x424))(0x2860000);
+    g.fn74(0x140, 0);
+    g.fn84(t, 0x23, 0x18, 0x51);
+    t = (*(s32 (**)(s32))(f + 0x424))(0x4550000);
+    g.fn74(0x200, 0);
+    g.fn84(t, 0x25, 0x10, 0x4A);
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80094AD0);
 
