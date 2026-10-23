@@ -366,4 +366,8 @@ typedef struct {
 
 typedef struct { u8 pad[0x108]; CgE4C e[1]; } CgObjE;
 
+typedef struct { s32 a; s32 b; Pair32 c; } FtE16;
+
+typedef struct { s16 id; s16 idx; s16 pad[2]; } FtMap8;
+
 #endif /* TYPES_H */

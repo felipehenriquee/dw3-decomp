@@ -392,7 +392,24 @@ Obj *func_80086018(void) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_8008605C);
+s32 func_8008605C(s16 *st, s16 *tbl, s32 depth) {
+    s16 *e = tbl + st[0] * 2;
+    if (depth == 0) {
+        st[1]--;
+    }
+    if (st[1] <= 0) {
+        st[0]++;
+        e += 2;
+        st[1] += e[1];
+        if (e[0] == 0xFF) {
+            e = tbl;
+            st[0] = 0;
+            st[1] += e[1];
+        }
+        func_8008605C(st, tbl, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80086108);
 

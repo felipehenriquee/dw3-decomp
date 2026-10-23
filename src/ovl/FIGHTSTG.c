@@ -295,7 +295,18 @@ s32 func_800897F8(s32 id) {
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80089844);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80089978);
+s32 func_80089978(s32 id, s32 *a, s32 *b, Pair32 *c) {
+    FtMap8 *p;
+    for (p = D_800A2EA4; p->id != -1; p++) {
+        if (p->id == id) {
+            *a = D_800A2B74[p->idx].a;
+            *b = D_800A2B74[p->idx].b;
+            *c = D_800A2B74[p->idx].c;
+            return 1;
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80089A24);
 
