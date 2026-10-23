@@ -321,7 +321,26 @@ INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80088B50);
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80088CA0);
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80088E24);
+void func_80088E24(void) {
+    struct {
+        u8 pad0[0x24];
+        void (*fn24)(s32, s32);
+        u8 pad28[4];
+        void (*fn2C)(s32);
+        u8 pad30[8];
+    } g;
+    u8 *f;
+
+    func_8001FFA8(&g);
+    g.fn24(0x280, 0);
+    f = (u8 *)D_80044B38;
+    g.fn2C((*(s32 (**)(s32))(f + 0x424))(0x6420000));
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x32);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x16);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x1D);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x94);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x6A);
+}
 
 s32 func_80088EF4(void) {
     u8 *p = (u8 *)D_80044B38;

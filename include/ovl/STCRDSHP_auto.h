@@ -19,6 +19,7 @@ Obj *func_80087B84(s32 arg0, s32 arg1);
 void func_80087BDC(u8 *o, Obj **out);
 Obj *func_80087CD4(void);
 void func_80088AFC(u8 *o);
+void func_80088E24(void);
 s32 func_80088EF4(void);
 void func_80088FB4(void *arg0, s32 arg1);
 s32 func_80089048(Fade *f);
