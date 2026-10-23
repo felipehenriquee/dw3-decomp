@@ -41,5 +41,6 @@ extern s32 D_8004BBC8[];
 extern s32 D_8009B708[];
 extern u8 *D_80099DA0[];
 extern s32 D_80042B1C[];
+extern u8 D_800975C0[][9];
 
 #endif /* FIELDSTG_DATA_H */

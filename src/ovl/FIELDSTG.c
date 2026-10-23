@@ -298,7 +298,17 @@ u8 *func_80087D68(s32 a) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80087DB0);
+s32 func_80087DB0(u8 *o) {
+    *(s32 *)(o + 0x68) -= (*(s32 (**)(void))&D_8004DF9C)();
+    if (*(s32 *)(o + 0x68) < 0) {
+        *(s32 *)(o + 0x64) += 2;
+        if (D_800975C0[*(s32 *)(o + 8)][*(s32 *)(o + 0x64)] == 0xFF) {
+            *(s32 *)(o + 0x64) = 0;
+        }
+        *(s32 *)(o + 0x68) = D_800975C0[*(s32 *)(o + 8)][*(s32 *)(o + 0x64) + 1];
+    }
+    return D_800975C0[*(s32 *)(o + 8)][*(s32 *)(o + 0x64)];
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80087E7C);
 

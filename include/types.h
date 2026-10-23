@@ -414,4 +414,6 @@ typedef struct { u8 pad[0x600]; s16 a[1]; } CgArr600;
 
 typedef struct { u8 pad[0x6C8]; s16 a[1]; } CgArr6C8;
 
+typedef struct { s16 h0; u8 b[0x1E]; } FtE32d;
+
 #endif /* TYPES_H */
