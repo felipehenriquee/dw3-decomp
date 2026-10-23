@@ -13,7 +13,23 @@ INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A6440);
 
 INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A66B0);
 
-INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A684C);
+s32 func_800A684C(void) {
+    u8 *a = D_80042B1C;
+    u8 *t;
+    s32 k, lim, r, d;
+    if (a[0x3C] == 0) {
+        return 0;
+    }
+    t = D_80048D34;
+    k = (*(s32 (**)(s32))(t + 0x2718))(0);
+    d = 0x20 - *(s16 *)(t + k * 0x3DC + 0x784);
+    lim = a[0x3C] * (d - *(s16 *)(a + 0x1C)) / 32;
+    r = ((s32 (*)(void))D_8004DC0C)() % 128;
+    if (r == 0) {
+        return 1;
+    }
+    return r < lim;
+}
 
 void func_800A6920(s32 a) {
     u8 *t = D_80048D34;
