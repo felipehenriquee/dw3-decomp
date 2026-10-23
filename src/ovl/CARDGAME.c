@@ -716,7 +716,41 @@ Obj *func_80095E2C(void) {
     return func_80014504(func_80095BFC, 0x50, 4);
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80095E58);
+void func_80095E58(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        void (*fn88)(s32);
+        void (*fn8C)(s32, s32, s32);
+        u8 pad90[4];
+        void (*fn94)(s32, s32);
+        u8 pad98[0xA0 - 0x98];
+    } g;
+    s32 k, t;
+    if (*(s16 *)(o + 0x58) != 0 && *(s16 *)(o + 0x5A) != 0) {
+        func_8001F648(&g);
+        g.fn94(*(s16 *)(o + 0x54), *(s16 *)(o + 0x56) + 0x13);
+        g.fn8C(*(s16 *)(o + 0x58), *(s16 *)(o + 0x5A), 0x1000);
+        if (o[0x63] == 0) {
+            t = *(s32 *)(o + 0x50) >> 2;
+            g.fn88(t % 16);
+        } else {
+            k = *(s32 *)(o + 0x50) >> 1;
+            if (k >= 7) {
+                k = 7;
+            }
+            g.fn88(k);
+        }
+        g.fn7C(0x100, 1);
+        g.fn74(0x280, 0);
+        g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x25D0002), 0x47, *(s16 *)(o + 0x54), *(s16 *)(o + 0x56));
+        *(s32 *)(o + 0x50) += ((s32 (*)(void))D_8004DF9C)();
+    }
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80095FB4);
 
@@ -768,7 +802,50 @@ void func_80096808(void *arg0) {
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80096828);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80096950);
+void func_80096950(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        void (*fn88)(s32);
+        void (*fn8C)(s32, s32, s32);
+        u8 pad90[4];
+        void (*fn94)(s32, s32);
+        u8 pad98[0xA0 - 0x98];
+    } g;
+    s32 k;
+    u32 s;
+
+    func_8001F648(&g);
+    g.fn7C(0x100, 2);
+    k = 0;
+    g.fn74(0x340, k);
+    switch (o[0xE9E]) {
+    case 0:
+    default:
+        break;
+    case 1:
+        if (o[0xE9D] >= 4) {
+            o[0xE9D] -= 4;
+            if (++o[0xE9C] >= 11) {
+                o[0xE9C] = 11;
+                o[0xE9E] = 2;
+            }
+        }
+        k = o[0xE9C];
+        o[0xE9D] += ((s32 (*)(void))D_8004DF9C)();
+        break;
+    case 2:
+        k = 11;
+        break;
+    }
+    g.fn88(k);
+    s = (*(u32 *)(o + 0x58) >> 1) & 0x3F;
+    g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x25D0003), 0, s, s);
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80096A94);
 
