@@ -7,7 +7,23 @@ INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A5DE0);
 
 INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A5EC0);
 
-INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A605C);
+u8 *func_800A605C(s32 a, s32 b, s32 c, s32 d) {
+    u8 *o = (u8 *)func_80014504(func_800A5EC0, 0x70, 0);
+    Pair32 *e;
+    u8 *t = (u8 *)D_800A83C8;
+    *(s32 *)(o + 0x54) = b;
+    *(s32 *)(o + 0x50) = a;
+    *(s32 *)(o + 0x58) = c;
+    *(s32 *)(o + 0x5C) = d;
+    e = (Pair32 *)(t + (c * 8 + b * 16 + a * 32));
+    *(s32 *)(o + 0x68) = e->x << 8;
+    *(s32 *)(o + 0x6C) = e->y << 8;
+    if (c != 0 && d != 0) {
+        *(s32 *)(o + 0x68) += 0x3200;
+        *(s32 *)(o + 0x6C) -= 0x1900;
+    }
+    return o;
+}
 
 void func_800A6130(u8 *o) {
     struct {

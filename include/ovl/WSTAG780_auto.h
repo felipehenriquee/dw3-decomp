@@ -3,6 +3,7 @@
 #define WSTAG780_AUTO_H
 
 /* funcoes ja decompiladas */
+u8 *func_800A605C(s32 a, s32 b, s32 c, s32 d);
 void func_800A6130(u8 *o);
 u8 *func_800A635C(s32 arg0);
 s16 func_800A638C(s16 *st, s16 *tbl, s32 depth);
@@ -27,7 +28,6 @@ s32 func_8001F648();
 s32 func_800853F8();
 s32 func_800A5DE0();
 s32 func_800A5EC0();
-s32 func_800A605C();
 s32 func_800A61C8();
 s32 func_800A652C();
 s32 func_800A66B0();

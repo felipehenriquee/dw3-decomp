@@ -27,7 +27,27 @@ s16 func_800A5DE0(s16 *st, s16 *tbl, s32 depth) {
     return e[0];
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG954/nonmatchings/WSTAG954", func_800A5ED4);
+void func_800A5ED4(u8 *o) {
+    Rec18 *r;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(s16 *)(o + 0x50) = 0;
+        *(s16 *)(o + 0x52) = D_800A61A4[1];
+        break;
+    case 1:
+        for (r = D_80099D90; r->b[2] != 0; r++) {
+            if (r->b[1] == 1) {
+                r->b[4] = func_800A5DE0(o + 0x50, D_800A61A4, 0);
+            }
+        }
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_800A5FA8(void) {
     return func_80014504(func_800A5ED4, 0x54, 0);
