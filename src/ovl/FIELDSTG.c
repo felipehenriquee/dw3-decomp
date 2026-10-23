@@ -797,7 +797,28 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008F1D4);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008F280);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008F304);
+void func_8008F304(u8 *o, s32 v, Pair32 pos) {
+    s32 i;
+    u8 *f;
+    u8 *x;
+    u8 *q;
+    Pair32 p;
+    D_80099DD8[0] = 1;
+    *(s32 *)(o + 0x108) = 0;
+    (*(void (**)(u8 *, s32))(o + 0x2C))(o, 0x48);
+    f = D_8004B610;
+    *(s32 *)(o + 0x60) = v;
+    for (i = 0; i < 3; i++) {
+        x = (*(u8 *(**)(s32, s32, s32))(f + 0x1AC))(5, -1, D_80097CA8[i]);
+        if (x != 0) {
+            *(s32 *)(x + 0x60) = v;
+        }
+    }
+    q = *(u8 **)(o + 0x24);
+    p.x = *(s32 *)(o + 0x58) + pos.x;
+    p.y = *(s32 *)(o + 0x5C) + pos.y;
+    *(Obj **)(q + 8) = func_8008D744(p);
+}
 
 void func_8008F3E4(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x108) = 0;
