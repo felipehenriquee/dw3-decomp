@@ -300,7 +300,27 @@ Obj *func_800889A8(s32 arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80088A64);
 
-INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80088DB8);
+void func_80088DB8(u8 *o, s32 k, s32 v) {
+    s32 i;
+    if (k == 7) {
+        for (i = 0; i < 6; i++) {
+            *(s16 *)(o + i * 2 + 0xC) += v;
+            if (*(s16 *)(o + i * 2 + 0xC) >= 1000) {
+                *(s16 *)(o + i * 2 + 0xC) = 999;
+            }
+        }
+    } else if ((u32)(k - 1) < 6) {
+        *(s16 *)(o + k * 2 + 0xA) += v;
+        if (*(s16 *)(o + k * 2 + 0xA) >= 1000) {
+            *(s16 *)(o + k * 2 + 0xA) = 999;
+        }
+    } else if ((u32)(k - 8) < 7) {
+        *(s16 *)(o + k * 2 + 0x8) += v;
+        if (*(s16 *)(o + k * 2 + 0x8) >= 1000) {
+            *(s16 *)(o + k * 2 + 0x8) = 999;
+        }
+    }
+}
 
 void func_80088E8C(u8 *o, u8 *x, s32 *q) {
     s16 v;

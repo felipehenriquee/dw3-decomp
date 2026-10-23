@@ -1372,7 +1372,27 @@ void func_800170C8(s32 who, u32 stat, s16 v) {
 
 INCLUDE_ASM("asm/nonmatchings/main", func_80017174);
 
-INCLUDE_ASM("asm/nonmatchings/main", func_80017578);
+void func_80017578(u8 *o, s32 k, s32 v) {
+    s32 i;
+    if (k == 7) {
+        for (i = 0; i < 6; i++) {
+            *(s16 *)(o + i * 2 + 0xC) += v;
+            if (*(s16 *)(o + i * 2 + 0xC) >= 1000) {
+                *(s16 *)(o + i * 2 + 0xC) = 999;
+            }
+        }
+    } else if ((u32)(k - 1) < 6) {
+        *(s16 *)(o + k * 2 + 0xA) += v;
+        if (*(s16 *)(o + k * 2 + 0xA) >= 1000) {
+            *(s16 *)(o + k * 2 + 0xA) = 999;
+        }
+    } else if ((u32)(k - 8) < 7) {
+        *(s16 *)(o + k * 2 + 0x8) += v;
+        if (*(s16 *)(o + k * 2 + 0x8) >= 1000) {
+            *(s16 *)(o + k * 2 + 0x8) = 999;
+        }
+    }
+}
 
 s32 func_8001764C(s32 arg0, s32 arg1) {
     s32 i;

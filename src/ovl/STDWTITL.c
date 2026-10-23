@@ -381,7 +381,35 @@ s32 func_80085F38(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x50);
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80085F44);
+void func_80085F44(u8 *o) {
+    s32 k;
+    s16 n;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(s16 *)(o + 0x54) = 0;
+        *(s16 *)(o + 0x56) = 0;
+        *(s32 *)(o + 0x50) = 0;
+        break;
+    case 1:
+        k = *(s32 *)(o + 0x10);
+        if (k != 0 && k == *(s32 *)(o + 0xC)) {
+            n = *(s16 *)(o + 0x56);
+            *(s16 *)(o + 0x56) = n + 1;
+            *(s16 *)(o + 0x54) = func_80085CD4(n);
+            if (*(s16 *)(o + 0x56) >= 30) {
+                (*(void (**)(u8 *, s32))(o + 0x2C))(o, 0);
+                *(s32 *)(o + 0x50) = k;
+            }
+        }
+        func_80085D64(*(s16 *)(o + 0x54));
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80086018(void) {
     void *temp_v0;
