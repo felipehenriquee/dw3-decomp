@@ -33,7 +33,26 @@ Obj *func_800832D8(void) {
     return func_80014504(func_80083184, 0x54, 0);
 }
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083304);
+s32 func_80083304(s16 *st, s16 *tbl, s32 depth) {
+    s16 *e = tbl + st[0] * 2;
+    s32 d = ((s32 (*)(void))D_8004DF9C[0])();
+    if (d >= 5) {
+        d = 4;
+    }
+    if (depth == 0) {
+        st[1] -= d;
+    }
+    if (st[1] <= 0) {
+        st[0]++;
+        e += 2;
+        st[1] += e[1];
+        if (e[0] == 0xFF) {
+            return 0xFF;
+        }
+        func_80083304(st, tbl, depth + 1);
+    }
+    return e[0];
+}
 
 void func_800833DC(u8 *o) {
     struct {

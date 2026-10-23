@@ -6,6 +6,7 @@
 Obj *func_80082E8C(void);
 s32 func_80082FC4(s32 n);
 Obj *func_800832D8(void);
+s32 func_80083304(s16 *st, s16 *tbl, s32 depth);
 void func_800833DC(u8 *o);
 void func_80083474(void *arg0, s16 arg1);
 void func_80083594(void);
@@ -29,7 +30,6 @@ s32 func_80082CE8();
 s32 func_80082EF0();
 s32 func_80083000();
 s32 func_80083184();
-s32 func_80083304();
 s32 func_8008347C();
 s32 func_800836DC();
 s32 func_80083940();
