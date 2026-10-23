@@ -708,7 +708,19 @@ Obj *func_800930C0(s32 n) {
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80093108);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009328C);
+void func_8009328C(FtLerp *o) {
+    s32 s;
+    if (o->on != 0) {
+        o->t += ((s32 (*)(void))D_8004DF9C[0])();
+        if (o->t >= o->dur) {
+            o->on = 0;
+            o->from = o->cur = o->to;
+        } else {
+            s = rsin((o->t << 10) / o->dur) * o->dur / 4096;
+            o->cur = o->from + (o->to - o->from) * s / o->dur;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80093364);
 
