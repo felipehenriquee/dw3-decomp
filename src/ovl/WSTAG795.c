@@ -20,8 +20,10 @@ u8 *func_800A61D0(s32 arg0) {
     return func_800143DC(func_800A5F00, 104, 0, arg0);
 }
 
-void func_800A6200(void) {
-    M2C_FIELD(func_80014504(func_800A5F00, 0x68, 0), s32 *, 0x54) = 1;
+Obj *func_800A6200(void) {
+    Obj *o = func_80014504(func_800A5F00, 0x68, 0);
+    M2C_FIELD(o, s32 *, 0x54) = 1;
+    return o;
 }
 
 INCLUDE_ASM("asm/ovl/WSTAG795/nonmatchings/WSTAG795", func_800A6234);
@@ -32,7 +34,27 @@ Obj *func_800A654C(void) {
     return func_80014504(func_800A637C, 0x54, 4);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG795/nonmatchings/WSTAG795", func_800A6578);
+void func_800A6578(u8 *o, Obj **w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        w[0] = (Obj *)func_800A654C();
+        if (((s32 (*)(s32, s32))D_80048ACC[0])(0x4063, 0) != 0) {
+            w[1] = (Obj *)func_800A61D0(0x344);
+        } else {
+            w[1] = (Obj *)func_800A6200();
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        if (((s32 (*)(s32, s32))D_80048ACC[0])(0x4043, 0) != 0 && D_8004B370[0] == 0x20) {
+            w[2] = func_800853F8(0x33E);
+        }
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A6654(s32 arg0) {
     void *temp_v0;

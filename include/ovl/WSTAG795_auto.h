@@ -5,8 +5,9 @@
 /* funcoes ja decompiladas */
 void func_800A6180(void *arg0, s32 arg1);
 u8 *func_800A61D0(s32 arg0);
-void func_800A6200(void);
+Obj *func_800A6200(void);
 Obj *func_800A654C(void);
+void func_800A6578(u8 *o, Obj **w);
 void *func_800A6654(s32 arg0);
 void func_800A66B0(void);
 void func_800A66DC(void);
@@ -20,7 +21,6 @@ s32 func_800A5DE0();
 s32 func_800A5F00();
 s32 func_800A6234();
 s32 func_800A637C();
-s32 func_800A6578();
 
 /* dados acessados via $gp */
 
