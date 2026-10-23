@@ -136,7 +136,29 @@ u8 *func_800A6EC0(s32 v) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG415/nonmatchings/WSTAG415", func_800A6EFC);
+void func_800A6EFC(u8 *o, Obj **w) {
+    s32 k;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        if (D_8004B370[0] == 6) {
+            if (((s32 (*)(s32, s32))D_80048ACC[0])(0x4018, 0) != 0) {
+                w[0] = func_800A6EC0(0);
+                w[1] = func_800853F8(0x96);
+            } else {
+                w[0] = func_800A6EC0(1);
+                w[2] = func_800A6ACC(0x32B);
+                w[1] = func_800853F8(0x97);
+            }
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A6FC0(s32 arg0) {
     void *temp_v0;

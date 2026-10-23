@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-10-22): EXE **274 de 347** (79%); overlays **1744 de 3292** (53.0%). Total **2018 de 3639 (55.5%)**.
+- [ ] Decompilação (2026-10-23): EXE **274 de 347** (79%); overlays **1878 de 3292** (57.0%). Total **2152 de 3639 (59.1%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -104,7 +104,7 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 - A comparação com decomp.me não foi necessária: tudo foi feito localmente com `tools/cc.sh` + `tools/cc_cmp.py`.
 
 ## Próximos passos
-0. **Rodar o reteste r4** (interrompido no começo em 2026-10-22): `python3 -I tools/autodecomp_reps.py --retest --run r4 C F S W > build/reps4.log 2>&1` (em segundo plano, ~2 h; integra e propaga sozinho). Vale porque os overlays agora linkam com os símbolos comuns e ~160 construtores passaram a devolver `Obj *` — resultados antigos que quebravam o make podem entrar.
+0. Reteste r4 concluído em 2026-10-23 (só 1 nova). Seguir com as pequenas: `python3 -I tools/pending.py --skip build/w/skip.txt | grep -v " main "` (lista em ~50 instruções). As que quase bateram estão em `build/w/skip.txt` / `wip/ovl/` — boas candidatas para o permuter.
 1. **Permuter em segundo plano** (`tools/perm_batch.sh 1200 6`, log em `build/perm/batch3.log`) pode estar rodando: só escreve em `build/perm/`, não mexe nos fontes. Ao terminar, veja `build/perm/zero.txt` e as pastas `output-0-*`; revise o C (tirar `new_var`, casts estranhos) e integre com `tools/fn.py`. Lista das difíceis do EXE: `wip/main/hard.txt`.
 2. **Overlays, das menores para as maiores** (rendeu muito em 2026-10-17): liste as pendentes por tamanho (ver script em `build/w/` ou refaça: contar linhas `/* ` no `.s`), escreva o C com `tools/fn.py <alvo> <func> show/test/apply` e rode `tools/propagate.py` de tempos em tempos (leva o C para as cópias idênticas em outros overlays).
 3. Geradores por forma: `tools/twocall.py` (duas chamadas `D_80048ABC.fn(K, n)`, 97 funções nos WSTAG); vale procurar outras formas repetidas com constantes diferentes (o `propagate.py` só junta formas idênticas). Ferramentas novas: `tools/mkobj.py` (funções que só criam objeto com `func_800143DC`/`func_80014504`), `tools/nearfix.py` (quase-certas do autodecomp: base local, parâmetros pulados), `tools/stmtperm.py` (testa a ordem das instruções simples).
@@ -113,6 +113,20 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 6. Corrigir a divisão do splat em `func_800148C0` (`make split` apaga `build/` — fazer quando nada estiver rodando).
 7. Revisão semântica para o port (`tools/audit_args.py`).
 8. Jobs em segundo plano: parar com `tools/stop_jobs.sh` e commitar com `tools/commit_locked.sh "msg"`.
+
+### Notas da decompilação manual (2026-10-23)
+- Ponteiro local para o símbolo atribuído **logo antes do uso** (`r = &D_80042BCA[k]; ... r->b[0xB]`) faz o `lui` sair depois do cálculo do índice e impede o GCC de dobrar o deslocamento no `%lo` (`D+0xC`). Resolveu várias do FIGHTSTG.
+- `base + 0x10 + idx*32` com `t+16` calculado antes: `idx = *(s32 *)(t + 8); t += 0x10; e = t + idx * 32;`.
+- Ordem dos operandos do `addu`: `o[0x46F + i]` gera `i+o`; `(o + i)[0x46F]` ou campo de struct (`((T *)o)->a[i]`) gera `o+i`. O mesmo vale para índices `j * 7 + i * 57` (a ordem no fonte decide).
+- `switch` com só `case 1`/`case 2` e árvore `beq 1; slti 2; beq 2`: falta um `case 0: default: break;`.
+- `case 0: default:` seguido de `case 1` sozinho gera `slti 2` (não `blez`).
+- Variável de resultado (`r = 0` ... `return r`) que precisa ficar viva num `s`-reg: evite `return r` antecipado; use `if (cond) r = ...`.
+- Valor comparado como booleano (`(p[3] >= 0x3A) == m`): guarde em variável (`t = p[3] >= 0x3A; if (t == m)`) para manter `sltiu/xori`.
+- Retorno `s16` de uma função atribuído a byte: declare a variável `u8` para não gerar `sll/sra`.
+- Construtor/gráfico `func_8001F648(&g)`: struct local de 0xA0 com os ponteiros de função; o deslocamento na pilha − 0x10 é o campo.
+- Funções que só trocam s0/s1 (o vs w) entre overlays idênticos (WSTAG226, WSTAG210) não fecharam; ver `skip.txt`.
+- `Rec18` virou union (`b[18]`, `h[9]`).
+- CARDGAME `func_800A4440/4494`: jump table no começo da rodata do overlay; o C não consegue colocá-la lá.
 
 ### Notas da decompilação manual (2026-10-22)
 - `tools/pending.py [--skip arq] [--show N]`: pendentes por tamanho (ignora `jlabel` e a biblioteca do STDWTITL). `build/w/skip.txt` tem as já tentadas que não fecharam.
