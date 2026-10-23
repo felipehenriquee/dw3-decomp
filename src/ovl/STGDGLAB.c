@@ -444,7 +444,14 @@ Obj *func_8008EFD0(void) {
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008F040);
 
-INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008F16C);
+s32 func_8008F16C(void) {
+    u8 *p = (u8 *)D_80044B38;
+    if ((*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0x39) != 0) return 1;
+    if ((*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0x4E) != 0) return 1;
+    if ((*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0x47) != 0) return 1;
+    if ((*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0xA2) != 0) return 1;
+    return (*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0x9B) != 0;
+}
 
 void func_8008F22C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = 1;

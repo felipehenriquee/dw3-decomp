@@ -8,5 +8,7 @@ extern s32 D_8008FD98 NOT_GP;
 extern s32 D_80055C48[];
 extern u8 D_8004DE10[];
 extern u16 D_80048D34[];
+extern s32 D_80044B38[];
+extern s32 D_8005CCA8[];
 
 #endif /* STGDGLAB_DATA_H */

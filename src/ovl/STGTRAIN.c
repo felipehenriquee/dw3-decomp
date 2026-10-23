@@ -323,7 +323,31 @@ INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80088348);
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_800888BC);
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80089698);
+void func_80089698(u8 *o, u8 *b) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        func_80088214(o, b);
+        *(s32 *)(o + 0xD8) = 8;
+        *(s32 *)(o + 0xC8) = 10;
+        *(s32 *)(o + 0xB8) = 10;
+        *(s32 *)(o + 0x78) = 10;
+        *(s32 *)(o + 0x88) = 10;
+        *(s32 *)(o + 0xA8) = 6;
+        *(s32 *)(o + 0x98) = 6;
+        *(s32 *)(o + 0xE8) = 10;
+        *(s32 *)(o + 0x5C) = *(s32 *)(*(u8 **)(o + 0x50) + 0x7C);
+        break;
+    case 1:
+        func_800888BC(o, b);
+    case 2:
+        func_80088348(o);
+        break;
+    case 3:
+        break;
+    }
+}
 
 void func_80089758(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = 0x1E;

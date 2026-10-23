@@ -291,7 +291,17 @@ INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80088A64);
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80088DB8);
 
-INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80088E8C);
+void func_80088E8C(u8 *o, u8 *x, s32 *q) {
+    s16 v;
+    o += q[0] * 128 + 0x64;
+    if (q[2] == 0) {
+        v = ((s16 *)o)[D_8008CAE8[q[1]]];
+    } else {
+        v = ((s16 *)(o + 0x2C))[D_8008CAE8[q[1]]];
+    }
+    (*(void (**)(u8 *, s32, s32))(x + 0x118))(x, 0, v);
+    (*(void (**)(u8 *, s32))(x + 0x148))(x, 1);
+}
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80088F4C);
 

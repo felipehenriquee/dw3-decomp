@@ -451,7 +451,29 @@ Obj *func_80099684(void) {
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_800996EC);
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_800997D4);
+void func_800997D4(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        u8 pad88[0xA0 - 0x88];
+    } g;
+
+    func_8001F648(&g);
+    g.fn7C(*(s32 *)(o + 0x50), 7);
+    g.fn74(0x280, 0x100);
+    if (*(s32 *)(o + 0x58) != 0) {
+        *(s32 *)(o + 0x54) += 1;
+        *(s32 *)(o + 0x54) = *(s32 *)(o + 0x54) < 0x60 ? *(s32 *)(o + 0x54) : 0;
+        *(s32 *)(o + 0x58) = 0;
+    } else {
+        *(s32 *)(o + 0x58) = 1;
+    }
+    g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x4040000), 0x1D, *(s32 *)(o + 0x54), *(s32 *)(o + 0x54));
+}
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80099894);
 

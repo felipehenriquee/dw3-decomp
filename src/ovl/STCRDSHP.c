@@ -303,7 +303,14 @@ INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80088CA0);
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80088E24);
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80088EF4);
+s32 func_80088EF4(void) {
+    u8 *p = (u8 *)D_80044B38;
+    if ((*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0x32) != 0) return 1;
+    if ((*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0x16) != 0) return 1;
+    if ((*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0x1D) != 0) return 1;
+    if ((*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0x94) != 0) return 1;
+    return (*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0x6A) != 0;
+}
 
 void func_80088FB4(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = 1;
