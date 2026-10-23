@@ -187,7 +187,35 @@ u8 *func_800A749C(s32 arg0) {
     return func_800143DC(func_800A72B0, 120, 0, arg0);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A74CC);
+void func_800A74CC(u8 *o, Obj **w) {
+    s32 v;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        w[1] = (Obj *)func_800A749C(0x321);
+        v = D_8004B370[0];
+        if (v == 0) {
+            w[0] = func_800853F8(0);
+        } else if (v == 0x17) {
+            w[0] = func_800853F8(0x2AC);
+        } else if (v == 0x1B) {
+            w[0] = func_800853F8(0x2E6);
+            w[2] = (Obj *)func_800A69D8();
+        } else if (v == 0x20) {
+            w[0] = func_800853F8(0x375);
+        } else if (v == 0x27) {
+            w[0] = func_800853F8(0x3CB);
+        } else if (v == 0x2B) {
+            w[0] = func_800853F8(0x5DC);
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A75B0(s32 arg0) {
     void *temp_v0;

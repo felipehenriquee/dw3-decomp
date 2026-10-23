@@ -16,6 +16,7 @@ void func_800A6A04(void *arg0, void *arg1);
 u8 *func_800A6F8C(s32 arg0);
 void func_800A7450(void *arg0, s32 arg1);
 u8 *func_800A749C(s32 arg0);
+void func_800A74CC(u8 *o, Obj **w);
 void *func_800A75B0(s32 arg0);
 void func_800A760C(void);
 void func_800A7618(void);
@@ -36,7 +37,6 @@ s32 func_800A6B4C();
 s32 func_800A6DC4();
 s32 func_800A6FBC();
 s32 func_800A72B0();
-s32 func_800A74CC();
 
 /* dados acessados via $gp */
 
