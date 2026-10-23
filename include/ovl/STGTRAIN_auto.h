@@ -56,6 +56,7 @@ void func_8008B9FC(Lerp *l, s32 from, s32 to, s32 n);
 s32 func_8008BAA8(s32 k);
 s32 func_8008BB38(void);
 void func_8008BBD0(void);
+s32 func_8008BD90(s32 i);
 s32 func_8008C064(s32 i);
 s32 func_8008C0A4(s32 i);
 s32 func_8008C0C0(s32 i);

@@ -476,7 +476,34 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008C220);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008C2CC);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008C454);
+void func_8008C454(u8 *o, u8 *w) {
+    s16 *p;
+    s32 a, b, k;
+    p = *(s16 **)(o + 0x8C);
+    a = *p++;
+    *(s16 **)(o + 0x8C) = p;
+    b = *p++;
+    *(s16 **)(o + 0x8C) = p;
+    if (a == 0x62) {
+        k = *(s32 *)(o + 0x94);
+        if (((FtArr58 *)o)->v[k] == 3) {
+            a = 0x38;
+        } else {
+            a = *(s32 *)(o + 0x70);
+        }
+        *(s32 *)(o + 0x94) = k + 1;
+    } else if (a == 0x63) {
+        if (*(s32 *)(o + 0x64) == 3) {
+            a = 0x38;
+        } else {
+            a = *(s32 *)(o + 0x70);
+        }
+        *(s32 *)(o + 0x94) += 1;
+    }
+    if (*(s32 *)(w + 0xC) == 0) {
+        *(s32 *)(w + 0xC) = func_8009B774(a, b);
+    }
+}
 
 /* comando de script: 0 cria (func_800930C0), 1 remove o objeto em *slot */
 void func_8008C514(u8 *o, s32 *slot) {

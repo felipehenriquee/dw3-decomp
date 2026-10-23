@@ -266,7 +266,18 @@ void func_80088878(void *arg0) {
     M2C_FIELD(temp_a0, M2C_UNK (**)(void *, s16, M2C_UNK), 0x50)(temp_a0, M2C_FIELD(base0, s16 *, 0x64), 1);
 }
 
-INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_800888E4);
+void func_800888E4(u8 *o) {
+    s32 i, n;
+    u8 *f;
+    *(s32 *)(o + 0x6C0) = 0;
+    f = (u8 *)&D_80042B98;
+    n = (*(s32 (**)(s32, u8 *))(f + 0xC))(*(s32 *)(o + 0x60), o + 0x38C);
+    for (i = 0; i < n; i++) {
+        if (*(u16 *)(((u8 *(*)(s32))D_80042B98)(*(s16 *)(o + i * 2 + 0x38C)) + 6) != 0) {
+            ((ItArr64 *)o)->a[(*(s32 *)(o + 0x6C0))++] = *(s16 *)(o + i * 2 + 0x38C);
+        }
+    }
+}
 
 Obj *func_800889A8(s32 arg0, s32 arg1, s32 arg2) {
     void *temp_v0;

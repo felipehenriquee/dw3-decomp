@@ -607,7 +607,25 @@ INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008BC94);
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008BD08);
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008BD90);
+s32 func_8008BD90(s32 i) {
+    s32 *s = D_8008CFCC;
+    if (s[1] == 0 || i >= 9) {
+        return 0;
+    }
+    *(s32 *)((u8 *)s + i * 80 + 0xC) = i;
+    D_8008D304 = (s32 *)(s[1] + i * 4);
+    D_8008D304 = (s32 *)(s[1] + *D_8008D304);
+    if (*D_8008D304 == 0) {
+        return 0;
+    }
+    if (func_8008BC1C(D_8008D304, i) == 0) {
+        return 0;
+    }
+    if (func_8008BC94(D_8008D304, i) == 0) {
+        return 0;
+    }
+    return func_8008BD08(D_8008D304, i) != 0;
+}
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008BE54);
 

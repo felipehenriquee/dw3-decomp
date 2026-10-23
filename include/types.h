@@ -400,4 +400,8 @@ typedef struct { s32 pad; s32 *e[8]; } FdSet4;
 
 typedef struct { s16 x, y; } CgPt16;
 
+typedef struct { u8 pad[0x58]; s32 v[4]; } FtArr58;
+
+typedef struct { u8 pad[0x64]; s16 a[1]; } ItArr64;
+
 #endif /* TYPES_H */
