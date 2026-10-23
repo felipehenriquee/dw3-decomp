@@ -404,4 +404,6 @@ typedef struct { u8 pad[0x58]; s32 v[4]; } FtArr58;
 
 typedef struct { u8 pad[0x64]; s16 a[1]; } ItArr64;
 
+typedef struct { u8 pad[0x14]; s16 a[1]; } CgArr14;
+
 #endif /* TYPES_H */

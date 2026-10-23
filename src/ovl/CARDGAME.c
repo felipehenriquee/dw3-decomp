@@ -331,7 +331,29 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008C6E0);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008C8D8);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008C988);
+void func_8008C988(u8 *o) {
+    struct {
+        u8 *p0;
+        u8 pad4[0x28];
+        void (*fn2C)(s32);
+        u8 pad30[0x28];
+    } t;
+    s32 bi = *(s16 *)(o + 0x5A0);
+    s32 best;
+    s32 i, v;
+
+    func_8001EBF8(&t);
+    best = 400;
+    for (i = *(s16 *)(o + 0x5A0); i < 40; i++) {
+        t.fn2C(((CgArr50 *)o)->a[*(s16 *)(o + i * 2 + 0x5B0)] + 1);
+        v = *(s16 *)(t.p0 + 8);
+        if (v < best) {
+            best = v;
+            bi = i;
+        }
+    }
+    *(s32 *)(o + 0x440) = bi;
+}
 
 void func_8008CA4C(void *arg0, void *arg1, s32 arg2) {
     u8 *base0;
@@ -1519,7 +1541,22 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009EDCC);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009EEFC);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009F04C);
+void func_8009F04C(u8 *o, s32 base, s32 n) {
+    u8 *p = o + 0x59C;
+    u8 *f;
+    s32 i, a, b;
+    s32 t;
+    if (n < 2) {
+        return;
+    }
+    for (i = 0, f = D_8004DC04; i < 40; i++) {
+        a = (*(s32 (**)(void))(f + 8))() % n + base;
+        b = (*(s32 (**)(void))(f + 8))() % n + base;
+        t = ((CgArr14 *)p)->a[a];
+        ((CgArr14 *)p)->a[a] = ((CgArr14 *)p)->a[b];
+        ((CgArr14 *)p)->a[b] = t;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009F110);
 
