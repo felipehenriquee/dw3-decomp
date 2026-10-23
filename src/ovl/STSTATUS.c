@@ -216,7 +216,22 @@ INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008B944);
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008BB88);
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008BD70);
+void func_8008BD70(u8 *o, u8 *b, s32 c) {
+    s32 i;
+    u8 *f;
+    s32 v;
+    if (c != 0) {
+        for (i = 0; i < 2; i++) {
+            f = (u8 *)D_80044B38;
+            v = (*(s32 (**)(s32))(f + 0x414))(D_8005CCA8[0] + 0xB0);
+            (*(void (**)(u8 *, s32, s32))(((u8 **)(b + 0x90))[i] + 0x114))(((u8 **)(b + 0x90))[i], v, i + 0x2D);
+        }
+    } else {
+        for (i = 0; i < 2; i++) {
+            (*(void (**)(u8 *, s32))(((u8 **)(b + 0x90))[i] + 0x144))(((u8 **)(b + 0x90))[i], 0);
+        }
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_8008BE34);
 
