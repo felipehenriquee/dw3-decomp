@@ -348,4 +348,21 @@ typedef struct { s32 v[8]; } S32x8;
 
 typedef struct { s16 n; s16 k; } S16Pair;
 
+typedef struct {
+    s32 a108, b10C;
+    u8 pad8[8];
+    s32 a118, b11C;
+    u8 pad18[0xE];
+    s16 h12E;
+    s32 w130;
+    s32 w134;
+    u8 pad30[0x12];
+    u8 b14A;
+    u8 pad43[4];
+    u8 b14F;
+    u8 pad48[4];
+} CgE4C;
+
+typedef struct { u8 pad[0x108]; CgE4C e[1]; } CgObjE;
+
 #endif /* TYPES_H */

@@ -413,10 +413,23 @@ u8 *func_8008B6A4(void) {
     return func_800143DC(func_8008AA10, 128, 124, 7);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008B6D4);
+void func_8008B6D4(s32 a, s32 b, s32 c, s32 d, s32 e, s32 g) {
+    u8 *o = ((u8 *(*)(s32, s32, s32))D_8004B7BC)(7, -1, -1);
+    u8 *p;
+    if (o != 0) {
+        *(s32 *)(o + 0x5C) = a;
+        *(s32 *)(o + 0x60) = b;
+        *(s32 *)(o + 0x68) = g;
+        (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+        p = D_80099D80;
+        *(s32 *)(p + 0x64) = c;
+        *(s32 *)(p + 0x68) = d;
+        *(s32 *)(p + 0x6C) = e;
+    }
+}
 
-s32 func_8008B770(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    return func_8008B6D4(arg0, arg1, arg2, arg3, /* extra? */ arg4, /* extra? */ 0);
+void func_8008B770(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    func_8008B6D4(arg0, arg1, arg2, arg3, arg4, 0);
 }
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008B798);

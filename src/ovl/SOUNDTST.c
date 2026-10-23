@@ -3,7 +3,24 @@
 #include "SOUNDTST_auto.h"
 #include "SOUNDTST_data.h"
 
-INCLUDE_ASM("asm/ovl/SOUNDTST/nonmatchings/SOUNDTST", func_80084370);
+void func_80084370(u8 *o, Obj **w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        w[0] = func_80084D48();
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        if (((s32 (*)(s32))D_8004BBC4[0])(0) & 8) {
+            ((void (*)(s32, s32))D_8004B440[0])(0x1500, 0);
+            (*(void (**)(u8 *))(o + 0x38))(o);
+        }
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80084410(void) {
     return func_80014504(func_80084370, 0x50, 4);

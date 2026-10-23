@@ -1108,7 +1108,25 @@ s32 func_8009C770(s32 arg0, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009C7F8);
+s32 func_8009C7F8(CgObjE *o, s32 i, s32 m) {
+    switch (m) {
+    case 0:
+    default:
+        o->e[i].b14A = 9;
+        o->e[i].b14F = 3;
+        break;
+    case 1:
+        o->e[i].b14F = 4;
+        o->e[i].b14A = 10;
+        break;
+    }
+    o->e[i].a118 = o->e[i].a108;
+    o->e[i].b11C = o->e[i].b10C;
+    o->e[i].w130 = 0;
+    o->e[i].w134 = 0;
+    o->e[i].h12E = 0;
+    return 0;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009C898);
 
