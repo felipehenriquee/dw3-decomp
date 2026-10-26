@@ -467,7 +467,41 @@ INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_8008B60C);
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_8008B908);
 
-INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_8008BFB0);
+void func_8008BFB0(u8 *o, s32 b) {
+    u8 *t;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            ((void (*)(void))D_8008D1B0[0])();
+            *(s32 *)(o + 0x10) += 1;
+            break;
+        case 1:
+            if (((s32 (*)(void))D_8008D1B4[0])() == 0) {
+                func_8008B524(o, (void *)b);
+                *(s32 *)(o + 0x68) = 10;
+                *(s32 *)(o + 0x78) = 10;
+                *(s32 *)(o + 0x88) = 10;
+                *(s32 *)(o + 0x98) = 10;
+                (*(void (**)(u8 *))(o + 0x38))(o);
+            }
+            break;
+        }
+        break;
+    case 1:
+        func_8008B908(o, b);
+        func_8008B60C(o, b);
+        break;
+    case 2:
+        break;
+    case 3:
+        t = (u8 *)D_80048D34;
+        (*(void (**)(s32, s32))(t + 0x270C))(*(s32 *)(t + 0x34), 0);
+        break;
+    }
+}
 
 void func_8008C0C4(u8 *o) {
     u8 *w = *(u8 **)(o + 0x24);

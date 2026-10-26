@@ -119,7 +119,32 @@ Obj *func_80083594(void) {
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800835D8);
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800837B4);
+void func_800837B4(u8 *o) {
+    struct {
+        u8 pad0[0x2C];
+        void (*fn2C)(s32);
+        void (*fn30)(void);
+        u8 pad34[8];
+        void (*fn3C)(s32, s32);
+        void (*fn40)(s32, s32);
+        void (*fn44)(s32, s32);
+        u8 pad48[0x10];
+    } t;
+    s32 n;
+    *(s32 *)(o + 0x5C) += 1;
+    if (*(s32 *)(o + 0x5C) >= 0x29) {
+        *(s32 *)(o + 0xC) = 2;
+        *(s32 *)(o + 0x5C) = 0x28;
+        return;
+    }
+    func_8001EBF8(&t);
+    t.fn2C(((DkDeck63E *)D_80048D34)->a[*(s32 *)(*(u8 **)(o + 0x50) + 0x5C)][*(s32 *)(o + 0x5C) - 1]);
+    t.fn3C(0x140, 0x100);
+    t.fn40(0x300, 0x100);
+    n = *(s32 *)(o + 0x5C) - 1;
+    t.fn44(n % 9, n / 9);
+    t.fn30();
+}
 
 void func_800838C4(u8 *o) {
     switch (*(s32 *)(o + 0xC)) {

@@ -40,7 +40,32 @@ Obj *func_800A604C(void) {
     return func_80014504(func_800A5F44, 0x60, 0);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG815/nonmatchings/WSTAG815", func_800A6078);
+void func_800A6078(u8 *o, u8 **w) {
+    s32 i;
+    u8 *f;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        w[0] = (u8 *)func_800A604C();
+        for (i = 0; i < 5; i++) {
+            if (D_800A6D14[i].skip == 0) {
+                w[i + 1] = func_800A6740(D_800A6D14[i].a, D_800A6D14[i].b, D_800A6D14[i].id);
+            }
+        }
+        f = (u8 *)&D_80048ABC;
+        if ((*(s32 (**)(s32, s32))(f + 0x10))(0x4072, 1) != 0) {
+            if ((*(s32 (**)(s32, s32))(f + 0x10))(0x40A9, 0) != 0) {
+                w[6] = (u8 *)func_800853F8(0x411);
+            }
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 u8 *func_800A6184(s32 a) {
     u8 *o = func_800143DC(func_800A6078, 0x54, 0x1C, 0x17);

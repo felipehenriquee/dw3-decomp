@@ -406,7 +406,26 @@ Obj *func_80087798(s32 arg0) {
 
 INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_800877F0);
 
-INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_80087B08);
+Obj *func_80087B08(void) {
+    Obj *o = func_80014504(func_800877F0, 0x70, 8);
+    u8 *t;
+    s32 lang;
+    s32 m;
+    s32 i;
+    *(s32 *)((u8 *)o + 0x54) = 0x1000;
+    t = (u8 *)D_80048D34;
+    lang = (u8)(*(s32 (**)(void))(t + 0x2704))();
+    *(s32 *)((u8 *)o + 0x50) = ((u32)(*(s32 (**)(void))(t + 0x2708))() >> 31) ^ 1;
+    m = (*(s32 (**)(void))(t + 0x2714))();
+    for (i = 0; D_800883A4[i].id != 0; i++) {
+        if (D_800883A4[i].id == m) {
+            *(s32 *)((u8 *)o + 0x68) = D_800883A4[i].v;
+        }
+    }
+    *(s32 *)((u8 *)o + 0x6C) = D_8008833C[lang];
+    ((void (*)(s32))D_80055C54[0])(0x20);
+    return o;
+}
 
 INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_80087C18);
 

@@ -77,7 +77,35 @@ void func_80083474(void *arg0, s16 arg1) {
     M2C_FIELD(arg0, s16 *, 0x54) = arg1;
 }
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_8008347C);
+void func_8008347C(u8 *o) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        *(s32 *)(o + 0x50) += 1;
+        *(s32 *)(o + 0x50) %= 32;
+        *(s16 *)(o + 0x56) = *(s32 *)(o + 0x50) / 4;
+        func_800833DC(o);
+        break;
+    case 2:
+        if (*(s32 *)(o + 0x10) == 0) {
+            *(s16 *)(o + 0x58) = 0;
+            *(s16 *)(o + 0x5A) = D_800843D8[1];
+            *(s32 *)(o + 0x10) += 1;
+        }
+        *(s16 *)(o + 0x56) = func_80083304((s16 *)(o + 0x58), D_800843D8, 0);
+        if (*(s16 *)(o + 0x56) != 0xFF) {
+            func_800833DC(o);
+        } else {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 3);
+        }
+        break;
+    case 3:
+        break;
+    }
+}
 
 void func_80083594(void) {
     M2C_FIELD(func_80014504(func_8008347C, 0x60, 0), void (**)(void *, s16), 0x5C) = func_80083474;

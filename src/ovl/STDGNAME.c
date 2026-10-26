@@ -270,7 +270,40 @@ void func_80086368(u8 *o) {
     g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x2880000), 0x24, *(s32 *)(o + 0x58), *(s32 *)(o + 0x58));
 }
 
-INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_8008645C);
+void func_8008645C(u8 *o, u8 *w) {
+    u8 *t;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            ((void (*)(void))D_80087F40[0])();
+            *(s32 *)(o + 0x10) += 1;
+            break;
+        case 1:
+            if (((s32 (*)(void))D_80087F44[0])() == 0) {
+                (*(void (**)(u8 *))(o + 0x38))(o);
+            }
+            break;
+        }
+        break;
+    case 1:
+        func_80086184(o);
+        func_80086368(o);
+        break;
+    case 2:
+        if (*(s32 *)(w + 0xC) == 0) {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 1);
+        }
+        func_80086368(o);
+        break;
+    case 3:
+        t = (u8 *)D_80048D34;
+        (*(void (**)(s32, s32))(t + 0x270C))(*(s32 *)(t + 0x34), 0);
+        break;
+    }
+}
 
 void func_8008656C(void *arg0) {
     void *temp_s0;

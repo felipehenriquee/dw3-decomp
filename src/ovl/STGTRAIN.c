@@ -220,9 +220,58 @@ Obj *func_80086174(void) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_800861BC);
+s32 func_800861BC(u8 *o, s32 k) {
+    u8 *q = ((u8 *(*)(s32))D_8004B484[0])(*(s32 *)(o + 0x5C));
+    u8 *p;
+    s32 off = 6;
+    TrDec8 *e;
+    TrDec8 *tb;
+    s32 v;
+    if ((u32)(k - 1) >= 5) {
+        return 0;
+    }
+    p = q + (k * 2 + 0x26);
+    if (*(s32 *)(o + 0x60) < 13) {
+        off = 0;
+    }
+    off += *(s32 *)(o + 0xD8) * 3 + *(s32 *)(*(u8 **)(o + 0x50) + 0x7C);
+    tb = D_8008C304;
+    e = &tb[off];
+    if (e->rnd != 0) {
+        v = e->base + ((s32 (*)(void))D_8004DC0C)() % e->rnd;
+    } else {
+        v = e->base;
+    }
+    *(s16 *)p += v;
+    if (*(s16 *)p >= 1000) {
+        *(s16 *)p = 999;
+    }
+    return v;
+}
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_800862D0);
+s32 func_800862D0(u8 *o, s32 arg) {
+    s32 k = arg;
+    u8 *p = ((u8 *(*)(s32))D_8004B484[0])(*(s32 *)(o + 0x5C));
+    TrDec8 *e;
+    TrDec8 *tb;
+    s32 v;
+    if ((u32)(k - 1) >= 5 || (((s32 (*)(void))D_8004DC04[2])() & 1)) {
+        return 0;
+    }
+    p += k * 2 + 0x26;
+    tb = D_8008C364;
+    e = &tb[*(s32 *)(*(u8 **)(o + 0x50) + 0x7C)];
+    if (e->rnd != 0) {
+        v = e->base + ((s32 (*)(void))D_8004DC04[2])() % e->rnd;
+    } else {
+        v = e->base;
+    }
+    *(s16 *)p -= v;
+    if (*(s16 *)p < 0) {
+        *(s16 *)p = 0;
+    }
+    return v;
+}
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_800863D4);
 

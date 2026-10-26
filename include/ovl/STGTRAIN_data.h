@@ -20,5 +20,9 @@ extern s32 *D_8008D304;
 extern s32 D_80048D34[];
 extern s32 D_80044F4C NOT_GP;
 extern s32 D_8005CCA8[];
+extern s32 D_8004DC0C NOT_GP;
+extern TrDec8 D_8008C304[];
+extern s32 D_8004DC04[];
+extern TrDec8 D_8008C364[];
 
 #endif /* STGTRAIN_DATA_H */

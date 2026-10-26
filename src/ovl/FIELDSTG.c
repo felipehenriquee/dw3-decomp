@@ -475,7 +475,26 @@ void func_80088A4C(s32 arg0) {
     M2C_FIELD(func_80014504(func_80088888, 0x68, 8), s32 *, 0x50) = arg0;
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80088A84);
+void func_80088A84(u8 *o, Pair32 *out) {
+    Pair32 p;
+    p.x = *(s32 *)(*(u8 **)(o + 0x50) + 0x58);
+    p.y = *(s32 *)(*(u8 **)(o + 0x50) + 0x5C);
+    if (*(s32 *)(*(u8 **)(o + 0x50) + 4) == 0xD6) {
+        p.y -= 0x15;
+    }
+    ((void (*)(Pair32 *))D_8009B3D4[0])(&p);
+    if ((u32)(*(s32 *)(o + 0x58) - 2) < 2) {
+        p.x -= 11;
+    } else {
+        p.x += 11;
+    }
+    if (*(s32 *)(o + 0x58) == 0 || *(s32 *)(o + 0x58) == 2) {
+        p.y -= 0x13;
+    } else {
+        p.y -= 7;
+    }
+    *out = p;
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80088B84);
 
@@ -1523,7 +1542,27 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092914);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092A90);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80092CA0);
+void func_80092CA0(s32 a, s32 scale, s32 dir, Pair32 *out) {
+    s32 c = (u8)func_80092914(D_8004B414, a);
+    s32 row = (c & 0xF) - ((c & 0xF) != 0);
+    s32 d;
+    s32 s;
+    Pair32 *e;
+    u8 *tb;
+    if (c & 0x10) {
+        d = D_8009B8E4[dir];
+    } else {
+        d = dir;
+    }
+    s = 1;
+    if (c & 0x10) {
+        s = -1;
+    }
+    tb = (u8 *)D_8009B724;
+    e = (Pair32 *)(d * 8 + row * 64 + tb);
+    out->x = e->x * scale * s / 4096;
+    out->y = e->y * scale / 4096;
+}
 
 /* out = tabela[k] * s / 4096 (dois valores) */
 void func_80092DA0(s32 unused, s32 s, s32 k, s32 *out) {

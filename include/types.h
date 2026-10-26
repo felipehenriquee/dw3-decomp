@@ -452,4 +452,10 @@ typedef struct { u8 pad[0x63E]; s16 a[3][51]; } DkDeck63E;
 
 typedef struct { s16 id; s16 skip; s32 a; s32 b; } W745Ent;
 
+typedef struct { u8 pad[0xD0]; s32 g[8][4][5]; } LabGrid;
+
+typedef struct { u8 v; u8 pad; s16 id; } McLangEnt;
+
+typedef struct { s32 base; s32 rnd; } TrDec8;
+
 #endif /* TYPES_H */

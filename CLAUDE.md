@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-10-26, 3ª sessão): EXE **275 de 347** (79%); overlays **2027 de 3292** (61.6%). Total **2302 de 3639 (63.3%)**.
+- [ ] Decompilação (2026-10-26, 4ª sessão): EXE **275 de 347** (79%); overlays **2040 de 3292** (62.0%). Total **2315 de 3639 (63.6%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -127,6 +127,9 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 - Estruturas de campo para fixar `base+idx`: `CgE0C` (`e->a[k-1]` mantém o `-1` fora do offset), `FsW10`, `DkArr78`.
 - Struct local passada por endereço que fica na pilha depois da struct gráfica (`sw` em `0xB0(sp)`): declare `Pair32 p;` depois de `g` (dois `s32` soltos vão para registradores).
 - `propagate.py` tenta pôr o leitor de animação (`s16 func_800A5DE0`) no WSTAG800 e quebra os chamadores (que usam o protótipo `s32 f()`); ignorar ou ajustar os chamadores com cast.
+- **`lui` da tabela saindo cedo/tarde demais** (`&T[idx]`, `base + idx*8`): use uma variável-base atribuída logo antes do uso (`tb = D_X; e = &tb[idx];`). Resolveu STGTRAIN `func_800861BC`/`func_800862D0` e FIELDSTG `func_80092CA0`; ainda não as FIGHTSTG `func_8009C8B0`/`func_8009CB10`.
+- Jump table do CARDGAME `func_8008423C` (`switch` de 30..40) caiu no lugar certo: o problema das notas antigas é só da jtbl no início exato da rodata.
+- Busca em tabela com sentinela que relê o campo (`lh` a cada passo): `for (i = 0; T[i].id != 0; i++)` indexado, não ponteiro.
 - Quase (2026-10-26, 3ª): FIGHTSTG `func_8009C8B0`/`func_8009CB10` (só a posição do `lui` no cálculo final `k*0x60 + idx*32 + base+0x10`), CARDGAME `func_800A3D90` (1 `addu` com operandos trocados em `o + j*0x72`), STAGSLCT `func_80084C94` (leiaute do `if` que escolhe `±0x111`).
 - Quase: STGTRAIN `func_800862D0` (só a ordem do `lui` da tabela `D_8008C364`), CARDGAME `func_800A3E9C` (o original reaproveita `j*8`), STFGTREP `func_80086844`, WSTAG625 `func_800A5F00` (ordem das comparações do retorno). Tentativas em `wip/ovl/`.
 

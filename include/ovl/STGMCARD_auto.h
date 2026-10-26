@@ -32,6 +32,7 @@ void func_80084BF8(void *arg0, void *arg1);
 void func_80084C70(void *arg0);
 void func_80084CA8(void *arg0);
 Obj *func_80087798(s32 arg0);
+Obj *func_80087B08(void);
 s32 func_80087DF0(void);
 void func_80087E78(void);
 void func_80087EDC(void *arg0, s32 arg1);
@@ -56,7 +57,6 @@ s32 func_80084DCC();
 s32 func_80087368();
 s32 func_80087534();
 s32 func_800877F0();
-s32 func_80087B08();
 s32 strcpy();
 
 /* dados acessados via $gp */

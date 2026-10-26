@@ -141,7 +141,32 @@ INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_800835CC);
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008365C);
 
-INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_800841E4);
+s32 func_800841E4(u8 *o, s32 d) {
+    s32 old = *(s32 *)(o + 0x294);
+    s32 c;
+    s32 v;
+    do {
+        v = *(s32 *)(o + 0x294) + d;
+        *(s32 *)(o + 0x294) = v;
+        if (v < 0) {
+            *(s32 *)(o + 0x294) = 0;
+        } else if (*(s32 *)(o + 0xCC) - 1 < v) {
+            *(s32 *)(o + 0x294) = *(s32 *)(o + 0xCC) - 1;
+        }
+        c = 0;
+        while (((LabGrid *)o)->g[*(s32 *)(o + 0xC0)][*(s32 *)(o + 0x294)][c] == 0) {
+            c++;
+            if (c >= 5) {
+                break;
+            }
+        }
+    } while (((LabGrid *)o)->g[*(s32 *)(o + 0xC0)][*(s32 *)(o + 0x294)][c] == 0);
+    if (old != *(s32 *)(o + 0x294)) {
+        *(s32 *)(o + 0x290) = c;
+        return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_800842F4);
 

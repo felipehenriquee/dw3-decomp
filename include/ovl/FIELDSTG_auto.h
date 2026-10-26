@@ -48,6 +48,7 @@ s32 func_80088190(s32 arg0);
 void func_800881B8(void *arg0, s32 arg1, M2C_UNK arg2);
 s32 func_80088288(u8 *o);
 void func_80088A4C(s32 arg0);
+void func_80088A84(u8 *o, Pair32 *out);
 void *func_80088CA0(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 Obj *func_80089490(s32 arg0, s32 arg1);
 void func_80089548(s32 arg0);
@@ -148,6 +149,7 @@ void func_800925A8(void);
 void func_800928CC(s32 arg0, s32 arg1);
 void func_800928E4(s32 v);
 void func_80092908(s32 arg0);
+void func_80092CA0(s32 a, s32 scale, s32 dir, Pair32 *out);
 void func_80092DA0(s32 unused, s32 s, s32 k, s32 *out);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
@@ -196,7 +198,6 @@ s32 func_80087F84();
 s32 func_8008836C();
 s32 func_800885D4();
 s32 func_80088888();
-s32 func_80088A84();
 s32 func_80088B84();
 s32 func_80088D38();
 s32 func_80088EEC();

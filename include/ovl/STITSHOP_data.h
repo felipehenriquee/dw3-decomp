@@ -12,5 +12,8 @@ extern s32 D_80048DA0[];
 extern s32 D_80044B38[];
 extern s32 D_8005CCA8[];
 extern s32 D_8008CAE8[];
+extern s32 D_80048D34[];
+extern s32 D_8008D1B0[];
+extern s32 D_8008D1B4[];
 
 #endif /* STITSHOP_DATA_H */
