@@ -156,7 +156,35 @@ s16 func_80086090(s32 a, s32 b, s32 c) {
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800860D4);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80086330);
+void func_80086330(u8 *o, u8 *x, s32 m) {
+    s32 i, found;
+    *(s32 *)(o + 0x440) = 0;
+    o[0x422] = 0;
+    if (*(s16 *)(x + 0x64) == 0) {
+        o[0x499] = o[0x49D] = 1;
+        (*(void (**)(u8 *))(x + 0xEC8))(x);
+    }
+    i = 0;
+    found = 0;
+    *(s32 *)(o + 0x424) = 0;
+    *(s32 *)(x + 0xDE8) = m;
+    *(s32 *)(x + 0xDE4) = 0;
+    for (; i < *(s16 *)(o + 0x5A6); i++) {
+        if (func_80085FD0(o, o + 0x5A8, ((CgArr600 *)o)->a[i]) != 0) {
+            found = 1;
+            break;
+        }
+    }
+    if (found != 0) {
+        *(s16 *)(x + 0xDF4) = 0;
+        *(s32 *)(o + 0x440) = 0;
+        *(s32 *)(o + 0x438) = 2;
+    } else {
+        *(s16 *)(x + 0xDF4) = 1;
+        *(s32 *)(o + 0x440) = 1;
+        *(s32 *)(o + 0x438) = 3;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008642C);
 
