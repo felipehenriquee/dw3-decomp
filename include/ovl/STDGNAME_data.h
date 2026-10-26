@@ -10,5 +10,6 @@ extern s32 D_8005CCA8[];
 extern s32 D_8004B600[];
 extern u8 D_80087F3C[];
 extern s32 D_80044B38[];
+extern s32 D_80044F5C[];
 
 #endif /* STDGNAME_DATA_H */

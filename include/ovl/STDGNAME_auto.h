@@ -15,6 +15,7 @@ void func_800851C4(u8 *o, s32 s);
 void func_80085358(void *arg0);
 u8 *func_80085364(s32 s, s32 b);
 Obj *func_80086144(s32 arg0);
+void func_80086368(u8 *o);
 void func_8008656C(void *arg0);
 Obj *func_800865B0(void);
 void func_800865F0(void);
@@ -39,7 +40,6 @@ s32 func_8008559C();
 s32 func_80085B70();
 s32 func_80085DE4();
 s32 func_80086184();
-s32 func_80086368();
 s32 func_8008645C();
 s32 strlen();
 

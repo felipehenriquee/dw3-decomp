@@ -193,7 +193,34 @@ Obj *func_80086144(s32 arg0) {
 
 INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80086184);
 
-INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80086368);
+void func_80086368(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        u8 pad88[0xA0 - 0x88];
+    } g;
+    s32 v;
+
+    func_8001F648(&g);
+    g.fn7C(*(s32 *)(o + 0x50), 7);
+    g.fn74(0x280, 0);
+    g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x2880000), 0x31, 0, 0);
+    if (*(s32 *)(o + 0x5C) != 0) {
+        v = 0;
+        if ((*(s32 *)(o + 0x58))++ < 0x5F) {
+            v = *(s32 *)(o + 0x58);
+        }
+        *(s32 *)(o + 0x58) = v;
+        *(s32 *)(o + 0x5C) = 0;
+    } else {
+        *(s32 *)(o + 0x5C) = 1;
+    }
+    g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x2880000), 0x24, *(s32 *)(o + 0x58), *(s32 *)(o + 0x58));
+}
 
 INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_8008645C);
 
