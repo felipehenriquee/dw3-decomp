@@ -13,7 +13,26 @@ INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80083780);
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80083BA8);
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_800843C0);
+void func_800843C0(u8 *o) {
+    s32 i, n, c;
+    u8 *f = D_80042B98;
+    u8 *g;
+    n = (*(s32 (**)(s32, u8 *))(f + 0xC))(1, o + 0x3C4);
+    *(s32 *)(o + 0x3C0) = 0;
+    i = 0;
+    if (n > 0) {
+        g = f;
+        do {
+        if ((*(s32 (**)(s32))(g + 4))(*(s16 *)(o + i * 2 + 0x3C4)) == 0x62) {
+            ((ShpArr98 *)o)->a[(*(s32 *)(o + 0x3C0))++] = *(s16 *)(o + i * 2 + 0x3C4);
+        }
+        } while (++i < n);
+    }
+    c = *(s32 *)(o + 0x3C0);
+    if (c != 0) {
+        *(s32 *)(o + 0x64) = c / 8 + ((c & 7) != 0);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_800844B8);
 

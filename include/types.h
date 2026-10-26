@@ -430,4 +430,6 @@ typedef struct { u8 b[0x4C]; } CgRow4C;
 
 typedef struct { s16 id; s16 idx; s32 w; } FtMap8w;
 
+typedef struct { u8 pad[0x98]; s16 a[1]; } ShpArr98;
+
 #endif /* TYPES_H */

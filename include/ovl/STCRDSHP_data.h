@@ -10,5 +10,6 @@ extern s32 D_80048DA0[];
 extern s32 D_80044B38[];
 extern s32 D_8005CCA8[];
 extern s32 D_8004DF98[];
+extern u8 D_80042B98[];
 
 #endif /* STCRDSHP_DATA_H */
