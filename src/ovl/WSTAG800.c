@@ -5,7 +5,81 @@
 
 INCLUDE_ASM("asm/ovl/WSTAG800/nonmatchings/WSTAG800", func_800A5DE0);
 
-INCLUDE_ASM("asm/ovl/WSTAG800/nonmatchings/WSTAG800", func_800A5F00);
+void func_800A5F00(u8 *o) {
+    Rec18 *r;
+    Rec18 *q;
+    s32 i;
+    s32 v;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        for (q = D_80099D90; q->b[2] != 0; q++) {
+            if (q->b[1] == 1) {
+                *(s16 *)(o + 0x58) = 0;
+                *(s16 *)(o + 0x5A) = D_800A7604[2];
+                *(Rec18 **)(o + 0x54) = q;
+            }
+            if (q->b[1] == 2) {
+                *(s16 *)(o + 0x60) = 0;
+                *(s16 *)(o + 0x62) = D_800A763C[2];
+                *(Rec18 **)(o + 0x5C) = q;
+            }
+        }
+        *(s16 *)(o + 0x50) = 0;
+        if (*(s16 *)(o + 0x52) == 0) {
+            (*(void (**)(u8 *))(o + 0x38))(o);
+        } else {
+            *(s16 *)(o + 0x58) = 0;
+            *(s16 *)(o + 0x5A) = D_800A7612[0];
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+        }
+        break;
+    case 1:
+        for (i = 0; i < 2; i++) {
+            r = *(Rec18 **)(o + i * 8 + 0x54);
+            switch (i) {
+            case 0:
+                r->b[0] = 1;
+                r->b[4] = 0x46;
+                r->b[9] = func_800A5DE0(o + 0x54, D_800A7604, 0, 0);
+                break;
+            case 1:
+                r->b[0] = 0;
+                break;
+            }
+        }
+        break;
+    case 2:
+        for (i = 0; i < 2; i++) {
+            r = *(Rec18 **)(o + i * 8 + 0x54);
+            switch (i) {
+            case 0:
+                r->b[0] = 1;
+                if (*(s16 *)(o + 0x50) != 0) {
+                    v = func_800A5DE0(o + 0x54, D_800A7610, 1, 0);
+                    if (v == 0xFF) {
+                        r->b[4] = 0x50;
+                        *(s16 *)(o + 0x50) = 0;
+                    } else {
+                        r->b[4] = v;
+                    }
+                } else {
+                    r->b[4] = 0x50;
+                }
+                r->b[9] = 0;
+                break;
+            case 1:
+                r->b[0] = 1;
+                r->b[4] = 0x51;
+                r->b[9] = func_800A5DE0(o + 0x5C, D_800A763C, 0, 0);
+                break;
+            }
+        }
+        break;
+    case 3:
+        break;
+    }
+}
 
 void func_800A6174(void *arg0, s32 arg1) {
     if (arg1 == 0x35B) {
@@ -24,7 +98,33 @@ void func_800A61F0(void) {
     M2C_FIELD(func_80014504(func_800A5F00, 0x64, 0), s16 *, 0x52) = 1;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG800/nonmatchings/WSTAG800", func_800A6224);
+s16 func_800A6224(u8 *o, AnimEnt4 *tbl, s32 once, s32 depth) {
+    AnimEnt4 *e = tbl + *(s16 *)(o + 0x8);
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        *(s16 *)(o + 0xA) -= dt;
+    }
+    if (*(s16 *)(o + 0xA) <= 0) {
+        *(s16 *)(o + 0x8) += 1;
+        e++;
+        *(s16 *)(o + 0xA) += e->dur;
+        if (once != 0) {
+            if (e->id == 0xFF) {
+                return 0xFF;
+            }
+        } else if (e->id == 0xFF) {
+            e = tbl;
+            *(s16 *)(o + 0x8) = 0;
+            *(s16 *)(o + 0xA) += e->dur;
+        }
+        func_800A6224(o, tbl, once, depth + 1);
+    }
+    return e->id;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG800/nonmatchings/WSTAG800", func_800A6344);
 

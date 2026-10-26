@@ -3,7 +3,31 @@
 #include "WSTAG680_auto.h"
 #include "WSTAG680_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG680/nonmatchings/WSTAG680", func_800A5EDC);
+s16 func_800A5EDC(u8 *o, AnimEnt4 *tbl, s32 depth) {
+    AnimEnt4 *e = tbl + *(s16 *)(o + 0xC);
+    s32 k;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        *(s16 *)(o + 0xE) -= dt;
+    }
+    if (*(s16 *)(o + 0xE) <= 0) {
+        *(s16 *)(o + 0xC) += 1;
+        e++;
+        *(s16 *)(o + 0xE) += e->dur;
+        if (e->id == 0xFF) {
+            *(s32 *)(o + 0x4) = e->next;
+            e = tbl;
+            *(s16 *)(o + 0xC) = 0;
+            *(s16 *)(o + 0xE) += e->dur;
+        }
+        func_800A5EDC(o, tbl, depth + 1);
+    }
+    return e->id;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG680/nonmatchings/WSTAG680", func_800A5FD8);
 

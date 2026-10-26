@@ -6,5 +6,8 @@
 struct opaque;
 extern s32 D_800A6650[];
 extern struct opaque D_8004DF9C;
+extern Rec18 *D_80099D90;
+extern s16 D_800A61CC[];
+extern s16 D_800A621C[];
 
 #endif /* WSTAG232_DATA_H */

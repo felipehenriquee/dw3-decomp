@@ -294,7 +294,43 @@ Obj *func_80088C00(void) {
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80088C2C);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80089148);
+s32 func_80089148(u8 a) {
+    u8 *t = D_800A4460;
+    s32 r;
+    s32 idx;
+    s16 *p; u8 *e;
+    idx = *(s32 *)(t + 0xC);
+    t += 0x10; e = t + idx * 32;
+    r = 0;
+    p = ((s16 *(*)(s32))D_800A37FC[0])(*(s16 *)(e + 0x60));
+    switch (a) {
+    case 1:
+        r = 1;
+        break;
+    case 2:
+        r = p[5];
+        break;
+    case 3:
+        r = p[6];
+        break;
+    case 4:
+        r = -1;
+        break;
+    case 5:
+        r = -2;
+        break;
+    case 6:
+        r = -3;
+        break;
+    case 7:
+        r = -4;
+        break;
+    case 8:
+        r = -5;
+        break;
+    }
+    return r;
+}
 
 void func_80089214(void) {
 }
@@ -1398,7 +1434,28 @@ INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009C9C0);
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009CB10);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009CC20);
+void func_8009CC20(u8 a, s32 b, s32 k, s32 flag) {
+    s32 i = func_8009BC94(D_800A43E0[k], a, b);
+    s32 v;
+    s32 *m;
+    u8 *e;
+    if (flag != 0) {
+        v = func_8009BDA4(a, 12);
+    } else {
+        v = func_8009BDA4(a, 8);
+    }
+    if (i >= 0) {
+        e = D_800A3868; *(s16 *)(e + i * 28 + 2) = v;
+    } else {
+        m = &D_800A4780;
+        m[0] = D_800A43E0[k];
+        m[1] = v;
+        m[2] = a;
+        m[3] = b;
+        m[4] = k;
+        func_8009B930(m);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009CD1C);
 
@@ -1514,7 +1571,23 @@ void func_8009D768(void) {
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009D7A4);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009D858);
+void func_8009D858(void) {
+    u8 *s = D_800A43F4; s32 *q;
+    s32 m = 0x10;
+    s32 *t;
+    u8 c;
+    u8 k;
+    Rec18 *r;
+    c = s[0x20];
+    k = c != 0;
+    if (k || D_80042B62[0] == 0) {
+        q = (s32 *)D_800A4460; t = q + (1 - k);
+        r = &D_80042BCA[*(s32 *)(s + 0x24)];
+        ((void (*)(s32, s32, s32, s32))D_800A4664[0])((u8)(m - c), t[2], 0, -r->b[0xC]);
+        func_8009CC20((u8)(m - s[0x20]), t[2], 0, *(s32 *)(s + 0x24));
+        s[r->b[0xA] + 0x38] = r->b[0xC];
+    }
+}
 
 void func_8009D944(void) {
     u8 *s = D_800A43F4;

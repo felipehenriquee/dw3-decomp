@@ -416,6 +416,24 @@ void func_800890B4(Lerp *l, s32 from, s32 to, s32 n) {
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_800890F4);
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80089160);
+ShpEnt *func_80089160(s32 id) {
+    s32 k = -1;
+    s32 i;
+
+    for (i = 0; D_8008CDD4[i].id != -1; i++) {
+        if (D_8008CDD4[i].id == id) {
+            k = i;
+            break;
+        }
+    }
+    if (k == -1) {
+        k = 0;
+    }
+    D_8008CDD4[k].n = 0;
+    for (i = 0; D_8008CDD4[k].l[i] != 0; i++) {
+        D_8008CDD4[k].n++;
+    }
+    return &D_8008CDD4[k];
+}
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_8008923C);

@@ -3,7 +3,33 @@
 #include "WSTAG481_auto.h"
 #include "WSTAG481_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG481/nonmatchings/WSTAG481", func_800A5DF8);
+void func_800A5DF8(u8 *o, u8 (**tbl)[4], AnimSt *st, s32 depth) {
+    s32 dt;
+    if (depth == 0) {
+        dt = (*(s32 (**)(void))&D_8004DF9C)();
+        if (dt >= 5) {
+            dt = 4;
+        }
+        st->t -= dt;
+    }
+    if (st->t <= 0) {
+        if (tbl[st->seq][st->frame][3] != 0) {
+            st->seq++;
+            st->frame = 0;
+            if (tbl[st->seq] == NULL) {
+                st->seq = 0;
+            }
+        } else {
+            st->frame++;
+        }
+        st->t += tbl[st->seq][st->frame][1];
+        func_800A5DF8(o, tbl, st, depth + 1);
+    }
+    if (depth == 0) {
+        o[4] = tbl[st->seq][st->frame][0];
+        o[9] = tbl[st->seq][st->frame][2];
+    }
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG481/nonmatchings/WSTAG481", func_800A5F84);
 

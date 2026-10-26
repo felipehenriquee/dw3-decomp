@@ -3,7 +3,33 @@
 #include "WSTAG795_auto.h"
 #include "WSTAG795_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG795/nonmatchings/WSTAG795", func_800A5DE0);
+s16 func_800A5DE0(u8 *o, AnimEnt4 *tbl, s32 once, s32 depth) {
+    AnimEnt4 *e = tbl + *(s16 *)(o + 0x4);
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        *(s16 *)(o + 0x6) -= dt;
+    }
+    if (*(s16 *)(o + 0x6) <= 0) {
+        *(s16 *)(o + 0x4) += 1;
+        e++;
+        *(s16 *)(o + 0x6) += e->dur;
+        if (once != 0) {
+            if (e->id == 0xFF) {
+                return 0xFF;
+            }
+        } else if (e->id == 0xFF) {
+            e = tbl;
+            *(s16 *)(o + 0x4) = 0;
+            *(s16 *)(o + 0x6) += e->dur;
+        }
+        func_800A5DE0(o, tbl, once, depth + 1);
+    }
+    return e->id;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG795/nonmatchings/WSTAG795", func_800A5F00);
 

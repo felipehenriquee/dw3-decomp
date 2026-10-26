@@ -15,7 +15,37 @@ u8 *func_800A6108(s32 unused) {
     return func_800143DC(func_800A5DF4, 112, 0, 809);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG790/nonmatchings/WSTAG790", func_800A6138);
+void func_800A6138(u8 *o) {
+    u8 *p;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+            break;
+        case 1:
+            if (*(s32 *)(o + 0x14) == 0) {
+                *(s32 *)(o + 0x50) = (*(s32 *)(o + 0x18) >> 2) + 5;
+                if (++*(s32 *)(o + 0x18) >= 20) {
+                    ((void (*)(s32))D_80055C48[0])(0x8100303C);
+                    (*(void (**)(u8 *))(o + 0x40))(o);
+                } else {
+                    p = (u8 *)func_80089548(1);
+                    if (p != NULL) {
+                        p[4] = o[0x50];
+                    }
+                }
+            }
+            break;
+        }
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void func_800A6224(void *arg0, s32 arg1) {
     if ((arg0 != NULL) && (arg1 == 0x32E)) {

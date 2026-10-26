@@ -3,7 +3,29 @@
 #include "WSTAG545_auto.h"
 #include "WSTAG545_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG545/nonmatchings/WSTAG545", func_800A5E18);
+s16 func_800A5E18(u8 *o, s16 *tbl, s32 depth) {
+    s16 *e = tbl + *(s16 *)(o + 0x4) * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        *(s16 *)(o + 0x6) -= dt;
+    }
+    if (*(s16 *)(o + 0x6) <= 0) {
+        *(s16 *)(o + 0x4) += 1;
+        e += 2;
+        *(s16 *)(o + 0x6) += e[1];
+        if (e[0] == 0xFF) {
+            *(s16 *)(o + 0x4) -= 1;
+            e = tbl + *(s16 *)(o + 0x4) * 2;
+            *(s16 *)(o + 0x6) += e[1];
+        }
+        func_800A5E18(o, tbl, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG545/nonmatchings/WSTAG545", func_800A5F20);
 

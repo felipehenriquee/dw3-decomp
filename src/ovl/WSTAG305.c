@@ -25,7 +25,52 @@ s16 func_800A5DE0(s16 *st, s16 *tbl, s32 depth) {
     return e[0];
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG305/nonmatchings/WSTAG305", func_800A5EB8);
+void func_800A5EB8(u8 *o) {
+    Rec18 *r;
+    Rec18 *q;
+    s32 v;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        for (q = D_80099D90; q->b[2] != 0; q++) {
+            if (q->b[1] == 1) {
+                *(s16 *)(o + 0x58) = 0;
+                *(s16 *)(o + 0x5A) = D_800A7FFC[1];
+                *(Rec18 **)(o + 0x54) = q;
+            }
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        r = *(Rec18 **)(o + 0x54);
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            r->b[4] = 5;
+            r->b[0] = 1;
+            break;
+        case 1:
+            r->b[0] = 1;
+            v = ((s32 (*)(s16 *, s16 *, s32))func_800A5DE0)((s16 *)(o + 0x54), D_800A7FFC, 0);
+            if (v != 0xFF) {
+                r->b[4] = v;
+            } else {
+                r->b[4] = 10;
+                (*(void (**)(u8 *))(o + 0x3C))(o);
+                ((void (*)(s32, s32))D_80055C50[0])(0xA0042FCB, *(s16 *)(o + 0x50));
+            }
+            break;
+        case 2:
+            r->b[0] = 1;
+            r->b[4] = 10;
+            break;
+        }
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void func_800A6018(void *arg0, s32 arg1) {
     if ((arg0 != NULL) && (arg1 == 0x335)) {

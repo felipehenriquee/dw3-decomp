@@ -432,4 +432,16 @@ typedef struct { s16 id; s16 idx; s32 w; } FtMap8w;
 
 typedef struct { u8 pad[0x98]; s16 a[1]; } ShpArr98;
 
+typedef struct { s32 id; s32 n; s16 *l; } ShpEnt;
+
+typedef struct { u8 pad[0xC]; u8 a[6]; } CgE0C;
+
+typedef struct { s16 id; u8 dur; u8 next; } AnimEnt4;
+
+typedef struct { s16 id; s16 dur; s32 d; } AnimEnt8;
+
+typedef struct { s16 seq; s16 frame; s32 t; } AnimSt;
+
+typedef struct { u8 pad[0x78]; u16 a[14]; s32 n; } DkArr78;
+
 #endif /* TYPES_H */

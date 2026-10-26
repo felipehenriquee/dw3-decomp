@@ -17,7 +17,31 @@ u8 *func_800A5F9C(s32 arg0) {
     return func_800143DC(func_800A5DE4, 84, 108, arg0);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG805/nonmatchings/WSTAG805", func_800A5FCC);
+s16 func_800A5FCC(u8 *o, AnimEnt4 *tbl, s32 depth) {
+    AnimEnt4 *e = tbl + *(s16 *)(o + 0x4);
+    s32 k;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        *(s16 *)(o + 0x6) -= dt;
+    }
+    if (*(s16 *)(o + 0x6) <= 0) {
+        *(s16 *)(o + 0x4) += 1;
+        e++;
+        *(s16 *)(o + 0x6) += e->dur;
+        if (e->id == 0xFF) {
+            k = e->next;
+            e = tbl + k;
+            *(s16 *)(o + 0x4) = k;
+            *(s16 *)(o + 0x6) += e->dur;
+        }
+        func_800A5FCC(o, tbl, depth + 1);
+    }
+    return e->id;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG805/nonmatchings/WSTAG805", func_800A60CC);
 
@@ -32,7 +56,38 @@ u8 *func_800A641C(s32 link) {
     return func_800143DC(func_800A60CC, 0x70, 0, link);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG805/nonmatchings/WSTAG805", func_800A644C);
+s16 func_800A644C(u8 *o, AnimEnt8 *tbl, s32 once, s32 depth) {
+    AnimEnt8 *e = tbl + *(s16 *)(o + 0x8);
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        *(s16 *)(o + 0xA) -= dt;
+    }
+    if (once != 0) {
+        *(s32 *)o += e->d;
+    }
+    if (*(s16 *)(o + 0xA) <= 0) {
+        *(s16 *)(o + 0x8) += 1;
+        e++;
+        *(s16 *)(o + 0xA) += e->dur;
+        if (once != 0) {
+            if (e->id == 0xFF) {
+                *(s16 *)(o + 0x8) -= 1;
+                e--;
+                *(s16 *)(o + 0xA) += e->dur;
+            }
+        } else if (e->id == 0xFF) {
+            e = tbl;
+            *(s16 *)(o + 0x8) = 0;
+            *(s16 *)(o + 0xA) += e->dur;
+        }
+        func_800A644C(o, tbl, once, depth + 1);
+    }
+    return e->id;
+}
 
 s32 func_800A65A0(s32 x, s32 y, s32 w, s32 h) {
     s16 r[4];

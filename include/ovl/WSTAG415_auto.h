@@ -3,6 +3,7 @@
 #define WSTAG415_AUTO_H
 
 /* funcoes ja decompiladas */
+s16 func_800A5DF4(u8 *o, s16 *tbl, s32 depth);
 void func_800A5EE8(u8 *o, s32 tex);
 u8 *func_800A6230(s32 arg0);
 u8 *func_800A6264(s32 arg0);
@@ -14,6 +15,7 @@ u8 *func_800A637C(s32 arg0);
 u8 *func_800A63B4(s32 arg0);
 u8 *func_800A63EC(s32 arg0);
 u8 *func_800A6424(s32 arg0);
+s16 func_800A645C(u8 *o, s16 *tbl, s32 depth);
 u8 *func_800A6A98(s32 arg0);
 u8 *func_800A6ACC(s32 arg0);
 void func_800A6E88(void *arg0, s32 arg1);
@@ -28,9 +30,7 @@ s32 func_80014504();
 s32 func_8001F648();
 s32 func_8001FFA8();
 s32 func_800853F8();
-s32 func_800A5DF4();
 s32 func_800A5FA8();
-s32 func_800A645C();
 s32 func_800A6558();
 s32 func_800A6B04();
 s32 func_800A6C8C();

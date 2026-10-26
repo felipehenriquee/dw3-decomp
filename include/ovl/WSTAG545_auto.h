@@ -3,6 +3,7 @@
 #define WSTAG545_AUTO_H
 
 /* funcoes ja decompiladas */
+s16 func_800A5E18(u8 *o, s16 *tbl, s32 depth);
 Obj *func_800A6054(s32 arg0, s32 arg1, s32 arg2);
 s16 func_800A60AC(s16 *st, s16 *tbl, s32 depth);
 void func_800A6304(void *arg0, s32 arg1);
@@ -18,7 +19,6 @@ void func_800A6A2C(void);
 s32 func_800143DC();
 s32 func_80014504();
 s32 func_800853F8();
-s32 func_800A5E18();
 s32 func_800A5F20();
 s32 func_800A6184();
 s32 func_800A648C();

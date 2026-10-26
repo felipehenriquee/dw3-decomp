@@ -9,5 +9,6 @@ extern u8 D_800A6A2A[];
 extern s32 D_800A7328[];
 extern s32 D_8004B370[];
 extern s32 D_80048ACC[];
+extern s32 D_8004DF9C NOT_GP;
 
 #endif /* WSTAG795_DATA_H */

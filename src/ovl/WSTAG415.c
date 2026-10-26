@@ -3,7 +3,29 @@
 #include "WSTAG415_auto.h"
 #include "WSTAG415_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG415/nonmatchings/WSTAG415", func_800A5DF4);
+s16 func_800A5DF4(u8 *o, s16 *tbl, s32 depth) {
+    s16 *e = tbl + *(s16 *)(o + 0x14) * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        *(s16 *)(o + 0x16) -= dt;
+    }
+    if (*(s16 *)(o + 0x16) <= 0) {
+        *(s16 *)(o + 0x14) += 1;
+        e += 2;
+        *(s16 *)(o + 0x16) += e[1];
+        if (e[0] == 0xFF) {
+            e = tbl;
+            *(s16 *)(o + 0x14) = 0;
+            *(s16 *)(o + 0x16) += e[1];
+        }
+        func_800A5DF4(o, tbl, depth + 1);
+    }
+    return e[0];
+}
 
 void func_800A5EE8(u8 *o, s32 tex) {
     struct {
@@ -99,7 +121,29 @@ u8 *func_800A6424(s32 arg0) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG415/nonmatchings/WSTAG415", func_800A645C);
+s16 func_800A645C(u8 *o, s16 *tbl, s32 depth) {
+    s16 *e = tbl + *(s16 *)(o + 0x14) * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        *(s16 *)(o + 0x16) -= dt;
+    }
+    if (*(s16 *)(o + 0x16) <= 0) {
+        *(s16 *)(o + 0x14) += 1;
+        e += 2;
+        *(s16 *)(o + 0x16) += e[1];
+        if (e[0] == 0xFF) {
+            *(s16 *)(o + 0x14) -= 1;
+            e -= 2;
+            *(s16 *)(o + 0x16) += e[1];
+        }
+        func_800A645C(o, tbl, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG415/nonmatchings/WSTAG415", func_800A6558);
 

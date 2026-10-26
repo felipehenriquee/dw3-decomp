@@ -250,7 +250,17 @@ void func_800856A8(void) {
     (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x24);
 }
 
-INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_800857A0);
+s32 func_800857A0(void) {
+    u8 *t = (u8 *)D_80044B38;
+    if ((*(s32 (**)(s32))(t + 0x404))(0x7F6) != 0) return 1;
+    if ((*(s32 (**)(s32))(t + 0x404))(0x7F7) != 0) return 1;
+    if ((*(s32 (**)(s32))(t + 0x404))(0x7F8) != 0) return 1;
+    if ((*(s32 (**)(s32))(t + 0x404))(0x7F9) != 0) return 1;
+    if ((*(s32 (**)(s32))(t + 0x404))(0x7FA) != 0) return 1;
+    if ((*(s32 (**)(s32))(t + 0x404))(D_8005CCA8[0] + 0x16) != 0) return 1;
+    if ((*(s32 (**)(s32))(t + 0x404))(D_8005CCA8[0] + 0x1D) != 0) return 1;
+    return (*(s32 (**)(s32))(t + 0x404))(D_8005CCA8[0] + 0x24) != 0;
+}
 
 void func_800858A0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = 1;

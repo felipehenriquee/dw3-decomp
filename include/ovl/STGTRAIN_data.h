@@ -17,5 +17,8 @@ extern struct opaque D_8004B600;
 extern s32 D_80044F44[];
 extern u8 D_80044B38[];
 extern s32 *D_8008D304;
+extern s32 D_80048D34[];
+extern s32 D_80044F4C NOT_GP;
+extern s32 D_8005CCA8[];
 
 #endif /* STGTRAIN_DATA_H */

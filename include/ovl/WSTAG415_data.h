@@ -9,5 +9,6 @@ extern s32 D_80099D8C;
 extern s32 D_80044F5C[];
 extern s32 D_8004B370[];
 extern s32 D_80048ACC[];
+extern s32 D_8004DF9C NOT_GP;
 
 #endif /* WSTAG415_DATA_H */

@@ -6,5 +6,6 @@
 struct opaque;
 extern s32 D_800A6998[];
 extern s32 D_8004B370[];
+extern s32 D_8004DF9C NOT_GP;
 
 #endif /* WSTAG680_DATA_H */

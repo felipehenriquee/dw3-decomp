@@ -104,7 +104,29 @@ INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80083D10);
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80084064);
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80084270);
+void func_80084270(u8 *a, u8 *w, s32 on) {
+    u8 *t;
+    u8 r[0x30];
+    u8 *o;
+    s32 v;
+    s32 i;
+    if (on != 0) {
+        t = (u8 *)D_80048D34;
+        (*(void (**)(s32, u8 *))(t + 0x2734))((*(s32 (**)(s32))(t + 0x2718))(*(s32 *)(a + 0x68)), r);
+        v = ((s32 (*)(s32))D_80044F4C)(D_8005CCA8[0] + 0x10B);
+        o = *(u8 **)(w + 0x60);
+        (*(void (**)(u8 *, s32, s32))(o + 0x114))(o, v, 4);
+        o = *(u8 **)(w + 0x64);
+        (*(void (**)(u8 *, s32, s32))(o + 0x118))(o, 0, *(s16 *)(r + 2));
+        o = *(u8 **)(w + 0x64);
+        (*(void (**)(u8 *, s32))(o + 0x148))(o, 1);
+    } else {
+        for (i = 0; i < 2; i++) {
+            o = ((u8 **)(w + 0x60))[i];
+            (*(void (**)(u8 *, s32))(o + 0x144))(o, 0);
+        }
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80084370);
 

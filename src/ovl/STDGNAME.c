@@ -173,7 +173,30 @@ void func_800851C4(u8 *o, s32 s) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80085258);
+void func_80085258(DkArr78 *o, u8 *buf) {
+    struct {
+        u8 pad0[8];
+        void (*fn8)(u8 *, u16 *, s32);
+        u8 padC[4];
+    } t;
+    s32 i;
+    for (i = 0; i < o->n * 2; i++) {
+        buf[i] = 0;
+    }
+    for (i = o->n - 1; i >= 0; i--) {
+        if (o->a[i] != 0x4081) {
+            break;
+        }
+        o->a[i] = 0;
+    }
+    for (i = 0; i < o->n; i++) {
+        if (o->a[i] != 0x4081) {
+            break;
+        }
+    }
+    func_8001FCC0(&t);
+    t.fn8(buf, &o->a[i], 1);
+}
 
 void func_80085358(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = 0xA;

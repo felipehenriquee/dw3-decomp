@@ -5,5 +5,6 @@
 /* tipo ainda desconhecido (so o endereco e usado) */
 struct opaque;
 extern s32 D_800A6FB0[];
+extern s32 D_8004DF9C NOT_GP;
 
 #endif /* WSTAG481_DATA_H */

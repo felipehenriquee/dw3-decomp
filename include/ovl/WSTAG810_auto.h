@@ -3,6 +3,7 @@
 #define WSTAG810_AUTO_H
 
 /* funcoes ja decompiladas */
+s16 func_800A5DE0(u8 *o, AnimEnt4 *tbl, s32 once, s32 depth);
 void func_800A6178(void *arg0, s32 arg1);
 u8 *func_800A61C4(s32 arg0);
 u8 *func_800A6200(s32 arg0);
@@ -24,7 +25,6 @@ void func_800A6BDC(void);
 s32 func_800143DC();
 s32 func_80014504();
 s32 func_8001F648();
-s32 func_800A5DE0();
 s32 func_800A5F00();
 s32 func_800A62B8();
 s32 func_800A6740();

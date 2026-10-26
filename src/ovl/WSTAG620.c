@@ -3,7 +3,33 @@
 #include "WSTAG620_auto.h"
 #include "WSTAG620_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG620/nonmatchings/WSTAG620", func_800A5DE0);
+s16 func_800A5DE0(u8 *o, s16 *tbl, s32 once, s32 depth) {
+    s16 *e = tbl + *(s16 *)(o + 0x8) * 2;
+    s32 dt = (*(s32 (**)(void))&D_8004DF9C)();
+
+    if (dt >= 5) {
+        dt = 4;
+    }
+    if (depth == 0) {
+        *(s16 *)(o + 0xA) -= dt;
+    }
+    if (*(s16 *)(o + 0xA) <= 0) {
+        *(s16 *)(o + 0x8) += 1;
+        e += 2;
+        *(s16 *)(o + 0xA) += e[1];
+        if (once != 0) {
+            if (e[0] == 0xFF) {
+                return 0xFF;
+            }
+        } else if (e[0] == 0xFF) {
+            e = tbl;
+            *(s16 *)(o + 0x8) = 0;
+            *(s16 *)(o + 0xA) += e[1];
+        }
+        func_800A5DE0(o, tbl, once, depth + 1);
+    }
+    return e[0];
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG620/nonmatchings/WSTAG620", func_800A5F00);
 

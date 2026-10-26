@@ -3,9 +3,11 @@
 #define WSTAG800_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800A5F00(u8 *o);
 void func_800A6174(void *arg0, s32 arg1);
 u8 *func_800A61C0(s32 arg0);
 void func_800A61F0(void);
+s16 func_800A6224(u8 *o, AnimEnt4 *tbl, s32 once, s32 depth);
 u8 *func_800A6510(s32 arg0);
 Obj *func_800A6858(void);
 void *func_800A69CC(s32 arg0);
@@ -23,8 +25,6 @@ s32 func_80014504();
 s32 func_8001F648();
 s32 func_800853F8();
 s32 func_800A5DE0();
-s32 func_800A5F00();
-s32 func_800A6224();
 s32 func_800A6344();
 s32 func_800A6540();
 s32 func_800A6688();
