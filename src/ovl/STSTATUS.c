@@ -531,9 +531,39 @@ INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80099894);
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80099A80);
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80099B6C);
+void func_80099B6C(void) {
+    struct {
+        u8 pad0[0x24];
+        void (*fn24)(s32, s32);
+        u8 pad28[4];
+        void (*fn2C)(s32);
+        u8 pad30[8];
+    } g;
+    u8 *f;
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80099C64);
+    func_8001FFA8(&g);
+    g.fn24(0x280, 0x100);
+    f = (u8 *)D_80044B38;
+    g.fn2C((*(s32 (**)(s32))(f + 0x424))(0x4050000));
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0xB0);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x6A);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x63);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x4E);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x47);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0xA2);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x9B);
+}
+
+s32 func_80099C64(void) {
+    u8 *p = (u8 *)D_80044B38;
+    if ((*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0xB0) != 0) return 1;
+    if ((*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0x6A) != 0) return 1;
+    if ((*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0x63) != 0) return 1;
+    if ((*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0x4E) != 0) return 1;
+    if ((*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0x47) != 0) return 1;
+    if ((*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0xA2) != 0) return 1;
+    return (*(s32 (**)(s32))(p + 0x404))(D_8005CCA8[0] + 0x9B) != 0;
+}
 
 void func_80099D5C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = 1;
