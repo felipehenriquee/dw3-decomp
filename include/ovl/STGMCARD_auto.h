@@ -3,6 +3,7 @@
 #define STGMCARD_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_80082CD0(u8 *o, Obj **w);
 Obj *func_80082DC8(void);
 void func_80082DF4(void *arg0, s32 arg1, s32 arg2);
 void func_80082E7C(u8 *obj);
@@ -47,7 +48,6 @@ s32 func_8001B364();
 s32 func_8001F648();
 s32 func_8001FCC0();
 s32 func_8001FFA8();
-s32 func_80082CD0();
 s32 func_8008316C();
 s32 func_800836C4();
 s32 func_80083C50();
