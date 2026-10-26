@@ -5,5 +5,6 @@
 /* tipo ainda desconhecido (so o endereco e usado) */
 struct opaque;
 
+extern StgSel16 D_80085EEC[];
 
 #endif /* STAGSLCT_DATA_H */

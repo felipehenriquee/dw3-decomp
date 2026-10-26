@@ -22,7 +22,37 @@ Obj *func_80084A30(void) {
     return func_80014504(func_800849CC, 0x50, 4);
 }
 
-INCLUDE_ASM("asm/ovl/STAGSLCT/nonmatchings/STAGSLCT", func_80084A5C);
+void func_80084A5C(u8 *o, s32 d) {
+    s32 stop = 0;
+    s32 oy = *(s32 *)(o + 0x54);
+    s32 ox = *(s32 *)(o + 0x50);
+    s32 v;
+    do {
+        *(s32 *)(o + 0x50) += d;
+        if (*(s32 *)(o + 0x50) < 0) {
+            *(s32 *)(o + 0x50) = 0;
+            *(s32 *)(o + 0x54) -= 1;
+            if (*(s32 *)(o + 0x54) < 0) {
+                *(s32 *)(o + 0x54) = 0;
+                stop = 1;
+            }
+        }
+        v = *(s32 *)(o + 0x58) - 1;
+        if (v < *(s32 *)(o + 0x50)) {
+            *(s32 *)(o + 0x50) = v;
+            *(s32 *)(o + 0x54) += 1;
+            if (*(s32 *)(o + 0x5C) - *(s32 *)(o + 0x58) < *(s32 *)(o + 0x54)) {
+                *(s32 *)(o + 0x54) = *(s32 *)(o + 0x5C) - *(s32 *)(o + 0x58);
+                stop = 1;
+            }
+        }
+        if (D_80085EEC[*(s32 *)(o + 0x54) + *(s32 *)(o + 0x50)].c != 0) {
+            return;
+        }
+    } while (stop == 0);
+    *(s32 *)(o + 0x54) = oy;
+    *(s32 *)(o + 0x50) = ox;
+}
 
 void func_80084B2C(void *arg0, s32 arg1) {
     s32 temp_a1;
