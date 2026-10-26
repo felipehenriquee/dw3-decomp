@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-10-23, 4ª sessão): EXE **275 de 347** (79%); overlays **1948 de 3292** (59.2%). Total **2223 de 3639 (61.1%)**.
+- [ ] Decompilação (2026-10-26): EXE **275 de 347** (79%); overlays **1973 de 3292** (59.9%). Total **2248 de 3639 (61.8%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -113,6 +113,12 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 6. Corrigir a divisão do splat em `func_800148C0` (`make split` apaga `build/` — fazer quando nada estiver rodando).
 7. Revisão semântica para o port (`tools/audit_args.py`).
 8. Jobs em segundo plano: parar com `tools/stop_jobs.sh` e commitar com `tools/commit_locked.sh "msg"`.
+
+### Notas da decompilação manual (2026-10-26)
+- `tools/gen_scrinit.py`: gerador para a família "inicialização de tela" (`D_8004DE10` fn150/fn154/fn174/fn16C/fn12C + construtor); usa `build/w/n22.c` como modelo. Rodar de novo quando houver mais pendentes com essa forma.
+- Família "inicialização de mapa" (`func_800A5E84`/`func_800A6080`..., dezenas de WSTAG): com uma `static inline` recebendo os argumentos da 1ª chamada (`map_call(0, ID|1, ...)`) o começo da função bate (`a0`/`a1` carregados antes dos stores). Falta a posição do load de `D_8005CCA8` + o `D_8009B6C4` em `s0` (o GCC os agenda no fim). Tentativa em `wip/ovl/WSTAG730_800A6080_inline.c`.
+- Parâmetro `u8` (não `s32` + cast) quando o original faz `andi` só no uso (ex.: FIGHTSTG `func_8009BC94`).
+- Constante 1 içada para um `s`-reg dentro de laço com chamada (`1 << i`, `s[i] = 1`): não resolvido (FIGHTSTG `func_8009DDD8`, `func_8009DB94`).
 
 ### Notas da decompilação manual (2026-10-23)
 - Ponteiro local para o símbolo atribuído **logo antes do uso** (`r = &D_80042BCA[k]; ... r->b[0xB]`) faz o `lui` sair depois do cálculo do índice e impede o GCC de dobrar o deslocamento no `%lo` (`D+0xC`). Resolveu várias do FIGHTSTG.
