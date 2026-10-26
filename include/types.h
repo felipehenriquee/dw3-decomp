@@ -428,4 +428,6 @@ typedef struct { s32 a, b, c, d; } StgSel16;
 
 typedef struct { u8 b[0x4C]; } CgRow4C;
 
+typedef struct { s16 id; s16 idx; s32 w; } FtMap8w;
+
 #endif /* TYPES_H */
