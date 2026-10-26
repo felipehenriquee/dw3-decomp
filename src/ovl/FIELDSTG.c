@@ -385,7 +385,29 @@ s32 func_80087DB0(u8 *o) {
     return D_800975C0[*(s32 *)(o + 8)][*(s32 *)(o + 0x64)];
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80087E7C);
+void func_80087E7C(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        u8 pad88[0xA0 - 0x88];
+    } g;
+    Pair32 p;
+    s32 v;
+    p.x = *(s32 *)(*(u8 **)(o + 0x50) + 0x58);
+    p.y = *(s32 *)(*(u8 **)(o + 0x50) + 0x5C) - (*(s32 *)(*(u8 **)(o + 0x50) + 0x64) >> 8);
+    func_8001F648(&g);
+    g.fn7C(0x1002, 1);
+    g.fn74(0x200, 0x100);
+    if (*(s32 *)(o + 0x10) == 2) {
+        v = func_80087DB0(o);
+        g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x1600000), v, p.x, p.y - 0x1B);
+    }
+    g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x1600000), *(s32 *)(o + 0x60) >> 2, p.x, p.y - 0x1B);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80087F84);
 

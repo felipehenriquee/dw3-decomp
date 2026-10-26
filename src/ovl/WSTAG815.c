@@ -5,7 +5,36 @@
 
 INCLUDE_ASM("asm/ovl/WSTAG815/nonmatchings/WSTAG815", func_800A5DE0);
 
-INCLUDE_ASM("asm/ovl/WSTAG815/nonmatchings/WSTAG815", func_800A5F44);
+void func_800A5F44(u8 *o) {
+    struct {
+        u8 pad0[0x24];
+        void (*fn24)(s32, s32);
+        void (*fn28)(s32, s32);
+        void (*fn2C)(s32);
+        u8 pad30[8];
+    } g;
+    u8 *t;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        func_8001FFA8(&g);
+        g.fn24(0x280, 0);
+        g.fn28(0, 0xF0);
+        t = (u8 *)D_80044B38;
+        g.fn2C((*(s32 (**)(s32))(t + 0x414))(0x775));
+        g.fn24(0x280, 0x100);
+        g.fn28(0, 0x1F0);
+        g.fn2C((*(s32 (**)(s32))(t + 0x414))(0x898));
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        func_800A5DE0(o);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_800A604C(void) {
     return func_80014504(func_800A5F44, 0x60, 0);

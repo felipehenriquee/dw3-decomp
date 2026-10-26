@@ -444,4 +444,12 @@ typedef struct { s16 seq; s16 frame; s32 t; } AnimSt;
 
 typedef struct { u8 pad[0x78]; u16 a[14]; s32 n; } DkArr78;
 
+typedef struct { u8 pad[0x74]; s16 a[3]; } S16x3_74;
+
+typedef struct { u8 pad[0x74]; s32 a[3][6]; } DkCnt74;
+
+typedef struct { u8 pad[0x63E]; s16 a[3][51]; } DkDeck63E;
+
+typedef struct { s16 id; s16 skip; s32 a; s32 b; } W745Ent;
+
 #endif /* TYPES_H */

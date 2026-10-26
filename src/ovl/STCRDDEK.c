@@ -369,7 +369,25 @@ INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80088D24);
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80088E74);
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_8008924C);
+void func_8008924C(DkCnt74 *o) {
+    struct {
+        u8 *p0;
+        u8 pad4[0x28];
+        void (*fn2C)(s32);
+        u8 pad30[0x28];
+    } t;
+    s32 d, i;
+    func_8001EBF8(&t);
+    for (d = 0; d < 3; d++) {
+        for (i = 0; i < 6; i++) {
+            o->a[d][i] = 0;
+        }
+        for (i = 0; i < 40; i++) {
+            t.fn2C(((DkDeck63E *)D_80048D34)->a[d][i]);
+            o->a[d][t.p0[0] - 1]++;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80089354);
 
