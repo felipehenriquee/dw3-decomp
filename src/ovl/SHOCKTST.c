@@ -3,7 +3,32 @@
 #include "SHOCKTST_auto.h"
 #include "SHOCKTST_data.h"
 
-INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_80082DA0);
+void func_80082DA0(u8 *o, Obj **w) {
+    s16 r[4];
+    u8 *t;
+    u8 *x;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        t = D_8004DE10;
+        (*(void (**)(void))(t + 0x150))();
+        (*(void (**)(s32))(t + 0x154))(0x5000);
+        (*(void (**)(s32, s32, s32, s32))(t + 0x174))(0x140, 0xF0, 0, 0);
+        r[0] = 0;
+        r[1] = 0;
+        r[2] = 0x140;
+        r[3] = 0xF0;
+        x = (*(u8 *(**)(s16 *, s32, s32))(t + 0x16C))(r, 0x1, 0x1000);
+        (*(void (**)(u8 *, s32, s32, s32))(x + 0x12C))(x, 0, 0, 0);
+        w[0] = (Obj *)func_8008499C();
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80082E98(void) {
     return func_80014504(func_80082DA0, 0x50, 4);

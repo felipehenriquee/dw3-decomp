@@ -3,6 +3,7 @@
 #define SHOCKTST_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_80082DA0(u8 *o, Obj **w);
 Obj *func_80082E98(void);
 void func_80083274(u8 *o, u8 *b, s32 n);
 void func_8008332C(u8 *o, u8 *b, s32 n);
@@ -17,7 +18,6 @@ s32 func_800250AC();
 s32 func_800250BC();
 s32 func_800250CC();
 s32 func_800250DC();
-s32 func_80082DA0();
 s32 func_80082EC4();
 s32 func_80083064();
 s32 func_800833C0();

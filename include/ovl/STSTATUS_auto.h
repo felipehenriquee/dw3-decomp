@@ -3,6 +3,7 @@
 #define STSTATUS_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_80083558(u8 *o, Obj **w);
 Obj *func_80083654(void);
 Obj *func_80084C48(s32 arg0);
 void func_80084C90(void *arg0, s32 arg1, s32 arg2);
@@ -50,7 +51,6 @@ s32 func_8001AE38();
 s32 func_8001B364();
 s32 func_8001F648();
 s32 func_8001FFA8();
-s32 func_80083558();
 s32 func_80083680();
 s32 func_80083914();
 s32 func_80083B58();

@@ -5,5 +5,6 @@
 /* tipo ainda desconhecido (so o endereco e usado) */
 struct opaque;
 extern struct opaque D_8004B5DC;
+extern u8 D_8004DE10[];
 
 #endif /* SHOCKTST_DATA_H */

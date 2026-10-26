@@ -3,6 +3,7 @@
 #define STDGNAME_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_80082F8C(u8 *o, Obj **w);
 Obj *func_80083084(void);
 void func_800830B0(void *arg0, s32 arg1, s32 arg2);
 void func_80083138(u8 *obj);
@@ -28,7 +29,6 @@ s32 func_8001AE38();
 s32 func_8001F648();
 s32 func_8001FCC0();
 s32 func_8001FFA8();
-s32 func_80082F8C();
 s32 func_80083478();
 s32 func_80083668();
 s32 func_80083994();

@@ -3,6 +3,7 @@
 #define STFGTREP_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_80082E70(u8 *o, Obj **w);
 Obj *func_80082F6C(void);
 void func_80082F98(void *arg0, s32 arg1, s32 arg2);
 void func_80083020(u8 *obj);
@@ -27,7 +28,6 @@ s32 func_80014504();
 s32 func_8001AE38();
 s32 func_8001F648();
 s32 func_8001FFA8();
-s32 func_80082E70();
 s32 func_80083260();
 s32 func_80083404();
 s32 func_80083744();
