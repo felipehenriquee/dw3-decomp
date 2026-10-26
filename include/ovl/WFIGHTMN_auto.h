@@ -9,6 +9,7 @@ void func_800A6920(s32 a);
 void func_800A69B8(void);
 void func_800A8458(u8 *o, u8 *w);
 void func_800A89F0(u8 *o, u8 *w);
+void func_800A8E90(u8 *o, u8 *w);
 void func_800A97BC(u8 *o, u8 *w);
 void func_800A9C10(u8 *o);
 u8 *func_800A9FF0(void);
