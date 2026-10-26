@@ -7,6 +7,7 @@ Obj *func_800A6414(void);
 s32 func_800A684C(void);
 void func_800A6920(s32 a);
 void func_800A69B8(void);
+void func_800A7B08(u8 *o, u8 *w);
 void func_800A8458(u8 *o, u8 *w);
 void func_800A89F0(u8 *o, u8 *w);
 void func_800A8E90(u8 *o, u8 *w);
