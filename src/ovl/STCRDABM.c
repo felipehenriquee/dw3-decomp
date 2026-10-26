@@ -226,7 +226,29 @@ Obj *func_8008566C(void) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_800856A8);
+void func_800856A8(void) {
+    struct {
+        u8 pad0[0x24];
+        void (*fn24)(s32, s32);
+        u8 pad28[4];
+        void (*fn2C)(s32);
+        u8 pad30[8];
+    } g;
+    u8 *f;
+
+    func_8001FFA8(&g);
+    g.fn24(0x280, 0);
+    f = (u8 *)D_80044B38;
+    g.fn2C((*(s32 (**)(s32))(f + 0x424))(0x6060000));
+    (*(void (**)(s32))(f + 0x40C))(0x7F6);
+    (*(void (**)(s32))(f + 0x40C))(0x7F7);
+    (*(void (**)(s32))(f + 0x40C))(0x7F8);
+    (*(void (**)(s32))(f + 0x40C))(0x7F9);
+    (*(void (**)(s32))(f + 0x40C))(0x7FA);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x16);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x1D);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x24);
+}
 
 INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_800857A0);
 
