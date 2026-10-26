@@ -159,7 +159,29 @@ void *func_80087000(s32 arg0, s32 arg1, s32 arg2) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80087070);
+void func_80087070(u8 *o, s32 *w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        if (((s32 (*)(void))D_8004B43C[0])() != 0) {
+            ((void (*)(s32))D_80055D34[0])(0x209);
+            D_80042B28[0] = func_80086904();
+            w[0] = func_800A7A60();
+        } else {
+            ((void (*)(s32))D_80055D34[0])(0x208);
+            w[0] = func_800A9FF0();
+        }
+        ((void (*)(s32))D_800A4548[0])(0);
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        ((void (*)(void))D_800A4544[0])();
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80087160(void) {
     return func_80014504(func_80087070, 0x50, 4);
