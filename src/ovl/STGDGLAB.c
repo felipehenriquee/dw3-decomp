@@ -222,7 +222,28 @@ void func_800886DC(void *arg0) {
     ((M2C_UNK (*)(void *, M2C_UNK)) D_8008FD98)(arg0 + 0x94, 1);
 }
 
-INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_80088718);
+void func_80088718(u8 *o) {
+    s32 i;
+    u8 *t;
+    *(s32 *)(o + 0xC) = 2;
+    *(s32 *)(o + 0x18) = 1;
+    t = *(u8 **)(o + 0x24);
+    ((void (*)(u8 *, s32))D_8008FD98)(o + 0x94, 0);
+    for (i = 0; i < 5; i++) {
+        if (((u8 **)(t + 0x14))[i] != 0) {
+            (*(void (**)(u8 *, s32))(((u8 **)(t + 0x14))[i] + 0x144))(((u8 **)(t + 0x14))[i], 0);
+        }
+        if (((u8 **)(t + 0x28))[i] != 0) {
+            (*(void (**)(u8 *, s32))(((u8 **)(t + 0x28))[i] + 0x144))(((u8 **)(t + 0x28))[i], 0);
+        }
+    }
+    if (*(u8 **)(t + 0x3C) != 0) {
+        (*(void (**)(u8 *, s32))(*(u8 **)(t + 0x3C) + 0x144))(*(u8 **)(t + 0x3C), 0);
+    }
+    for (i = 4; i >= 0; i--) {
+        *(s32 *)(o + i * 4 + 0xFC) = 0;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_80088808);
 
