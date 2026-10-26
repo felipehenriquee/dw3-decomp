@@ -1883,7 +1883,29 @@ u8 func_8009CF60(u8 *o, s32 i) {
     return *g.p0;
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8009CFBC);
+void func_8009CFBC(u8 *o, s32 i, s32 n) {
+    struct {
+        u8 *p0;
+        u8 pad4[0x28];
+        void (*fn2C)(s32);
+        u8 pad30[0x28];
+    } t;
+    u8 *e;
+
+    func_8001EBF8(&t);
+    t.fn2C((*(s16 **)(o + 0x50))[n] + 1);
+    e = ((CgRow4C *)o)[i].b;
+    *(s16 *)(e + 0x142) = n;
+    e[0x14B] = t.p0[1];
+    e[0x14C] = t.p0[2];
+    e[0x149] = t.p0[5];
+    *(s16 *)(e + 0x140) = t.p0[0] - 1;
+    if (t.p0[3] == 0x10) {
+        *(s16 *)(e + 0x144) = 1;
+    } else {
+        *(s16 *)(e + 0x144) = 0;
+    }
+}
 
 void func_8009D0B0(void *arg0, M2C_UNK arg1, s32 arg2) {
     s32 temp_a1;
