@@ -463,7 +463,31 @@ Obj *func_8008EFD0(void) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008F040);
+void func_8008F040(void) {
+    struct {
+        u8 pad0[0x24];
+        void (*fn24)(s32, s32);
+        void (*fn28)(s32, s32);
+        void (*fn2C)(s32);
+        void (*fn30)(s32);
+        u8 pad34[4];
+    } g;
+    u8 *f;
+
+    func_8001FFA8(&g);
+    g.fn24(0x280, 0x100);
+    f = (u8 *)D_80044B38;
+    g.fn2C((*(s32 (**)(s32))(f + 0x424))(0x2C60000));
+    g.fn24(0x140, 0x100);
+    g.fn28(0x280, 0);
+    g.fn30(0x10000);
+    g.fn2C((*(s32 (**)(s32))(f + 0x424))(0x2C60002));
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x39);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x4E);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x47);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0xA2);
+    (*(void (**)(s32))(f + 0x40C))(D_8005CCA8[0] + 0x9B);
+}
 
 s32 func_8008F16C(void) {
     u8 *p = (u8 *)D_80044B38;
