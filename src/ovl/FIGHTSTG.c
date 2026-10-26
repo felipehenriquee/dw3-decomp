@@ -1247,7 +1247,19 @@ s8 func_8009BC54(void) {
     return r;
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009BC94);
+s32 func_8009BC94(s32 a, u8 b, s32 c) {
+    u8 *d = D_800A3868;
+    u8 *e;
+    d[0xAF2] = a;
+    d[0xAF3] = func_8009BBA8(0);
+    while (*(s8 *)(d + 0xAF3) >= 0) {
+        if (((FtEnt28 *)d)[*(s8 *)(d + 0xAF3)].f4 == b && ((FtEnt28 *)d)[*(s8 *)(d + 0xAF3)].f8 == c) {
+            break;
+        }
+        d[0xAF3] = func_8009BBA8(*(s8 *)(d + 0xAF3) + 1);
+    }
+    return D_800A435B;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8009BD44);
 

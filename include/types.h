@@ -422,4 +422,6 @@ typedef struct { u8 pad[0xAA]; s16 a[1]; } FtArrAA;
 
 typedef struct { u8 pad[0x42]; s16 a[3]; } FtArr42;
 
+typedef struct { s32 f0, f4, f8, fC; s32 f10, f14, f18; } FtEnt28;
+
 #endif /* TYPES_H */
