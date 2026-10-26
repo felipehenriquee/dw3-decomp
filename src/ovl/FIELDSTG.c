@@ -942,7 +942,35 @@ void func_8008FD60(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x90) = 0;
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008FD74);
+void func_8008FD74(u8 *o, s32 a, s32 b) {
+    s32 t;
+    if (*(s32 *)(o + 8) != 0) {
+        return;
+    }
+    if (a != 0) {
+        t = *(s32 *)(o + 0x18);
+        if ((t & 7) == 0) {
+            switch (*(s32 *)(o + 4)) {
+            default:
+                ((void (*)(s32))D_80055C48)(0x8004583C);
+                break;
+            case 0x146:
+                if ((t & 0x1F) == 0) {
+                    ((void (*)(s32))D_80055C48)(0x80045FCB);
+                }
+                break;
+            case 0x147:
+                break;
+            }
+            if (b != 0) {
+                ((void (*)(void))D_8009B6A0[0])();
+            }
+        }
+    } else if ((*(s32 *)(o + 0x18) & 0x1F) == 0) {
+        ((void (*)(s32))D_80055C48)(0x8004583C);
+    }
+    *(s32 *)(o + 0x18) += 1;
+}
 
 void func_8008FE68(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 8) == 0) {
