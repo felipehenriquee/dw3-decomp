@@ -426,4 +426,6 @@ typedef struct { s32 f0, f4, f8, fC; s32 f10, f14, f18; } FtEnt28;
 
 typedef struct { s32 a, b, c, d; } StgSel16;
 
+typedef struct { u8 b[0x4C]; } CgRow4C;
+
 #endif /* TYPES_H */
