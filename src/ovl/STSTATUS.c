@@ -162,9 +162,62 @@ Obj *func_80086450(s32 arg0) {
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80086498);
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80086680);
+void func_80086680(u8 *a, u8 **w, s32 on) {
+    u8 *p;
+    u8 *t;
+    u8 *o;
+    s32 v;
+    s32 n;
+    s32 i;
+    if (on != 0) {
+        i = 0;
+        p = ((u8 *(*)(s32))D_8004B484[0])(*(s32 *)(a + 0x5C));
+        t = (u8 *)D_80044B38;
+        for (; i < 6; i++) {
+            n = *(s16 *)(p + i * 2 + 0x3C0);
+            if (n > 0) {
+                v = (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0x6A);
+                o = w[i + 1];
+                (*(void (**)(u8 *, s32, s32))(o + 0x114))(o, v, n);
+            } else {
+                v = (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0xB0);
+                o = w[i + 1];
+                (*(void (**)(u8 *, s32, s32))(o + 0x114))(o, v, D_8009A7AC[i]);
+            }
+        }
+    } else {
+        for (i = 0; i < 6; i++) {
+            o = w[i + 1];
+            (*(void (**)(u8 *, s32))(o + 0x144))(o, 0);
+        }
+    }
+}
 
-INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_800867B8);
+void func_800867B8(u8 *a, u8 **w, s32 n) {
+    u8 *t;
+    u8 *o;
+    u8 *p;
+    s32 v;
+    if (n > 0) {
+        t = (u8 *)D_80044B38;
+        v = (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0x63);
+        o = w[34];
+        (*(void (**)(u8 *, s32, s32))(o + 0x114))(o, v, n);
+        if ((u32)(*(s32 *)(a + 0x60) - 2) < 2) {
+            p = *((u8 **(*)(s32))D_80042B98[0])(n);
+            v = (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0xB0);
+            o = w[35];
+            (*(void (**)(u8 *, s32, s32))(o + 0x114))(o, v, D_8009A7C4[p[2] - 1]);
+            return;
+        }
+    } else {
+        v = ((s32 (*)(s32))D_80044F4C[0])(D_8005CCA8[0] + 0xB0);
+        o = w[34];
+        (*(void (**)(u8 *, s32, s32))(o + 0x114))(o, v, 0x51);
+    }
+    o = w[35];
+    (*(void (**)(u8 *, s32))(o + 0x144))(o, 0);
+}
 
 INCLUDE_ASM("asm/ovl/STSTATUS/nonmatchings/STSTATUS", func_80086900);
 

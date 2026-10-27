@@ -384,7 +384,46 @@ void func_80088AFC(u8 *o) {
     (*(void (**)(u8 *, s32))(c + 0x148))(c, 1);
 }
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80088B50);
+void func_80088B50(u8 *o, s32 b) {
+    u8 *t;
+    u8 *q;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            ((void (*)(void))D_8008CB80[0])();
+            *(s32 *)(o + 0x10) += 1;
+            break;
+        case 1:
+            if (((s32 (*)(void))D_8008CB84[0])() == 0) {
+                func_80087D00(o, b);
+                *(s32 *)(o + 0x398) = 10;
+                *(s32 *)(o + 0x3A8) = 10;
+                *(s32 *)(o + 0x3B8) = 10;
+                (*(void (**)(u8 *))(o + 0x38))(o);
+            }
+            break;
+        }
+        break;
+    case 1:
+        func_8008838C(o, b);
+        func_800880C4(o);
+        break;
+    case 2:
+        break;
+    case 3:
+        if (*(s32 *)(o + 0x68) != 0) {
+            t = (u8 *)D_80048D34;
+            (*(void (**)(s32, s32))(t + 0x270C))(0x400, (*(s32 (**)(void))(t + 0x2708))());
+        } else {
+            q = (u8 *)D_80048D34;
+            (*(void (**)(s32, s32))(q + 0x270C))(*(s32 *)(q + 0x34), 0);
+        }
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80088CA0);
 

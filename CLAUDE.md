@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-10-26, 5ª sessão): EXE **275 de 347** (79%); overlays **2050 de 3292** (62.3%). Total **2325 de 3639 (63.9%)**.
+- [ ] Decompilação (2026-10-26, 6ª sessão): EXE **275 de 347** (79%); overlays **2075 de 3292** (63.0%). Total **2350 de 3639 (64.6%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -132,6 +132,12 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 - Busca em tabela com sentinela que relê o campo (`lh` a cada passo): `for (i = 0; T[i].id != 0; i++)` indexado, não ponteiro.
 - Variável "achou" (`found = 1`) que precisa ficar num `s`-reg através de uma chamada: atribua **antes** da chamada; depois dela o GCC prova que não está viva e usa `a0`.
 - Família "liga/desliga" de janelas (`w[i]->fn114(w[i], D_80044B38.fn414(D_8005CCA8 + K), n)` / `fn144(w[i], 0)`): STITSHOP `func_800836F8`, STCRDSHP `func_80087E8C`/`func_80087FAC`, STGTRAIN `func_80084270`. Lista das restantes: `grep -l '0x144(\$a0)'` nos pendentes.
+- **Operandos do `addu` trocados** (o original faz `base + x`, o GCC gera `x + base`): `(o - -(x))[off]` (achado pelo permuter, CARDGAME `func_800A3D90`) ou `t = t - -(idx * 32)` (FIGHTSTG `func_800A1C18`). No `mult`: `m = h * *&m;` (FIGHTSTG `func_800A01AC`).
+- Inverso do truque do `lui`: `p = &T[k]; p->campo` faz o `sll` do índice sair **antes** do `lui` (FIGHTSTG `func_80096EC8`).
+- Jump table no início da rodata funcionou em STDWTITL `func_8008453C` e CARDGAME `func_80083E34`; as CARDGAME `func_800A4440`/`func_800A4494` continuam falhando (o C bate, o `make` não).
+- Coordenada `s16` calculada no laço (`(s16)(i * 19 + 0x92)`): o GCC guarda o valor deslocado (`<< 16`) como variável de indução; um `s16 y += 19` não bate.
+- Padrão **sem solução ainda**: elemento `k*0x60 + idx*32 + (D_800A4460 + 0x10)` com o `lui` no meio (FIGHTSTG `func_8009C8B0`/`func_8009CB10`/`func_8009FE1C`/`func_8009D61C`, WFIGHTMN `func_800AABF0`/`func_800AA9F0`/`func_800A88CC`). Bom alvo para o permuter (`tools/perm_setup.py` + `build/perm/run_r5.sh` como modelo).
+- `wip/ovl/` ganhou várias quase-certas desta sessão (STSTATUS `func_80083B58`, STGTRAIN `func_8008A3E0`, STCRDDEK `func_80088D24`, STDWTITL `func_800835D4`/`func_80086834`, FIGHTSTG `func_80092E18`/`func_8008B508`, CARDGAME `func_80096828`, WFIGHTMN `func_800A77B4`/`func_800A69F0`, STAGSLCT `func_80084B70`, STCRDSHP `func_80085BAC`).
 - Quase (2026-10-26, 5ª): FIGHTSTG `func_800A01AC` (ordem dos operandos do `mult`), `func_8009D61C` (s0/s1 trocados), STSTATUS `func_80099324` (ordem das constantes), STGTRAIN `func_80085DD8` (árvore do `switch`; talvez falte um `case`), STITSHOP `func_8008A0D0` (posição do `lw` do ponteiro), WFIGHTMN `func_800AABF0`. C em `wip/ovl/`.
 - Quase (2026-10-26, 3ª): FIGHTSTG `func_8009C8B0`/`func_8009CB10` (só a posição do `lui` no cálculo final `k*0x60 + idx*32 + base+0x10`), CARDGAME `func_800A3D90` (1 `addu` com operandos trocados em `o + j*0x72`), STAGSLCT `func_80084C94` (leiaute do `if` que escolhe `±0x111`).
 - Quase: STGTRAIN `func_800862D0` (só a ordem do `lui` da tabela `D_8008C364`), CARDGAME `func_800A3E9C` (o original reaproveita `j*8`), STFGTREP `func_80086844`, WSTAG625 `func_800A5F00` (ordem das comparações do retorno). Tentativas em `wip/ovl/`.

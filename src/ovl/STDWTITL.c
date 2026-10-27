@@ -100,7 +100,30 @@ void func_80083F48(s32 arg0) {
     M2C_FIELD(func_80014504(func_80083CC0, 0x58, 4), s32 *, 0x50) = arg0;
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083F80);
+void func_80083F80(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        void (*fn78)(s32, s32);
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        void (*fn88)(s32);
+        u8 pad8C[0xA0 - 0x8C];
+    } g;
+    func_8001F648(&g);
+    if (*(s32 *)(o + 0x5C) != 0) {
+        g.fn7C(*(s32 *)(o + 0x60), 0);
+        g.fn74(0x280, 0x100);
+        g.fn78(0, 0x1F0);
+        g.fn84(((s32 (*)(s32))D_80044F5C[0])(D_80088234), 2, 0x31, 0x79);
+        func_8001F648(&g);
+    }
+    g.fn7C(*(s32 *)(o + 0x60), 0);
+    g.fn74(0x280, 0x100);
+    g.fn88(*(s32 *)(o + 0x58));
+    g.fn84(((s32 (*)(s32))D_80044F5C[0])(D_80088234), 4, 0x25, 0x72);
+}
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800840A8);
 
@@ -136,7 +159,41 @@ Obj *func_800844E8(s32 arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_8008453C);
+void func_8008453C(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        void (*fn88)(s32);
+        u8 pad8C[0xA0 - 0x8C];
+    } g;
+    s32 k = 0;
+    switch (D_8005CCA8[0]) {
+    case 0:
+    case 1:
+    case 2:
+        k = 0;
+        break;
+    case 3:
+    case 6:
+        k = 2;
+        break;
+    case 4:
+        k = 3;
+        break;
+    case 5:
+        k = 1;
+        break;
+    }
+    func_8001F648(&g);
+    g.fn7C(0x100, 1);
+    g.fn74(0x280, 0);
+    g.fn88(*(s16 *)(o + 0x50));
+    g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x8A60000), k, 0, 0);
+}
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80084628);
 
@@ -242,7 +299,43 @@ void func_80084C3C(u8 *o) {
     g.fn84(((s32 (*)(s32))D_80044F5C[0])(D_80088234), 1, *(s32 *)(o + 0x58), *(s32 *)(o + 0x5C));
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80084CD4);
+void func_80084CD4(u8 *o) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        *(s32 *)(o + 0x58) = 0x153;
+        *(s32 *)(o + 0x5C) = 0x6F;
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 1:
+            *(s32 *)(o + 0x54) = 10;
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        case 2:
+            *(s32 *)(o + 0x58) = *(s32 *)(o + 0x54) * 32 + 0x13;
+            if ((*(s32 *)(o + 0x54))-- <= 0) {
+                (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+            }
+            break;
+        case 0:
+        default:
+            return;
+        }
+        func_80084C3C(o);
+        break;
+    case 2:
+        if (*(s32 *)(o + 0x10) == 0) {
+            *(s32 *)(o + 0x58) = 0x13;
+            *(s32 *)(o + 0x5C) = 0x6F;
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        }
+        func_80084C3C(o);
+        break;
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80084DF0(s32 arg0) {
     void *temp_v0;

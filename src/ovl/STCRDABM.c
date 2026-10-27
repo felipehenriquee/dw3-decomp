@@ -216,7 +216,41 @@ INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_80084BC8);
 
 INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_80084C38);
 
-INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_80085540);
+void func_80085540(u8 *o, s32 b) {
+    u8 *t;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            ((void (*)(void))D_80085A64[0])();
+            *(s32 *)(o + 0x10) += 1;
+            break;
+        case 1:
+            if (((s32 (*)(void))D_80085A68[0])() == 0) {
+                func_80083BFC(o, b);
+                *(s32 *)(o + 0xB8) = 8;
+                *(s32 *)(o + 0xC8) = 8;
+                *(s32 *)(o + 0x64) = 0x1B;
+                *(s32 *)(o + 0x78) = 1;
+                (*(void (**)(u8 *))(o + 0x38))(o);
+            }
+            break;
+        }
+        break;
+    case 1:
+        func_80084C38(o, b);
+        func_80084500(o);
+        break;
+    case 2:
+        break;
+    case 3:
+        t = (u8 *)D_80048D34;
+        (*(void (**)(s32, s32))(t + 0x270C))((*(s32 (**)(void))(t + 0x2714))(), 0);
+        break;
+    }
+}
 
 Obj *func_8008566C(void) {
     Obj *o = func_80014504(func_80085540, 0xD8, 0x4C);

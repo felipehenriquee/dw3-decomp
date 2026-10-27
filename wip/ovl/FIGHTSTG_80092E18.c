@@ -1,0 +1,30 @@
+void func_80092E18(u8 *o) {
+    u8 *t = (u8 *)D_8004DE10;
+    u8 *x;
+    u32 *ot;
+    PolyF4 *p;
+    u32 *tp;
+    x = (*(u8 *(**)(s32))(t + 0x17C))(0x1006);
+    ot = (*(u32 *(**)(u8 *, s32))(x + 0x138))(x, 0);
+    p = (*(PolyF4 *(**)(void))(t + 0x158))();
+    tp = (u32 *)(p + 1);
+    p->r0 = o[0x54];
+    p->g0 = o[0x54];
+    p->b0 = o[0x54];
+    ((u8 *)p)[3] = 5;
+    p->code = 0x2A;
+    p->x0 = 0;
+    p->y0 = 0;
+    p->x1 = 0x140;
+    p->y1 = 0;
+    p->x2 = 0;
+    p->y2 = 0xF0;
+    p->x3 = 0x140;
+    p->y3 = 0xF0;
+    p->tag = (p->tag & 0xFF000000) | (*ot & 0xFFFFFF);
+    *ot = (*ot & 0xFF000000) | ((u32)p & 0xFFFFFF);
+    SetDrawTPage(tp, 0, 1, 0xA0);
+    *tp = (*tp & 0xFF000000) | (*ot & 0xFFFFFF);
+    *ot = (*ot & 0xFF000000) | ((u32)tp & 0xFFFFFF);
+    (*(void (**)(u8 *))(t + 0x15C))((u8 *)p + 0x20);
+}

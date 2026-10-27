@@ -13,5 +13,8 @@ extern s32 D_8004DF98[];
 extern u8 D_80042B98[];
 extern ShpEnt D_8008CDD4[];
 extern s32 D_80044F4C NOT_GP;
+extern s32 D_80048D34[];
+extern s32 D_8008CB80[];
+extern s32 D_8008CB84[];
 
 #endif /* STCRDSHP_DATA_H */

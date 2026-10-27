@@ -126,7 +126,40 @@ INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80083D9C);
 
 INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80083E74);
 
-INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_800848E4);
+void func_800848E4(u8 *o, s32 b) {
+    u8 *t;
+    u8 *p;
+    s32 v;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        func_80083260(o, b);
+        *(s32 *)(o + 0x148) = 10;
+        t = (u8 *)D_80048D34;
+        p = (*(u8 *(**)(s32))(t + 0x2750))((*(s32 (**)(s32))(t + 0x2718))(*(s32 *)(o + 0x5C)));
+        v = *(s32 *)(p + 0x18);
+        *(s32 *)(o + 0x138) = v;
+        if (v > 999998) {
+            *(s32 *)(o + 0x140) = 10;
+        }
+        if (*(s32 *)(o + 0x64) == 0) {
+            (*(void (**)(u8 *))(o + 0x16C))(o);
+        }
+        *(s32 *)(o + 0x13C) = *(s32 *)(p + 0x18) + *(s32 *)(o + 0x60);
+        if (*(s32 *)(o + 0x13C) > 999999) {
+            *(s32 *)(o + 0x13C) = 999999;
+        }
+        break;
+    case 1:
+        func_80083E74(o, b);
+        func_80083744(o);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void func_80084A08(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = 1;

@@ -55,5 +55,11 @@ extern s32 D_800A4544[];
 extern s32 D_800A43E0[];
 extern u8 D_80042B62[];
 extern s32 D_800A469C[];
+extern FtE32d D_800A4470[];
+extern FtSkill58 D_8003EF5C[];
+extern s32 D_8005CCA0[];
+extern u8 D_800A35D4[];
+extern Pair32 D_800A2530[];
+extern s32 D_8004B600[];
 
 #endif /* FIGHTSTG_DATA_H */

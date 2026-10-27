@@ -438,7 +438,40 @@ Obj *func_8008EABC(s32 arg0, s32 arg1, s32 arg2) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008EB30);
+void func_8008EB30(u8 *o, u8 **w) {
+    u8 *x;
+    switch (*(s32 *)(o + 0x10)) {
+    case 0:
+    default:
+        if (w[0] == NULL) {
+            w[0] = (u8 *)func_8008A610((s32)o);
+        }
+        *(s32 *)(o + 0x10) += 1;
+        break;
+    case 1:
+        x = w[0];
+        if (x != NULL) {
+            if (*(s32 *)(x + 0x54) != 0) {
+                w[1] = ((u8 *(*)(u8 *))D_8008F4B8[*(s32 *)(x + 0x60)])(o);
+                *(s32 *)(o + 0x10) += 1;
+            }
+        } else {
+            *(s32 *)(o + 0x10) = 3;
+        }
+        break;
+    case 2:
+        if (w[1] == NULL) {
+            *(s32 *)(o + 0x10) = 1;
+            *(s32 *)(w[0] + 0x54) = 0;
+        }
+        break;
+    case 3:
+        if (*(s32 *)(w[2] + 0xC) == 2) {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 3);
+        }
+        break;
+    }
+}
 
 void func_8008EC50(u8 *o) {
     s32 i, j;
@@ -464,7 +497,64 @@ void func_8008EC50(u8 *o) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008ED0C);
+void func_8008ED0C(u8 *o, u8 **w) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        u8 pad88[0xA0 - 0x88];
+    } g;
+    s32 v;
+    s32 r;
+    u8 *q;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            ((void (*)(void))D_8008FD90[0])();
+            *(s32 *)(o + 0x10) += 1;
+            break;
+        case 1:
+            if (((s32 (*)(void))D_8008FD94[0])() == 0) {
+                (*(void (**)(u8 *))(o + 0x38))(o);
+                *(s32 *)(o + 0x5C) = 3;
+                func_8008EC50(o);
+            }
+            break;
+        }
+        break;
+    case 1:
+        func_8008EB30(o, w);
+        func_8001F648(&g);
+        g.fn7C(*(s32 *)(o + 0x50), 7);
+        g.fn74(0x280, 0x100);
+        if (*(s32 *)(o + 0x58) != 0) {
+            r = 0;
+            v = *(s32 *)(o + 0x54) + 1;
+            *(s32 *)(o + 0x54) = v;
+            if (v < 0x60) {
+                r = v;
+            }
+            *(s32 *)(o + 0x54) = r;
+            *(s32 *)(o + 0x58) = 0;
+        } else {
+            *(s32 *)(o + 0x58) = 1;
+        }
+        g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x2C50000), 0x37, *(s32 *)(o + 0x54), *(s32 *)(o + 0x54));
+        break;
+    case 2:
+        break;
+    case 3:
+        q = (u8 *)D_80048D34;
+        (*(void (**)(s32, s32))(q + 0x270C))(*(s32 *)(q + 0x34), 0);
+        break;
+    }
+}
 
 s32 func_8008EEA0(void *arg0) {
     void *temp_a0;

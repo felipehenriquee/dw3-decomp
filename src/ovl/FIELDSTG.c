@@ -361,7 +361,24 @@ INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800875AC);
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80087704);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80087854);
+void func_80087854(s32 unused, u32 *ot, SRect r, s32 color) {
+    u8 *t = (u8 *)D_8004DE10;
+    PolyF4 *p = (*(PolyF4 *(**)(void))(t + 0x158))();
+    ((u8 *)p)[3] = 5;
+    *(s32 *)&p->r0 = color;
+    p->code = 0x28;
+    p->x0 = r.x;
+    p->x1 = r.x + r.w;
+    p->x2 = r.x;
+    p->x3 = r.x + r.w;
+    p->y0 = r.y;
+    p->y1 = r.y;
+    p->y2 = r.y + r.h;
+    p->y3 = r.y + r.h;
+    p->tag = (p->tag & 0xFF000000) | (*ot & 0xFFFFFF);
+    *ot = (*ot & 0xFF000000) | ((u32)p & 0xFFFFFF);
+    (*(void (**)(PolyF4 *))(t + 0x15C))(p + 1);
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80087974);
 

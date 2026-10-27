@@ -458,4 +458,10 @@ typedef struct { u8 v; u8 pad; s16 id; } McLangEnt;
 
 typedef struct { s32 base; s32 rnd; } TrDec8;
 
+typedef struct { u16 id; u8 pad[0x56]; } FtSkill58;
+
+typedef struct { s16 x, y, w, h; } SRect;
+
+typedef struct { u8 a, b, c, d; u8 e[40]; } CgRec2C;
+
 #endif /* TYPES_H */

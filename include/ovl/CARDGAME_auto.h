@@ -3,6 +3,7 @@
 #define CARDGAME_AUTO_H
 
 /* funcoes ja decompiladas */
+s32 func_80083E34(s32 k, s32 w, s32 i);
 void func_80083F48(u8 *o, s32 unused, s32 v, s32 add);
 void func_80083F84(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_80083FC8(void *arg0, s32 arg1, s32 arg2, s32 arg3);
@@ -49,6 +50,7 @@ void func_8008F2D8(u8 *o, s32 unused, s32 a, s32 b);
 void func_8008F530(s32 arg0, s32 arg1);
 void func_8008F750(void *arg0, void *arg1);
 s32 func_8008F948(u8 *o);
+void func_8008F978(u8 *o, u8 *x, s32 side, s32 which);
 void func_8009076C(CardGame *g, s32 unused, s32 k);
 void func_80090A6C(void *arg0, s32 arg1, s8 arg2);
 s32 func_80090A90(u8 *o, s32 unused, s32 m);
@@ -75,6 +77,7 @@ void func_80096C20(s32 a, s32 b, s32 i, s16 *p);
 void func_80096E24(s32 arg0, M2C_UNK arg1);
 void func_80097238(s32 a, u8 **w, u8 *p);
 void func_80097310(s32 arg0, void *arg1, void *arg2, M2C_UNK arg3, s32 arg4);
+void func_800973E4(s32 a, s32 b, u8 *r, u8 *x, s32 txt);
 void func_800978F0(s32 arg0, M2C_UNK arg1);
 void func_80097958(s32 a, s32 b, s32 c, s32 x, s32 y);
 void func_80097A24(s32 a, s32 b, s32 x, s32 y);
@@ -158,6 +161,7 @@ s32 func_800A35A4(void *arg0);
 void func_800A35B0(void *arg0);
 void func_800A35BC(u8 *o);
 Obj *func_800A367C(s8 arg0);
+void func_800A3D90(u8 *o, s32 j);
 s32 func_800A4328(u8 *o);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
@@ -168,7 +172,6 @@ s32 func_8001EBF8();
 s32 func_8001F648();
 s32 func_8001FCC0();
 s32 func_8001FFA8();
-s32 func_80083E34();
 s32 func_80084320();
 s32 func_80085DE8();
 s32 func_800860D4();
@@ -212,7 +215,6 @@ s32 func_8008F0F4();
 s32 func_8008F2EC();
 s32 func_8008F560();
 s32 func_8008F790();
-s32 func_8008F978();
 s32 func_8008FA9C();
 s32 func_8008FF08();
 s32 func_80090058();
@@ -251,7 +253,6 @@ s32 func_80096418();
 s32 func_80096828();
 s32 func_80096CF0();
 s32 func_80096E8C();
-s32 func_800973E4();
 s32 func_80097508();
 s32 func_80097ACC();
 s32 func_80098558();
@@ -306,7 +307,6 @@ s32 func_800A32D8();
 s32 func_800A3558();
 s32 func_800A36E4();
 s32 func_800A3934();
-s32 func_800A3D90();
 s32 func_800A3E9C();
 s32 func_800A3F48();
 s32 func_800A4078();

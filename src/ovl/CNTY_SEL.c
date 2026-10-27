@@ -143,7 +143,49 @@ void func_80083630(u8 *o) {
     g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x8A30000), 2, 0x94, 0);
 }
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_800836DC);
+void func_800836DC(u8 *o) {
+    s16 n;
+    Seg *e;
+    s32 k;
+    Seg *tb;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(s16 *)(o + 0x54) = 0x1000;
+        *(s16 *)(o + 0x56) = 0;
+        *(s16 *)(o + 0x50) = 0;
+        break;
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+            break;
+        case 1:
+            k = *(s16 *)(o + 0x50);
+            n = (*(s16 *)(o + 0x52))++;
+            tb = D_800843EC;
+            e = &tb[k];
+            if (e->len < n) {
+                *(s16 *)(o + 0x50) ^= 1;
+                (*(void (**)(u8 *, s32))(o + 0x2C))(o, 0);
+                *(s16 *)(o + 0x56) = e->to;
+            } else {
+                *(s16 *)(o + 0x56) = func_800835CC(o, k);
+            }
+            break;
+        }
+        func_80083630(o);
+        break;
+    case 2:
+        *(s16 *)(o + 0x52) = 0;
+        (*(void (**)(u8 *, s32))(o + 0x28))(o, 1);
+        (*(void (**)(u8 *, s32))(o + 0x2C))(o, 1);
+        func_80083630(o);
+        break;
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80083804(void) {
     return func_80014504(func_800836DC, 0x58, 0);
@@ -182,7 +224,49 @@ void func_80083894(u8 *o) {
     g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x8A30000), 1, 0x140, 0x14);
 }
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083940);
+void func_80083940(u8 *o) {
+    s16 n;
+    Seg *e;
+    s32 k;
+    Seg *tb;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(s16 *)(o + 0x56) = 0x1000;
+        *(s16 *)(o + 0x54) = 0;
+        *(s16 *)(o + 0x50) = 0;
+        break;
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+            break;
+        case 1:
+            k = *(s16 *)(o + 0x50);
+            n = (*(s16 *)(o + 0x52))++;
+            tb = D_800843FC;
+            e = &tb[k];
+            if (e->len < n) {
+                *(s16 *)(o + 0x50) ^= 1;
+                (*(void (**)(u8 *, s32))(o + 0x2C))(o, 0);
+                *(s16 *)(o + 0x54) = e->to;
+            } else {
+                *(s16 *)(o + 0x54) = func_80083830(o, k);
+            }
+            break;
+        }
+        func_80083894(o);
+        break;
+    case 2:
+        *(s16 *)(o + 0x52) = 0;
+        (*(void (**)(u8 *, s32))(o + 0x28))(o, 1);
+        (*(void (**)(u8 *, s32))(o + 0x2C))(o, 1);
+        func_80083894(o);
+        break;
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80083A68(void) {
     return func_80014504(func_80083940, 0x58, 0);
@@ -222,7 +306,49 @@ void func_80083B00(u8 *o) {
     g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x8A30000), 3, 0, 0x9E);
 }
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083BC0);
+void func_80083BC0(u8 *o) {
+    s16 n;
+    Seg12 *e;
+    s32 k;
+    Seg12 *tb;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(s16 *)(o + 0x56) = 0x1000;
+        *(s16 *)(o + 0x54) = 0;
+        *(s16 *)(o + 0x50) = 0;
+        break;
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+            break;
+        case 1:
+            k = *(s16 *)(o + 0x50);
+            n = (*(s16 *)(o + 0x52))++;
+            tb = D_8008440C;
+            e = &tb[k];
+            if (e->len < n) {
+                *(s16 *)(o + 0x50) ^= 1;
+                (*(void (**)(u8 *, s32))(o + 0x2C))(o, 0);
+                *(s16 *)(o + 0x54) = e->to;
+            } else {
+                *(s16 *)(o + 0x54) = func_80083A94(o, k);
+            }
+            break;
+        }
+        func_80083B00(o);
+        break;
+    case 2:
+        *(s16 *)(o + 0x52) = 0;
+        (*(void (**)(u8 *, s32))(o + 0x28))(o, 1);
+        (*(void (**)(u8 *, s32))(o + 0x2C))(o, 1);
+        func_80083B00(o);
+        break;
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80083CEC(void) {
     return func_80014504(func_80083BC0, 0x58, 0);

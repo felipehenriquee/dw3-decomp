@@ -23,5 +23,6 @@ extern CgPt16 D_800A5978[];
 extern s32 D_80044B38[];
 extern s16 D_800A5AC8[];
 extern s32 D_8004DC0C NOT_GP;
+extern CgRec2C D_800A4DF4[];
 
 #endif /* CARDGAME_DATA_H */
