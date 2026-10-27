@@ -130,7 +130,31 @@ void func_8008360C(void *arg0, void *arg1) {
     M2C_FIELD(temp_v0, M2C_UNK (**)(s32, M2C_UNK), 0x80)(temp_v0, 0);
 }
 
-INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_800836F8);
+void func_800836F8(u8 *a, u8 **w, s32 on) {
+    u8 *t;
+    u8 *o;
+    s32 v;
+    if (on != 0) {
+        t = (u8 *)D_80044B38;
+        v = (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0x71);
+        o = w[2];
+        (*(void (**)(u8 *, s32, s32))(o + 0x114))(o, v, 0x11);
+        v = (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0x71);
+        o = w[3];
+        (*(void (**)(u8 *, s32, s32))(o + 0x114))(o, v, 8);
+        o = w[4];
+        (*(void (**)(u8 *, s32, s32))(o + 0x118))(o, 0, *(s32 *)(a + 0x64));
+        o = w[4];
+        (*(void (**)(u8 *, s32))(o + 0x148))(o, 1);
+    } else {
+        o = w[2];
+        (*(void (**)(u8 *, s32))(o + 0x144))(o, 0);
+        o = w[3];
+        (*(void (**)(u8 *, s32))(o + 0x144))(o, 0);
+        o = w[4];
+        (*(void (**)(u8 *, s32))(o + 0x144))(o, 0);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80083810);
 

@@ -109,7 +109,23 @@ u8 *func_8008610C(s32 a, Pair32 p) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800861F4);
+void func_800861F4(u8 *o, u8 **w) {
+    u8 c[8];
+    u8 *f = (u8 *)D_800A469C;
+    u8 *p;
+    (*(void (**)(u8 *, u8 *, s32, u8 *))(f + 4))(o + 0xB4, o + 0xBC, *(s32 *)(o + 0xA4), o + 0xC4);
+    c[0] = o[0xC4];
+    c[1] = o[0xC6];
+    c[2] = o[0xC8];
+    (*(void (**)(u8 *, s32, u8 *))(*w + 0x262C))(*w, 1, c);
+    (*(void (**)(u8 *, u8 *, s32, u8 *))(f + 4))(o + 0xCC, o + 0xD4, *(s32 *)(o + 0xA4), o + 0xDC);
+    p = ((u8 *(*)(s32))D_8004DF8C[0])(0x1000);
+    if (*(s32 *)(o + 0xDC) != 0 || *(s16 *)(o + 0xE0) != 0) {
+        (*(void (**)(u8 *, s32, s32, s32))(p + 0x12C))(p, o[0xDC], o[0xDE], o[0xE0]);
+    } else {
+        (*(void (**)(u8 *, s32, s32, s32))(p + 0x12C))(p, 1, 1, 1);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80086304);
 
@@ -798,7 +814,17 @@ void func_80092244(u8 *o, Block34 *src) {
     (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800922B4);
+void func_800922B4(u8 *o, Block34 *a, Block34 *b, s32 n) {
+    if (a != NULL) {
+        *(Block34 *)(o + 0xBC) = *a;
+    } else {
+        *(Block34 *)(o + 0xBC) = *(Block34 *)(o + 0x54);
+    }
+    *(Block34 *)(o + 0x88) = *b;
+    *(s32 *)(o + 0xF4) = 0x100000 / n;
+    *(s32 *)(o + 0xF0) = 0;
+    (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800923B4);
 

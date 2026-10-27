@@ -496,7 +496,33 @@ void func_80088A84(u8 *o, Pair32 *out) {
     *out = p;
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80088B84);
+void func_80088B84(u8 *o, u8 **w) {
+    Pair32 p;
+    Pair32 q;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        if (*(s32 *)(o + 0x5C) != 0) {
+            w[0] = (u8 *)func_8001BE00(0x1004, *(s32 *)(o + 0x60), *(s32 *)(o + 0x54));
+        } else {
+            func_80088A84(o, &p);
+            w[0] = (u8 *)func_8001CE44(0x1004, (s16)p.x, (s16)p.y, *(s32 *)(o + 0x60), *(s32 *)(o + 0x54), *(s32 *)(o + 0x58));
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        if (w[0] == NULL) {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 3);
+        } else if (*(s32 *)(o + 0x5C) == 0) {
+            func_80088A84(o, &q);
+            (*(void (**)(u8 *, s32, s32))(w[0] + 0x68))(w[0], q.x, q.y);
+        }
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_80088CA0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *temp_v0;

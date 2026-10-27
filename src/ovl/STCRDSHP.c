@@ -319,9 +319,57 @@ Obj *func_80087CD4(void) {
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80087D00);
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80087E8C);
+void func_80087E8C(u8 *a, u8 **w, s32 on) {
+    u8 *t;
+    u8 *o;
+    s32 v;
+    if (on != 0) {
+        t = (u8 *)D_80044B38;
+        v = (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0x94);
+        o = w[0];
+        (*(void (**)(u8 *, s32, s32))(o + 0x114))(o, v, *(s32 *)(a + 0x64));
+        v = (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0x32);
+        o = w[3];
+        (*(void (**)(u8 *, s32, s32))(o + 0x114))(o, v, 3);
+        o = w[4];
+        (*(void (**)(u8 *, s32, s32))(o + 0x118))(o, 0, D_80048DA0[0]);
+        o = w[4];
+        (*(void (**)(u8 *, s32))(o + 0x148))(o, 1);
+    } else {
+        o = w[0];
+        (*(void (**)(u8 *, s32))(o + 0x144))(o, 0);
+        o = w[3];
+        (*(void (**)(u8 *, s32))(o + 0x144))(o, 0);
+        o = w[4];
+        (*(void (**)(u8 *, s32))(o + 0x144))(o, 0);
+    }
+}
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80087FAC);
+void func_80087FAC(u8 *a, u8 **w, s32 on) {
+    u8 *t;
+    u8 *o;
+    s32 v;
+    s32 i;
+    if (on != 0) {
+        i = 0;
+        t = (u8 *)D_80044B38;
+        for (; i < 3; i++) {
+            v = (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0x32);
+            o = w[i + 5];
+            (*(void (**)(u8 *, s32, s32))(o + 0x114))(o, v, i + 5);
+        }
+        v = ((s32 (*)(s32))D_80044F4C)(D_8005CCA8[0] + 0x32);
+        o = w[1];
+        (*(void (**)(u8 *, s32, s32))(o + 0x114))(o, v, 4);
+    } else {
+        for (i = 0; i < 3; i++) {
+            o = w[i + 5];
+            (*(void (**)(u8 *, s32))(o + 0x144))(o, 0);
+        }
+        o = w[1];
+        (*(void (**)(u8 *, s32))(o + 0x144))(o, 0);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_800880C4);
 

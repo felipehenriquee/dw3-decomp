@@ -16,6 +16,7 @@ u8 *func_800A63B4(s32 arg0);
 u8 *func_800A63EC(s32 arg0);
 u8 *func_800A6424(s32 arg0);
 s16 func_800A645C(u8 *o, s16 *tbl, s32 depth);
+void func_800A698C(u8 *o, s32 ev);
 u8 *func_800A6A98(s32 arg0);
 u8 *func_800A6ACC(s32 arg0);
 void func_800A6E88(void *arg0, s32 arg1);

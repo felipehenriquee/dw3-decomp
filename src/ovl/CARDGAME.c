@@ -399,7 +399,31 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80089580);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800896F0);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008985C);
+void func_8008985C(u8 *o, u8 *x) {
+    s32 k = ((s32 (*)(void))D_8004DC0C)() & 1;
+    *(s32 *)(o + 0x434) = k;
+    *(s32 *)(o + 0x424) = *(s32 *)(o + 0x428) = *(s32 *)(o + 0x42C) = *(s32 *)(o + 0x430) = 0;
+    (*(void (**)(u8 *, s32, s32, s32))(x + 0xF14))(x, 0, 0x7400, 0x6100);
+    (*(void (**)(u8 *, s32, s32, s32))(x + 0xF14))(x, 1, 0xA400, 0x6100);
+    if (k != 0) {
+        (*(void (**)(u8 *, s32, s32))(x + 0xF3C))(x, 0, 0x57);
+        (*(void (**)(u8 *, s32, s32))(x + 0xF3C))(x, 1, 0x58);
+    } else {
+        (*(void (**)(u8 *, s32, s32))(x + 0xF3C))(x, 1, 0x57);
+        (*(void (**)(u8 *, s32, s32))(x + 0xF3C))(x, 0, 0x58);
+    }
+    x[0x14D] = 2;
+    x[0x199] = 2;
+    *(s16 *)(x + 0x120) = 0;
+    x[0x151] = 0;
+    x[0x150] = 0;
+    *(s16 *)(x + 0x16C) = 0;
+    x[0x19D] = 0;
+    x[0x19C] = 0;
+    *(s32 *)(o + 0x43C) = 0;
+    *(s32 *)(o + 0x440) = 0;
+    o[0x422] = 1;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80089974);
 
@@ -761,7 +785,40 @@ void func_80090A6C(void *arg0, s32 arg1, s8 arg2) {
     M2C_FIELD(arg0, s8 *, 0x445) = 0;
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80090A90);
+s32 func_80090A90(u8 *o, s32 unused, s32 m) {
+    s32 i, n, j, hi;
+    if (o[0x444] != 0) {
+        if (m == 0) {
+            n = 0;
+            for (i = *(s16 *)(o + 0x5A0); i < *(s16 *)(o + 0x5A0) + o[0x444]; i++) {
+                if (i >= 40) {
+                    o[0x445] = 1;
+                    o[0x444] = n;
+                    break;
+                }
+                (o + i)[0x46F] = 1;
+                n++;
+            }
+        } else {
+            j = *(s16 *)(o + 0x668);
+            hi = 39;
+            if (o[0x444] > *(s16 *)(o + 0x66C)) {
+                o[0x445] = 1;
+                o[0x444] = o[0x66C];
+            }
+            for (i = 0; i < o[0x444]; i++) {
+                if ((o + j * 2)[0x30B] == o[0x300] * 2 + 2) {
+                    (o + j)[0x46F] = 1;
+                    j++;
+                } else {
+                    (o + hi)[0x46F] = 1;
+                    hi--;
+                }
+            }
+        }
+    }
+    return 1;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80090BA0);
 
@@ -2537,7 +2594,37 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800A41A8);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800A41F8);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800A4328);
+s32 func_800A4328(u8 *o) {
+    struct {
+        u8 *p0;
+        u8 pad4[0x28];
+        void (*fn2C)(s32);
+        u8 pad30[0x28];
+    } t;
+    s32 best = 500;
+    s32 bi = 500;
+    s8 *p = (s8 *)(o + 0x446);
+    s32 i;
+    s32 found;
+    u8 *e;
+    func_8001EBF8(&t);
+    found = 0;
+    for (i = 0; i < *(s16 *)(o + 0x66E); i++) {
+        if (p[i] != 0) {
+            found = 1;
+            t.fn2C(((CgArr50 *)o)->a[((CgArr6C8 *)o)->a[i]] + 1);
+            if (*(s16 *)(t.p0 + 8) < best) {
+                best = *(s16 *)(t.p0 + 8);
+                bi = i;
+            }
+        }
+    }
+    if (found == 1) {
+        e = o + (s8)o[0x575] * 8;
+        e[0x586] = ((CgArr6C8 *)o)->a[bi];
+    }
+    return found;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800A4440);
 
