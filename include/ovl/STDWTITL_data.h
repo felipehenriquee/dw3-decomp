@@ -15,5 +15,8 @@ extern s32 D_80088238[];
 extern s32 D_80088234;
 extern s32 D_80044F5C[];
 extern s32 D_8005CCA8[];
+extern s32 D_80044B38[];
+extern s32 D_8004DE10[];
+extern u8 D_80087C4C[];
 
 #endif /* STDWTITL_DATA_H */

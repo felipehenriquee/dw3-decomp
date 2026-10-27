@@ -275,7 +275,43 @@ s32 func_800862D0(u8 *o, s32 arg) {
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_800863D4);
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_800865A0);
+s32 func_800865A0(u8 *o, s32 k) {
+    u8 *q;
+    u8 *p;
+    s32 off;
+    TrDec8 *e;
+    TrDec8 *tb;
+    s32 v;
+    if ((u32)(k - 15) >= 2) {
+        return 0;
+    }
+    q = ((u8 *(*)(s32))D_8004B484[0])(*(s32 *)(o + 0x5C));
+    if (k == 15) {
+        p = q + 0x22;
+    } else {
+        p = q + 0x26;
+    }
+    off = 0;
+    if (*(s32 *)(o + 0xD8) != 0) {
+        off = 2;
+        if (*(s32 *)(o + 0x60) < 13) {
+            off = 1;
+        }
+    }
+    off += *(s32 *)(*(u8 **)(o + 0x50) + 0x7C) * 3;
+    tb = D_8008C490;
+    e = &tb[off];
+    if (e->rnd != 0) {
+        v = e->base + ((s32 (*)(void))D_8004DC0C)() % e->rnd;
+    } else {
+        v = e->base;
+    }
+    *(s16 *)p += v;
+    if (*(s16 *)p >= 10000) {
+        *(s16 *)p = 9999;
+    }
+    return v;
+}
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_800866CC);
 

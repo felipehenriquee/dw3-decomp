@@ -3,6 +3,7 @@
 #define STDWTITL_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_80082D70(u8 *o, u8 **w);
 Obj *func_80082E9C(void);
 Obj *func_80083028(void);
 void func_800833AC(void *arg0);
@@ -43,6 +44,7 @@ s32 func_80085F38(void *arg0);
 void func_80085F44(u8 *o);
 Obj *func_80086018(void);
 s32 func_8008605C(s16 *st, s16 *tbl, s32 depth);
+void func_80086108(u8 *o);
 void func_800867A8(void *arg0);
 Obj *func_800867E0(s32 arg0);
 Obj *func_80086DB0(s32 arg0);
@@ -70,7 +72,6 @@ s32 StUnSetRing();
 s32 func_80014504();
 s32 func_8001F648();
 s32 func_8001FFA8();
-s32 func_80082D70();
 s32 func_80082EC8();
 s32 func_80083054();
 s32 func_800831E8();
@@ -90,7 +91,6 @@ s32 func_80085160();
 s32 func_800852F0();
 s32 func_80085594();
 s32 func_80085D64();
-s32 func_80086108();
 s32 func_80086228();
 s32 func_80086544();
 s32 func_80086834();

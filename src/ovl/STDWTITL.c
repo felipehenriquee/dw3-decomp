@@ -3,7 +3,37 @@
 #include "STDWTITL_auto.h"
 #include "STDWTITL_data.h"
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80082D70);
+void func_80082D70(u8 *o, u8 **w) {
+    struct {
+        u8 pad0[0x24];
+        void (*fn24)(s32, s32);
+        u8 pad28[4];
+        void (*fn2C)(s32);
+        u8 pad30[8];
+    } g;
+    u8 *t;
+    u8 *x;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        t = (u8 *)D_8004DE10;
+        (*(void (**)(void))(t + 0x150))();
+        (*(void (**)(s32))(t + 0x154))(0xA000);
+        (*(void (**)(s32, s32, s32, s32))(t + 0x174))(0x140, 0xF0, 0, 0);
+        func_8001FFA8(&g);
+        g.fn24(0x280, 0);
+        g.fn2C(((s32 (*)(s32))D_80044F5C[0])(0x8A60001));
+        x = (*(u8 *(**)(u8 *, s32, s32))(t + 0x16C))(D_80087C4C, 2, 0x100);
+        (*(void (**)(u8 *, s32, s32, s32))(x + 0x12C))(x, 0x1F, 0x1F, 0x1F);
+        w[0] = (u8 *)func_8008483C();
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80082E9C(void) {
     return func_80014504(func_80082D70, 0x50, 4);
@@ -532,7 +562,28 @@ s32 func_8008605C(s16 *st, s16 *tbl, s32 depth) {
     return e[0];
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80086108);
+void func_80086108(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        void (*fn78)(s32, s32);
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        u8 pad88[0xA0 - 0x88];
+    } g;
+    u8 *t;
+    func_8001F648(&g);
+    g.fn7C(*(s32 *)(o + 0x7C), 0);
+    g.fn78(0, 0x1F3);
+    g.fn74(0x300, 0);
+    t = (u8 *)D_80044B38;
+    g.fn84((*(s32 (**)(s32))(t + 0x424))(0x8870000), 0, 0, 0);
+    g.fn74(0x340, 0);
+    g.fn84((*(s32 (**)(s32))(t + 0x424))(0x8870001), 0, 0, 0);
+    g.fn74(0x380, 0);
+    g.fn84((*(s32 (**)(s32))(t + 0x424))(0x8870002), 0, 0, 0);
+}
 
 INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80086228);
 
