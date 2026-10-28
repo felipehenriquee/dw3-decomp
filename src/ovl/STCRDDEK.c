@@ -290,7 +290,44 @@ INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80086E04);
 
 INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_80087788);
 
-INCLUDE_ASM("asm/ovl/STCRDDEK/nonmatchings/STCRDDEK", func_800884E8);
+void func_800884E8(u8 *o, s32 b) {
+    struct {
+        u8 pad0[0x24];
+        void (*fn24)(s32, s32);
+        u8 pad28[4];
+        void (*fn2C)(s32);
+        u8 pad30[8];
+    } g;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        func_8001FFA8(&g);
+        g.fn24(*(s32 *)(o + 0x5C), *(s32 *)(o + 0x60));
+        g.fn2C(((s32 (*)(s32))D_80044F5C[0])(0x7710000));
+        if (D_8005CCA8[0] == 0) {
+            D_8008B848.n = 3;
+            D_8008B848.a = D_8008B368;
+            D_8008B848.b = D_8008B38C;
+        } else {
+            D_8008B848.n = 1;
+            D_8008B848.a = D_8008B604;
+            D_8008B848.b = D_8008B610;
+        }
+        *(s32 *)(o + 0xBC) = 10;
+        *(s32 *)(o + 0xDC) = 10;
+        *(s32 *)(o + 0xCC) = 10;
+        func_800868E8(o, b);
+        break;
+    case 1:
+        func_80087788(o, b);
+        func_80086E04(o);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void func_80088628(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x5C) = arg1;

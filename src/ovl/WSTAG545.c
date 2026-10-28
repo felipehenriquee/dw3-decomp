@@ -27,7 +27,40 @@ s16 func_800A5E18(u8 *o, s16 *tbl, s32 depth) {
     return e[0];
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG545/nonmatchings/WSTAG545", func_800A5F20);
+void func_800A5F20(u8 *o) {
+    Rec18 *q;
+    Rec18 *r;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(s16 *)(o + 0x60) = 0;
+        *(s16 *)(o + 0x62) = D_800A6D24[1];
+        for (q = D_80099D90; q->b[2] != 0; q++) {
+            if (q->b[1] == *(s32 *)(o + 0x58)) {
+                *(Rec18 **)(o + 0x5C) = q;
+                q->h[5] = *(s16 *)(o + 0x50);
+                q->h[6] = *(s16 *)(o + 0x54);
+            }
+        }
+        break;
+    case 1:
+        (*(Rec18 **)(o + 0x5C))->b[0] = 0;
+        break;
+    case 2:
+        if (*(s32 *)(o + 0x10) == 0) {
+            *(s16 *)(o + 0x60) = 0;
+            *(s16 *)(o + 0x62) = D_800A6D24[1];
+            (*(void (**)(u8 *, s32))(o + 0x2C))(o, 1);
+        }
+        r = *(Rec18 **)(o + 0x5C);
+        r->b[0] = 1;
+        r->b[4] = func_800A5E18(o + 0x5C, D_800A6D24, 0);
+        break;
+    case 3:
+        break;
+    }
+}
 
 Obj *func_800A6054(s32 arg0, s32 arg1, s32 arg2) {
     void *temp_v0;
@@ -103,7 +136,42 @@ s16 func_800A636C(s16 *st, s16 *tbl, s32 once, s32 depth) {
 
 INCLUDE_ASM("asm/ovl/WSTAG545/nonmatchings/WSTAG545", func_800A648C);
 
-INCLUDE_ASM("asm/ovl/WSTAG545/nonmatchings/WSTAG545", func_800A6780);
+void func_800A6780(u8 *arg, s32 ev) {
+    u8 *o = arg;
+    if (o == NULL) {
+        return;
+    }
+    if (*(s32 *)(o + 0x54) == 0) {
+        ((void (*)(s32))D_80055C48[0])(0x8004474A);
+    }
+    switch (ev) {
+    case 0x35D:
+        (*(void (**)(u8 *, s32))(o + 0x2C))(o, 1);
+        break;
+    case 0x35E:
+        (*(void (**)(u8 *, s32))(o + 0x2C))(o, 3);
+        break;
+    case 0x35F:
+        (*(void (**)(u8 *, s32))(o + 0x2C))(o, 5);
+        break;
+    case 0x360:
+        *(s32 *)(o + 0x50) = 1;
+        break;
+    case 0x361:
+        *(s32 *)(o + 0x50) = 2;
+        break;
+    case 0x362:
+        *(s32 *)(o + 0x50) = 3;
+        break;
+    case 0x363:
+        *(s32 *)(o + 0x50) = 4;
+        break;
+    case 0x364:
+        *(s32 *)(o + 0x50) = 5;
+        break;
+    }
+    (*(void (**)(u8 *, s32))(o + 0x30))(o, 0);
+}
 
 u8 *func_800A6894(s32 arg0) {
     return func_800143DC(func_800A648C, 96, 20, arg0);

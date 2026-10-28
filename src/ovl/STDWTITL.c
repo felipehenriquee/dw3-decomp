@@ -94,11 +94,73 @@ void func_80083568(s32 arg0, M2C_UNK arg1) {
     func_80083500(arg0);
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800835D4);
+u32 *func_800835D4(DecEnv *dec) {
+    u32 *addr;
+    StHeader *sector;
+    s32 cnt = 2000;
+    while (StGetNext(&addr, (u32 **)&sector) != 0) {
+        if (--cnt == 0) {
+            return 0;
+        }
+    }
+    if (sector->frameCount >= (u32)D_8008926C[0]) {
+        D_80089264 = 1;
+    }
+    if (D_80087C88 != sector->width || D_80087C8C != sector->height) {
+        func_80083438();
+        D_80087C88 = sector->width;
+        D_80087C8C = sector->height;
+    }
+    dec->rect[0].w = dec->rect[1].w = D_80087C88 * 3 / 2;
+    dec->rect[0].h = dec->rect[1].h = D_80087C8C;
+    dec->slice.h = D_80087C8C;
+    return addr;
+}
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800836D8);
+s32 func_800836D8(DecEnv *dec) {
+    s32 cnt = 2000;
+    u32 *next;
+    s32 t;
+    s32 *tb;
+    while ((next = func_800835D4(dec)) == 0) {
+        if (--cnt == 0) {
+            return -1;
+        }
+    }
+    tb = D_80089250;
+    t = tb[0];
+    dec->vlcid = dec->vlcid == 0;
+    func_8008780C(next, dec->vlcbuf[dec->vlcid], t);
+    StFreeRing(next);
+    return 0;
+}
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083760);
+void func_80083760(void) {
+    SRect snap;
+    s32 id;
+    if (D_80081454[0] != 0) {
+        StCdInterrupt();
+        D_80081454[0] = 0;
+    }
+    id = D_80089214.imgid;
+    snap = D_80089214.slice;
+    D_80089214.imgid = D_80089214.imgid ? 0 : 1;
+    D_80089214.slice.x += D_80089214.slice.w;
+    if (D_80089214.rectid != 0) {
+        snap.x += 480;
+    }
+    snap.y = 36;
+    if (D_80089214.slice.x < D_80089214.rect[D_80089214.rectid].x + D_80089214.rect[D_80089214.rectid].w) {
+        func_80087320(D_80089214.imgbuf[D_80089214.imgid], D_80089214.slice.w * D_80089214.slice.h / 2);
+    } else {
+        D_80089214.isdone = 1;
+        D_80089214.rectid = D_80089214.rectid == 0;
+        D_80089214.slice.x = D_80089214.rect[D_80089214.rectid].x;
+        D_80089214.slice.y = D_80089214.rect[D_80089214.rectid].y;
+    }
+    DrawSync(0);
+    LoadImage(&snap, D_80089214.imgbuf[id]);
+}
 
 void func_800838B0(TitlBlink *o) {
     volatile s32 c = 0x800000;
@@ -155,7 +217,46 @@ void func_80083F80(u8 *o) {
     g.fn84(((s32 (*)(s32))D_80044F5C[0])(D_80088234), 4, 0x25, 0x72);
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800840A8);
+void func_800840A8(u8 *o) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        if (*(s32 *)(o + 0x50) == 0) {
+            *(s32 *)(o + 0x5C) = 0;
+            (*(void (**)(u8 *))(o + 0x38))(o);
+        } else {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+        }
+        break;
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            return;
+        case 1:
+            *(s32 *)(o + 0x54) = 0;
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        case 2:
+            *(s32 *)(o + 0x58) = D_80087D40[*(s32 *)(o + 0x54)];
+            if (++*(s32 *)(o + 0x54) >= 12) {
+                (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+            }
+            break;
+        }
+        func_80083F80(o);
+        break;
+    case 2:
+        if (*(s32 *)(o + 0x10) == 0) {
+            *(s32 *)(o + 0x58) = 11;
+            *(s32 *)(o + 0x5C) = 1;
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        }
+        func_80083F80(o);
+        break;
+    case 3:
+        break;
+    }
+}
 
 void func_800841E0(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0xC) == 1) {
@@ -174,9 +275,74 @@ Obj *func_80084218(s32 arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_8008426C);
+void func_8008426C(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        void (*fn78)(s32, s32);
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        void (*fn88)(s32);
+        u8 pad8C[0xA0 - 0x8C];
+    } g;
+    func_8001F648(&g);
+    if (*(s32 *)(o + 0x5C) != 0) {
+        g.fn7C(*(s32 *)(o + 0x60), 0);
+        g.fn74(0x280, 0x100);
+        g.fn78(0, 0x1F0);
+        g.fn84(((s32 (*)(s32))D_80044F5C[0])(D_80088234), 2, 0xFD, 0x64);
+        func_8001F648(&g);
+    }
+    if (*(s32 *)(o + 0x58) != -1) {
+        g.fn7C(*(s32 *)(o + 0x60), 0);
+        g.fn74(0x280, 0x100);
+        g.fn88(*(s32 *)(o + 0x58));
+        g.fn84(((s32 (*)(s32))D_80044F5C[0])(D_80088234), 4, 0xF3, 0x5A);
+    }
+}
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800843A4);
+void func_800843A4(u8 *o) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        if (*(s32 *)(o + 0x50) == 0) {
+            *(s32 *)(o + 0x5C) = 0;
+            (*(void (**)(u8 *))(o + 0x38))(o);
+        } else {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+        }
+        break;
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            return;
+        case 1:
+            *(s32 *)(o + 0x58) = *(s32 *)(o + 0x54) = 0;
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        case 2:
+            *(s32 *)(o + 0x58) = D_80087D58[*(s32 *)(o + 0x54)];
+            if (*(s32 *)(o + 0x58) == -1) {
+                (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+            }
+            func_8008426C(o);
+            *(s32 *)(o + 0x54) += 1;
+            break;
+        }
+        break;
+    case 2:
+        if (*(s32 *)(o + 0x10) == 0) {
+            *(s32 *)(o + 0x58) = -1;
+            *(s32 *)(o + 0x5C) = 1;
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        }
+        func_8008426C(o);
+        break;
+    case 3:
+        break;
+    }
+}
 
 Obj *func_800844E8(s32 arg0) {
     void *temp_v0;
@@ -292,7 +458,47 @@ void func_800849D8(u8 *o) {
     g.fn84(((s32 (*)(s32))D_80044F5C[0])(D_80088234), 1, *(s32 *)(o + 0x58), *(s32 *)(o + 0x5C));
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80084A70);
+void func_80084A70(u8 *o) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        if (*(s32 *)(o + 0x50) == 0) {
+            *(s32 *)(o + 0x58) = 0x20F;
+            *(s32 *)(o + 0x5C) = 0x22;
+            (*(void (**)(u8 *))(o + 0x38))(o);
+        } else {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+        }
+        break;
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 1:
+            *(s32 *)(o + 0x54) = 10;
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        case 2:
+            *(s32 *)(o + 0x58) = *(s32 *)(o + 0x54) * 32 + 0xCF;
+            if ((*(s32 *)(o + 0x54))-- <= 0) {
+                (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+            }
+            break;
+        case 0:
+        default:
+            return;
+        }
+        func_800849D8(o);
+        break;
+    case 2:
+        if (*(s32 *)(o + 0x10) == 0) {
+            *(s32 *)(o + 0x58) = 0xCF;
+            *(s32 *)(o + 0x5C) = 0x22;
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        }
+        func_800849D8(o);
+        break;
+    case 3:
+        break;
+    }
+}
 
 void func_80084BB0(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0xC) == 1) {
@@ -396,7 +602,47 @@ void func_80084E44(u8 *o) {
     g.fn84(((s32 (*)(s32))D_80044F5C[0])(D_80088234), 0, *(s32 *)(o + 0x58), *(s32 *)(o + 0x5C));
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80084EDC);
+void func_80084EDC(u8 *o) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        if (*(s32 *)(o + 0x50) == 0) {
+            *(s32 *)(o + 0x58) = -0x12F;
+            *(s32 *)(o + 0x5C) = 0x3D;
+            (*(void (**)(u8 *))(o + 0x38))(o);
+        } else {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+        }
+        break;
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 1:
+            *(s32 *)(o + 0x54) = 10;
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        case 2:
+            *(s32 *)(o + 0x58) = -(*(s32 *)(o + 0x54) * 320) / 10 + 0x11;
+            if ((*(s32 *)(o + 0x54))-- <= 0) {
+                (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+            }
+            break;
+        case 0:
+        default:
+            return;
+        }
+        func_80084E44(o);
+        break;
+    case 2:
+        if (*(s32 *)(o + 0x10) == 0) {
+            *(s32 *)(o + 0x58) = 0x11;
+            *(s32 *)(o + 0x5C) = 0x3D;
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        }
+        func_80084E44(o);
+        break;
+    case 3:
+        break;
+    }
+}
 
 void func_8008503C(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0xC) == 1) {
@@ -433,7 +679,43 @@ void func_800850C8(u8 *o) {
     g.fn84(((s32 (*)(s32))D_80044F5C[0])(D_80088234), 0, *(s32 *)(o + 0x58), *(s32 *)(o + 0x5C));
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80085160);
+void func_80085160(u8 *o) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        *(s32 *)(o + 0x58) = -0x12D;
+        *(s32 *)(o + 0x5C) = 0x18;
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 1:
+            *(s32 *)(o + 0x54) = 10;
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        case 2:
+            *(s32 *)(o + 0x58) = -(*(s32 *)(o + 0x54) * 320) / 10 + 0x13;
+            if ((*(s32 *)(o + 0x54))-- <= 0) {
+                (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+            }
+            break;
+        case 0:
+        default:
+            return;
+        }
+        func_800850C8(o);
+        break;
+    case 2:
+        if (*(s32 *)(o + 0x10) == 0) {
+            *(s32 *)(o + 0x58) = 0x13;
+            *(s32 *)(o + 0x5C) = 0x18;
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        }
+        func_800850C8(o);
+        break;
+    case 3:
+        break;
+    }
+}
 
 Obj *func_8008529C(s32 arg0) {
     void *temp_v0;

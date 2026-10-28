@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-10-26, 7ª sessão): EXE **275 de 347** (79%); overlays **2080 de 3292** (63.2%). Total **2355 de 3639 (64.7%)**.
+- [ ] Decompilação (2026-10-28): EXE **275 de 347** (79%); overlays **2106 de 3292** (64.0%). Total **2381 de 3639 (65.4%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -113,6 +113,15 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 6. Corrigir a divisão do splat em `func_800148C0` (`make split` apaga `build/` — fazer quando nada estiver rodando).
 7. Revisão semântica para o port (`tools/audit_args.py`).
 8. Jobs em segundo plano: parar com `tools/stop_jobs.sh` e commitar com `tools/commit_locked.sh "msg"`.
+
+### Notas da decompilação manual (2026-10-28)
+- Família CARDGAME com `o + j*0x72` (mão do jogador, `0x72C` = nº de cartas): use `(o - -(j * 0x72))[0x72C]` no laço e `(o + (i * 14 - -(j * 0x72)) + off)` no elemento. Resolveu `func_800A3E9C`/`func_800A3F48`/`func_800A4078`/`func_800A41F8`.
+- STDWTITL tem o exemplo de vídeo da PsyQ (movie.c): `strNext` (`func_800835D4`), `strNextVlc` (`func_800836D8`), `strCallback` (`func_80083760`) com a struct `DecEnv` (types.h) e `StHeader` (`frameCount` +8, `width`/`height` +0x10). Usar as structs (não `u8 *`) fez bater. `strInitDecEnv` (`func_80083478`) ainda não (agendamento).
+- Família STDWTITL/STDGNAME/STPLNMET/STCRDDEK "estado com contador" (`func_80084CD4` e cópias com constantes `0x58`/`0x5C` diferentes): adaptar o C trocando constantes; `fuzzyprop` pega parte.
+- Constante guardada num `s`-reg que o original carrega antes do contador do laço (`li v1,10` antes de `li s0,1`): ponha o valor numa variável (`v = 10; ... = v;`).
+- Acesso por campo de struct global (`tb[slot].b[6]`) em vez de ponteiro `e = &tb[slot]` muda a ordem do `addu` (FIGHTSTG `func_8008F5D4`).
+- `if (st[4] == 0) return; switch (...)` separa o teste de zero da árvore do `switch`.
+- Permuter rápido para funções pequenas: `tools/perm_setup.py <ovl> <func> arq.c` e depois `timeout 150 .venv/bin/python tools/decomp-permuter/permuter.py -j6 --stop-on-zero build/perm/<func>` (achou o `tb = D_X; t = tb[0];` da `func_800836D8`).
 
 ### Notas da decompilação manual (2026-10-26)
 - `tools/gen_scrinit.py`: gerador para a família "inicialização de tela" (`D_8004DE10` fn150/fn154/fn174/fn16C/fn12C + construtor); usa `build/w/n22.c` como modelo. Rodar de novo quando houver mais pendentes com essa forma.

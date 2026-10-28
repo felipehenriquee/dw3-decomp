@@ -100,7 +100,34 @@ INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A7C00);
 
 INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A7FE4);
 
-INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A8118);
+void func_800A8118(u8 *o, u8 **w) {
+    u8 *b = D_800A3868;
+    u8 *e = (s8)b[0xAF1] * 28 + b;
+    s32 j;
+    u8 *t;
+    u8 *p;
+    j = (*(s32 (**)(s32, s32, s32))(b + 0xB0C))(6, e[4], *(s32 *)(e + 8));
+    if (j >= 0) {
+        b = j * 28 + b;
+        w[7] = (u8 *)func_8009A298();
+        *(s32 *)(o + 0x50) = 0x5A;
+        *(s32 *)(o + 0x54) = *(s32 *)(e + 4);
+        *(s32 *)(o + 0x58) = *(s32 *)(e + 8);
+        (*(void (**)(u8 *, s32, u8 *))(w[7] + 0xAC))(w[7], 7, o + 0x50);
+        if (*(s32 *)(b + 4) == 0) {
+            t = (u8 *)D_80048D34;
+            p = (*(u8 *(**)(s32))(t + 0x2750))((*(s32 (**)(s32))(t + 0x2718))(*(s32 *)(b + 8)));
+            if (*(s16 *)(p + 0x3C8) == 0x140 || *(s16 *)(p + 0x3CA) == 0x140) {
+                *(s16 *)b = 6;
+                *(s32 *)(b + 0xC) = 0;
+                goto end;
+            }
+        }
+        *(s16 *)b = 0;
+    }
+end:
+    (*(void (**)(u8 *, s32))(o + 0x2C))(o, 2);
+}
 
 INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A8260);
 

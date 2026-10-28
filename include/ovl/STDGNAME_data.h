@@ -14,5 +14,10 @@ extern s32 D_80044F5C[];
 extern s32 D_80048D34[];
 extern s32 D_80087F40[];
 extern s32 D_80087F44[];
+extern NmTbl D_80088E34;
+extern u8 D_800876FC[];
+extern u8 D_80087720[];
+extern u8 D_80087998[];
+extern u8 D_800879A4[];
 
 #endif /* STDGNAME_DATA_H */

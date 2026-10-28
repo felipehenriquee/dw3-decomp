@@ -10,5 +10,11 @@ extern u8 D_8004B7D0[];
 extern s32 D_80044B38[];
 extern s32 D_8005CCA8[];
 extern u8 D_80048D34[];
+extern s32 D_80044F5C[];
+extern u8 D_8008B368[];
+extern u8 D_8008B38C[];
+extern u8 D_8008B604[];
+extern u8 D_8008B610[];
+extern NmTbl D_8008B848 NOT_GP;
 
 #endif /* STCRDDEK_DATA_H */

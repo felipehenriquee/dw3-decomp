@@ -464,4 +464,19 @@ typedef struct { s16 x, y, w, h; } SRect;
 
 typedef struct { u8 a, b, c, d; u8 e[40]; } CgRec2C;
 
+typedef struct {
+    u32 *vlcbuf[2];
+    s32 vlcid;
+    u16 *imgbuf[2];
+    s32 imgid;
+    SRect rect[2];
+    s32 rectid;
+    SRect slice;
+    s32 isdone;
+} DecEnv;
+
+typedef struct { u16 id; u16 type; u16 secCount; u16 nSectors; u32 frameCount; u32 frameSize; u16 width; u16 height; } StHeader;
+
+typedef struct { s32 n; u8 *a; u8 *b; } NmTbl;
+
 #endif /* TYPES_H */

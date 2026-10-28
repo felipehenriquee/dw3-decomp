@@ -718,7 +718,32 @@ Obj *func_8008F57C(s8 arg0, s32 arg1, s32 arg2) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008F5D4);
+void func_8008F5D4(s32 k, s32 slot) {
+    FtE32d *tb = D_800A4470;
+    Rec18 *r = &D_80042BCA[k];
+    u8 *b;
+    u8 *e;
+    s32 i;
+    s32 j;
+    if (tb[slot].h0 == 0) {
+        return;
+    }
+    i = 0;
+    b = D_800A3868;
+    for (; i < 6; i++) {
+        j = (*(s32 (**)(s32, s32, s32))(b + 0xB0C))(D_800A3438[i], 0, slot);
+        if (j >= 0) {
+            *(s16 *)(b + j * 28) = 0;
+        }
+    }
+    if (*(s16 *)&tb[slot].b[6] == 0) {
+        func_800A6920(slot);
+    }
+    tb[slot].b[0x1A] = 0;
+    *(s16 *)&tb[slot].b[6] = *(s16 *)&tb[slot].b[4];
+    ((void (*)(s32, s32, s32, s32))D_800A4664[0])(0, slot, 1, r->b[0xC]);
+    func_8009CC20(0, slot, 1, k);
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_8008F714);
 
@@ -1061,7 +1086,34 @@ void func_80094A00(void) {
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80094AD0);
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80094C18);
+void func_80094C18(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        u8 pad88[0xA0 - 0x88];
+    } g;
+    s32 i;
+    s32 y;
+    s32 t;
+    s32 v;
+    func_8001F648(&g);
+    g.fn7C(0x1005, 1);
+    t = ((s32 (*)(s32))D_80044F5C[0])(0x2860000);
+    g.fn74(0x140, 0);
+    for (i = 0, y = 0x51; i < 6; y += 14, i++) {
+        v = *(s32 *)(o + i * 4 + 0xD4) & 0x1FFF;
+        if (v != 0) {
+            g.fn84(t, D_80042BDC[v - 1].b[4] + 0x37, 0x18, y);
+        }
+    }
+    t = ((s32 (*)(s32))D_80044F5C[0])(0x4550000);
+    g.fn74(0x200, 0);
+    g.fn84(t, 0x26, 0x10, 0x4A);
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80094D50);
 

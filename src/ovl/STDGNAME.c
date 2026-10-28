@@ -156,7 +156,44 @@ INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80083994);
 
 INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80084318);
 
-INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80085078);
+void func_80085078(u8 *o, s32 b) {
+    struct {
+        u8 pad0[0x24];
+        void (*fn24)(s32, s32);
+        u8 pad28[4];
+        void (*fn2C)(s32);
+        u8 pad30[8];
+    } g;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        func_8001FFA8(&g);
+        g.fn24(*(s32 *)(o + 0x5C), *(s32 *)(o + 0x60));
+        g.fn2C(((s32 (*)(s32))D_80044F5C[0])(0x7710000));
+        if (D_8005CCA8[0] == 0) {
+            D_80088E34.n = 3;
+            D_80088E34.a = D_800876FC;
+            D_80088E34.b = D_80087720;
+        } else {
+            D_80088E34.n = 1;
+            D_80088E34.a = D_80087998;
+            D_80088E34.b = D_800879A4;
+        }
+        *(s32 *)(o + 0xC0) = 10;
+        *(s32 *)(o + 0xE0) = 10;
+        *(s32 *)(o + 0xD0) = 10;
+        func_80083478(o, b);
+        break;
+    case 1:
+        func_80084318(o, b);
+        func_80083994(o);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void func_800851B8(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x5C) = arg1;

@@ -350,7 +350,40 @@ INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80086C0C);
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008706C);
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80087F28);
+void func_80087F28(u8 *o, u8 **w) {
+    s32 i;
+    u8 *x;
+    s32 v;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        func_80086B24(o, w);
+        *(s32 *)(o + 0xF4) = 10;
+        *(s32 *)(o + 0x104) = 10;
+        *(s32 *)(o + 0x114) = 10;
+        *(s32 *)(o + 0x124) = 10;
+        v = -1;
+        for (i = 4; i >= 0; i--) {
+            *(s32 *)(o + i * 4 + 0x64) = v;
+        }
+        x = (u8 *)func_8008A274(*(s32 *)(o + 0x5C), *(s32 *)(o + 0x60), *(s32 *)(o + 0x54), *(s32 *)(o + 0x58) - 3);
+        w[6] = x;
+        (*(void (**)(u8 *, s32, s32))(x + 0xA4))(x, 0x300, 0);
+        (*(void (**)(u8 *, s32, s32))(w[6] + 0xA8))(w[6], 0x2C0, 0);
+        (*(void (**)(u8 *))(w[6] + 0xBC))(w[6]);
+        (*(void (**)(u8 *, s32))(w[6] + 0xC0))(w[6], 0);
+        ((void (*)(s32, u8 *))D_8004B468[0])(*(s32 *)(o + 0x5C), o + 0xA4);
+        break;
+    case 1:
+        func_8008706C(o, w);
+        func_80086C0C(o);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_80088070(s32 arg0, s32 arg1, s32 arg2) {
     void *temp_v0;
