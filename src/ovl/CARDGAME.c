@@ -162,7 +162,32 @@ void func_8008423C(u8 *o, s32 b) {
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80084320);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80085DE8);
+void func_80085DE8(u8 *o) {
+    S8x2 t;
+    s16 v;
+    s32 i, j, k;
+    s16 *arr = (s16 *)(o + 0x678);
+    for (i = *(s16 *)(o + 0x668); i < 39; i++) {
+        for (j = i + 1; j < 40; j++) {
+            if ((u8)((CgCards30A *)o)->c[i].a > (u8)((CgCards30A *)o)->c[j].a) {
+                v = arr[i];
+                arr[i] = arr[j];
+                arr[j] = v;
+                t = ((CgCards30A *)o)->c[i];
+                ((CgCards30A *)o)->c[i] = ((CgCards30A *)o)->c[j];
+                ((CgCards30A *)o)->c[j] = t;
+            }
+        }
+    }
+    k = o[0x41C];
+    t = ((CgCards30A *)o)->c[*(s32 *)(o + 0x440)];
+    ((CgCards30A *)o)->c[*(s32 *)(o + 0x440)] = ((CgCards30A *)o)->c[k];
+    ((CgCards30A *)o)->c[k] = t;
+    v = arr[*(s32 *)(o + 0x440)];
+    arr[*(s32 *)(o + 0x440)] = arr[k];
+    arr[k] = v;
+    *(s32 *)(o + 0x440) = k;
+}
 
 s32 func_80085F38(u8 *o, s32 n) {
     struct {
@@ -497,7 +522,23 @@ s32 func_80089ED4(u8 *o) {
     return n * 8 + 14;
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80089F18);
+void func_80089F18(u8 *o, u8 *x, s32 side, s32 d) {
+    s32 b = 0;
+    ((void (*)(s32))D_80055C48)(0x4001B);
+    switch (side) {
+    case 1:
+        b = 6;
+        break;
+    case 2:
+        b = 12;
+        break;
+    }
+    (x - -((b + *(s32 *)(o + 0x43C)) * 76))[0x150] &= 0xFE;
+    *(s16 *)(x - -((b + *(s32 *)(o + 0x43C)) * 76) + 0x12E) = 0;
+    *(s32 *)(o + 0x43C) += d;
+    (x - -((b + *(s32 *)(o + 0x43C)) * 76))[0x150] |= 1;
+    *(s16 *)(x - -((b + *(s32 *)(o + 0x43C)) * 76) + 0x12E) = 1;
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008A068);
 
@@ -510,8 +551,8 @@ s32 func_8008AD58(u8 *o) {
     return func_80089ED4(o);
 }
 
-s32 func_8008AD78(void) {
-    return func_80089F18();
+void func_8008AD78(u8 *o, u8 *x, s32 side, s32 d) {
+    func_80089F18(o, x, side, d);
 }
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_8008AD98);

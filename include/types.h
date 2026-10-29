@@ -479,4 +479,12 @@ typedef struct { u16 id; u16 type; u16 secCount; u16 nSectors; u32 frameCount; u
 
 typedef struct { s32 n; u8 *a; u8 *b; } NmTbl;
 
+typedef struct { s16 *tbl; s16 a; s16 b; } W780Ent;
+
+typedef struct { s8 a, b; } S8x2;
+
+typedef struct { u8 pad[0x30A]; S8x2 c[40]; } CgCards30A;
+
+typedef struct { u8 pad[0x678]; s16 a[40]; } CgArr678;
+
 #endif /* TYPES_H */

@@ -844,7 +844,21 @@ void func_8008DDC8(s32 arg0) {
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008DE0C);
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008DFEC);
+s32 func_8008DFEC(u8 *o) {
+    Pair32 d;
+    s32 r = 0;
+    s32 i;
+    for (i = 0; i < 5; i++) {
+        u8 k = D_80097B60[*(s32 *)(o + 0x60)][i];
+        u8 *f = D_80097C08[k];
+        d.x = (f[0] & 1) * *(s32 *)(o + 0x68) / 2;
+        if (f[0] & 0x80) d.x = -d.x;
+        d.y = (f[1] & 1) * *(s32 *)(o + 0x68) / 4;
+        if (f[1] & 0x80) d.y = -d.y;
+        if (((s32 (*)(u8 *, Pair32, Pair32))func_8008DE0C)(o, D_80097B88[k], d)) r = 1;
+    }
+    return r;
+}
 
 void func_8008E13C(u8 *o, s32 k) {
     if (k != 0 && D_80099DD0[0] == 0) {

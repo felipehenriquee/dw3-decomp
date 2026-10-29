@@ -8,7 +8,35 @@ void func_80082F58(s32 a, s32 b, u8 *o, s16 *p) {
     (*(void (**)(u8 *, s32))(o + 0x148))(o, 5);
 }
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80082FCC);
+void func_80082FCC(u8 *o, u8 **w) {
+    SRect r;
+    u8 *t;
+    u8 *x;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        t = (u8 *)D_8004DE10;
+        (*(void (**)(void))(t + 0x150))();
+        (*(void (**)(s32))(t + 0x154))(0x19000);
+        (*(void (**)(s32, s32, s32, s32))(t + 0x174))(0x140, 0xF0, 0, 0);
+        r.x = 0;
+        r.y = 0;
+        r.w = 0x140;
+        r.h = 0xF0;
+        x = (*(u8 *(**)(SRect *, s32, s32))(t + 0x16C))(&r, 1, 0x1000);
+        (*(void (**)(u8 *, s32, s32, s32))(x + 0x12C))(x, 1, 1, 1);
+        func_80082F58((s32)o, (s32)w, x, (s16 *)&r);
+        (*(void (**)(SRect *, s32, s32))(t + 0x16C))(&r, 3, 0x1001);
+        (*(void (**)(s32, s32, s32))(t + 0x180))(0x1001, 0x1000, 1);
+        w[0] = (u8 *)func_800882A4();
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80083118(void) {
     return func_80014504(func_80082FCC, 0x50, 4);

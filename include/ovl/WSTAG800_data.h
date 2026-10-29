@@ -14,5 +14,11 @@ extern Rec18 *D_80099D90;
 extern u8 D_800A7604[];
 extern u8 D_800A7610[];
 extern u8 D_800A763C[];
+extern s32 D_80044B38[];
+extern s32 D_80048D34[];
+extern s16 D_800A76F8[];
+extern s32 D_80048ACC NOT_GP;
+extern struct opaque D_80048ABC;
+extern W745Ent D_800A7700[];
 
 #endif /* WSTAG800_DATA_H */

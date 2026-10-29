@@ -63,5 +63,6 @@ extern Pair32 D_800A2530[];
 extern s32 D_8004B600[];
 extern Rec18 D_80042BDC[];
 extern s32 D_800A3438[];
+extern s32 D_80042B98[];
 
 #endif /* FIGHTSTG_DATA_H */

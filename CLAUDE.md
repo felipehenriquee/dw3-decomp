@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-10-28): EXE **275 de 347** (79%); overlays **2106 de 3292** (64.0%). Total **2381 de 3639 (65.4%)**.
+- [ ] Decompilação (2026-10-29): EXE **275 de 347** (79%); overlays **2116 de 3292** (64.3%). Total **2391 de 3639 (65.7%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -113,6 +113,15 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 6. Corrigir a divisão do splat em `func_800148C0` (`make split` apaga `build/` — fazer quando nada estiver rodando).
 7. Revisão semântica para o port (`tools/audit_args.py`).
 8. Jobs em segundo plano: parar com `tools/stop_jobs.sh` e commitar com `tools/commit_locked.sh "msg"`.
+
+### Notas da decompilação manual (2026-10-29)
+- Elemento de 76 bytes com operandos do `addu` trocados: `(x - -((b + o->43C) * 76))` (CARDGAME `func_80089F18`).
+- Ponteiro local `s16 *arr = (s16 *)(o + 0x678)` separa as variáveis de indução (CARDGAME `func_80085DE8`).
+- Ponteiro de função por índice: `((s32 (*)(s32))D_80044B38[0x109])(...)`; `i = 0` depois da 1ª chamada muda o registrador (WSTAG795 `func_800A6234`).
+- **Struct passada por valor como argumento** (`a1/a2` + `a3`/pilha carregados fora de ordem): `((s32 (*)(u8 *, Pair32, Pair32))f)(o, D[k], d)` (FIELDSTG `func_8008DFEC`).
+- `rand()` via `D_8004DC0C` sem argumentos; `v = r->b[6]; k = v + v * (...) / 128;` e base local `s32 *tb = (s32 *)D_800A4460;` em cada ramo (FIGHTSTG `func_800A08C8`).
+- Ao mudar a assinatura (retorno `u8 *`/parâmetros), corrija os chamadores (`func_800A61F0` WSTAG800, `func_8008AD78` CARDGAME).
+- Quase: FIELDSTG `func_80087704` (6 instr.: ordem do `lh` de `w`; ordem dos loads step/t0/t1 acerta os registradores), FIGHTSTG `func_80093CF4` (16: s2/s3 trocados), CARDGAME `func_8009EEFC` (permuter sem zero), STGDGLAB `func_80083334` (rascunho). C em `wip/ovl/`.
 
 ### Notas da decompilação manual (2026-10-28)
 - Família CARDGAME com `o + j*0x72` (mão do jogador, `0x72C` = nº de cartas): use `(o - -(j * 0x72))[0x72C]` no laço e `(o + (i * 14 - -(j * 0x72)) + off)` no elemento. Resolveu `func_800A3E9C`/`func_800A3F48`/`func_800A4078`/`func_800A41F8`.

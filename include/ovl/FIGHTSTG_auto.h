@@ -137,12 +137,14 @@ void func_8009EBE0(s32 m, s32 *pmin, s32 *pmax);
 s32 func_8009F644(s32 a, s32 i);
 s32 func_800A0108(u8 side, s32 k);
 s32 func_800A01AC(u8 side, s32 k, s32 crit);
+s32 func_800A08C8(u8 side, s32 id);
 s32 func_800A1458(s32 unused, s32 k);
 s32 func_800A1508(s32 unused, s32 k);
 s32 func_800A1558(s32 unused, s32 k);
 s32 func_800A1910(u8 side);
 s32 func_800A19D8(u8 side);
 s32 func_800A1C18(s32 x);
+s32 func_800A1D3C(u8 side, s32 id);
 void func_800A1E84(void);
 Obj *func_800A246C(void);
 
