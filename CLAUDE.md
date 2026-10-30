@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-10-29): EXE **275 de 347** (79%); overlays **2116 de 3292** (64.3%). Total **2391 de 3639 (65.7%)**.
+- [ ] Decompilação (2026-10-30): EXE **275 de 347** (79%); overlays **2152 de 3292** (65.4%). Total **2427 de 3639 (66.7%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -113,6 +113,18 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 6. Corrigir a divisão do splat em `func_800148C0` (`make split` apaga `build/` — fazer quando nada estiver rodando).
 7. Revisão semântica para o port (`tools/audit_args.py`).
 8. Jobs em segundo plano: parar com `tools/stop_jobs.sh` e commitar com `tools/commit_locked.sh "msg"`.
+
+### Notas da decompilação manual (2026-10-30)
+- `pending.py` lista muitas da família "inicialização de mapa" (`D_80099D80`) no topo; filtre com `grep -q D_80099D80` no `.s` para achar as outras.
+- **Leitura de script** `o->8C` (FIGHTSTG): `x = *(*(s16 **)(o + 0x8C))++;` repetido (o GCC usa offsets do mesmo ponteiro); um `p` local com `o->8C = p` não bate. `switch (*(*(s16 **)(o + 0x8C))++)` com `case 1..4: break;` explícitos gera a árvore `slti 5 / bgtz / beqz`.
+- Atribuição usada como base: `*(s32 *)((*(u8 **)(x + 0x3C) = f()) + 0x50) = ...` (FIGHTSTG `func_8008B69C`).
+- **Chamadas sem argumento**: quando o original não carrega `a0` antes do `jalr` (o valor sobrou de antes), a função não recebe parâmetro (`D_80089B98()`, `D_8004DC0C()` = rand). Base local `t = (u8 *)D_800519EC; (t + 0x4274)` para campos grandes.
+- `k*0x60 + idx*32 + D`: `t = k + 0x60; p = t + D_800A4470;` (WFIGHTMN `func_800A8770`). Não resolveu a FIGHTSTG `func_8009C8B0`.
+- Ponteiros de janela usados direto na chamada (`(*(fn)(w[5] + 0x114))(w[5], ...)`) quando o original relê `w[i]` em `a0` a cada chamada (STITSHOP `func_80083810`, STSTATUS `func_80094558`).
+- Retorno lido antes do `sb` final (`r = e->type; base[0xAF1] = k; return r;`) e `goto` para pôr o `return 0` no meio (FIGHTSTG `func_8009BA4C`).
+- Expressão repetida nos dois ramos (`v = a[0x2F] + a->8 / 8` em cada um) mantém o `lh` duplicado (FIGHTSTG `func_800A0B98` e irmãs `func_800A0D00`/`func_800A0FAC`/`func_800A0E68`).
+- `fuzzyprop.py` sempre tenta o WSTAG800 `func_800A5DE0` e quebra (conhecido, ignorar).
+- Quase: FIELDSTG `func_80087704` (6), FIGHTSTG `func_80093E44` (registradores; permuter 20), `func_8009A734` (4; permuter 20), `func_800A0A18` (11: posição do `lui` do rand), STCRDSHP `func_80087A2C` (`move` na divisão por 6), STFGTREP `func_80086924` (registradores dos parâmetros), WSTAG805 `func_800A69E8` (9: `li a0` antes do `lui` de `D_80048ABC`), CARDGAME `func_8009A82C` (agendamento; permuter 505), FIGHTSTG `func_8009ADD4` (rascunho). C em `wip/ovl/`.
 
 ### Notas da decompilação manual (2026-10-29)
 - Elemento de 76 bytes com operandos do `addu` trocados: `(x - -((b + o->43C) * 76))` (CARDGAME `func_80089F18`).

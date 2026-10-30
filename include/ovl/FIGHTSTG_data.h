@@ -64,5 +64,14 @@ extern s32 D_8004B600[];
 extern Rec18 D_80042BDC[];
 extern s32 D_800A3438[];
 extern s32 D_80042B98[];
+extern s32 D_80044F3C[];
+extern s32 D_800A3800[];
+extern s32 D_800A46A0[];
+extern u8 D_80042B5B[];
+extern u8 D_80042B5C[];
+extern u8 D_80042B5E[];
+extern u8 D_80042B5F[];
+extern u8 D_80042B5D[];
+extern s16 D_800A4694[];
 
 #endif /* FIGHTSTG_DATA_H */

@@ -5,7 +5,32 @@
 
 INCLUDE_ASM("asm/ovl/WFIGHTTS/nonmatchings/WFIGHTTS", func_800A67B8);
 
-INCLUDE_ASM("asm/ovl/WFIGHTTS/nonmatchings/WFIGHTTS", func_800A6A28);
+void func_800A6A28(void) {
+    struct {
+        u8 pad0[0x20];
+        void (*fn20)(s32);
+        void (*fn24)(s32, s32);
+        u8 pad28[4];
+        void (*fn2C)(s32);
+        u8 pad30[8];
+    } g;
+    u8 *f;
+
+    func_8001FFA8(&g);
+    g.fn24(0x200, 0);
+    f = (u8 *)D_80044B38;
+    g.fn2C((*(s32 (**)(s32))(f + 0x424))(0x4560001));
+    g.fn24(0, 0xF4);
+    g.fn20((*(s32 (**)(s32))(f + 0x424))(0x4560000));
+    g.fn24(0x140, 0x100);
+    g.fn2C((*(s32 (**)(s32))(f + 0x414))(0x79E));
+    g.fn24(0x1C0, 0x100);
+    g.fn2C((*(s32 (**)(s32))(f + 0x414))(0x7AE));
+    g.fn24(0x200, 0x100);
+    g.fn2C((*(s32 (**)(s32))(f + 0x414))(0x7E1));
+    g.fn24(0x240, 0x100);
+    g.fn2C((*(s32 (**)(s32))(f + 0x414))(0x7E3));
+}
 
 INCLUDE_ASM("asm/ovl/WFIGHTTS/nonmatchings/WFIGHTTS", func_800A6B90);
 

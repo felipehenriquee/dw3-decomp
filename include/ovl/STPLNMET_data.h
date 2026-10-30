@@ -15,5 +15,12 @@ extern u8 D_8008983C[];
 extern u8 D_80089848[];
 extern NmTbl D_80089BB0 NOT_GP;
 extern s32 D_8004DE10[];
+extern Pair32 D_800885EC[];
+extern s32 D_8004B440[];
+extern s32 D_800519EC[];
+extern s32 D_80055C54[];
+extern s32 D_80055C68[];
+extern s32 D_80089B98[];
+extern s32 D_80089B9C[];
 
 #endif /* STPLNMET_DATA_H */

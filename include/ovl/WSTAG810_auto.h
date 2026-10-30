@@ -9,6 +9,7 @@ u8 *func_800A61C4(s32 arg0);
 u8 *func_800A6200(s32 arg0);
 u8 *func_800A623C(s32 arg0);
 Obj *func_800A6278(s16 arg0);
+void func_800A62B8(u8 *o, u8 **w);
 void *func_800A6418(s32 arg0);
 s16 func_800A6474(s16 *st, s16 *tbl, s32 once, s32 depth);
 void func_800A6594(u8 *o, s32 tex, s32 i);
@@ -26,7 +27,6 @@ s32 func_800143DC();
 s32 func_80014504();
 s32 func_8001F648();
 s32 func_800A5F00();
-s32 func_800A62B8();
 s32 func_800A6740();
 
 /* dados acessados via $gp */

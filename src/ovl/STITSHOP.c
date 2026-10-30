@@ -156,7 +156,20 @@ void func_800836F8(u8 *a, u8 **w, s32 on) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80083810);
+void func_80083810(u8 *a, u8 **w, s32 on) {
+    u8 *t;
+    if (on != 0) {
+        t = (u8 *)D_80044B38;
+        (*(void (**)(u8 *, s32, s32))(w[5] + 0x114))(w[5], (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0x71), 0x12);
+        (*(void (**)(u8 *, s32, s32))(w[5] + 0x118))(w[5], 1, *(u16 *)(((u8 *(*)(s32))D_80042B98)(*(s32 *)(a + 0x60)) + 4) * *(s32 *)(a + 0x64));
+        (*(void (**)(u8 *, s32, s32))(w[6] + 0x114))(w[6], (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0x71), 0x13);
+        (*(void (**)(u8 *, s32, s32))(w[7] + 0x114))(w[7], (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0x71), 0x14);
+    } else {
+        (*(void (**)(u8 *, s32))(w[5] + 0x144))(w[5], 0);
+        (*(void (**)(u8 *, s32))(w[6] + 0x144))(w[6], 0);
+        (*(void (**)(u8 *, s32))(w[7] + 0x144))(w[7], 0);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80083970);
 
@@ -199,7 +212,22 @@ Obj *func_8008596C(s32 arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_800859C0);
+void func_800859C0(u8 *o, u8 *x) {
+    s32 i;
+    u8 *w = (u8 *)func_8001B364(*(s16 *)(o + 0x58), *(s32 *)(o + 0x5C) - 1, 0, 0xB0);
+    *(u8 **)(x + 8) = w;
+    (*(void (**)(u8 *, s32))(w + 0x80))(w, 0);
+    for (i = 0; i < 4; i++) {
+        ((s32 *)(x + 0xC))[i] = func_8001AE38(*(s16 *)(o + 0x58), 1, 0xBE, (s16)(i * 14 + 0x2F));
+    }
+    *(s32 *)(x + 0x1C) = func_8001AE38(*(s16 *)(o + 0x58), 1, 0xB9, 0x3A);
+    *(s32 *)(x + 0x20) = func_8001AE38(*(s16 *)(o + 0x58), 1, 0x103, 0x54);
+    *(s32 *)(x + 0x24) = func_8001AE38(*(s16 *)(o + 0x58), 1, 0x11E, 0x54);
+    *(s32 *)(x + 0x28) = func_8001AE38(*(s16 *)(o + 0x58), 1, 0x9A, 0x2C);
+    *(s32 *)(x + 0x2C) = func_8001AE38(*(s16 *)(o + 0x58), 1, 0xC5, 0x49);
+    *(s32 *)(x + 0x30) = func_8001AE38(*(s16 *)(o + 0x58), 1, 0xC5, 0x59);
+    *(s32 *)(x + 0x34) = func_8001AE38(*(s16 *)(o + 0x58), 1, 0x9A, 0x8A);
+}
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80085B18);
 

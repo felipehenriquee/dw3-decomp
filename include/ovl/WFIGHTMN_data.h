@@ -18,5 +18,6 @@ extern s32 D_8004DC0C NOT_GP;
 extern u8 D_80042B1C[];
 extern s32 D_800A437C[];
 extern u8 D_800A44D0[];
+extern u8 D_800A4470[];
 
 #endif /* WFIGHTMN_DATA_H */

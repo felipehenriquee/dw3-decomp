@@ -4,5 +4,6 @@
 
 /* tipo ainda desconhecido (so o endereco e usado) */
 struct opaque;
+extern s32 D_80044B38[];
 
 #endif /* WFIGHTTS_DATA_H */

@@ -4,6 +4,7 @@
 
 /* funcoes ja decompiladas */
 s16 func_800A5E40(s16 *st, s16 *tbl, s32 depth);
+void func_800A5F34(u8 *o);
 Obj *func_800A6084(void);
 s16 func_800A60B0(s16 *st, s16 *tbl, s32 once, s32 depth);
 u8 *func_800A6604(s32 arg0);
@@ -29,7 +30,6 @@ s32 func_800143DC();
 s32 func_80014504();
 s32 func_8001F648();
 s32 func_800853F8();
-s32 func_800A5F34();
 s32 func_800A61D0();
 s32 func_800A6780();
 s32 func_800A6C10();

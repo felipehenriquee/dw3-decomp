@@ -81,7 +81,49 @@ Obj *func_800835C4(void) {
     return func_80014504(func_800833E8, 0x68, 0);
 }
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_800835F0);
+void func_800835F0(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        u8 pad88[4];
+        void (*fn8C)(s32, s32);
+        u8 pad90[4];
+        void (*fn94)(s32, s32);
+        u8 pad98[0xA0 - 0x98];
+    } g;
+    u8 *t;
+    s32 v;
+    Pair32 *tb;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        func_8001F648(&g);
+        g.fn74(0x280, 0x100);
+        g.fn7C(0x1001, 6);
+        t = (u8 *)D_8004DE10;
+        v = (*(s32 (**)(void))(t + 0x188))();
+        tb = D_800885EC;
+        if (tb[*(s32 *)(o + 0x60)].x < v - *(s32 *)(o + 0x64)) {
+            *(s32 *)(o + 0x64) = (*(s32 (**)(void))(t + 0x188))();
+            *(s32 *)(o + 0x60) += 1;
+            if (tb[*(s32 *)(o + 0x60)].y == 0) {
+                *(s32 *)(o + 0x60) = 0;
+            }
+        }
+        g.fn84((*(s32 (**)(s32))&D_80044F5C)(0x28A0000), D_800885EC[*(s32 *)(o + 0x60)].y, 0, 0);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80083748(void) {
     return func_80014504(func_800835F0, 0x68, 0);
@@ -455,7 +497,44 @@ void func_80088070(u8 *o) {
     g.fn84((*(s32 (**)(s32))&D_80044F5C)(0x28A0000), *(s32 *)(o + 0x58) + 0xC, 0x18, 0x15);
 }
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80088138);
+void func_80088138(u8 *o, u8 *b) {
+    u8 *t;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            ((void (*)(void))D_80089B98[0])();
+            ((void (*)(s32))D_80055C54[0])(0x20);
+            *(s32 *)(o + 0x10) += 1;
+            break;
+        case 1:
+            if (((s32 (*)(void))D_80089B9C[0])() == 0) {
+                func_80087B14(o, b);
+                *(s32 *)(o + 0x5C) = 10;
+                (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+            }
+            break;
+        }
+        break;
+    case 1:
+        func_80087C9C(o, b);
+        func_80088070(o);
+        break;
+    case 2:
+        t = (u8 *)D_800519EC;
+        if ((*(s32 (**)(void))(t + 0x4274))() == 0) {
+            (*(void (**)(s32))(t + 0x425C))(0x60800000);
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 1);
+        }
+        break;
+    case 3:
+        ((void (*)(s32))D_80055C68[0])(0x60800000);
+        ((void (*)(s32, s32))D_8004B440[0])(0x2D8, 0);
+        break;
+    }
+}
 
 Obj *func_800882A4(void) {
     void *temp_v0;

@@ -5,6 +5,7 @@
 /* funcoes ja decompiladas */
 void func_80082D70(u8 *o, u8 **w);
 Obj *func_80082E9C(void);
+void func_80082EC8(u8 *o, u8 **w);
 Obj *func_80083028(void);
 void func_800833AC(void *arg0);
 Obj *func_800833E4(s32 arg0);
@@ -16,7 +17,7 @@ s32 func_800836D8(DecEnv *dec);
 void func_80083760(void);
 void func_800838B0(TitlBlink *o);
 Obj *func_80083C70(s32 a, s32 b);
-void func_80083F48(s32 arg0);
+u8 *func_80083F48(s32 arg0);
 void func_80083F80(u8 *o);
 void func_800840A8(u8 *o);
 void func_800841E0(void *arg0);
@@ -81,7 +82,6 @@ s32 StUnSetRing();
 s32 func_80014504();
 s32 func_8001F648();
 s32 func_8001FFA8();
-s32 func_80082EC8();
 s32 func_80083054();
 s32 func_800831E8();
 s32 func_80083478();

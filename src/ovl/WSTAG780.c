@@ -149,7 +149,42 @@ s16 func_800A66B0(u8 *o, s16 *tbl, s32 depth) {
     return e[0];
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A67A4);
+void func_800A67A4(u8 *o) {
+    Rec18 *q;
+    Rec18 *r;
+    s32 i;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        *(s16 *)(o + 0x54) = 0;
+        *(s16 *)(o + 0x56) = D_800A8518[0][1];
+        *(s16 *)(o + 0x5C) = 0;
+        *(s16 *)(o + 0x5E) = D_800A8518[1][1];
+        for (q = D_80099D90; q->b[2] != 0; q++) {
+            switch (q->b[1]) {
+            case 1:
+                *(Rec18 **)(o + 0x50) = q;
+                break;
+            case 2:
+                *(Rec18 **)(o + 0x58) = q;
+                break;
+            }
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        for (i = 0; i < 2; i++) {
+            r = *(Rec18 **)(o + i * 8 + 0x50);
+            r->b[0] = 1;
+            r->b[4] = func_800A66B0(o + (i * 8 + 0x50), D_800A8518[i], 0);
+            r->b[9] = 0;
+        }
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_800A6914(void) {
     return func_80014504(func_800A67A4, 0x60, 0);

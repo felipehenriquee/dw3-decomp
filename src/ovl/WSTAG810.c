@@ -75,7 +75,39 @@ Obj *func_800A6278(s16 arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG810/nonmatchings/WSTAG810", func_800A62B8);
+void func_800A62B8(u8 *o, u8 **w) {
+    s32 i;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(void))(o + 0x38))();
+        for (i = 0; i < 0x3E; i++) {
+            if (D_800A71F4[i].off == 0) {
+                w[i] = func_800A69D0(D_800A71F4[i].x, D_800A71F4[i].y, D_800A71F4[i].p);
+            }
+        }
+        if (((s32 (*)(s32, s32))D_80048ACC[0])(0x406E, 0) != 0) {
+            w[0x3E] = func_800A61C4(0x34C);
+        } else {
+            w[0x3E] = (u8 *)func_800A6278(1);
+        }
+        if (((s32 (*)(s32, s32))D_80048ACC[0])(0x406F, 0) != 0) {
+            w[0x3F] = func_800A6200(0x34B);
+        } else {
+            w[0x3F] = (u8 *)func_800A6278(3);
+        }
+        if (((s32 (*)(s32, s32))D_80048ACC[0])(0x406D, 0) != 0) {
+            w[0x40] = func_800A623C(0x34A);
+        } else {
+            w[0x40] = (u8 *)func_800A6278(5);
+        }
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A6418(s32 arg0) {
     void *temp_v0;

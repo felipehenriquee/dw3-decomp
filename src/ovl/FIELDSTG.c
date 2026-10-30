@@ -357,7 +357,22 @@ Obj *func_80087580(void) {
     return func_80014504(func_800874D0, 0x50, 0xC);
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_800875AC);
+void func_800875AC(s32 unused, FsW2 *w) {
+    s16 key = ((s32 (*)(void))D_8004B438[0])();
+    s32 i;
+    for (i = 0; D_80097098[i].id != 0; i++) {
+        if (D_80097098[i].id == key) {
+            FsEnt4 *p = &D_80097098[i];
+            w->a = (u8 *)func_8001AE38(0x1003, 1, 0x80, 0x1A);
+            (*(void (**)(u8 *, s32, s32))(w->a + 0x114))(w->a, ((s32 (*)(s32))D_80044B38[0x105])(D_8005CCA8 + 0xA9), p->a);
+            (*(void (**)(u8 *, s32))(w->a + 0x130))(w->a, 5);
+            w->b = (u8 *)func_8001AE38(0x1003, 1, 0x28, 0x44);
+            (*(void (**)(u8 *, s32, s32))(w->b + 0x114))(w->b, ((s32 (*)(s32))D_80044B38[0x105])(D_8005CCA8 + 0xB7), p->b);
+            (*(void (**)(u8 *, s32))(w->b + 0x130))(w->b, 5);
+            return;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80087704);
 

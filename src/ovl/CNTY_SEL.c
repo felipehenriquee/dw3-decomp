@@ -27,7 +27,33 @@ s32 func_80082FC4(s32 n) {
 
 INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083000);
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083184);
+void func_80083184(u8 *o) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(s16 *)(o + 0x50) = 0;
+        break;
+    case 1:
+        *(s16 *)(o + 0x50) = (s16)(*(s16 *)(o + 0x50) + 1) % 192;
+        func_80082EF0(o);
+        break;
+    case 2:
+        if (*(s32 *)(o + 0x10) == 0) {
+            *(s16 *)(o + 0x52) = 0;
+            *(s32 *)(o + 0x10) = 1;
+        }
+        *(s16 *)(o + 0x50) = (s16)(*(s16 *)(o + 0x50) + 1) % 192;
+        func_80082EF0(o);
+        func_80083000(func_80082FC4((*(s16 *)(o + 0x52))++));
+        if (*(s16 *)(o + 0x52) >= 0x1E) {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 3);
+        }
+        break;
+    case 3:
+        break;
+    }
+}
 
 Obj *func_800832D8(void) {
     return func_80014504(func_80083184, 0x54, 0);

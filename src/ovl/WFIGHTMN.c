@@ -145,7 +145,48 @@ void func_800A8458(u8 *o, u8 *w) {
 
 INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A84D0);
 
-INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A8770);
+void func_800A8770(u8 *o, u8 *x) {
+    u8 *e = D_800A3868 + (s8)D_800A3868[0xAF1] * 0x1C;
+    u8 *p;
+    u8 *w;
+    s32 k, t;
+    switch (*(s32 *)(o + 0x14)) {
+    case 0:
+    default:
+        *(s32 *)(o + 0x50) = *(s32 *)(o + 0x10) + 0x1C;
+        *(s32 *)(o + 0x54) = *(s32 *)(e + 4);
+        *(s32 *)(o + 0x58) = *(s32 *)(e + 8);
+        w = (u8 *)func_8009A298();
+        *(u8 **)(x + 0x1C) = w;
+        (*(void (**)(u8 *, s32, u8 *))(w + 0xAC))(w, 7, o + 0x50);
+        *(s32 *)(o + 0x14) += 1;
+        break;
+    case 1:
+        if (*(u8 **)(x + 0x1C) == 0) {
+            k = *(s32 *)(e + 8) * 32;
+            if (*(s32 *)(e + 4) != 0) {
+                t = k + 0x60;
+                p = t + D_800A4470;
+            } else {
+                p = k + D_800A4470;
+            }
+            switch (*(s32 *)(o + 0x10)) {
+            case 0:
+            default:
+                p[0x1C] &= 0xFD;
+                break;
+            case 14:
+                p[0x1C] &= 0xFB;
+                break;
+            case 15:
+                p[0x1C] &= 0xF7;
+                break;
+            }
+            (*(void (**)(u8 *, s32))(o + 0x2C))(o, 0);
+        }
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A88CC);
 

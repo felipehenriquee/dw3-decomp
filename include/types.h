@@ -487,4 +487,16 @@ typedef struct { u8 pad[0x30A]; S8x2 c[40]; } CgCards30A;
 
 typedef struct { u8 pad[0x678]; s16 a[40]; } CgArr678;
 
+typedef struct { u8 *a; u8 *b; } FsW2;
+
+typedef struct { u8 a; u8 b; s16 id; } FsEnt4;
+
+typedef struct { s32 w[15]; } FtBlk3C;
+
+typedef struct { s16 x, y, z, pad; } SVec16;
+
+typedef struct { s16 type; s16 t; u8 pad[0x18]; } FtEv1C;
+
+typedef struct { s16 p; s16 off; s32 x; s32 y; } WsEnt12;
+
 #endif /* TYPES_H */
