@@ -20,5 +20,8 @@ extern s16 D_800A76F8[];
 extern s32 D_80048ACC NOT_GP;
 extern struct opaque D_80048ABC;
 extern W745Ent D_800A7700[];
+extern AnimEnt4 D_800A7658[];
+extern AnimEnt4 D_800A76A4[];
+extern AnimEnt4 *D_800A76F0[];
 
 #endif /* WSTAG800_DATA_H */

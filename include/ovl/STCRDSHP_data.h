@@ -16,5 +16,6 @@ extern s32 D_80044F4C NOT_GP;
 extern s32 D_80048D34[];
 extern s32 D_8008CB80[];
 extern s32 D_8008CB84[];
+extern s32 D_8008CB98[];
 
 #endif /* STCRDSHP_DATA_H */

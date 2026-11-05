@@ -92,7 +92,44 @@ Obj *func_80083880(void) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_80083930);
+void func_80083930(u8 *o, s32 *w) {
+    s16 r[4];
+    u8 *t;
+    u8 *x;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        t = D_8004DE10;
+        (*(void (**)(void))(t + 0x150))();
+        (*(void (**)(s32))(t + 0x154))(0x14000);
+        (*(void (**)(s32, s32, s32, s32))(t + 0x174))(0x140, 0xF0, 0, 0);
+        r[0] = 0;
+        r[1] = 0;
+        r[2] = 0x140;
+        r[3] = 0xF0;
+        x = (*(u8 *(**)(s16 *, s32, s32))(t + 0x16C))(r, 3, 0x1000);
+        (*(void (**)(u8 *, s32, s32, s32))(x + 0x12C))(x, 0, 0, 0);
+        r[0] = 0x7B;
+        r[1] = 0x53;
+        r[2] = 0xA8;
+        r[3] = 0x58;
+        (*(u8 *(**)(s16 *, s32, s32))(t + 0x16C))(r, 3, 0x1001);
+        (*(void (**)(s32, s32, s32))(t + 0x180))(0x1001, 0x1000, 1);
+        r[0] = 0;
+        r[1] = 0;
+        r[2] = 0x140;
+        r[3] = 0xF0;
+        (*(u8 *(**)(s16 *, s32, s32))(t + 0x16C))(r, 3, 0x1002);
+        (*(void (**)(s32, s32, s32))(t + 0x180))(0x1002, 0x1001, 1);
+        *w = func_80085DD8();
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80083AC0(void) {
     return func_80014504(func_80083930, 0x50, 4);

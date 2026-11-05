@@ -18,5 +18,8 @@ extern s32 D_8004DC04[];
 extern W780Ent D_800A8420[];
 extern Rec18 *D_80099D90;
 extern s16 *D_800A8518[];
+extern u8 D_800A83C0[];
+extern s32 D_8004DE10[];
+extern u8 *D_800A8E14[];
 
 #endif /* WSTAG780_DATA_H */

@@ -195,7 +195,33 @@ u8 *func_800A6ACC(s32 arg0) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG415/nonmatchings/WSTAG415", func_800A6B04);
+void func_800A6B04(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        void (*fn78)(s32, s32);
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        u8 pad88[0xA0 - 0x88];
+    } g;
+    Pair32 p;
+    u8 *t;
+    func_8001F648(&g);
+    g.fn7C(0x1002, 7);
+    g.fn74(0x280, 0);
+    g.fn78(0, 0xF0);
+    t = (u8 *)D_80044B38;
+    p.x = *(s32 *)(o + 0x50) >> 8;
+    p.y = (*(s32 *)(o + 0x54) >> 8) + 0x100;
+    g.fn84((*(s32 (**)(s32))(t + 0x424))(0x75E0002), 0, p.x, p.y);
+    g.fn84((*(s32 (**)(s32))(t + 0x424))(0x75E0002), 0, p.x - 0x200, p.y + 0x100);
+    g.fn74(0x280, 0x100);
+    g.fn78(0, 0xF8);
+    p.x = (*(s32 *)(o + 0x50) >> 8) + 0x100;
+    g.fn84((*(s32 (**)(s32))(t + 0x424))(0x75E0004), 0, p.x, p.y);
+    g.fn84((*(s32 (**)(s32))(t + 0x424))(0x75E0004), 0, p.x - 0x200, p.y + 0x100);
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG415/nonmatchings/WSTAG415", func_800A6C8C);
 

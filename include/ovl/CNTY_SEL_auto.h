@@ -3,8 +3,10 @@
 #define CNTY_SEL_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_80082CE8(u8 *o, u8 **w);
 Obj *func_80082E8C(void);
 s32 func_80082FC4(s32 n);
+void func_80083000(s32 v);
 void func_80083184(u8 *o);
 Obj *func_800832D8(void);
 s32 func_80083304(s16 *st, s16 *tbl, s32 depth);
@@ -31,9 +33,7 @@ s32 ClearImage2();
 s32 func_80014504();
 s32 func_8001F648();
 s32 func_8001FFA8();
-s32 func_80082CE8();
 s32 func_80082EF0();
-s32 func_80083000();
 s32 func_80083D18();
 
 /* dados acessados via $gp */

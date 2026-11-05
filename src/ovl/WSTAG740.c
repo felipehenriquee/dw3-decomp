@@ -80,7 +80,59 @@ void func_800A626C(u8 *o, s32 tex, s32 i) {
     g.fn84(((s32 (*)(s32))D_80044F5C[0])(D_80099D8C), p[0], *(s32 *)(o + 0x54), *(s32 *)(o + 0x58));
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG740/nonmatchings/WSTAG740", func_800A6324);
+void func_800A6324(u8 *o) {
+    u8 *x = ((u8 *(*)(s32))D_8004DF8C[0])(0x1002);
+    s32 i;
+    s32 n;
+    s32 v;
+    s32 y;
+    void *f;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        *(s16 *)(o + 0x5C) = 0;
+        *(s16 *)(o + 0x5E) = D_800A6ADE;
+        *(s16 *)(o + 0x60) = 0;
+        *(s16 *)(o + 0x62) = D_800A6AFA;
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        n = 0;
+        i = 0;
+        f = func_800A626C;
+        for (; i < 2; i++) {
+            v = func_800A6194((s16 *)(o + (i * 4 + 0x5C)), D_800A6B30[i], 0);
+            switch (v) {
+            default:
+                ((s16 *)(o + 0x64))[i * 2] = v;
+                break;
+            case 0xFF:
+                ((s16 *)(o + 0x64))[i * 2] = 0;
+                n++;
+                break;
+            case 0x12C:
+                ((s16 *)(o + 0x64))[i * 2] = 0;
+                break;
+            }
+            if (((s16 *)(o + 0x64))[i * 2] != 0) {
+                y = *(s32 *)(o + 0x58);
+                if (i == 0) {
+                    y -= 0xF0;
+                } else {
+                    y += 0x14;
+                }
+                (*(void (**)(u8 *, void *, u8 *, s32, s32))(x + 0x14C))(x, f, o, y, i);
+            }
+        }
+        if (n == 2) {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 3);
+        }
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_800A64BC(s32 arg0, s32 arg1) {
     void *temp_v0;

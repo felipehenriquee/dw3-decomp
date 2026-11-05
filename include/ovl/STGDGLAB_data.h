@@ -15,5 +15,6 @@ extern s32 D_8008F4B8[];
 extern s32 D_80044F5C[];
 extern s32 D_8008FD90[];
 extern s32 D_8008FD94[];
+extern s32 D_8005CCA0[];
 
 #endif /* STGDGLAB_DATA_H */

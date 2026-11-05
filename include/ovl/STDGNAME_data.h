@@ -19,5 +19,8 @@ extern u8 D_800876FC[];
 extern u8 D_80087720[];
 extern u8 D_80087998[];
 extern u8 D_800879A4[];
+extern NmEnt12 D_80087D98[];
+extern s32 D_80044F4C NOT_GP;
+extern s32 D_80087F38[];
 
 #endif /* STDGNAME_DATA_H */

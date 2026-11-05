@@ -116,7 +116,23 @@ Obj *func_80083218(void) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80083260);
+void func_80083260(u8 *o, u8 **w) {
+    s32 i;
+    s32 y;
+    y = *(s32 *)(o + 0x5C) * 0x32;
+    w[0] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x3D, (s16)(y + 0x28));
+    w[2] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 3, 0x3E, (s16)(y + 0x38));
+    w[1] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 3, 0x5B, (s16)(y + 0x38));
+    w[4] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 3, 0x6A, (s16)(y + 0x45));
+    w[3] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 3, 0x67, (s16)(y + 0x45));
+    for (i = 0; i < 3; i++) {
+        y = *(s32 *)(o + 0x5C) * 0x32 + i * 15;
+        w[i * 2 + 5] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x8D, (s16)(y + 0x28));
+        w[i * 2 + 6] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 3, 0x114, (s16)(y + 0x2C));
+    }
+    w[0xB] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x14, 0xC2);
+    (*(void (**)(u8 *, s32))(w[0xB] + 0x160))(w[0xB], 2);
+}
 
 INCLUDE_ASM("asm/ovl/STFGTREP/nonmatchings/STFGTREP", func_80083404);
 

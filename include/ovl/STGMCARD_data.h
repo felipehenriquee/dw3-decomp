@@ -16,5 +16,6 @@ extern s32 D_80048D34[];
 extern s32 D_80055C54[];
 extern McLangEnt D_800883A4[];
 extern s32 D_8008833C[];
+extern s32 D_80044F5C[];
 
 #endif /* STGMCARD_DATA_H */

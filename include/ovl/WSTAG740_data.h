@@ -9,5 +9,9 @@ extern s32 D_800A7234[];
 extern s32 D_80099D8C;
 extern s32 D_80044F5C[];
 extern s32 D_8004DF9C[];
+extern s32 D_8004DF8C[];
+extern s16 *D_800A6B30[];
+extern s16 D_800A6ADE;
+extern s16 D_800A6AFA;
 
 #endif /* WSTAG740_DATA_H */

@@ -34,7 +34,54 @@ Obj *func_80082E98(void) {
     return func_80014504(func_80082DA0, 0x50, 4);
 }
 
-INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_80082EC4);
+void func_80082EC4(s32 unused, u8 **w, u32 k) {
+    s32 i;
+    (*(void (**)(u8 *, s32))(w[0] + 0x138))(w[0], 0);
+    for (i = 0; i < 2; i++) {
+        (*(void (**)(u8 *, s32))(w[i + 4] + 0x138))(w[i + 4], 0);
+        (*(void (**)(u8 *, s32))(w[i + 6] + 0x138))(w[i + 6], 0);
+    }
+    (*(void (**)(u8 *, s32))(w[8] + 0x138))(w[8], 0);
+    switch (k) {
+    case 1:
+    default:
+        (*(void (**)(u8 *, s32))(w[0] + 0x138))(w[0], 3);
+        break;
+    case 2:
+        (*(void (**)(u8 *, s32))(w[4] + 0x138))(w[4], 3);
+        break;
+    case 3:
+        (*(void (**)(u8 *, s32))(w[5] + 0x138))(w[5], 3);
+        break;
+    case 4:
+        (*(void (**)(u8 *, s32))(w[6] + 0x138))(w[6], 3);
+        break;
+    case 5:
+        (*(void (**)(u8 *, s32))(w[7] + 0x138))(w[7], 3);
+        break;
+    case 10:
+        (*(void (**)(u8 *, s32))(w[8] + 0x138))(w[8], 3);
+        break;
+    case 0:
+        (*(void (**)(u8 *, s32))(w[0] + 0x138))(w[0], 1);
+        break;
+    case 6:
+        (*(void (**)(u8 *, s32))(w[4] + 0x138))(w[4], 1);
+        break;
+    case 7:
+        (*(void (**)(u8 *, s32))(w[5] + 0x138))(w[5], 1);
+        break;
+    case 8:
+        (*(void (**)(u8 *, s32))(w[6] + 0x138))(w[6], 1);
+        break;
+    case 9:
+        (*(void (**)(u8 *, s32))(w[7] + 0x138))(w[7], 1);
+        break;
+    case 11:
+        (*(void (**)(u8 *, s32))(w[8] + 0x138))(w[8], 1);
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/SHOCKTST/nonmatchings/SHOCKTST", func_80083064);
 

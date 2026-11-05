@@ -150,7 +150,25 @@ s32 func_800A6904(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/ovl/WSTAG460/nonmatchings/WSTAG460", func_800A6940);
 
-INCLUDE_ASM("asm/ovl/WSTAG460/nonmatchings/WSTAG460", func_800A6AB0);
+void func_800A6AB0(u8 *o) {
+    s32 a, b;
+    *(s16 *)(o + 0x70) += (*(s32 (**)(void))&D_8004DF9C)();
+    if (*(s16 *)(o + 0x72) < *(s16 *)(o + 0x70)) {
+        if (func_800A6904(o, 0x1E) != 0) {
+            *(s16 *)(o + 0x76) = ((func_800A6940(*(s32 *)(o + 0x5C) - *(s16 *)(o + 0x6C), *(s32 *)(o + 0x60) - *(s16 *)(o + 0x6E)) - 0x40) * 0x10) & 0xFFF;
+        } else {
+            *(s16 *)(o + 0x76) = (((s32 (*)(void))D_8004DC0C[0])() & 0xFF) * 0x10;
+        }
+        *(s16 *)(o + 0x70) -= *(s16 *)(o + 0x72);
+        *(s16 *)(o + 0x70) -= 7 - (((s32 (*)(void))D_8004DC0C[0])() & 0xF);
+    }
+    a = rsin(*(s16 *)(o + 0x76)) * *(s16 *)(o + 0x74) / 4096;
+    b = rcos(*(s16 *)(o + 0x76)) * *(s16 *)(o + 0x74) / 4096;
+    *(s32 *)(o + 0x64) += a;
+    *(s32 *)(o + 0x68) += b;
+    *(s16 *)(o + 0x6C) = *(s32 *)(o + 0x64) >> 8;
+    *(s16 *)(o + 0x6E) = *(s32 *)(o + 0x68) >> 8;
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG460/nonmatchings/WSTAG460", func_800A6C2C);
 

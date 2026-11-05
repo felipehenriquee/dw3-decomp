@@ -403,7 +403,34 @@ Obj *func_80086F60(s32 arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80086FC0);
+void func_80086FC0(u8 *o, u8 **w) {
+    s32 i;
+    u8 *b;
+    b = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x20, 0x1A);
+    w[0] = b;
+    (*(void (**)(u8 *, s32))(b + 0x138))(b, 4);
+    for (i = 0; i < 3; i++) {
+        b = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x1A, (s16)(i * 24 + 0x34));
+        w[i + 1] = b;
+        (*(void (**)(u8 *, s32))(b + 0x138))(b, 1);
+    }
+    b = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x3A, 0x32);
+    w[4] = b;
+    (*(void (**)(u8 *, s32))(b + 0x138))(b, 4);
+    b = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x3A, 0xC2);
+    w[5] = b;
+    (*(void (**)(u8 *, s32))(b + 0x160))(b, 3);
+    (*(void (**)(u8 *, s32))(w[5] + 0x138))(w[5], 1);
+    for (i = 0; i < 3; i++) {
+        b = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 2, 0x72, (s16)(i * 42 + 0x43));
+        w[i * 2 + 6] = b;
+        (*(void (**)(u8 *, s32))(b + 0x138))(b, 5);
+        b = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x72, (s16)(i * 42 + 0x4F));
+        w[i * 2 + 7] = b;
+        (*(void (**)(u8 *, s32))(b + 0x160))(b, 2);
+        (*(void (**)(u8 *, s32))(w[i * 2 + 7] + 0x138))(w[i * 2 + 7], 1);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80087190);
 

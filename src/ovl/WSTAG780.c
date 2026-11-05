@@ -5,7 +5,48 @@
 
 INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A5DE0);
 
-INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A5EC0);
+void func_800A5EC0(u8 *o) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        if (*(s32 *)(o + 0x58) == 0) {
+            if (*(s32 *)(o + 0x54) != 0) {
+                *(s32 *)(o + 0x68) += 0x500;
+            } else {
+                *(s32 *)(o + 0x68) -= 0x500;
+            }
+            if (*(s32 *)(o + 0x50) != 0) {
+                *(s32 *)(o + 0x6C) -= 0x280;
+            } else {
+                *(s32 *)(o + 0x6C) += 0x280;
+            }
+        }
+        *(s32 *)(o + 0x64) += (*(s32 (**)(void))&D_8004DF9C)();
+        if (*(s32 *)(o + 0x64) >= 8) {
+            *(s32 *)(o + 0x64) = 0;
+        }
+        if (*(s32 *)(o + 0x5C) != 0 && *(s32 *)(o + 0x58) != 0) {
+            *(s32 *)(o + 0x60) = 0x3B;
+        } else {
+            *(s32 *)(o + 0x60) = D_800A83C0[(*(s32 *)(o + 0x64) >> 2) + *(s32 *)(o + 0x50) * 2 + *(s32 *)(o + 0x5C) * 4];
+        }
+        if (*(s32 *)(o + 0x54) != 0) {
+            if (*(s32 *)(o + 0x68) >= 0x28000) {
+                (*(void (**)(u8 *, s32))(o + 0x28))(o, 3);
+            }
+        } else if (*(s32 *)(o + 0x68) <= 0) {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 3);
+        }
+        func_800A5DE0(o);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 u8 *func_800A605C(s32 a, s32 b, s32 c, s32 d) {
     u8 *o = (u8 *)func_80014504(func_800A5EC0, 0x70, 0);
@@ -244,7 +285,47 @@ void func_800A6A04(void *arg0, void *arg1) {
 
 INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A6B4C);
 
-INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A6DC4);
+void func_800A6DC4(u8 *o, u8 *x) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            *(s32 *)(o + 0x50) = 2;
+            *(s32 *)(o + 0x54) = 0;
+            *(s32 *)(o + 0x58) = 1;
+            *(s32 *)(o + 0x5C) = 0;
+            break;
+        case 1:
+            if (*(s32 *)(o + 0x50) == 2) *(s32 *)(o + 0x50) = 1;
+            if (*(s32 *)(o + 0x54) == 2) *(s32 *)(o + 0x54) = 1;
+            *(s32 *)(o + 0x14) += (*(s32 (**)(void))&D_8004DF9C)();
+            if (*(s32 *)(o + 0x14) > 0x78) {
+                if (*(s32 *)(o + 0x50) == 0) *(s32 *)(o + 0x50) = 2;
+                if (*(s32 *)(o + 0x50) == 1) *(s32 *)(o + 0x50) = 0;
+                if (*(s32 *)(o + 0x54) == 0) *(s32 *)(o + 0x54) = 2;
+                if (*(s32 *)(o + 0x54) == 1) *(s32 *)(o + 0x54) = 0;
+                (*(void (**)(u8 *))(o + 0x3C))(o);
+            }
+            *(s32 *)(o + 0x58) = 0;
+            *(s32 *)(o + 0x5C) = 0;
+            break;
+        case 2:
+            *(s32 *)(o + 0x58) = 0;
+            *(s32 *)(o + 0x5C) = 1;
+            break;
+        }
+        func_800A6B4C(o);
+        func_800A6A04(o, x);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A6F40);
 
@@ -254,7 +335,49 @@ u8 *func_800A6F8C(s32 arg0) {
 
 INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A6FBC);
 
-INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A72B0);
+void func_800A72B0(u8 *o) {
+    s32 i;
+    u8 *e;
+    u8 *t;
+    u8 **tb;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(s32 *)(o + 0x50) = 1;
+        *(s32 *)(o + 0x54) = -1;
+        *(s32 *)(o + 0x64) = 4;
+        *(s32 *)(o + 0x68) = -1;
+        break;
+    case 1:
+        i = 0;
+        t = (u8 *)D_8004DE10;
+        tb = D_800A8E14;
+        for (; i < 2; i++) {
+            e = o + (i * 0x14 + 0x50);
+            if (*(s32 *)e != *(s32 *)(e + 4)) {
+                *(s32 *)(e + 4) = *(s32 *)e;
+                *(s32 *)(e + 8) = 0;
+                *(s32 *)(e + 0xC) = 0;
+                *(s32 *)(e + 0x10) = 0;
+            }
+            *(s32 *)(e + 0x10) -= (*(s32 (**)(void))(t + 0x18C))();
+            if (*(s32 *)(e + 0x10) <= 0) {
+                *(s32 *)(e + 8) += 1;
+                if ((tb[*(s32 *)e] + *(s32 *)(e + 8) * 2)[1] == 0) {
+                    *(s32 *)(e + 8) = (tb[*(s32 *)e] + *(s32 *)(e + 8) * 2)[0];
+                }
+                *(s32 *)(e + 0xC) = (tb[*(s32 *)e] + *(s32 *)(e + 8) * 2)[0];
+                *(s32 *)(e + 0x10) = (tb[*(s32 *)e] + *(s32 *)(e + 8) * 2)[1];
+            }
+        }
+        func_800A6FBC(o);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void func_800A7450(void *arg0, s32 arg1) {
     if (arg1 == 0x322) {

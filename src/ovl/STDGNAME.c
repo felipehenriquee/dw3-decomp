@@ -259,7 +259,29 @@ u8 *func_80085364(s32 s, s32 b) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_80085420);
+void func_80085420(u8 *o, u8 **w, s32 k, s32 on) {
+    s32 a = 0;
+    u8 *t;
+    if (k < 5) a = *(s32 *)(o + 0x54);
+    if (on != 0) {
+        if (*w == 0) {
+            *w = (u8 *)func_8001AE38((s16)a, 1, D_80087D98[k].x, D_80087D98[k].y);
+            (*(void (**)(u8 *, s32))(*w + 0x15C))(*w, 1);
+        }
+        if ((u32)(k - 2) < 3) {
+            s32 v;
+            t = (u8 *)D_80048D34;
+            v = (*(s32 (**)(s32))(t + 0x2750))((*(s32 (**)(u32))(t + 0x2718))(k - 2));
+            *(s32 *)(*w + 0x50) = D_80087F38[0];
+            (*(void (**)(u8 *, s32, s32))(*w + 0x114))(*w, v, -1);
+        } else {
+            (*(void (**)(u8 *, s32, s32))(*w + 0x114))(*w, ((s32 (*)(s32))D_80044F4C)(D_8005CCA8[0] + 0x40), D_80087D98[k].id);
+        }
+        (*(void (**)(u8 *, s32))(*w + 0x138))(*w, 0);
+    } else if (*w != 0) {
+        (*(void (**)(u8 *, s32))(*w + 0x144))(*w, 0);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STDGNAME/nonmatchings/STDGNAME", func_8008559C);
 

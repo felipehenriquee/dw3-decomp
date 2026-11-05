@@ -270,13 +270,73 @@ Obj *func_800873D4(s32 arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80087428);
+void func_80087428(u8 *o, u8 **w) {
+    s32 i;
+    s32 y;
+    u8 *b;
+    y = *(s32 *)(o + 0x5C) * 0x28;
+    for (i = 0; i < 0xE; i++) {
+        b = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, (s16)((i % 2) * 0x83 + 0x37), (s16)((i / 2) * 0xE + 0x24));
+        w[i] = b;
+        (*(void (**)(u8 *, s32))(b + 0x15C))(b, *(s32 *)(o + 0x58) - 1);
+    }
+    w[0xE] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x9B, (s16)(y + 0x60));
+    w[0xF] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x9C, (s16)(y + 0x60));
+    w[0x10] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0xB0, (s16)(y + 0x60));
+    w[0x11] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x2D, (s16)(y - -(*(s32 *)(o + 0x5C) * 2 + 0x5C)));
+    w[0x12] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x102, (s16)(y - -(*(s32 *)(o + 0x5C) * 2 + 0x5C)));
+    b = (u8 *)func_8001B364(*(s16 *)(o + 0x54), *(s32 *)(o + 0x58) - 1, 0x1D, 0x24);
+    w[0x13] = b;
+    (*(void (**)(u8 *, s32))(b + 0x80))(b, 0);
+}
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_800875E0);
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80087920);
 
-INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80087CFC);
+void func_80087CFC(u8 *o, u8 *x) {
+    s32 n, d;
+    switch (*(s32 *)(o + 0x10)) {
+    case 0:
+    default:
+        if (*(s32 *)(o + 0x5C) == 0) {
+            *(s32 *)(o + 0x6B4) = ((s32 (*)(s32))D_8008D1AC[7])(*(s32 *)(o + 0x60));
+            *(s32 *)(o + 0x6C0) = D_8008D1AC[0];
+            *(s32 *)(o + 0x6D4) = 8;
+            *(s32 *)(o + 0x10) += 1;
+        } else {
+            func_800888E4(o);
+            *(s32 *)(o + 0x6D4) = 0xE;
+            *(s32 *)(o + 0x10) = 0x64;
+        }
+        n = *(s32 *)(o + 0x6C0);
+        d = *(s32 *)(o + 0x6D4);
+        *(s32 *)(o + 0x6C8) = n / d + (n % d != 0);
+        break;
+    case 1:
+        ((void (*)(u8 *, s32))D_8008D1B8[0])(o + 0x6D8, 1);
+        *(s32 *)(o + 0x10) += 1;
+        break;
+    case 2:
+        if (((s32 (*)(u8 *))D_8008D1BC[0])(o + 0x6D8) != 0) {
+            func_800875E0(o, x, 1);
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+        }
+        break;
+    case 0x32:
+        ((void (*)(u8 *, s32))D_8008D1B8[0])(o + 0x6D8, 0);
+        func_800875E0(o, x, 0);
+        *(s32 *)(o + 0x10) += 1;
+        break;
+    case 0x33:
+        if (((s32 (*)(u8 *))D_8008D1BC[0])(o + 0x6D8) != 0) {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+        }
+        break;
+    case 100:
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80087EC0);
 

@@ -7,7 +7,28 @@ INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_8008300C);
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_800832C8);
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_800835B8);
+void func_800835B8(u8 *o, u8 **w, s32 on) {
+    u8 *t;
+    s32 id;
+    s8 *d;
+    if (on != 0) {
+        id = *(s16 *)((o - -(*(s32 *)(o + 0x5C) * 2)) + 0x98);
+        t = (u8 *)D_80044B38;
+        (*(void (**)(u8 *, s32, s32))(w[9] + 0x114))(w[9], (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0x6A), id);
+        (*(void (**)(u8 *, s32, s32))(w[10] + 0x114))(w[10], (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0x32), 8);
+        d = (s8 *)D_80048D34;
+        (*(void (**)(u8 *, s32, s32))(w[11] + 0x118))(w[11], 0, (id + d)[0x7C]);
+        (*(void (**)(u8 *, s32))(w[11] + 0x148))(w[11], 1);
+        (*(void (**)(u8 *, s32, s32))(w[12] + 0x114))(w[12], (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0x32), 0xF);
+        (*(void (**)(u8 *, s32, s32))(w[13] + 0x114))(w[13], (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0x32), 4);
+    } else {
+        (*(void (**)(u8 *, s32))(w[9] + 0x144))(w[9], 0);
+        (*(void (**)(u8 *, s32))(w[10] + 0x144))(w[10], 0);
+        (*(void (**)(u8 *, s32))(w[11] + 0x144))(w[11], 0);
+        (*(void (**)(u8 *, s32))(w[12] + 0x144))(w[12], 0);
+        (*(void (**)(u8 *, s32))(w[13] + 0x144))(w[13], 0);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80083780);
 
@@ -272,7 +293,44 @@ INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_8008674C);
 
 INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80086DC4);
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80087A2C);
+void func_80087A2C(u8 *o, u8 *x) {
+    s32 i;
+    s32 n, c, r;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(u8 **)(o + 0xA8) = ((u8 *(*)(s32))D_8008CB98[0])(*(s32 *)(o + 0xA0));
+        for (i = 0; i < 6; i++) {
+            ((s32 *)(o + 0x74))[i] = (*(s16 **)(*(u8 **)(o + 0xA8) + 8))[i];
+        }
+        n = *(s32 *)(*(u8 **)(o + 0xA8) + 4);
+        *(s32 *)(o + 0xA4) = n;
+        c = n / 6;
+        r = c;
+        c = n - r * 6;
+        c = c != 0;
+        c = r - -c;
+        *(s32 *)(o + 0x70) = c;
+        *(Obj **)(x + 0x48) = func_80085FDC(*(s32 *)(o + 0x50), (s32 *)(o + 0x74));
+        func_80086074(o, x);
+        *(s32 *)(o + 0xAC) = 10;
+        *(s32 *)(o + 0xBC) = 10;
+        *(s32 *)(o + 0xCC) = 10;
+        break;
+    case 1:
+        func_80086DC4(o, x);
+        func_8008674C(o);
+        break;
+    case 2:
+        if (*(Obj **)(x + 0x48) == 0) {
+            *(s32 *)(o + 0xC) = 3;
+        }
+        break;
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80087B84(s32 arg0, s32 arg1) {
     void *temp_v0;

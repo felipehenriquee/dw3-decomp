@@ -185,7 +185,27 @@ INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_80085470);
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_80085730);
 
-INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_80085C50);
+void func_80085C50(u8 *o, u8 **w, s32 on) {
+    u8 *t;
+    u8 *f;
+    s32 i;
+    s32 v;
+    if (on != 0) {
+        for (i = 0; i < 3; i++) {
+            t = (u8 *)D_80044B38;
+            v = (*(s32 (**)(s32))(t + 0x414))(D_8005CCA8[0] + 0x4E);
+            (*(void (**)(u8 *, s32, s32))(w[i + 0x21] + 0x114))(w[i + 0x21], v, ((u8 *(*)(s32))D_8005CCA0[0])(((s16 *)(o + 0x74))[i])[0x55]);
+        }
+        f = (u8 *)D_80044B38;
+        (*(void (**)(u8 *, s32, s32))(w[0x24] + 0x114))(w[0x24], (*(s32 (**)(s32))(f + 0x414))(D_8005CCA8[0] + 0x39), 0x2C);
+        (*(void (**)(u8 *, s32, s32))(w[0x20] + 0x114))(w[0x20], (*(s32 (**)(s32))(f + 0x414))(D_8005CCA8[0] + 0x39), 0x2B);
+    } else {
+        for (i = 0; i < 4; i++) {
+            (*(void (**)(u8 *, s32))(w[i + 0x21] + 0x144))(w[i + 0x21], 0);
+        }
+        (*(void (**)(u8 *, s32))(w[0x20] + 0x144))(w[0x20], 0);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_80085DD0);
 
@@ -200,7 +220,39 @@ Obj *func_80087018(s32 arg0, s32 arg1) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_80087070);
+void func_80087070(u8 *o, u8 **w) {
+    s32 i;
+    u8 **p;
+    u8 *b;
+    u8 *q;
+    w[0] = (u8 *)func_8001AE38(*(s16 *)(o + 0xB4), 1, 0xAE, 0x57);
+    for (i = 0; i < 3; i++) {
+        w[i + 0xE] = (u8 *)func_8001AE38(*(s16 *)(o + 0xB4), 1, 0xA7, (s16)(i * 14 + 0x16));
+    }
+    for (i = 0; i < 2; i++) {
+        w[i + 0x11] = (u8 *)func_8001AE38(*(s16 *)(o + 0xB4), 1, 0xA7, (s16)(i * 14 + 0x73));
+    }
+    for (i = 0; i < 6; i++) {
+        w[i + 1] = (u8 *)func_8001AE38(*(s16 *)(o + 0xB4), 1, 0x32, (s16)(i * 14 + 0x4F));
+    }
+    for (i = 0; i < 7; i++) {
+        b = (u8 *)func_8001AE38(*(s16 *)(o + 0xB4), 1, 0x5B, (s16)(i * 14 + 0x4F));
+        q = (u8 *)w + (i * 4 + 0x18);
+        *(u8 **)(q + 4) = b;
+    }
+    p = *(u8 ***)(o + 0x24);
+    i = 0;
+    while (i < *(s32 *)(o + 0x20) - 4) {
+        if (*p != 0) {
+            (*(void (**)(u8 *, s32))(*p + 0x15C))(*p, *(s32 *)(o + 0xB8) - 1);
+        }
+        i++;
+        p++;
+    }
+    b = (u8 *)func_8001B364(*(s16 *)(o + 0xB4), *(s32 *)(o + 0xB8) - 1, 0x9A, 0x73);
+    w[0x14] = b;
+    (*(void (**)(u8 *, s32))(b + 0x80))(b, 0);
+}
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_80087248);
 

@@ -389,7 +389,43 @@ void func_80084CA8(void *arg0) {
 
 INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_80084DCC);
 
-INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_80087368);
+void func_80087368(u8 *arg0) {
+    u8 *o = arg0;
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        void (*fn88)(s32);
+        u8 pad8C[0xA0 - 0x8C];
+    } g;
+    u8 *t;
+    func_8001F648(&g);
+    g.fn7C(*(s32 *)(o + 0x54), 2);
+    g.fn74(0x140, 0);
+    if (*(s32 *)(o + 0x2840) != 0) {
+        t = D_8004DE10;
+        if (((*(s32 (**)(void))(t + 0x188))() - *(s32 *)(o + 0x2844)) / 3 != 0) {
+            *(s32 *)(o + 0x2844) = (*(s32 (**)(void))(t + 0x188))();
+            *(s32 *)(o + 0x2848) += 1;
+            if (*(s32 *)(o + 0x2848) >= 5) {
+                *(s32 *)(o + 0x2848) = 0;
+            }
+        }
+        g.fn88(*(s32 *)(o + 0x2848));
+        g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x2860000), 0xA, 0x126, 0xD0);
+    }
+    g.fn74(0x280, 0);
+    g.fn88(0);
+    t = (u8 *)D_80044B38;
+    g.fn84((*(s32 (**)(s32))(t + 0x424))(0x29D0000), 0x21, *(s32 *)(o + 0x58) + *(s32 *)(o + 0x2810), *(s32 *)(o + 0x5C) + *(s32 *)(o + 0x282C));
+    if (*(s32 *)(o + 0x284C) != 0) {
+        g.fn7C(*(s32 *)(o + 0x54), 1);
+        g.fn84((*(s32 (**)(s32))(t + 0x424))(0x29D0000), 0x1D, 0xBC, 0xB9);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_80087534);
 

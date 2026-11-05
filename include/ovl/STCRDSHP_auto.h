@@ -3,6 +3,7 @@
 #define STCRDSHP_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800835B8(u8 *o, u8 **w, s32 on);
 void func_800843C0(u8 *o);
 void func_800852CC(u8 *o, s32 b);
 Obj *func_8008536C(s32 arg0);
@@ -16,6 +17,7 @@ void func_80085788(void *arg0);
 void func_80085CD8(u8 *o);
 Obj *func_80085FDC(s32 arg, s32 *v);
 void func_80086074(void *arg0, void *arg1);
+void func_80087A2C(u8 *o, u8 *x);
 Obj *func_80087B84(s32 arg0, s32 arg1);
 void func_80087BDC(u8 *o, Obj **out);
 Obj *func_80087CD4(void);
@@ -39,7 +41,6 @@ s32 func_8001F648();
 s32 func_8001FFA8();
 s32 func_8008300C();
 s32 func_800832C8();
-s32 func_800835B8();
 s32 func_80083780();
 s32 func_80083BA8();
 s32 func_800844B8();
@@ -49,7 +50,6 @@ s32 func_80085DA0();
 s32 func_8008627C();
 s32 func_8008674C();
 s32 func_80086DC4();
-s32 func_80087A2C();
 s32 func_80087D00();
 s32 func_800880C4();
 s32 func_8008838C();

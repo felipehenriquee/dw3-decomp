@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-10-30): EXE **275 de 347** (79%); overlays **2152 de 3292** (65.4%). Total **2427 de 3639 (66.7%)**.
+- [ ] Decompilação (2026-11-04): EXE **275 de 347** (79%); overlays **2199 de 3292** (66.8%). Total **2474 de 3639 (68.0%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -113,6 +113,18 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 6. Corrigir a divisão do splat em `func_800148C0` (`make split` apaga `build/` — fazer quando nada estiver rodando).
 7. Revisão semântica para o port (`tools/audit_args.py`).
 8. Jobs em segundo plano: parar com `tools/stop_jobs.sh` e commitar com `tools/commit_locked.sh "msg"`.
+
+### Notas da decompilação manual (2026-11-04)
+- **Finais iguais fundidos pelo GCC** (`j` para o `jalr` do outro ramo, função 16 bytes menor): declare um dos ponteiros com outro retorno (`void` num, `s32` no outro); o RTL muda e o cross-jump não acontece (CNTY_SEL `func_80082CE8`).
+- **`move` depois da divisão**: `c = i / 9; r = c; c = i - r * 9;` em vez de `i / 9` + `i % 9` (STCRDDEK `func_800835D8`). Com soma ao fim: `c = n / 6; r = c; c = n - r * 6; c = c != 0; c = r - -c;` (STCRDSHP `func_80087A2C`).
+- **Mesma variável com dois tipos**: quando o registrador do ponteiro segue vivo depois do primitivo, use um `p` só e `p++` em vez de `m = (DrMode *)(p + 1)` (FIGHTSTG `func_8009E77C`).
+- Elemento de animação/janela com `addu a0,s,s2` e `s2` começando em `0x50`/`0x5C`: `o + (i * 8 + 0x50)` no argumento e `*(T *)(o + i * 8 + 0x50)` no load criam as duas variáveis de indução (WSTAG780 `func_800A67A4`, WSTAG740 `func_800A6324`, WSTAG800 `func_800A6344`). Sem chamada no meio: `b = f(); q = (u8 *)w + (i * 4 + 0x18); *(u8 **)(q + 4) = b;` (STGDGLAB `func_80087070`); com a carga antes da chamada: `q = ...; z = *(u8 **)(q + 0x34);` (STSTATUS `func_800891A4`).
+- Endereço içado para `s`-reg antes do laço: `i = 0; f = func_X; for (; i < n; i++)` (WSTAG740). `lui` só depois do teste do laço: atribua a base **dentro** do laço (`d = (u8 *)D_X;`), o GCC iça depois do teste (STCRDABM `func_800835BC`, STSTATUS `func_80084A98`, STCRDDEK `func_800835D8`).
+- Registro por byte `lb a2,0x7C(s0)` sem dobrar o offset: base local logo antes do uso, `d = (s8 *)D_80048D34; (id + d)[0x7C]` (STCRDSHP `func_800835B8`, STSTATUS `func_8008F0DC`).
+- `base + K` num `s`-reg antes de somar o índice: `k = f(); d += 0x75C; e = k * 0x3DC + d;` (STSTATUS `func_8008886C`). Em `t + idx*32`, com o índice no registrador do resultado: `e = *(u8 **)(t + 8); t += 0x10; e = (u8 *)((s32)e << 5); e = e + (s32)t;` (FIGHTSTG `func_80090C8C`).
+- Parâmetro `u8` muda o chamador (ele mascara antes): se o `make` quebrar com a função batendo, volte para `s32` (CNTY_SEL `func_80083000`). `CgPt16` por valor: `sw a1,0x24(sp)` na entrada (CARDGAME `func_800A32D8`).
+- `switch` com `default` antes de valores especiais (`default: guarda; case 0xFF: ...; case 0x12C: ...`) gera `beq; beq; guarda` (WSTAG740). `case 1: default:` quando o `sltiu` da jump table cai no caso 1 (SHOCKTST `func_80082EC4`).
+- Quase: CARDGAME `func_800A32D8` (só `a2`/`a3` das máscaras), FIELDSTG `func_8008ED2C` (4: `a0`/`v1`), STCRDSHP `func_80088CA0` (`a1`/`v1`; permuter 30) e `func_80087D00` (zero constante num `s`-reg), WFIGHTMN `func_800A66B0` (variável de indução `+10`), STGTRAIN `func_800863D4`, STSTATUS `func_800980B0` (um `s`-reg a mais). FIGHTSTG `func_8009DF78` bate, mas o `make` falha (jump table). C em `wip/ovl/`.
 
 ### Notas da decompilação manual (2026-10-30)
 - `pending.py` lista muitas da família "inicialização de mapa" (`D_80099D80`) no topo; filtre com `grep -q D_80099D80` no `.s` para achar as outras.

@@ -19,5 +19,7 @@ extern u8 D_80042B1C[];
 extern s32 D_800A437C[];
 extern u8 D_800A44D0[];
 extern u8 D_800A4470[];
+extern s32 D_8004B44C[];
+extern u8 D_8003EF5C[];
 
 #endif /* WFIGHTMN_DATA_H */

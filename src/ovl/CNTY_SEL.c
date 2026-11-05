@@ -3,7 +3,45 @@
 #include "CNTY_SEL_auto.h"
 #include "CNTY_SEL_data.h"
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80082CE8);
+void func_80082CE8(u8 *o, u8 **w) {
+    struct {
+        u8 pad0[0x24];
+        void (*fn24)(s32, s32);
+        void (*fn28)(s32, s32);
+        void (*fn2C)(s32);
+        u8 pad30[8];
+    } g;
+    u8 *t;
+    u8 *x;
+    u8 *s;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        s = (u8 *)D_800519EC;
+        if ((*(s32 (**)(void))(s + 0x4274))() == 0) {
+            t = (u8 *)D_8004DE10;
+            (*(void (**)(void))(t + 0x150))();
+            (*(void (**)(s32))(t + 0x154))(0xA000);
+            (*(void (**)(s32, s32, s32, s32))(t + 0x174))(0x140, 0xF0, 0, 0);
+            func_8001FFA8(&g);
+            g.fn24(0x280, 0);
+            g.fn28(0, 0x1F0);
+            g.fn2C(((s32 (*)(s32))D_80044F5C[0])(0x8A30001));
+            x = (*(u8 *(**)(SRect *, s32, s32))(t + 0x16C))(D_800843C0, 3, 0x100);
+            (*(void (**)(u8 *, s32, s32, s32))(x + 0x12C))(x, 0x1F, 0x1F, 0x1F);
+            *w = (u8 *)func_80084394();
+            (*(void (**)(u8 *))(o + 0x38))(o);
+            (*(s32 (**)(s32))(s + 0x425C))(0x60840002);
+        }
+        break;
+    case 1:
+    case 2:
+        break;
+    case 3:
+        ((void (*)(s32))D_80055C68[0])(0x60840002);
+        break;
+    }
+}
 
 /* limpa a tela, cria o objeto da selecao de pais e toca o som 0x21 */
 Obj *func_80082E8C(void) {
@@ -25,7 +63,38 @@ s32 func_80082FC4(s32 n) {
     return n * 255 / 30;
 }
 
-INCLUDE_ASM("asm/ovl/CNTY_SEL/nonmatchings/CNTY_SEL", func_80083000);
+void func_80083000(s32 v) {
+    u8 *sys = (u8 *)D_8004DE10;
+    u8 *o;
+    u32 *ot;
+    PolyF4 *p;
+    DrMode *m;
+
+    o = (*(u8 *(**)(s32))(sys + 0x17C))(0x100);
+    ot = (*(u32 *(**)(u8 *, s32))(o + 0x138))(o, 0);
+    p = (*(PolyF4 *(**)(void))(sys + 0x158))();
+    ((u8 *)p)[3] = 5;
+    p->b0 = v;
+    p->g0 = v;
+    p->r0 = v;
+    p->code = 0x2A;
+    p->x0 = D_800843D0.x;
+    p->x1 = D_800843D0.x + D_800843D0.w;
+    p->x2 = D_800843D0.x;
+    p->x3 = D_800843D0.x + D_800843D0.w;
+    p->y0 = D_800843D0.y;
+    p->y1 = D_800843D0.y;
+    p->y2 = D_800843D0.y + D_800843D0.h;
+    p->y3 = D_800843D0.y + D_800843D0.h;
+    m = (DrMode *)(p + 1);
+    p->tag = (p->tag & 0xFF000000) | (*ot & 0xFFFFFF);
+    *ot = (*ot & 0xFF000000) | ((u32)p & 0xFFFFFF);
+    ((u8 *)m)[3] = 1;
+    m->code[0] = 0xE1000245;
+    m->tag = (m->tag & 0xFF000000) | (*ot & 0xFFFFFF);
+    *ot = (*ot & 0xFF000000) | ((u32)m & 0xFFFFFF);
+    (*(void (**)(void *))(sys + 0x15C))((u8 *)m + 8);
+}
 
 void func_80083184(u8 *o) {
     switch (*(s32 *)(o + 0xC)) {

@@ -249,7 +249,41 @@ INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A8F88);
 
 INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A9584);
 
-INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A9640);
+void func_800A9640(u8 *o, u8 *x) {
+    u8 *t;
+    u8 *e;
+    s32 k;
+    u8 *d;
+    u8 *q;
+    switch (*(s32 *)(o + 0x14)) {
+    case 0:
+    default:
+        t = D_800A4460;
+        k = ((s32 (*)(s32))D_8004B44C[0])(*(s32 *)(t + 8));
+        q = t + 0x10;
+        e = *(s32 *)(t + 8) * 32 + q;
+        *(s16 *)e = *(s16 *)(D_8003EF5C + k * 0x58);
+        *(s16 *)(e + 0xE) = 0;
+        func_800A7328();
+        d = D_800A3868;
+        k = (*(s32 (**)(s32, s32, s32))(d + 0xB0C))(8, 0, *(s32 *)(t + 8));
+        if (k >= 0) {
+            *(s16 *)(d + k * 0x1C) = 0;
+        }
+        *(s32 *)(x + 0x1C) = func_80087000(*(s16 *)e, 0, func_800AA9F0(0, 0));
+        *(s32 *)(o + 0x14) += 1;
+        break;
+    case 1:
+        if (*(s32 *)(x + 0x1C) == 0) {
+            *(s32 *)(x + 0x1C) = func_8009A298();
+            *(s32 *)(o + 0x50) = 0x47;
+            *(s32 *)(o + 0x54) = 0;
+            (*(void (**)(u8 *, s32, u8 *))(*(u8 **)(x + 0x1C) + 0xAC))(*(u8 **)(x + 0x1C), 2, o + 0x50);
+            (*(void (**)(u8 *, s32))(o + 0x2C))(o, 2);
+        }
+        break;
+    }
+}
 
 void func_800A97BC(u8 *o, u8 *w) {
     u8 *x;

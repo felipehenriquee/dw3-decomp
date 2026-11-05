@@ -14,5 +14,6 @@ extern s32 D_80055C48[];
 extern s16 D_800A73F2[];
 extern s16 D_800A741A[];
 extern s16 D_800A742A[];
+extern s32 D_80044B38[];
 
 #endif /* WSTAG415_DATA_H */

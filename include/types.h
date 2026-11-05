@@ -499,4 +499,8 @@ typedef struct { s16 type; s16 t; u8 pad[0x18]; } FtEv1C;
 
 typedef struct { s16 p; s16 off; s32 x; s32 y; } WsEnt12;
 
+typedef struct { s32 id; s16 x; s16 p6; s16 y; s16 pA; } NmEnt12;
+
+typedef struct { u32 tag; Bytes4 c0; s16 x0, y0; Bytes4 c1; s16 x1, y1; Bytes4 c2; s16 x2, y2; Bytes4 c3; s16 x3, y3; } FtPolyG4;
+
 #endif /* TYPES_H */

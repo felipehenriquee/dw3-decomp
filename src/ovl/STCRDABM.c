@@ -131,7 +131,39 @@ void func_8008314C(void *arg0) {
 
 INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_80083174);
 
-INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_800835BC);
+void func_800835BC(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        void (*fn88)(s32);
+        u8 pad8C[0xA0 - 0x8C];
+    } g;
+    s32 i;
+    s32 k;
+    s32 x, y;
+    u8 *d;
+    u8 *t;
+    func_8001F648(&g);
+    g.fn7C(*(s32 *)(o + 0x54), *(s32 *)(o + 0x58) - 1);
+    g.fn74(0x280, 0);
+    for (i = 0; i < *(s32 *)(o + 0x68); i++) {
+        d = (u8 *)D_80048D34;
+        t = (u8 *)D_80044B38;
+        k = *(s32 *)(o + 0x5C) + i;
+        x = i % 6;
+        y = i / 6;
+        if ((k + d)[0x4DF] != 0 || k >= 0x13B) {
+            g.fn88(*(s32 *)(o + 0x70));
+        } else {
+            g.fn88(0);
+        }
+        g.fn84((*(s32 (**)(s32))(t + 0x424))(0x6050000), 6, x * 0x2A + 0x23, y * 0x36 + 0x32);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_80083734);
 

@@ -80,9 +80,91 @@ Obj *func_80083028(void) {
     return func_80014504(func_80082EC8, 0x50, 0xC);
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80083054);
+void func_80083054(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        void (*fn88)(s32);
+        u8 pad8C[0xA0 - 0x8C];
+    } g;
+    u8 *t;
+    if (*(s32 *)(o + 0x54) != 0) {
+        func_8001F648(&g);
+        g.fn7C(*(s32 *)(o + 0x68), 0);
+        g.fn74(0x280, 0x100);
+        t = (u8 *)D_80044B38;
+        g.fn84((*(s32 (**)(s32))(t + 0x424))(D_80088234), 6, 0x1D, 0xD1);
+        func_8001F648(&g);
+        g.fn7C(*(s32 *)(o + 0x68), 0);
+        g.fn74(0x280, 0x100);
+        g.fn88(*(s16 *)(o + 0x5A));
+        g.fn84((*(s32 (**)(s32))(t + 0x424))(D_80088234), 3, 8, 0x1C);
+        func_8001F648(&g);
+        g.fn7C(*(s32 *)(o + 0x68), 0);
+        g.fn74(0x280, 0x100);
+        g.fn88(*(s16 *)(o + 0x62));
+        g.fn84((*(s32 (**)(s32))(t + 0x424))(D_80088234), 5, 0x14, 0xCA);
+    }
+}
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_800831E8);
+void func_800831E8(u8 *o) {
+    s32 i;
+    s16 v;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        if (*(s32 *)(o + 0x50) == 0) {
+            (*(void (**)(u8 *))(o + 0x38))(o);
+        } else {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+        }
+        break;
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            break;
+        case 1:
+            *(s32 *)(o + 0x54) = 1;
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+            *(s16 *)(o + 0x58) = 0;
+            *(s16 *)(o + 0x60) = 0;
+        case 2:
+            for (i = 0; i < 2; i++) {
+                if (*(s32 *)(o + i * 8 + 0x5C) == 0) {
+                    if (D_80087C54[i][*(s16 *)(o + i * 8 + 0x58)] == -1) {
+                        *(s32 *)(o + i * 8 + 0x5C) = 1;
+                        *(s16 *)(o + i * 8 + 0x58) -= 1;
+                    }
+                    v = D_80087C54[i][*(s16 *)(o + i * 8 + 0x58)];
+                    *(s16 *)(o + i * 8 + 0x58) += 1;
+                    *(s16 *)(o + i * 8 + 0x5A) = v;
+                }
+            }
+            if (*(s32 *)(o + 0x5C) + *(s32 *)(o + 0x64) == 2) {
+                (*(void (**)(u8 *, s32))(o + 0x2C))(o, 2);
+            }
+            func_80083054(o);
+            break;
+        }
+        break;
+    case 2:
+        if (*(s32 *)(o + 0x10) == 0) {
+            *(s16 *)(o + 0x5A) = 0xB;
+            *(s16 *)(o + 0x62) = 7;
+            *(s32 *)(o + 0x54) = 1;
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        }
+        func_80083054(o);
+        break;
+    case 3:
+        break;
+    }
+}
 
 void func_800833AC(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0xC) == 1) {
@@ -941,7 +1023,31 @@ Obj *func_80086DB0(s32 arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80086DF8);
+void func_80086DF8(void) {
+    struct {
+        u8 pad0[0x24];
+        void (*fn24)(s32, s32);
+        void (*fn28)(s32, s32);
+        void (*fn2C)(s32);
+        u8 pad30[8];
+    } g;
+    u8 *f;
+    func_8001FFA8(&g);
+    g.fn24(0x280, 0x100);
+    g.fn28(0, 0x1F0);
+    f = (u8 *)D_80044B38;
+    g.fn2C((*(s32 (**)(s32))(f + 0x424))(D_8008824C[D_8005CCA8[0]].x));
+    D_80088234 = D_8008824C[D_8005CCA8[0]].y;
+    g.fn28(0, 0x1F3);
+    g.fn24(0x300, 0);
+    g.fn2C((*(s32 (**)(s32))(f + 0x424))(0x8870004));
+    g.fn24(0x340, 0);
+    g.fn2C((*(s32 (**)(s32))(f + 0x424))(0x8870005));
+    g.fn24(0x380, 0);
+    g.fn2C((*(s32 (**)(s32))(f + 0x424))(0x8870006));
+    g.fn24(0x3C0, 0);
+    g.fn2C((*(s32 (**)(s32))(f + 0x424))(0x8870007));
+}
 
 void func_80086FA0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = 1;
