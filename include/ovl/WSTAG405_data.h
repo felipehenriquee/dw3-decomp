@@ -8,5 +8,7 @@ extern s32 D_800A6E38[];
 extern struct opaque D_8004DF9C;
 extern Rec18 *D_80099D90;
 extern s16 D_800A63EC[];
+extern struct opaque D_80048ABC;
+extern s32 D_8004B370[];
 
 #endif /* WSTAG405_DATA_H */

@@ -327,7 +327,18 @@ void func_800A6DC4(u8 *o, u8 *x) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG780/nonmatchings/WSTAG780", func_800A6F40);
+void func_800A6F40(u8 *o, s32 k) {
+    if (o != 0) {
+        switch (k) {
+        case 0x324:
+            (*(void (**)(u8 *, s32))(o + 0x2C))(o, 0);
+            break;
+        case 0x320:
+            (*(void (**)(u8 *, s32))(o + 0x2C))(o, 1);
+            break;
+        }
+    }
+}
 
 u8 *func_800A6F8C(s32 arg0) {
     return func_800143DC(func_800A6DC4, 96, 16, arg0);

@@ -12,5 +12,8 @@ extern s16 *D_800A816C[];
 extern W212Pt D_800A817C[];
 extern s32 D_800A8188[];
 extern s32 D_80055C48[];
+extern struct opaque D_80048ABC;
+extern u8 D_80048D34[];
+extern s32 D_80048ACC[];
 
 #endif /* WSTAG212_DATA_H */

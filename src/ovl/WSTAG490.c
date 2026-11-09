@@ -3,7 +3,31 @@
 #include "WSTAG490_auto.h"
 #include "WSTAG490_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG490/nonmatchings/WSTAG490", func_800A5DE4);
+void func_800A5DE4(u8 *o, s32 *w) {
+    s32 a;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        {
+            u8 *f = (u8 *)&D_80048ABC;
+            if ((*(s32 (**)(s32, s32))(f + 0x10))(0x4025, 1) && (*(s32 (**)(s32, s32))(f + 0x10))(0x4026, 0)) { a = 0x4F4; goto call; }
+        }
+        {
+            u8 *f = (u8 *)&D_80048ABC;
+            if ((*(s32 (**)(s32, s32))(f + 0x10))(0x402F, 1) && (*(s32 (**)(s32, s32))(f + 0x10))(0x4030, 0)) {
+                a = 0x4FE;
+            call:
+                w[0] = func_800853F8(a);
+            }
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A5EC8(s32 arg0) {
     void *temp_v0;

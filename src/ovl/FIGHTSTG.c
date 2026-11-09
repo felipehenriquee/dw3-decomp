@@ -286,7 +286,13 @@ void func_80087E7C(u8 *o, s32 id, s32 v) {
     *(s32 *)(o + 0x54) = v;
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80087EE4);
+s32 func_80087EE4(u8 *o) {
+    s32 i = func_80087BF8(o);
+    if (i != -1) {
+        return *(s32 *)((o - -(i * 76)) + 0x64);
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_80087F38);
 
@@ -2662,7 +2668,12 @@ s32 func_800A1558(s32 unused, s32 k) {
     return (((s32 (*)(void))D_8004DC0C)() & 0x7F) < c;
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800A15A8);
+s32 func_800A15A8(u8 *o, s32 n) {
+    u8 *tb = D_800A4460;
+    s32 t;
+    t = n * 64 / *(s16 *)((tb - -(*(s32 *)(tb + 8) * 32)) + 0x16) + 0x20;
+    return (((s32 (*)(void))D_8004DC0C)() & 0x7F) < t;
+}
 
 INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800A1608);
 

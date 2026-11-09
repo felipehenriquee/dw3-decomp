@@ -6,5 +6,7 @@
 struct opaque;
 extern s32 D_800A67DC[];
 extern s32 D_80048AC8[];
+extern s32 D_80048ACC[];
+extern s32 D_8004B370[];
 
 #endif /* WSTAG575_DATA_H */

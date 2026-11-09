@@ -3,6 +3,7 @@
 #define WSTAG925_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_800A5DE0(u8 *o, s32 *w);
 void *func_800A5E64(s32 arg0);
 void func_800A5EC0(void);
 s16 func_800A6000(s16 *st, s16 *tbl, s32 depth);
@@ -13,7 +14,6 @@ u8 *func_800A639C(s32 arg0);
 s32 func_800143DC();
 s32 func_80014504();
 s32 func_800853F8();
-s32 func_800A5DE0();
 s32 func_800A6110();
 
 /* dados acessados via $gp */

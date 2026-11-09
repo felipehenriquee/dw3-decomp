@@ -3,7 +3,24 @@
 #include "WSTAG400_auto.h"
 #include "WSTAG400_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG400/nonmatchings/WSTAG400", func_800A5DE4);
+void func_800A5DE4(u8 *o, s32 *w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        {
+            u8 *f = (u8 *)&D_80048ABC;
+            if ((*(s32 (**)(s32, s32))(f + 0x10))(0x1A26, 1) && (*(s32 (**)(s32, s32))(f + 0x10))(0x1C4B, 0)) {
+                w[0] = func_800853F8(0x514);
+            }
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A5E8C(s32 arg0) {
     void *temp_v0;

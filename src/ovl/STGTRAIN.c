@@ -857,4 +857,15 @@ INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008C12C);
 
 INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008C158);
 
-INCLUDE_ASM("asm/ovl/STGTRAIN/nonmatchings/STGTRAIN", func_8008C1C8);
+Pair8 *func_8008C1C8(s32 a, s32 b) {
+    s32 i;
+    if ((u32)(a - 1) >= 14) {
+        a = 0;
+    }
+    for (i = 0; i < 16; i++) {
+        if (D_8008C4E4[a][i].k == b) {
+            return &D_8008C4E4[a][i];
+        }
+    }
+    return 0;
+}

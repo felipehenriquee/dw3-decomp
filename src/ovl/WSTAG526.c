@@ -43,7 +43,68 @@ s16 func_800A6058(s16 *st, s16 *tbl, s32 once, s32 depth) {
     return e[0];
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6178);
+void func_800A6178(u8 *o) {
+    Rec18 *r;
+    u8 *p;
+    u8 *q;
+    s32 v;
+
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        *(s16 *)(o + 0x58) = 0;
+        *(s16 *)(o + 0x5A) = D_800A76E8[1];
+        *(s16 *)(o + 0x50) = 1;
+        for (r = D_80099D90; r->b[2] != 0; r++) {
+            if (r->b[1] == 0x15) {
+                *(Rec18 **)(o + 0x54) = r;
+            }
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        q = *(u8 **)(o + 0x54);
+        if (*(s16 *)(o + 0x50) != 0) {
+            q[0] = 1;
+            q[4] = 2;
+            q[9] = ((s32 (*)(u8 *, s16 *, s32, s32))func_800A6058)(o + 0x54, D_800A76E8, 0, 0);
+        } else {
+            q[0] = 0;
+        }
+        if (*(s16 *)(o + 0x50) == 2) {
+            if (--*(s16 *)(o + 0x52) <= 0) {
+                (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+            }
+        }
+        break;
+    case 2:
+        if (*(s32 *)(o + 0x10) == 0) {
+            *(s16 *)(o + 0x58) = 0;
+            *(s16 *)(o + 0x5A) = D_800A76FC[1];
+            (*(void (**)(u8 *, s32))(o + 0x2C))(o, 1);
+        }
+        p = *(u8 **)(o + 0x54);
+        v = ((s32 (*)(u8 *, s16 *, s32, s32))func_800A6058)(o + 0x54, D_800A76FC, 1, 0);
+        switch (v) {
+        case 0x12C:
+            p[0] = 0;
+            break;
+        case 0xFF:
+            p[0] = 0;
+            *(s16 *)(o + 0x50) = 0;
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 1);
+            break;
+        default:
+            p[0] = 1;
+            p[4] = 2;
+            p[9] = v;
+            break;
+        }
+        break;
+    case 3:
+        break;
+    }
+}
 
 void func_800A6364(void *arg0) {
     if (arg0 != NULL) {
@@ -133,7 +194,65 @@ s16 func_800A681C(s16 *st, s16 *tbl, s32 once, s32 depth) {
     return e[0];
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A693C);
+void func_800A693C(u8 *o) {
+    Rec18 *r;
+    u8 *p;
+    u8 *q;
+    s32 v;
+
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        *(s16 *)(o + 0x50) = 1;
+        for (r = D_80099D90; r->b[2] != 0; r++) {
+            if (r->b[1] == 0x16) {
+                *(Rec18 **)(o + 0x54) = r;
+            }
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        q = *(u8 **)(o + 0x54);
+        if (*(s16 *)(o + 0x50) != 0) {
+            q[0] = 1;
+            q[4] = 0x21;
+        } else {
+            q[0] = 0;
+        }
+        if (*(s16 *)(o + 0x50) == 2) {
+            if (--*(s16 *)(o + 0x52) <= 0) {
+                (*(void (**)(u8 *, s32))(o + 0x28))(o, 2);
+            }
+        }
+        break;
+    case 2:
+        if (*(s32 *)(o + 0x10) == 0) {
+            *(s16 *)(o + 0x58) = 0;
+            *(s16 *)(o + 0x5A) = D_800A7790[1];
+            (*(void (**)(u8 *, s32))(o + 0x2C))(o, 1);
+        }
+        p = *(u8 **)(o + 0x54);
+        v = ((s32 (*)(u8 *, s16 *, s32, s32))func_800A681C)(o + 0x54, D_800A7790, 1, 0);
+        switch (v) {
+        case 0x12C:
+            p[0] = 0;
+            break;
+        case 0xFF:
+            p[0] = 0;
+            *(s16 *)(o + 0x50) = 0;
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 1);
+            break;
+        default:
+            p[0] = 1;
+            p[4] = v;
+            p[9] = 0;
+            break;
+        }
+        break;
+    case 3:
+        break;
+    }
+}
 
 void func_800A6AF4(void *arg0) {
     if (arg0 != NULL) {
@@ -193,7 +312,40 @@ s32 func_800A6C8C(void *arg0, s32 arg1) {
     return arg1 < (var_a2 + var_a1);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG526/nonmatchings/WSTAG526", func_800A6CC8);
+s32 func_800A6CC8(s32 x, s32 y) {
+    s32 r = 0;
+    s32 t = 0;
+    s32 q;
+    s32 i;
+
+    if (x <= 0 && y >= 0) q = 0;
+    else if (x >= 0 && y >= 0) q = 0x40;
+    else if (x >= 0 && y <= 0) q = 0x80;
+    else if (x <= 0 && y <= 0) q = 0xC0;
+    else q = 0;
+    if (x < 0) x = -x;
+    if (y < 0) y = -y;
+    if (x == y) return q | 0x20;
+    if (y < x) t = (y * 0xFFFF) / x;
+    else if (x < y) t = (x * 0xFFFF) / y;
+    for (i = 0; i <= 32; i++) {
+        if (t >= D_800A7874[i] && t <= D_800A7874[i + 1]) {
+            switch (q) {
+            case 0:
+            case 0x80:
+                if (y < x) r = i;
+                else if (x < y) r = 0x40 - i;
+                return r + q;
+            case 0x40:
+            case 0xC0:
+                if (y < x) r = 0x40 - i;
+                else if (x < y) r = i;
+                return r + q;
+            }
+        }
+    }
+    return 0xFF;
+}
 
 void func_800A6E38(u8 *o) {
     s32 a, b;

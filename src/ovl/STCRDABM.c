@@ -165,7 +165,20 @@ void func_800835BC(u8 *o) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_80083734);
+s32 func_80083734(u8 *o) {
+    s32 i;
+    s32 j;
+    u8 *d;
+
+    for (i = 0; i < 12; i++) {
+        j = *(s32 *)(o + 0x5C) + i;
+        d = (u8 *)D_80048D34;
+        if ((j + d)[0x4DF] != 0 || j >= 0x13B) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 void func_80083780(u8 *o) {
     switch (*(s32 *)(o + 0x10)) {

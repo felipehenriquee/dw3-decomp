@@ -63,7 +63,45 @@ u8 *func_800A61FC(s32 link) {
     return func_800143DC(func_800A5EF4, 0x70, 0, link);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG212/nonmatchings/WSTAG212", func_800A622C);
+void func_800A622C(u8 *o, s32 *w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        {
+        u8 *d = D_80048D34;
+        if (*(s32 *)(d + 0x263C) == 2) {
+            u8 *f = (u8 *)&D_80048ABC;
+            if ((*(s32 (**)(s32, s32))(f + 0x10))(0x7000, 1)) { *w = func_800853F8(0xA); goto end; }
+            if (*(s32 *)(d + 0x263C) == 2) {
+                if ((*(s32 (**)(s32, s32))(f + 0x10))(0x7001, 1)) { *w = func_800853F8(0xB); goto end; }
+                if (*(s32 *)(d + 0x263C) == 2) {
+                    if ((*(s32 (**)(s32, s32))(f + 0x10))(0x7002, 1)) { *w = func_800853F8(0xC); goto end; }
+                }
+            }
+        }
+        }
+        {
+        u8 *d = D_80048D34;
+        if (*(s32 *)(d + 0x263C) == 11) {
+            u8 *f = (u8 *)&D_80048ABC;
+            if ((*(s32 (**)(s32, s32))(f + 0x10))(0x4004, 0)) { *w = func_800853F8(0x10F); goto end; }
+            if (*(s32 *)(d + 0x263C) == 11) {
+                if ((*(s32 (**)(s32, s32))(f + 0x10))(0x4004, 1)) { *w = func_800853F8(0x111); goto end; }
+            }
+        }
+        }
+        if (D_8004B370[0] == 13 && ((s32 (*)(s32, s32))D_80048ACC[0])(0x1C0D, 1)) {
+            *w = func_800853F8(0x160);
+        }
+    end:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A63DC(s32 arg0) {
     void *temp_v0;

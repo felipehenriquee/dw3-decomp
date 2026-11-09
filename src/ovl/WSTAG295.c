@@ -3,7 +3,33 @@
 #include "WSTAG295_auto.h"
 #include "WSTAG295_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG295/nonmatchings/WSTAG295", func_800A5DE0);
+void func_800A5DE0(u8 *o, s32 *w) {
+    s32 a;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        if (D_8004B370[0] == 0x21) {
+            {
+                u8 *f = (u8 *)&D_80048ABC;
+                if ((*(s32 (**)(s32, s32))(f + 0x10))(0x1C39, 0) && (*(s32 (**)(s32, s32))(f + 0x10))(0x4057, 1) && (*(s32 (**)(s32, s32))(f + 0x10))(0x4058, 0)) { a = 0x37B; goto call; }
+            }
+            {
+                u8 *f = (u8 *)&D_80048ABC;
+                if ((*(s32 (**)(s32, s32))(f + 0x10))(0x1C39, 0) && (*(s32 (**)(s32, s32))(f + 0x10))(0x4058, 1)) {
+                    a = 0x37C;
+                call:
+                    w[0] = func_800853F8(a);
+                }
+            }
+        }
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A5EE0(s32 arg0) {
     void *temp_v0;

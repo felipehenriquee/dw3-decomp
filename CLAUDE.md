@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-11-09, 2ª): EXE **275 de 347** (79%); overlays **2221 de 3292** (67.5%). Total **2496 de 3639 (68.6%)**.
+- [ ] Decompilação (2026-11-09, 3ª): EXE **275 de 347** (79%); overlays **2266 de 3292** (68.8%). Total **2541 de 3639 (69.8%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -113,6 +113,16 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 6. Corrigir a divisão do splat em `func_800148C0` (`make split` apaga `build/` — fazer quando nada estiver rodando).
 7. Revisão semântica para o port (`tools/audit_args.py`).
 8. Jobs em segundo plano: parar com `tools/stop_jobs.sh` e commitar com `tools/commit_locked.sh "msg"`.
+
+### Notas da decompilação manual (2026-11-09, 3ª sessão)
+- **Família `D_80048ABC.fn10` + `func_800853F8` (eventos de mapa nos WSTAG)**: declare `u8 *f = (u8 *)&D_80048ABC;` **dentro de um bloco `{ }` próprio para cada `if`** (o original recarrega `lui/addiu` em cada bloco, com o `li a0` antes do `lui`). Rendeu ~15 funções (WSTAG400/405/406/490/300/295/735/421/475/750...).
+- Nessa família, **cada sucesso grava `w[k] = func_800853F8(K); goto end;`** (uma gravação por ramo, o GCC funde depois): com `a = K; goto call;` e uma gravação só, `o`/`w` trocam de `s`-reg (WSTAG620, WSTAG212). O ponteiro `d = D_80048D34` (campo `0x263C`) também vai num bloco `{ u8 *d = ...; }` por grupo.
+- Ainda não fecham: `o`/`w` trocados com 1–2 gravações (WSTAG206/395/285/226 `func_800A6228`/580/210 `func_800A73DC`) e `v`/`f` trocados quando há um laço antes (WSTAG310/311/820). Na WSTAG310 o permuter zerou com `if (D_800A8504 || f) { bloco 0x2A9 } else { igual }` (artificial). WSTAG305 `func_800A60B4`: 43 dif., só o delay slot do último `bne`. Rascunhos em `wip/ovl/`.
+- Leitura de animação com `switch (v) { case 0x12C: ...; case 0xFF: ...; default: ... }` nessa ordem, e **variável separada** (`q`) para o ponteiro do `case 1` (senão ele vai para `s0`) (WSTAG526 `func_800A693C`/`func_800A6178`). Na `func_800A6178` o `p[9]` recebe o retorno da chamada.
+- `if (k == 0x320) f(o,1); else if (k == 0x324) f(o,0);` com o `jalr` fundido: `switch` com `case 0x324` antes do `case 0x320` (WSTAG780 `func_800A6F40`).
+- `if (x <= 0 && y >= 0) q = 0; else if ... else q = 0;` (com o `else` final) na atan2 da WSTAG526 `func_800A6CC8`.
+- Retorno antecipado ao contrário: quando o original faz `bne`/`beqz` para o caso útil e `j fim; v0 = 0` no outro, escreva `if (ok) { ...; return p; } return 0;` (FIELDSTG `func_80089F24`, FIGHTSTG `func_80087EE4`).
+- O truque `(x - -(y))` resolveu várias pequenas do `skip.txt` (FIELDSTG `func_800927A0`, FIGHTSTG `func_800A15A8`, STITSHOP `func_80088830`, CARDGAME `func_800A4924`); parâmetro `s32` (não `u8`) quando o original grava com `sb` mas carrega com `lw` da pilha (CARDGAME `func_800A3558`).
 
 ### Notas da decompilação manual (2026-11-09)
 - `build/w/skip.txt` agora lista também as que só foram olhadas e parecem longas (não só as tentadas); a lista de `pending.py --skip` fica menor.

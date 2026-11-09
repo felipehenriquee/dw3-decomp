@@ -148,7 +148,40 @@ s32 func_800A6904(void *arg0, s32 arg1) {
     return arg1 < (var_a2 + var_a1);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG460/nonmatchings/WSTAG460", func_800A6940);
+s32 func_800A6940(s32 x, s32 y) {
+    s32 r = 0;
+    s32 t = 0;
+    s32 q;
+    s32 i;
+
+    if (x <= 0 && y >= 0) q = 0;
+    else if (x >= 0 && y >= 0) q = 0x40;
+    else if (x >= 0 && y <= 0) q = 0x80;
+    else if (x <= 0 && y <= 0) q = 0xC0;
+    else q = 0;
+    if (x < 0) x = -x;
+    if (y < 0) y = -y;
+    if (x == y) return q | 0x20;
+    if (y < x) t = (y * 0xFFFF) / x;
+    else if (x < y) t = (x * 0xFFFF) / y;
+    for (i = 0; i <= 32; i++) {
+        if (t >= D_800A7440[i] && t <= D_800A7440[i + 1]) {
+            switch (q) {
+            case 0:
+            case 0x80:
+                if (y < x) r = i;
+                else if (x < y) r = 0x40 - i;
+                return r + q;
+            case 0x40:
+            case 0xC0:
+                if (y < x) r = 0x40 - i;
+                else if (x < y) r = i;
+                return r + q;
+            }
+        }
+    }
+    return 0xFF;
+}
 
 void func_800A6AB0(u8 *o) {
     s32 a, b;

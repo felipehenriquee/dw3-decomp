@@ -3,7 +3,21 @@
 #include "WSTAG676_auto.h"
 #include "WSTAG676_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG676/nonmatchings/WSTAG676", func_800A5DE0);
+void func_800A5DE0(u8 *o, s32 *w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        if (D_8004B370[0] == 0x22 && ((s32 (*)(s32, s32))D_80048ACC[0])(0x405A, 1)) {
+            w[0] = func_800853F8(0x385);
+        }
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A5E68(s32 arg0) {
     void *temp_v0;

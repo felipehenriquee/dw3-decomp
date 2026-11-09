@@ -742,6 +742,22 @@ void func_8008F32C(Lerp *l, s32 from, s32 to, s32 n) {
 
 INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008F36C);
 
-INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008F3D8);
+s32 func_8008F3D8(s32 k) {
+    s32 i;
+    for (i = 0; D_8008F628[i].id != 0; i++) {
+        if (D_8008F628[i].id == k) {
+            return D_8008F628[i].v;
+        }
+    }
+    return 0;
+}
 
-INCLUDE_ASM("asm/ovl/STGDGLAB/nonmatchings/STGDGLAB", func_8008F424);
+s32 func_8008F424(s32 k) {
+    s32 i;
+    for (i = 0; D_8008F628[i].id != 0; i++) {
+        if (D_8008F628[i].id == k) {
+            return D_8008F628[i].x;
+        }
+    }
+    return 0;
+}

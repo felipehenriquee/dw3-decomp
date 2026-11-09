@@ -18,6 +18,7 @@ void func_800A6940(u8 *o, Obj **w);
 Obj *func_800A69D8(void);
 void func_800A6A04(void *arg0, void *arg1);
 void func_800A6DC4(u8 *o, u8 *x);
+void func_800A6F40(u8 *o, s32 k);
 u8 *func_800A6F8C(s32 arg0);
 void func_800A72B0(u8 *o);
 void func_800A7450(void *arg0, s32 arg1);

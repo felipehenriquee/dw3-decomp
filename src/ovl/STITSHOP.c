@@ -388,7 +388,12 @@ void func_800887EC(void *arg0) {
     func_80088714(arg0, 0);
 }
 
-INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80088830);
+s32 func_80088830(u8 *o) {
+    if (*(s32 *)(o + 0x5C) == 0) {
+        return (*(s16 **)(o + 0x6B4))[*(s32 *)(o + 0x6BC)];
+    }
+    return *(s16 *)((o - -(*(s32 *)(o + 0x6BC) * 2)) + 0x64);
+}
 
 void func_80088878(void *arg0) {
     u8 *base0;

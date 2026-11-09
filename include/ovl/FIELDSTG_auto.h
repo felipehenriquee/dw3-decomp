@@ -3,6 +3,7 @@
 #define FIELDSTG_AUTO_H
 
 /* funcoes ja decompiladas */
+void func_80083784(u8 *o);
 u8 *func_80083CD8(void);
 void func_80084124(void *arg0, s32 arg1);
 u8 *func_80084198(s32 link);
@@ -57,6 +58,7 @@ Obj *func_80089490(s32 arg0, s32 arg1);
 void func_80089548(s32 arg0);
 void func_80089B28(u8 *o);
 void func_80089BA4(s32 arg0);
+u8 *func_80089F24(s32 v);
 s32 func_8008A9B0(void);
 u8 *func_8008B6A4(void);
 void func_8008B6D4(s32 a, s32 b, s32 c, s32 d, s32 e, s32 g);
@@ -151,6 +153,7 @@ s32 func_80092484(s32 arg0);
 void func_800924C8(s32 arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3);
 void func_8009252C(void);
 void func_800925A8(void);
+void func_800927A0(s32 k);
 void func_800928CC(s32 arg0, s32 arg1);
 void func_800928E4(s32 v);
 void func_80092908(s32 arg0);
@@ -176,7 +179,6 @@ s32 func_8001BE00();
 s32 func_8001CE44();
 s32 func_8001F648();
 s32 func_8001FFA8();
-s32 func_80083784();
 s32 func_80083D08();
 s32 func_80084200();
 s32 func_80084B40();
@@ -209,7 +211,6 @@ s32 func_8008957C();
 s32 func_80089610();
 s32 func_80089700();
 s32 func_80089BDC();
-s32 func_80089F24();
 s32 func_80089F7C();
 s32 func_8008A5E4();
 s32 func_8008AA10();

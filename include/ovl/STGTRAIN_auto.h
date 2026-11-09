@@ -69,6 +69,7 @@ s32 func_8008C0A4(s32 i);
 s32 func_8008C0C0(s32 i);
 s32 func_8008C0E4(s32 i);
 s32 func_8008C108(s32 i);
+Pair8 *func_8008C1C8(s32 a, s32 b);
 
 /* funcoes ainda em assembly (prototipo desconhecido) */
 s32 ApplyMatrixSV();

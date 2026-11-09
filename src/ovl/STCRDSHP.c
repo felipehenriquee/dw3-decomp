@@ -641,4 +641,12 @@ ShpEnt *func_80089160(s32 id) {
     return &D_8008CDD4[k];
 }
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_8008923C);
+s32 func_8008923C(s32 k) {
+    s32 i;
+    for (i = 0; D_8008CD20[i].id != 0; i++) {
+        if (D_8008CD20[i].id == k) {
+            return D_8008CD20[i].v;
+        }
+    }
+    return 1;
+}

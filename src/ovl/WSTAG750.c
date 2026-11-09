@@ -49,7 +49,42 @@ u8 *func_800A61C0(s32 link) {
     return func_800143DC(func_800A5EF0, 0x70, 0, link);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG750/nonmatchings/WSTAG750", func_800A61F0);
+#define FN10(k, n) (*(s32 (**)(s32, s32))(f + 0x10))(k, n)
+void func_800A61F0(u8 *o, s32 *w) {
+    s32 a;
+
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        if (D_800A725C[0].off == 0) {
+            w[0] = (s32)func_800A69DC(D_800A725C[0].p, D_800A725C[0].q, D_800A725C[0].a);
+        }
+        if (D_8004B370[0] == 0x20) {
+            u8 *f = (u8 *)&D_80048ABC;
+            if (FN10(0x4048, 0) && FN10(0x4046, 0) && FN10(0x4066, 0)) { a = 0x35C; goto call; }
+        }
+        if (D_8004B370[0] == 0x20) {
+            u8 *f = (u8 *)&D_80048ABC;
+            if (FN10(0x4046, 1) && FN10(0x4048, 0) && FN10(0x4047, 0) && FN10(0x4066, 0)) { a = 0x373; goto call; }
+        }
+        if (D_8004B370[0] == 0x20) {
+            u8 *f = (u8 *)&D_80048ABC;
+            if (FN10(0x4048, 1) && FN10(0x4046, 0) && FN10(0x4062, 0) && FN10(0x4066, 0)) { a = 0x374; goto call; }
+        }
+        if (D_8004B370[0] == 0x20 && ((s32 (*)(s32, s32))D_80048ACC[0])(0x4066, 1)) {
+            a = 0x376;
+        call:
+            w[2] = func_800853F8(a);
+        }
+        w[1] = (s32)func_800A61C0(0x34E);
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A6424(s32 arg0) {
     void *temp_v0;

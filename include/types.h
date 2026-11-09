@@ -503,4 +503,12 @@ typedef struct { s32 id; s16 x; s16 p6; s16 y; s16 pA; } NmEnt12;
 
 typedef struct { u32 tag; Bytes4 c0; s16 x0, y0; Bytes4 c1; s16 x1, y1; Bytes4 c2; s16 x2, y2; Bytes4 c3; s16 x3, y3; } FtPolyG4;
 
+typedef struct { s16 a; s16 off; s32 p; s32 q; } Ent0C;
+
+typedef struct { s16 id; s16 v; s16 x; } Ent6;
+
+typedef struct { s16 id; s16 v; } Ent4s;
+
+typedef struct { s32 k; s32 v; } Pair8;
+
 #endif /* TYPES_H */

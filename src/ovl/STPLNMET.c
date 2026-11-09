@@ -506,7 +506,17 @@ INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80087444);
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80087774);
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_800879E0);
+void func_800879E0(u8 *o, s32 k) {
+    s32 t = *(s32 *)(o + 0x24);
+    if (k != 0) {
+        *(s32 *)(o + 0xC) = 2;
+        func_80087190(o, t, 0);
+    } else {
+        *(s32 *)(o + 0xC) = 1;
+        *(s32 *)(o + 0x10) = 0;
+        func_80087190(o, t, 1);
+    }
+}
 
 void func_80087A30(u8 *o, s32 a) {
     switch (*(s32 *)(o + 0xC)) {

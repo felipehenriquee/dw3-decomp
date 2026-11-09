@@ -3,7 +3,30 @@
 #include "WSTAG736_auto.h"
 #include "WSTAG736_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG736/nonmatchings/WSTAG736", func_800A5DE0);
+void func_800A5DE0(u8 *o, s32 *w) {
+    s32 i;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        for (i = 0; i < 10; i++) {
+            if (D_800A6800[i].off == 0) {
+                w[i] = (s32)func_800A649C(D_800A6800[i].p, D_800A6800[i].q, D_800A6800[i].a);
+            }
+        }
+        {
+            u8 *f = (u8 *)&D_80048ABC;
+            if ((*(s32 (**)(s32, s32))(f + 0x10))(0x4082, 1) && (*(s32 (**)(s32, s32))(f + 0x10))(0x4083, 0)) {
+                w[10] = func_800853F8(0x50E);
+            }
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A5EE4(s32 arg0) {
     void *temp_v0;

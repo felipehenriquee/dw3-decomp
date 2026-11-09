@@ -3,7 +3,21 @@
 #include "WSTAG440_auto.h"
 #include "WSTAG440_data.h"
 
-INCLUDE_ASM("asm/ovl/WSTAG440/nonmatchings/WSTAG440", func_800A5DE4);
+void func_800A5DE4(u8 *o, s32 *w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        if (D_8004B370[0] == 6) {
+            w[0] = func_800853F8(0x98);
+        }
+        break;
+    case 1:
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void *func_800A5E50(s32 arg0) {
     void *temp_v0;
