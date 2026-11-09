@@ -75,7 +75,48 @@ Obj *func_800833A4(void) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_800833E8);
+void func_800833E8(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[4];
+        void (*fn7C)(s32, s32);
+        u8 pad80[4];
+        void (*fn84)(s32, s32, s32, s32);
+        u8 pad88[0xA0 - 0x88];
+    } g;
+    u8 *t;
+    u8 *f;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        *(s32 *)(o + 0x60) = 0x18;
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        func_8001F648(&g);
+        g.fn74(0x280, 0x100);
+        g.fn7C(0x1001, 6);
+        t = (u8 *)D_8004DE10;
+        if ((*(s32 (**)(void))(t + 0x188))() - *(s32 *)(o + 0x64) >= 5) {
+            *(s32 *)(o + 0x64) = (*(s32 (**)(void))(t + 0x188))();
+            *(s32 *)(o + 0x60) += 1;
+            if (*(s32 *)(o + 0x60) >= 0x24) {
+                *(s32 *)(o + 0x60) = 0x18;
+            }
+        }
+        f = (u8 *)D_80044B38;
+        g.fn84((*(s32 (**)(s32))(f + 0x424))(0x28A0000), *(s32 *)(o + 0x60), 0x33, 0);
+        g.fn84((*(s32 (**)(s32))(f + 0x424))(0x28A0000), *(s32 *)(o + 0x60), 0x78, -0x14);
+        g.fn84((*(s32 (**)(s32))(f + 0x424))(0x28A0000), *(s32 *)(o + 0x60), 0xA7, -0x58);
+        g.fn84((*(s32 (**)(s32))(f + 0x424))(0x28A0000), *(s32 *)(o + 0x60), 0xF8, 0xD);
+        g.fn84((*(s32 (**)(s32))(f + 0x424))(0x28A0000), *(s32 *)(o + 0x60), 0x120, 0);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_800835C4(void) {
     return func_80014504(func_800833E8, 0x68, 0);
@@ -167,7 +208,34 @@ s32 func_80083E04(Fade *f) {
     return 0;
 }
 
-INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80083E70);
+void func_80083E70(u8 *o, u8 **w) {
+    s32 i;
+    u8 *b;
+    b = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x20, 0x1A);
+    w[0] = b;
+    (*(void (**)(u8 *, s32))(b + 0x138))(b, 4);
+    b = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x4B, 0x40);
+    w[1] = b;
+    (*(void (**)(u8 *, s32, s32))(b + 0x140))(b, 0x13, 0);
+    *(s32 **)(w[1] + 0x50) = D_8008991C;
+    for (i = 0; i < 3; i++) {
+        b = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, (s16)(i * 78 + 0x2F), 0x5B);
+        w[i + 2] = b;
+        (*(void (**)(u8 *, s32))(b + 0x15C))(b, *(s32 *)(o + 0x58) - 1);
+        (*(void (**)(u8 *, s32))(w[i + 2] + 0x160))(w[i + 2], 7);
+        (*(void (**)(u8 *, s32, s32))(w[i + 2] + 0x140))(w[i + 2], 0xE, 0x12);
+        *(s32 **)(w[i + 2] + 0x50) = D_8008991C;
+    }
+    w[8] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0xCE, 0xC6);
+    w[9] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0xE1, 0xC6);
+    b = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x13, 0x62);
+    w[10] = b;
+    (*(void (**)(u8 *, s32))(b + 0x15C))(b, *(s32 *)(o + 0x58) - 1);
+    b = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x123, 0x62);
+    w[11] = b;
+    (*(void (**)(u8 *, s32))(b + 0x15C))(b, *(s32 *)(o + 0x58) - 1);
+    w[12] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0x3E, 0x72);
+}
 
 INCLUDE_ASM("asm/ovl/STPLNMET/nonmatchings/STPLNMET", func_80084060);
 

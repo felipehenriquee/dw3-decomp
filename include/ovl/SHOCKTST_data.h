@@ -6,5 +6,6 @@
 struct opaque;
 extern struct opaque D_8004B5DC;
 extern u8 D_8004DE10[];
+extern s32 D_8004B7D0[];
 
 #endif /* SHOCKTST_DATA_H */

@@ -510,7 +510,74 @@ void func_8008453C(u8 *o) {
     g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x8A60000), k, 0, 0);
 }
 
-INCLUDE_ASM("asm/ovl/STDWTITL/nonmatchings/STDWTITL", func_80084628);
+void func_80084628(u8 *o) {
+    u8 *t;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(s16 *)(o + 0x50) = 0xF;
+        *(s16 *)(o + 0x52) = 0;
+        ((void (*)(void))D_80055C64[0])();
+        break;
+    case 1:
+        switch (*(u32 *)(o + 0x10)) {
+        case 0:
+        default:
+            if (*(s16 *)(o + 0x52) >= 2) {
+                *(s16 *)(o + 0x52) -= 2;
+                *(s16 *)(o + 0x50) -= 1;
+                if (*(s16 *)(o + 0x50) <= 0) {
+                    (*(void (**)(u8 *, s32))(o + 0x2C))(o, 1);
+                    *(s16 *)(o + 0x52) = 0;
+                }
+            }
+            break;
+        case 1:
+            if (!(*(s16 *)(o + 0x52) < 0x78)) {
+                (*(void (**)(u8 *))(o + 0x3C))(o);
+                *(s16 *)(o + 0x52) = 0;
+            }
+            break;
+        case 2:
+            t = (u8 *)D_8004B7D0;
+            if ((((*(s32 (**)(s32))(t + 0x3F4))(0) >> (*(s32 (**)(s32, s32))(t + 0x408))(0, 3)) & 1)) {
+                *(s16 *)(o + 0x52) = 0x4650;
+            }
+            if (!(*(s16 *)(o + 0x52) < 0x4650)) {
+                (*(void (**)(u8 *))(o + 0x3C))(o);
+                *(s16 *)(o + 0x52) = 0;
+            }
+            break;
+        case 3:
+            if (*(s16 *)(o + 0x52) >= 2) {
+                *(s16 *)(o + 0x52) -= 2;
+                *(s16 *)(o + 0x50) += 1;
+                if (!(*(s16 *)(o + 0x50) < 0xF)) {
+                    (*(void (**)(u8 *))(o + 0x3C))(o);
+                    *(s16 *)(o + 0x52) = 0;
+                }
+            }
+            break;
+        case 4:
+            if (!(*(s16 *)(o + 0x52) < 0x3C)) {
+                (*(void (**)(u8 *))(o + 0x3C))(o);
+                *(s16 *)(o + 0x52) = 0;
+            }
+            break;
+        case 5:
+            ((void (*)(s32, s32))D_8004B440[0])(0xE01, 0);
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 3);
+            break;
+        }
+        *(s16 *)(o + 0x52) += ((s32 (*)(void))D_8004DF9C[0])();
+        func_8008453C(o);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_8008483C(void) {
     return func_80014504(func_80084628, 0x54, 0);

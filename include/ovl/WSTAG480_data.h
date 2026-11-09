@@ -8,5 +8,6 @@ extern s32 D_8004B370[];
 extern s32 D_800A81F8[];
 extern s32 D_80048ACC[];
 extern s32 D_8004DF9C NOT_GP;
+extern Rec18 *D_80099D90;
 
 #endif /* WSTAG480_DATA_H */

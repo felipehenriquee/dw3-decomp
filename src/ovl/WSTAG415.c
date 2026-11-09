@@ -223,7 +223,67 @@ void func_800A6B04(u8 *o) {
     g.fn84((*(s32 (**)(s32))(t + 0x424))(0x75E0004), 0, p.x - 0x200, p.y + 0x100);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG415/nonmatchings/WSTAG415", func_800A6C8C);
+void func_800A6C8C(u8 *o) {
+    struct {
+        u8 pad0[0x24];
+        void (*fn24)(s32, s32);
+        void (*fn28)(s32, s32);
+        void (*fn2C)(s32);
+        u8 pad30[8];
+    } g;
+    u8 *f;
+    u32 v;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        func_8001FFA8(&g);
+        g.fn24(0x280, 0);
+        g.fn28(0, 0xF0);
+        f = (u8 *)D_80044B38;
+        g.fn2C((*(s32 (**)(s32))(f + 0x414))(0x769));
+        g.fn24(0x280, 0x100);
+        g.fn28(0, 0xF8);
+        g.fn2C((*(s32 (**)(s32))(f + 0x414))(0x76A));
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        if (*(s32 *)(o + 4) != 0) {
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        }
+        break;
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            *(u32 *)(o + 0x58) = 0x800;
+            *(s32 *)(o + 0x5C) = 0x400;
+            break;
+        case 1:
+            if (*(u32 *)(o + 0x58) == 0x800) {
+                ((void (*)(s32))D_80055C48[0])(0x340003);
+            }
+            v = *(u32 *)(o + 0x58);
+            if (v != 0) {
+                *(u32 *)(o + 0x58) = v - 0x10;
+                *(s32 *)(o + 0x5C) = (s32)(v - 0x10) / 2;
+                if ((s32)*(u32 *)(o + 0x58) < 0) {
+                    *(u32 *)(o + 0x58) = 0;
+                    *(s32 *)(o + 0x5C) = 0;
+                }
+            }
+            break;
+        }
+        *(s32 *)(o + 0x50) += *(u32 *)(o + 0x58);
+        *(s32 *)(o + 0x54) -= *(s32 *)(o + 0x5C);
+        if (*(s32 *)(o + 0x50) > 0x1FFFF) {
+            *(s32 *)(o + 0x50) -= 0x20000;
+            *(s32 *)(o + 0x54) += 0x10000;
+        }
+        func_800A6B04(o);
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 void func_800A6E88(void *arg0, s32 arg1) {
     if ((arg0 != NULL) && (arg1 == 0x336)) {

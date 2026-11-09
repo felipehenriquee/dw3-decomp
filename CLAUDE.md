@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-11-04): EXE **275 de 347** (79%); overlays **2199 de 3292** (66.8%). Total **2474 de 3639 (68.0%)**.
+- [ ] Decompilação (2026-11-09): EXE **275 de 347** (79%); overlays **2218 de 3292** (67.4%). Total **2493 de 3639 (68.5%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -113,6 +113,15 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 6. Corrigir a divisão do splat em `func_800148C0` (`make split` apaga `build/` — fazer quando nada estiver rodando).
 7. Revisão semântica para o port (`tools/audit_args.py`).
 8. Jobs em segundo plano: parar com `tools/stop_jobs.sh` e commitar com `tools/commit_locked.sh "msg"`.
+
+### Notas da decompilação manual (2026-11-09)
+- `build/w/skip.txt` agora lista também as que só foram olhadas e parecem longas (não só as tentadas); a lista de `pending.py --skip` fica menor.
+- **Mais chamadas sem argumento** (o `a0` sobra de uma comparação anterior com 1): `D_8009B5D0()`/`D_8009B5D4()` (STSTATUS `func_80099894`), `fn2714()` do `D_80048D34` (STCRDDEK `func_80089E98`), `fn150()` do `D_8004DE10` (CARDGAME `func_80095BFC`).
+- O jogo tem erros reais que precisam ser reproduzidos: na WSTAG480/481 `func_800A5F84` a 5ª entrada (`o+0x74`) lê `D_800A685C[3]`, não `[4]`.
+- Laço decrescente com ponteiro (`for (i = 14; i >= 0; i--) { p[0x151] = 0; p -= 0x4C; }`): quando o original usa outros registradores, declare `j`/`q` num bloco `{ }` próprio (CARDGAME `func_80092438`).
+- Laços aninhados com `w[i*2 + j + 1]`: `b = f(...); q = (u8 *)w + (i * 8 + j * 4); *(u8 **)(q + 4) = b;` (STSTATUS `func_80091E94`).
+- Dois quocientes iguais (`v / n` duas vezes): o original guarda o segundo e multiplica o primeiro; `*(o+0x64) = v / n * m; *(o+0x88) = v / n;` chega perto (STSTATUS `func_8009946C`, em `wip/`; a chamada final é fundida com a do outro ramo).
+- Quase (em `wip/ovl/`): STGTRAIN `func_80084064` (4; permuter 100), STSTATUS `func_800853E0` (registradores das bases; permuter 245), `func_8008865C`, `func_8009946C`, WSTAG460 `func_800A6118` (fim fundido), CARDGAME `func_80095BFC` (retorno `s8` e cross-jump).
 
 ### Notas da decompilação manual (2026-11-04)
 - **Finais iguais fundidos pelo GCC** (`j` para o `jalr` do outro ramo, função 16 bytes menor): declare um dos ponteiros com outro retorno (`void` num, `s32` no outro); o RTL muda e o cross-jump não acontece (CNTY_SEL `func_80082CE8`).

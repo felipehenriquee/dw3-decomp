@@ -33,5 +33,7 @@ extern s32 D_8009A7C4[];
 extern Rec18 D_80042BDC[];
 extern s32 D_8009AF68[];
 extern s32 D_8005CCA0[];
+extern s32 D_8009B5D0[];
+extern s32 D_8009B5D4[];
 
 #endif /* STSTATUS_DATA_H */
