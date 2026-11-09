@@ -189,7 +189,69 @@ void func_80083780(u8 *o) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/STCRDABM/nonmatchings/STCRDABM", func_80083848);
+void func_80083848(u8 *o) {
+    s32 st;
+    u8 *t;
+    switch (st = *(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(s32 *)(o + 0x5C) = 1;
+        func_80083114(o, 1);
+        break;
+    case 1:
+        func_80083780(o);
+        ((void (*)(u8 *, s32))func_80083174)(o, 0);
+        break;
+    case 2:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            *(s32 *)(o + 0x68) += 1;
+            if (*(s32 *)(o + 0x68) < 0xC) {
+                (*(void (**)(u8 *))(o + 0x3C))(o);
+                *(s32 *)(o + 0x18) = ((s32 (*)(void))D_8004DF98[0])();
+            } else {
+                *(s32 *)(o + 0x68) = 0xC;
+                *(s32 *)(o + 0x10) = st;
+            }
+            break;
+        case 1:
+            if (((s32 (*)(void))D_8004DF98[0])() - *(s32 *)(o + 0x18) >= 2) {
+                *(s32 *)(o + 0x10) = *(s32 *)(o + 0x14);
+            }
+            break;
+        case 2:
+            func_8008304C(o);
+            *(s32 *)(o + 0x64) = 0xC;
+            *(s32 *)(o + 0x6C) = ((s32 (*)(void))D_8004DF98[0])();
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+            if (func_80083734(o) != 0) {
+                ((void (*)(s32))D_80055C48[0])(0x4001C);
+            }
+            break;
+        case 3:
+            t = (u8 *)D_8004DE10;
+            if ((*(s32 (**)(void))(t + 0x188))() - *(s32 *)(o + 0x6C) >= 2) {
+                *(s32 *)(o + 0x6C) = (*(s32 (**)(void))(t + 0x188))();
+                *(s32 *)(o + 0x70) += 1;
+                if (*(s32 *)(o + 0x70) >= 0xB) {
+                    *(s32 *)(o + 0xC) = 1;
+                }
+            }
+            break;
+        }
+        func_800835BC(o);
+        if (*(s32 *)(o + 0x10) < 3) {
+            ((void (*)(u8 *, s32))func_80083174)(o, 1);
+        } else {
+            ((void (*)(u8 *, s32))func_80083174)(o, 0);
+        }
+        break;
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80083A78(s32 arg0) {
     void *temp_v0;

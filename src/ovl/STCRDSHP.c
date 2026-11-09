@@ -238,7 +238,67 @@ void func_80085CD8(u8 *o) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/STCRDSHP/nonmatchings/STCRDSHP", func_80085DA0);
+void func_80085DA0(u8 *o) {
+    s32 st;
+    u8 *t;
+    switch (st = *(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        func_80085730(o, (s32 *)(o + 0x7C));
+        break;
+    case 1:
+        func_80085CD8(o);
+        ((void (*)(u8 *, s32))func_800857B0)(o, 0);
+        break;
+    case 2:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            *(s32 *)(o + 0x68) += 1;
+            if (*(s32 *)(o + 0x68) < 6) {
+                (*(void (**)(u8 *))(o + 0x3C))(o);
+                *(s32 *)(o + 0x18) = ((s32 (*)(void))D_8004DF98[0])();
+            } else {
+                *(s32 *)(o + 0x68) = 6;
+                *(s32 *)(o + 0x10) = st;
+            }
+            ((void (*)(s32))D_80055C48[0])(0x800460BD);
+            break;
+        case 1:
+            if (((s32 (*)(void))D_8004DF98[0])() - *(s32 *)(o + 0x18) >= 2) {
+                *(s32 *)(o + 0x10) = *(s32 *)(o + 0x14);
+            }
+            break;
+        case 2:
+            func_80085678(o);
+            *(s32 *)(o + 0x64) = 6;
+            *(s32 *)(o + 0x6C) = ((s32 (*)(void))D_8004DF98[0])();
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+            ((void (*)(s32))D_80055C48[0])(0x4001C);
+            break;
+        case 3:
+            t = (u8 *)D_8004DE10;
+            if ((*(s32 (**)(void))(t + 0x188))() - *(s32 *)(o + 0x6C) >= 2) {
+                *(s32 *)(o + 0x6C) = (*(s32 (**)(void))(t + 0x188))();
+                *(s32 *)(o + 0x70) += 1;
+                if (*(s32 *)(o + 0x70) >= 0xB) {
+                    *(s32 *)(o + 0xC) = 1;
+                }
+            }
+            break;
+        }
+        func_80085BAC(o);
+        if (*(s32 *)(o + 0x10) < 3) {
+            ((void (*)(u8 *, s32))func_800857B0)(o, 1);
+        } else {
+            ((void (*)(u8 *, s32))func_800857B0)(o, 0);
+        }
+        break;
+    case 3:
+        break;
+    }
+}
 
 /* cria o objeto de func_80085DA0 com os 6 valores de v */
 Obj *func_80085FDC(s32 arg, s32 *v) {
