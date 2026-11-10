@@ -23,5 +23,6 @@ extern NmEnt12 D_80087D98[];
 extern s32 D_80044F4C NOT_GP;
 extern s32 D_80087F38[];
 extern s32 D_80087A78[];
+extern s32 D_8004B7D0[];
 
 #endif /* STDGNAME_DATA_H */

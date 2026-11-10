@@ -32,6 +32,7 @@ void func_80084BF8(void *arg0, void *arg1);
 void func_80084C70(void *arg0);
 void func_80084CA8(void *arg0);
 void func_80087368(u8 *arg0);
+void func_80087534(u8 *o, u8 **w);
 Obj *func_80087798(s32 arg0);
 Obj *func_80087B08(void);
 s32 func_80087DF0(void);
@@ -55,7 +56,6 @@ s32 func_800836C4();
 s32 func_80083C50();
 s32 func_800843D8();
 s32 func_80084DCC();
-s32 func_80087534();
 s32 func_800877F0();
 s32 strcpy();
 

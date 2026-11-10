@@ -23,5 +23,6 @@ extern s32 D_80055C68[];
 extern s32 D_80089B98[];
 extern s32 D_80089B9C[];
 extern s32 D_8008991C[];
+extern s32 D_8004B7D0[];
 
 #endif /* STPLNMET_DATA_H */

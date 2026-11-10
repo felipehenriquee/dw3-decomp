@@ -427,7 +427,46 @@ void func_80087368(u8 *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/STGMCARD/nonmatchings/STGMCARD", func_80087534);
+void func_80087534(u8 *o, u8 **w) {
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        *(s32 *)(o + 0x58) = 5;
+        *(s32 *)(o + 0x5C) = 0x59;
+        ((void (*)(u8 *, s32, s32, s32))D_80088798)(o + 0x2824, 0x97, 0, 0xA);
+        w[0] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, (s16)(*(s32 *)(o + 0x58) + 0xC8), (s16)(*(s32 *)(o + 0x5C) + (*(u16 *)(o + 0x282C) + 9)));
+        w[5] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, (s16)(*(s32 *)(o + 0x58) + 0xF), (s16)(*(s32 *)(o + 0x5C) + 0x18));
+        w[1] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, (s16)(*(s32 *)(o + 0x58) + 0xF), (s16)(*(s32 *)(o + 0x5C) + 0x28));
+        (*(void (**)(u8 *, s32))(w[1] + 0x160))(w[1], 5);
+        (*(void (**)(u8 *, s32))(w[1] + 0x15C))(w[1], 1);
+        w[2] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, (s16)(*(s32 *)(o + 0x58) + 0xF), (s16)(*(s32 *)(o + 0x5C) + 0x67));
+        (*(void (**)(u8 *, s32))(w[2] + 0x160))(w[2], 2);
+        w[3] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0xCF, 0xBD);
+        w[4] = (u8 *)func_8001AE38(*(s16 *)(o + 0x54), 1, 0xCF, 0xCB);
+        w[6] = (u8 *)func_8001B364(*(s16 *)(o + 0x54), 0, 0xCF, 0xBD);
+        (*(void (**)(u8 *, s32))(w[6] + 0x80))(w[6], 0);
+        w[8] = (u8 *)func_800849F0((s32)o);
+        break;
+    case 1:
+        func_80084DCC(o, w);
+        func_80087368(o);
+        break;
+    case 2:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            (*(void (**)(u8 *, s32))(w[0] + 0x144))(w[0], 0);
+            *(s32 *)(o + 0x10) += 1;
+        case 1:
+            break;
+        }
+        func_80087368(o);
+        break;
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80087798(s32 arg0) {
     void *temp_v0;

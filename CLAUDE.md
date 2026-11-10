@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-11-09, 4ª): EXE **275 de 347** (79%); overlays **2279 de 3292** (69.2%). Total **2554 de 3639 (70.2%)**.
+- [ ] Decompilação (2026-11-09, 4ª): EXE **275 de 347** (79%); overlays **2283 de 3292** (69.3%). Total **2558 de 3639 (70.3%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -124,6 +124,8 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 - Laço `for (i = 0; i < n - 2; i++, p++)` (o `p++` na expressão do `for`) manteve o `nop` do load (STGDGLAB `func_8008C278`).
 - `if (a) {...} else {...}` mudando o ponteiro de janela: chamada com `t = (u8 *)D_8004B7D0;` repetido num bloco `{ }` próprio quando o original recarrega o `lui` (CARDGAME `func_80087B80`).
 - Variável nova (bloco `{ u8 *r = ...; }`) quando o original deixa o endereço em `v0` em vez de `s`-reg (CARDGAME `func_800999A0`).
+- Rodata da própria função (`dlabel` no `.s` da função) usada como argumento: `static const S16x4 r = { { 0, 0x78, 0x7FFF, 0 } };` dentro da função (FIGHTSTG `func_800880F0`); com `extern` o link falha.
+- Leitura de controle (`fn3F4`/`fn3FC` + `fn408`): copie o modelo da SHOCKTST `func_80083064`; antes do grupo `0xD`/`0xE`, `t = (u8 *)D_8004B7D0;` de novo (STPLNMET `func_80087774`, STDGNAME `func_80085B70`).
 - Quase (em `wip/ovl/`): STSTATUS `func_8008F2B4` (só registradores; permuter 80, artificial) e `func_80083914` (o `lui` de `D_8005CCA8` vai para `s6`; mais 5 cópias com outra tabela: `func_8008519C`, `func_8008B944`, `func_8008ED04`, `func_80094144`, `func_80096744`), WSTAG805 `func_800A6724` (33: ordem dos loads em `o->58 ± o->60`).
 
 ### Notas da decompilação manual (2026-11-09, 3ª sessão)

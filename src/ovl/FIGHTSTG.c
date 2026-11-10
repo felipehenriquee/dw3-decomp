@@ -399,7 +399,65 @@ u8 *func_80088054(void) {
     return o;
 }
 
-INCLUDE_ASM("asm/ovl/FIGHTSTG/nonmatchings/FIGHTSTG", func_800880F0);
+void func_800880F0(u8 *o, Obj **w) {
+    static const S16x4 r = { { 0, 0x78, 0x7FFF, 0 } };
+    u8 *s = *(u8 **)(o + 0x54);
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            {
+                u8 *b = (u8 *)D_8004B610;
+                *(u8 **)(o + 0x50) = (*(u8 *(**)(s32, s32, s32))(b + 0x1AC))(0x14, -1, -1);
+                *(u8 **)(o + 0x54) = (*(u8 *(**)(s32, s32, s32))(b + 0x1AC))(0x12, -1, -1);
+            }
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        case 1:
+            break;
+        }
+        switch (*(s32 *)(o + 0x14)) {
+        case 0:
+        default:
+            func_80089978(0x33, (s32 *)(o + 0x60), (s32 *)(o + 0x64), (Pair32 *)(o + 0x68));
+            (*(void (**)(u8 *))(o + 0x40))(o);
+        case 1:
+            break;
+        }
+        if (((s32 (*)(s32))D_80044F3C[0])(*(s16 *)(o + 0x66)) == 0) {
+            (*(void (**)(u8 *))(o + 0x38))(o);
+        }
+        break;
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+            (*(void (**)(u8 *, s32))(s + 0xF8))(s, (*(s32 (**)(u8 *))(s + 0x100))(s));
+            w[0] = (Obj *)func_80089BE4(0x33, (S16x4 *)&r);
+            ((void (*)(s32))D_80055C48[0])(0x800429BF);
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        case 1:
+            *(s32 *)(o + 0x18) += ((s32 (*)(void))D_8004DF9C[0])();
+            if (*(s32 *)(o + 0x18) < 10) {
+                break;
+            }
+            w[1] = func_8008C910();
+            w[1]->unk50 = 0;
+            w[1]->unk54 = *(s32 *)(o + 0x58) + 1;
+            *(s32 *)((u8 *)w[1] + 0x74) = *(s32 *)(o + 0x5C);
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        case 2:
+            if (w[1] == 0) {
+                (*(void (**)(u8 *, s32))(o + 0x28))(o, 3);
+            }
+            break;
+        }
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_8008834C(s32 arg0, s32 arg1) {
     void *temp_v0;
