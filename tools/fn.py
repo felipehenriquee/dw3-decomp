@@ -127,7 +127,7 @@ def test(name, fn, path):
     open(c, "w").write(tu(name, fn, open(path).read()))
     if os.path.exists(o):
         os.remove(o)
-    r = ad.run([os.path.join(R, 'tools/cc.sh'), c, o,
+    r = ad.run([os.environ.get('CCSH') or os.path.join(R, 'tools/cc.sh'), c, o,
                 str(ad.target(name)[3])], stdin=subprocess.DEVNULL)
     if r.returncode != 0 or not os.path.exists(o):
         print(r.stderr[-2000:])

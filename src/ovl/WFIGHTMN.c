@@ -9,7 +9,32 @@ Obj *func_800A6414(void) {
     return func_80014504(func_800A5ECC, 0x54, 0);
 }
 
-INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A6440);
+void func_800A6440(void) {
+    u8 *t = (u8 *)D_8004DE10;
+    u8 *x;
+    (*(void (**)(void))(t + 0x150))();
+    (*(void (**)(s32))(t + 0x154))(0x19000);
+    (*(void (**)(s32, s32, s32, s32))(t + 0x174))(0x140, 0xF0, 0, 0);
+    x = (*(u8 *(**)(s16 *, s32, s32))(t + 0x16C))(D_800AAD08, 1, 0x1000);
+    (*(void (**)(u8 *, s32, s32))(x + 0x118))(x, 0xA0, 0x78);
+    x = (*(u8 *(**)(s16 *, s32, s32))(t + 0x16C))(D_800AAD08, 1, 0x1001);
+    (*(void (**)(u8 *, s32, s32))(x + 0x118))(x, 0xA0, 0x78);
+    (*(void (**)(u8 *, s32))(x + 0x148))(x, 0x64);
+    x = (*(u8 *(**)(s16 *, s32, s32))(t + 0x16C))(D_800AAD08, 8, 0x1002);
+    (*(void (**)(u8 *, s32, s32))(x + 0x118))(x, D_800AAD08[2] / 2, D_800AAD08[3] / 2);
+    (*(void (**)(u8 *, s32))(x + 0x148))(x, 0x28);
+    x = (*(u8 *(**)(s16 *, s32, s32))(t + 0x16C))(D_800AAD08, 1, 0x1003);
+    (*(void (**)(u8 *, s32, s32))(x + 0x118))(x, 0xA0, 0x78);
+    (*(void (**)(u8 *, s32))(x + 0x148))(x, 0x64);
+    x = (*(u8 *(**)(s16 *, s32, s32))(t + 0x16C))(D_800AAD08, 0xC, 0x1004);
+    (*(void (**)(u8 *, s32, s32))(x + 0x118))(x, 0xA0, 0x78);
+    (*(void (**)(u8 *, s32))(x + 0x148))(x, 0x64);
+    x = (*(u8 *(**)(s16 *, s32, s32))(t + 0x16C))(D_800AAD08, 1, 0x1005);
+    (*(void (**)(u8 *, s32, s32))(x + 0x118))(x, 0, 0);
+    x = (*(u8 *(**)(s16 *, s32, s32))(t + 0x16C))(D_800AAD08, 1, 0x1006);
+    (*(void (**)(u8 *, s32, s32))(x + 0x118))(x, 0, 0);
+    (*(void (**)(u8 *, s32))(x + 0x148))(x, 0xA);
+}
 
 INCLUDE_ASM("asm/ovl/WFIGHTMN/nonmatchings/WFIGHTMN", func_800A66B0);
 

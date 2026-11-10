@@ -454,7 +454,28 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800875AC);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800878B4);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80087B80);
+void func_80087B80(u8 *o, u8 *x, s32 n) {
+    u8 *t;
+    (x - -(*(s32 *)(o + 0x43C) * 0x4C))[0x150] |= 1;
+    *(s16 *)((x - -(*(s32 *)(o + 0x43C) * 0x4C)) + 0x12E) = 1;
+    t = (u8 *)D_8004B7D0;
+    if (((*(s32 (**)(s32))(t + 0x3F4))(0) >> (*(s32 (**)(s32, s32))(t + 0x408))(0, 0xE)) & 1) {
+        ((void (*)(s32))D_80055C48)(0x800450BD);
+        *(s32 *)(o + 0x440) = -1;
+        o[0x423] = 0xA;
+    }
+    if (n != 0) {
+        if ((((*(s32 (**)(s32))(t + 0x3FC))(0) & (1 << (*(s32 (**)(s32, s32))(t + 0x408))(0, 7))) | ((*(s32 (**)(s32))(t + 0x3F4))(0) & (1 << (*(s32 (**)(s32, s32))(t + 0x408))(0, 7)))) && *(s32 *)(o + 0x43C) > 0) {
+            func_80086F24(o, x, n, -1);
+        }
+        {
+        u8 *t = (u8 *)D_8004B7D0;
+        if ((((*(s32 (**)(s32))(t + 0x3FC))(0) & (1 << (*(s32 (**)(s32, s32))(t + 0x408))(0, 5))) | ((*(s32 (**)(s32))(t + 0x3F4))(0) & (1 << (*(s32 (**)(s32, s32))(t + 0x408))(0, 5)))) && *(s32 *)(o + 0x43C) < n - 1) {
+            func_80086F24(o, x, n, 1);
+        }
+        }
+    }
+}
 
 s32 func_80087DC8(u8 *o, u8 *x) {
     s32 r = 0;
@@ -1420,7 +1441,34 @@ Obj *func_80096180(s16 arg0, s16 arg1) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800961F0);
+void func_800961F0(u8 *o) {
+    s16 tbl[8] = { 0, 1, 2, 3, 2, 1, 0, 0 };
+    CgGfx g;
+    CgGfx h;
+    s32 k;
+    if (*(s16 *)(o + 0x5C) != 0 && *(s16 *)(o + 0x5E) != 0) {
+        func_8001F648(&g);
+        g.fn94(*(s16 *)(o + 0x58), *(s16 *)(o + 0x5A));
+        g.fn8C(*(s16 *)(o + 0x5C), *(s16 *)(o + 0x5E), 0x1000);
+        g.fn7C(0x100, 1);
+        g.fn74(0x280, 0);
+        g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x25D0002), 0x45, *(s16 *)(o + 0x58), *(s16 *)(o + 0x5A));
+        func_8001F648(&h);
+        h.fn94(*(s16 *)(o + 0x58), *(s16 *)(o + 0x5A));
+        if (o[0x67] != 0) {
+            k = *(s32 *)(o + 0x54) >> 1;
+            if (k >= 7) {
+                k = 7;
+            }
+            h.fn88(tbl[k]);
+            *(s32 *)(o + 0x54) += ((s32 (*)(void))D_8004DF9C)();
+        }
+        h.fn8C(*(s16 *)(o + 0x5C), *(s16 *)(o + 0x5E), 0x1000);
+        h.fn7C(0x100, 1);
+        h.fn74(0x280, 0);
+        h.fn84(((s32 (*)(s32))D_80044F5C[0])(0x25D0002), 0x46, *(s16 *)(o + 0x58), *(s16 *)(o + 0x5A));
+    }
+}
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80096418);
 
@@ -1703,7 +1751,52 @@ INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80098898);
 
 INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_80099440);
 
-INCLUDE_ASM("asm/ovl/CARDGAME/nonmatchings/CARDGAME", func_800999A0);
+void func_800999A0(u8 *a, u8 *b, s32 k, u8 *c) {
+    CgGfx g;
+    s32 x, y, x2, y2;
+    u8 *e;
+    u8 *t;
+    u8 *tb;
+    u8 *w;
+    s32 v;
+    if (k == 0) {
+        tb = D_800A5AA8;
+        t = D_8005CCB0[0] * 16 + tb;
+        x = *(s16 *)(t + 0);
+        y = *(s16 *)(t + 2);
+        x2 = *(s16 *)(t + 8);
+        y2 = *(s16 *)(t + 0xA);
+    } else {
+        tb = D_800A5AA8;
+        t = D_8005CCB0[0] * 16 + tb;
+        x = *(s16 *)(t + 4);
+        y = *(s16 *)(t + 6);
+        x2 = *(s16 *)(t + 0xC);
+        y2 = *(s16 *)(t + 0xE);
+    }
+    if (c[8] != 0) {
+        func_8001F648(&g);
+        g.fn7C(0x100, 1);
+        g.fn74(0x280, 0);
+        e = a + k * 0x54;
+        g.fn94(*(s16 *)(e + 0x6C) + x, *(s16 *)(e + 0x6E) + y);
+        g.fn8C(*(s16 *)c, 0x1000, 0x1000);
+        v = ((s32 (*)(s32))D_80044F5C[0])(0x25D0002);
+        g.fn84(v, k == 0 ? 0x44 : 0x43, *(s16 *)(e + 0x6C) + x, *(s16 *)(e + 0x6E) + y);
+    }
+    if (c[8] == 2) {
+        u8 *q;
+        w = b + k * 4;
+        q = a + k * 0x54;
+        (*(void (**)(u8 *, s32, s32))(*(u8 **)(w + 0x10) + 0x134))(*(u8 **)(w + 0x10), (s16)(*(u16 *)(q + 0x6C) + x2), (s16)(*(u16 *)(q + 0x6E) + y2));
+        (*(void (**)(u8 *, s32, s32))(*(u8 **)(w + 0x10) + 0x114))(*(u8 **)(w + 0x10), ((s32 (*)(s32))D_80044F4C[0])(D_8005CCA8[0] + 0xF), 0x3F);
+        return;
+    }
+    {
+        u8 *r = b + k * 4;
+        (*(void (**)(u8 *, s32))(*(u8 **)(r + 0x10) + 0x144))(*(u8 **)(r + 0x10), 0);
+    }
+}
 
 void func_80099BE4(s32 a, s32 b, s32 c, s16 *st) {
     switch (((u8 *)st)[8]) {

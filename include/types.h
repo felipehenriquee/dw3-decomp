@@ -511,4 +511,20 @@ typedef struct { s16 id; s16 v; } Ent4s;
 
 typedef struct { s32 k; s32 v; } Pair8;
 
+typedef struct {
+    u8 pad0[0x74];
+    void (*fn74)(s32, s32);
+    u8 pad78[4];
+    void (*fn7C)(s32, s32);
+    u8 pad80[4];
+    void (*fn84)(s32, s32, s32, s32);
+    void (*fn88)(s32);
+    void (*fn8C)(s32, s32, s32);
+    u8 pad90[4];
+    void (*fn94)(s32, s32);
+    u8 pad98[0xA0 - 0x98];
+} CgGfx;
+
+typedef struct { u32 addr : 24; u32 len : 8; } PTag24;
+
 #endif /* TYPES_H */

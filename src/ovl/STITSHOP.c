@@ -488,7 +488,58 @@ INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_80089E2C);
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_8008A0D0);
 
-INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_8008A1FC);
+void func_8008A1FC(u8 *o, u8 *w, s32 on) {
+    u8 *d;
+    u8 *f;
+    u8 *e;
+    s32 h;
+    s32 v;
+    s32 i;
+    s32 j;
+    if (on != 0) {
+        i = 0;
+        if (*(s32 *)(o + 0x60) > 0) {
+        d = (u8 *)D_80048D34;
+        f = (u8 *)D_8008D1AC;
+        do {
+            h = (*(s32 (**)(s32))(d + 0x2718))(i);
+            v = (*(s32 (**)(s32))(d + 0x2750))(h);
+            e = *(u8 **)(w + i * 0x2C + 0x24);
+            (*(void (**)(u8 *, s32, s32))(e + 0x114))(e, v, -1);
+            if ((*(s32 (**)(s32, s32))(f + 0x20))(h, *(s32 *)(o + 0x1E4)) != 0) {
+                func_80089274(o, w, i);
+                e = *(u8 **)(w + i * 0x2C + 0x24);
+                (*(void (**)(u8 *, s32))(e + 0x138))(e, 0);
+            } else {
+                e = *(u8 **)(w + i * 0x2C + 0x24);
+                (*(void (**)(u8 *, s32))(e + 0x138))(e, 7);
+                for (j = 0; j < 2; j++) {
+                    e = *(u8 **)(w + (i * 0x2C + j * 4) + 0x28);
+                    (*(void (**)(u8 *, s32))(e + 0x144))(e, 0);
+                }
+                for (j = 0; j < 8; j++) {
+                    e = *(u8 **)(w + (i * 0x2C + j * 4) + 0x30);
+                    (*(void (**)(u8 *, s32))(e + 0x144))(e, 0);
+                }
+            }
+            i++;
+        } while (i < *(s32 *)(o + 0x60));
+        }
+    } else {
+        for (i = 0; i < *(s32 *)(o + 0x60); i++) {
+            e = *(u8 **)(w + i * 0x2C + 0x24);
+            (*(void (**)(u8 *, s32))(e + 0x144))(e, 0);
+            for (j = 0; j < 2; j++) {
+                e = *(u8 **)(w + (i * 0x2C + j * 4) + 0x28);
+                (*(void (**)(u8 *, s32))(e + 0x144))(e, 0);
+            }
+            for (j = 0; j < 8; j++) {
+                e = *(u8 **)(w + (i * 0x2C + j * 4) + 0x30);
+                (*(void (**)(u8 *, s32))(e + 0x144))(e, 0);
+            }
+        }
+    }
+}
 
 INCLUDE_ASM("asm/ovl/STITSHOP/nonmatchings/STITSHOP", func_8008A450);
 

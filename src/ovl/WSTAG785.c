@@ -63,7 +63,78 @@ void func_800A6208(u8 *o, s32 b) {
     g.fn84(((s32 (*)(s32))D_80044F5C[0])(0x1C70001), b, xy[0], xy[1]);
 }
 
-INCLUDE_ASM("asm/ovl/WSTAG785/nonmatchings/WSTAG785", func_800A62B4);
+void func_800A62B4(u8 *o) {
+    s32 k;
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            k = 0x32;
+            if ((*(s32 *)(o + 0x14) += (*(s32 (**)(void))&D_8004DF9C)()) < 4) {
+                break;
+            }
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        case 1:
+            k = 0x33;
+            if ((*(s32 *)(o + 0x14) += (*(s32 (**)(void))&D_8004DF9C)()) < 4) {
+                break;
+            }
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        case 2:
+            k = 0x34;
+            if ((*(s32 *)(o + 0x14) += (*(s32 (**)(void))&D_8004DF9C)()) < 4) {
+                break;
+            }
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        case 3:
+            switch (*(s32 *)(o + 0x50)) {
+            case 0:
+            default:
+                k = 0x35;
+                break;
+            case 3:
+                k = 0x3D;
+                break;
+            case 1:
+                k = ((*(s32 *)(o + 0x14) >> 3) & 1) + 0x38;
+                *(s32 *)(o + 0x14) += (*(s32 (**)(void))&D_8004DF9C)();
+                break;
+            case 2:
+                k = 0x3C;
+                break;
+            }
+            break;
+        }
+        func_800A6208(o, k);
+        break;
+    case 2:
+        switch (*(s32 *)(o + 0x10)) {
+        case 0:
+        default:
+            k = 0x36;
+            if ((*(s32 *)(o + 0x14) += (*(s32 (**)(void))&D_8004DF9C)()) < 4) {
+                break;
+            }
+            (*(void (**)(u8 *))(o + 0x3C))(o);
+        case 1:
+            k = 0x37;
+            if ((*(s32 *)(o + 0x14) += (*(s32 (**)(void))&D_8004DF9C)()) < 4) {
+                break;
+            }
+            (*(void (**)(u8 *))(o + 0x38))(o);
+            break;
+        }
+        func_800A6208(o, k);
+        break;
+    case 3:
+        break;
+    }
+}
 
 u8 *func_800A6510(s32 link) {
     return func_800143DC(func_800A62B4, 0x58, 0, link);

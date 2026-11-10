@@ -62,5 +62,6 @@ extern Pair32 D_80097B88[];
 extern FsEnt4 D_80097098[];
 extern s32 D_80044B38[];
 extern s32 D_8005CCA8 NOT_GP;
+extern s16 *D_80096E84[][4];
 
 #endif /* FIELDSTG_DATA_H */

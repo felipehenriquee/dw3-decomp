@@ -20,7 +20,7 @@ Caminho escolhido:
 - [x] PsyQ identificada: **4.7**. 430 funções nomeadas em `symbol_addrs.txt`; cada objeto da lib virou um `.s` próprio em `asm/psyq/`.
 - [x] Compilador identificado: **GCC 2.8.1 + maspsx**, `-O2`, `-G8` (ou 4) no EXE.
 - [x] C no build: o código do jogo do EXE é `src/main.c` (C + `INCLUDE_ASM`); cada overlay é `src/ovl/<NOME>.c` (`-G0`). Tudo compilado pelo `make` e batendo.
-- [ ] Decompilação (2026-11-09, 3ª): EXE **275 de 347** (79%); overlays **2266 de 3292** (68.8%). Total **2541 de 3639 (69.8%)**.
+- [ ] Decompilação (2026-11-09, 4ª): EXE **275 de 347** (79%); overlays **2279 de 3292** (69.2%). Total **2554 de 3639 (70.2%)**.
 
 ## Repositório `~/dw3-decomp`
 - `sles_049.36.yaml`: config do splat do EXE. gp real = `0x8005CB50` (definido pelo código de entrada; o cabeçalho diz 0). Precisa de `ld_align_section_vram_end: False` e `ld_align_segment_vram_end: False`, senão o linker insere padding e o binário não bate.
@@ -113,6 +113,18 @@ Como validei: os alvos de `jal` internos caem em prólogos de função (`addiu s
 6. Corrigir a divisão do splat em `func_800148C0` (`make split` apaga `build/` — fazer quando nada estiver rodando).
 7. Revisão semântica para o port (`tools/audit_args.py`).
 8. Jobs em segundo plano: parar com `tools/stop_jobs.sh` e commitar com `tools/commit_locked.sh "msg"`.
+
+### Notas da decompilação manual (2026-11-09, 4ª sessão)
+- **Abaixo de ~140 instruções só sobram a família "inicialização de mapa" (309 funções, `D_80099D80`) e o `skip.txt`.** Lista em `build/w/mapinit.txt` (regerar: pendentes cujo `.s` cita `D_80099D80`).
+- Diagnóstico da inicialização de mapa (WSTAG366 `func_800A5ED0`, testes em `build/mi/`): o 3º argumento da 1ª chamada é o próprio descritor (`a2 = &D_80099D80`, `fn40(0, ID|1, m)`); com `struct` para o sistema (`D_8009B6C4.fn40`) some o `addiu s0,64`. O que falta é o agendamento: no dump `-dS` do GCC os `sw` do descritor têm prioridade 1 e saem na ordem do fonte, mas o `sw 0x44` (de `D_8005CCA8 + 0xE1`) tem prioridade 2 e vai para o fim; no original ele fica logo depois do `0x1C`. A ordem do fonte, `volatile`, endereço literal, ponteiro local, `inline` e `asm` de barreira não mudaram nada. `-fno-schedule-insns` chega mais perto, mas os outros C dos WSTAG precisam do sched1. O `tools/fn.py` agora aceita `CCSH=<script>` para testar outro compilador ou outras flags.
+- **`addPrim` com campo de bits**: `typedef struct { u32 addr : 24; u32 len : 8; } PTag24;` e `((PTag24 *)p)->addr = ((PTag24 *)ot)->addr; ((PTag24 *)ot)->addr = (u32)p;` reproduzem a ordem das máscaras `0xFF000000`/`0xFFFFFF` (FIGHTSTG `func_80084BC0`). Nas quase do `wip/` (CARDGAME `func_800A32D8`, FIGHTSTG `func_80092E18`) piorou; lá o problema é outro.
+- Índice de linha com deslocamento separado (`s4 = i*0x2C` além do ponteiro): agrupe `w + (i * 0x2C + j * 4) + 0x28` (STITSHOP `func_8008A1FC`).
+- Tabela `T + idx*16 + i*4` com a soma antes da base: `*(s16 **)((i * 4 + idx * 16) - -(s32)tb)` (FIELDSTG `func_80085BD4`).
+- Máquina de estados com `switch` 1..3 e `beq 1; slti 2; beq 2; beq 3`: ponha `case 0: default:` nos `switch` e teste a ordem dos `case` do `switch` interno (WSTAG785 `func_800A62B4`; o `stmtperm` não cobre isso, gerei as 24 permutações).
+- Laço `for (i = 0; i < n - 2; i++, p++)` (o `p++` na expressão do `for`) manteve o `nop` do load (STGDGLAB `func_8008C278`).
+- `if (a) {...} else {...}` mudando o ponteiro de janela: chamada com `t = (u8 *)D_8004B7D0;` repetido num bloco `{ }` próprio quando o original recarrega o `lui` (CARDGAME `func_80087B80`).
+- Variável nova (bloco `{ u8 *r = ...; }`) quando o original deixa o endereço em `v0` em vez de `s`-reg (CARDGAME `func_800999A0`).
+- Quase (em `wip/ovl/`): STSTATUS `func_8008F2B4` (só registradores; permuter 80, artificial) e `func_80083914` (o `lui` de `D_8005CCA8` vai para `s6`; mais 5 cópias com outra tabela: `func_8008519C`, `func_8008B944`, `func_8008ED04`, `func_80094144`, `func_80096744`), WSTAG805 `func_800A6724` (33: ordem dos loads em `o->58 ± o->60`).
 
 ### Notas da decompilação manual (2026-11-09, 3ª sessão)
 - **Família `D_80048ABC.fn10` + `func_800853F8` (eventos de mapa nos WSTAG)**: declare `u8 *f = (u8 *)&D_80048ABC;` **dentro de um bloco `{ }` próprio para cada `if`** (o original recarrega `lui/addiu` em cada bloco, com o `li a0` antes do `lui`). Rendeu ~15 funções (WSTAG400/405/406/490/300/295/735/421/475/750...).

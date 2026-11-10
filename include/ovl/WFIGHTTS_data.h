@@ -5,5 +5,7 @@
 /* tipo ainda desconhecido (so o endereco e usado) */
 struct opaque;
 extern s32 D_80044B38[];
+extern u8 D_8004DE10[];
+extern s16 D_800A9368[];
 
 #endif /* WFIGHTTS_DATA_H */

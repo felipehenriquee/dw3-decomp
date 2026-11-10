@@ -199,7 +199,65 @@ s16 func_80085AFC(s16 *st, s16 *tbl, s32 depth) {
     return e[0];
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_80085BD4);
+void func_80085BD4(u8 *o) {
+    struct {
+        u8 pad0[0x74];
+        void (*fn74)(s32, s32);
+        u8 pad78[8];
+        void (*fn80)(s32, s32);
+        void (*fn84)(s32, s32, s32, s32);
+        void (*fn88)(s32);
+        u8 pad8C[0xA0 - 0x8C];
+    } g;
+    s32 s;
+    s32 i;
+    s32 k;
+    s16 *(*tb)[4];
+    s32 j;
+    u8 *f;
+    s = ((s32 (*)(s32))*(s32 *)&D_8004DF8C)(0x1002);
+    switch (*(s32 *)(o + 0xC)) {
+    case 0:
+    default:
+        for (j = 0; j < 4; j++) {
+            *(s32 *)(o + j * 8 + 0x5C) = 1;
+            *(s16 *)(o + j * 8 + 0x60) = 0;
+            *(u16 *)(o + j * 8 + 0x62) = D_80096E84[*(s16 *)(o + 0x58)][j][1];
+        }
+        (*(void (**)(u8 *))(o + 0x38))(o);
+        break;
+    case 1:
+        i = 0;
+        tb = D_80096E84;
+        f = (u8 *)D_80044B38;
+        for (; i < 4; i++) {
+            if (*(s32 *)(o + i * 8 + 0x5C) != 0) {
+                k = ((s32 (*)(s16 *, s16 *, s32))func_80085AFC)((s16 *)(o + (i * 8 + 0x5C)), *(s16 **)((i * 4 + *(s16 *)(o + 0x58) * 16) - -(s32)tb), 0);
+                switch (k) {
+                case 0x12C:
+                    break;
+                case 0xFF:
+                    *(s32 *)(o + i * 8 + 0x5C) = 0;
+                    break;
+                default:
+                    func_8001F648(&g);
+                    g.fn74(0x240, 0x100);
+                    g.fn80(s, 0);
+                    g.fn88(0);
+                    g.fn84((*(s32 (**)(s32))(f + 0x424))(0x1600001), k, *(s32 *)(o + 0x50), *(s32 *)(o + 0x54));
+                    break;
+                }
+            }
+        }
+        if (*(s32 *)(o + 0x5C) == 0 && *(s32 *)(o + 0x64) == 0 && *(s32 *)(o + 0x6C) == 0 && *(s32 *)(o + 0x74) == 0) {
+            (*(void (**)(u8 *, s32))(o + 0x28))(o, 3);
+        }
+        break;
+    case 2:
+    case 3:
+        break;
+    }
+}
 
 Obj *func_80085E0C(s32 arg0, s32 arg1, s16 arg2) {
     void *temp_v0;
@@ -1010,7 +1068,53 @@ void func_8008EA44(u8 *o) {
     }
 }
 
-INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008EAE8);
+void func_8008EAE8(u8 *o) {
+    u8 *q;
+    u8 *s;
+    if (**(u8 ***)(o + 0x104) == 0) {
+        **(u8 ***)(o + 0x104) = ((u8 *(*)(s32, s32, s32))D_8004B7BC)(5, -1, 0);
+    }
+    s = **(u8 ***)(o + 0x104);
+    q = *(u8 **)(o + 0x104);
+    if (s != 0) {
+        switch (*(s32 *)(s + 0x10)) {
+        case 2:
+        case 3:
+        case 5:
+        case 0x4F:
+        case 0x50:
+            *(s32 *)((q - -(*(s32 *)(q + 4) * 12)) + 0xC) = *(s32 *)(s + 0x50);
+            *(s32 *)((q - -(*(s32 *)(q + 4) * 12)) + 0x10) = *(s32 *)(s + 0x54);
+            *(s32 *)((q - -(*(s32 *)(q + 4) * 12)) + 0x14) = *(s32 *)(s + 0x60);
+            *(s32 *)(q + 4) = (*(s32 *)(q + 4) + 1) & 0x3F;
+            *(s32 *)(o + 0x50) = *(s32 *)((q - -(*(s32 *)(q + 8) * 12)) + 0xC);
+            *(s32 *)(o + 0x54) = *(s32 *)((q - -(*(s32 *)(q + 8) * 12)) + 0x10);
+            *(s32 *)(o + 0x60) = *(s32 *)((q - -(*(s32 *)(q + 8) * 12)) + 0x14);
+            *(s32 *)(q + 8) = (*(s32 *)(q + 8) + 1) & 0x3F;
+            break;
+        }
+        switch (*(s32 *)(s + 0x10)) {
+        case 2:
+        case 3:
+        case 5:
+            if (*(s32 *)(o + 0x10) != 3) {
+                (*(void (**)(u8 *, s32))(o + 0x2C))(o, 3);
+            }
+            break;
+        case 0x4F:
+            if (*(s32 *)(o + 0x10) != 1) {
+                (*(void (**)(u8 *, s32))(o + 0x2C))(o, 1);
+            }
+            break;
+        default:
+            if (*(s32 *)(o + 0x10) == 3) {
+                (*(void (**)(u8 *, s32))(o + 0x2C))(o, 4);
+            }
+            break;
+        }
+        *(s32 *)(o + 0x78) = *(s32 *)(s + 0x78);
+    }
+}
 
 INCLUDE_ASM("asm/ovl/FIELDSTG/nonmatchings/FIELDSTG", func_8008ED2C);
 
